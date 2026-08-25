@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M.R. Moorti Art | Marble Murti, Handicrafts & Marble Mandir</title>
+
+<meta name="description" content="M.R. Moorti Art - Premium Marble Murti, Handicrafts, Marble Mandir and Paintings. Delivery across the world.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   M.R. MOORTI ART — COMPLETE SINGLE FILE WEBSITE
+========================================================= */
+
+:root{
+  --black:#090909;
+  --deep:#11100f;
+  --cream:#eee5d6;
+  --ivory:#f7f2e9;
+  --gold:#c8a45a;
+  --gold-light:#e0c783;
+  --brown:#6e5031;
+  --muted:#aaa49a;
+  --white:#fff;
+  --serif:"Cormorant Garamond",serif;
+  --sans:"DM Sans",sans-serif;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--black);
+  color:var(--ivory);
+  font-family:var(--sans);
+  overflow-x:hidden;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+}
+
+/* ---------- CURSOR GLOW ---------- */
+
+.cursor-glow{
+  position:fixed;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(
+    circle,
+    rgba(200,164,90,.09) 0%,
+    rgba(200,164,90,.035) 35%,
+    transparent 70%
+  );
+  transform:translate(-50%,-50%);
+  z-index:2;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:84px;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+  background:linear-gradient(
+    to bottom,
+    rgba(5,5,5,.88),
+    rgba(5,5,5,.2),
+    transparent
+  );
+  transition:.4s ease;
+}
+
+.navbar.scrolled{
+  background:rgba(7,7,7,.94);
+  backdrop-filter:blur(16px);
+  height:72px;
+  border-bottom:1px solid rgba(200,164,90,.13);
+}
+
+.logo{
+  width:90px;
+  max-height:62px;
+  object-fit:contain;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:32px;
+}
+
+.nav-links a{
+  position:relative;
+  color:#eee;
+  font-size:13px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-7px;
+  width:0;
+  height:1px;
+  background:var(--gold);
+  transition:.35s ease;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+.nav-cta{
+  border:1px solid rgba(200,164,90,.55);
+  padding:12px 20px;
+  border-radius:100px;
+  color:var(--gold-light)!important;
+}
+
+.nav-cta::after{
+  display:none;
+}
+
+.menu-btn{
+  display:none;
+  color:white;
+  background:none;
+  border:0;
+  font-size:26px;
+  cursor:pointer;
+}
+
+/* ---------- HERO ---------- */
+
+.hero{
+  min-height:100svh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.88) 0%,
+      rgba(0,0,0,.60) 42%,
+      rgba(0,0,0,.15) 100%
+    ),
+    url("hero.jpg") center/cover no-repeat;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 75% 50%,transparent 0%,rgba(0,0,0,.25) 60%,rgba(0,0,0,.65) 100%);
+  pointer-events:none;
+}
+
+.hero-content{
+  width:min(760px,90%);
+  margin-left:8%;
+  position:relative;
+  z-index:3;
+  padding-top:60px;
+}
+
+.eyebrow{
+  color:var(--gold-light);
+  font-size:11px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(60px,8vw,118px);
+  line-height:.83;
+  font-weight:500;
+  letter-spacing:-.045em;
+  margin-bottom:30px;
+}
+
+.hero h1 span{
+  color:var(--gold-light);
+  font-style:italic;
+}
+
+.hero-text{
+  max-width:560px;
+  color:#ddd5c9;
+  font-size:17px;
+  line-height:1.8;
+  margin-bottom:36px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:155px;
+  padding:15px 25px;
+  border-radius:100px;
+  border:1px solid rgba(200,164,90,.6);
+  transition:.35s ease;
+  cursor:pointer;
+}
+
+.btn-gold{
+  background:var(--gold);
+  color:#111;
+  border-color:var(--gold);
+}
+
+.btn-dark{
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(8px);
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+
+.hero-scroll{
+  position:absolute;
+  bottom:35px;
+  left:8%;
+  z-index:4;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  color:#aaa;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.25em;
+}
+
+.scroll-line{
+  width:65px;
+  height:1px;
+  background:var(--gold);
+}
+
+/* ---------- COMMON ---------- */
+
+section{
+  position:relative;
+  overflow:hidden;
+}
+
+.section-inner{
+  width:min(1180px,90%);
+  margin:auto;
+}
+
+.section-head{
+  margin-bottom:55px;
+}
+
+.section-kicker{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.3em;
+  font-size:11px;
+  margin-bottom:14px;
+}
+
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(48px,6vw,78px);
+  line-height:.92;
+  font-weight:500;
+}
+
+.section-title em{
+  color:var(--gold-light);
+}
+
+.section-description{
+  max-width:580px;
+  color:#aaa39a;
+  line-height:1.8;
+  margin-top:20px;
+}
+
+/* ---------- ABOUT ---------- */
+
+.about{
+  padding:145px 0;
+  background:
+    radial-gradient(circle at 10% 20%,rgba(200,164,90,.08),transparent 30%),
+    var(--deep);
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:90px;
+  align-items:center;
+}
+
+.about-image{
+  position:relative;
+}
+
+.about-image img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  filter:saturate(.88);
+}
+
+.about-image::before{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-top:1px solid var(--gold);
+  border-left:1px solid var(--gold);
+  top:-18px;
+  left:-18px;
+  z-index:2;
+}
+
+.about-image::after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-right:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);
+  bottom:-18px;
+  right:-18px;
+}
+
+.about-copy p{
+  color:#bcb5ab;
+  line-height:1.9;
+  margin:25px 0;
+}
+
+.about-quote{
+  border-left:1px solid var(--gold);
+  padding:5px 0 5px 25px;
+  font-family:var(--serif);
+  color:#eee3d1;
+  font-size:26px;
+  font-style:italic;
+}
+
+/* ---------- COLLECTION ---------- */
+
+.collection{
+  padding:145px 0;
+  background:var(--black);
+}
+
+.collection-wrap{
+  position:relative;
+}
+
+.slider{
+  position:relative;
+  overflow:hidden;
+  cursor:grab;
+  user-select:none;
+}
+
+.slider:active{
+  cursor:grabbing;
+}
+
+.slider-track{
+  display:flex;
+  gap:22px;
+  transition:transform .7s cubic-bezier(.22,.61,.36,1);
+}
+
+.product{
+  flex:0 0 calc(33.333% - 15px);
+  position:relative;
+  overflow:hidden;
+  background:#161513;
+}
+
+.product img{
+  width:100%;
+  height:580px;
+  object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+.product:hover img{
+  transform:scale(1.045);
+}
+
+.product-info{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:70px 28px 28px;
+  background:linear-gradient(transparent,rgba(0,0,0,.92));
+}
+
+.product-number{
+  font-size:10px;
+  color:var(--gold);
+  letter-spacing:.2em;
+}
+
+.product-info h3{
+  font-family:var(--serif);
+  font-size:34px;
+  font-weight:500;
+  margin-top:5px;
+}
+
+.product-info p{
+  color:#bdb7ae;
+  font-size:12px;
+  margin-top:3px;
+}
+
+.slider-controls{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:22px;
+}
+
+.slider-btn{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  border:1px solid rgba(200,164,90,.5);
+  color:var(--gold-light);
+  background:transparent;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.slider-btn:hover{
+  background:var(--gold);
+  color:#111;
+}
+
+.slider-progress{
+  height:1px;
+  background:#292725;
+  margin-top:25px;
+  position:relative;
+}
+
+.slider-progress span{
+  position:absolute;
+  left:0;
+  top:0;
+  height:1px;
+  width:20%;
+  background:var(--gold);
+  transition:.5s;
+}
+
+/* ---------- EXPERIENCE ---------- */
+
+.experience{
+  padding:150px 0;
+  background:
+    linear-gradient(rgba(12,10,8,.87),rgba(12,10,8,.94)),
+    url("hero.jpg") center/cover fixed;
+}
+
+.experience-content{
+  max-width:900px;
+}
+
+.experience-title{
+  font-family:var(--serif);
+  font-size:clamp(50px,7vw,95px);
+  line-height:.9;
+  font-weight:500;
+}
+
+.experience-title span{
+  color:var(--gold-light);
+}
+
+.experience-copy{
+  margin-top:30px;
+  color:#bcb5ab;
+  line-height:1.9;
+  max-width:650px;
+}
+
+/* ---------- SERVICES ---------- */
+
+.services{
+  padding:140px 0;
+  background:var(--ivory);
+  color:#171310;
+}
+
+.services .section-kicker{
+  color:#86622e;
+}
+
+.services .section-title{
+  color:#181411;
+}
+
+.service-list{
+  margin-top:65px;
+}
+
+.service{
+  display:grid;
+  grid-template-columns:100px 1fr 1.3fr;
+  gap:35px;
+  align-items:center;
+  padding:27px 0;
+  border-top:1px solid rgba(30,25,20,.18);
+  transition:.35s ease;
+}
+
+.service:last-child{
+  border-bottom:1px solid rgba(30,25,20,.18);
+}
+
+.service:hover{
+  padding-left:15px;
+}
+
+.service-no{
+  color:#8a6a39;
+  font-family:var(--serif);
+  font-size:30px;
+}
+
+.service h3{
+  font-family:var(--serif);
+  font-size:33px;
+  font-weight:600;
+}
+
+.service p{
+  color:#706a61;
+  line-height:1.7;
+  font-size:14px;
+}
+
+/* ---------- WORLDWIDE ---------- */
+
+.worldwide{
+  min-height:600px;
+  padding:130px 0;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.5)),
+    url("about.jpg") center/cover;
+}
+
+.worldwide-inner{
+  width:min(1180px,90%);
+  margin:auto;
+}
+
+.worldwide h2{
+  font-family:var(--serif);
+  font-size:clamp(60px,8vw,115px);
+  line-height:.85;
+  font-weight:500;
+}
+
+.worldwide h2 span{
+  color:var(--gold-light);
+  font-style:italic;
+}
+
+.worldwide p{
+  max-width:540px;
+  margin-top:30px;
+  color:#c0b9ae;
+  line-height:1.8;
+}
+
+/* ---------- ENQUIRY ---------- */
+
+.enquiry{
+  padding:145px 0;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(200,164,90,.12),transparent 30%),
+    #0d0c0b;
+}
+
+.enquiry-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:90px;
+  align-items:start;
+}
+
+.enquiry-copy h2{
+  font-family:var(--serif);
+  font-size:clamp(55px,6vw,82px);
+  line-height:.9;
+  font-weight:500;
+}
+
+.enquiry-copy h2 span{
+  color:var(--gold-light);
+}
+
+.enquiry-copy > p{
+  color:#a9a29a;
+  line-height:1.8;
+  margin:25px 0;
+}
+
+.contact-details{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  margin-top:35px;
+}
+
+.contact-details a{
+  color:#ddd5ca;
+  transition:.3s;
+}
+
+.contact-details a:hover{
+  color:var(--gold-light);
+}
+
+.enquiry-form{
+  display:flex;
+  flex-direction:column;
+  gap:17px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:17px;
+}
+
+.enquiry-form input,
+.enquiry-form textarea,
+.enquiry-form select{
+  width:100%;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid #393632;
+  padding:17px 4px;
+  color:white;
+  outline:none;
+  font-family:var(--sans);
+  transition:.3s;
+  border-radius:0;
+}
+
+.enquiry-form input:focus,
+.enquiry-form textarea:focus,
+.enquiry-form select:focus{
+  border-color:var(--gold);
+}
+
+.enquiry-form select option{
+  background:#151310;
+}
+
+.enquiry-form textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.form-submit{
+  margin-top:15px;
+  width:max-content;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+  padding:55px 5% 30px;
+  background:#070707;
+  border-top:1px solid rgba(200,164,90,.12);
+}
+
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+  padding-bottom:40px;
+}
+
+.footer-logo{
+  width:100px;
+}
+
+.footer-tagline{
+  font-family:var(--serif);
+  font-size:28px;
+  color:#d8c8aa;
+}
+
+.socials{
+  display:flex;
+  gap:12px;
+}
+
+.social{
+  width:43px;
+  height:43px;
+  border:1px solid #38342f;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+  transition:.3s;
+}
+
+.social:hover{
+  background:var(--gold);
+  color:#111;
+  border-color:var(--gold);
+  transform:translateY(-4px);
+}
+
+.footer-bottom{
+  padding-top:25px;
+  border-top:1px solid #252321;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#77736d;
+  font-size:11px;
+}
+
+.footer-credit{
+  color:var(--gold-light);
+}
+
+/* ---------- FLOATING BUTTONS ---------- */
+
+.floating{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:900;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.float-btn{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:19px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  transition:.3s;
+}
+
+.float-btn:hover{
+  transform:scale(1.08);
+}
+
+.call{
+  background:#b68e47;
+}
+
+.whatsapp{
+  background:#1da851;
+}
+
+.float-enquiry{
+  position:fixed;
+  left:20px;
+  bottom:20px;
+  z-index:900;
+  padding:14px 22px;
+  background:var(--gold);
+  color:#111;
+  border-radius:100px;
+  font-size:12px;
+  font-weight:600;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+/* ---------- REVEAL ---------- */
+
+.reveal{
+  opacity:0;
+  transform:translateY(55px);
+  transition:
+    opacity .9s cubic-bezier(.2,.7,.2,1),
+    transform .9s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.reveal-left{
+  opacity:0;
+  transform:translateX(-60px);
+  transition:1s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal-left.active{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.reveal-right{
+  opacity:0;
+  transform:translateX(60px);
+  transition:1s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal-right.active{
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:900px){
+
+  .navbar{
+    height:72px;
+    padding:0 5%;
+  }
+
+  .nav-links{
+    position:absolute;
+    top:72px;
+    left:0;
+    width:100%;
+    background:rgba(8,8,8,.98);
+    backdrop-filter:blur(18px);
+    flex-direction:column;
+    align-items:flex-start;
+    padding:25px 6%;
+    gap:23px;
+    transform:translateY(-130%);
+    opacity:0;
+    pointer-events:none;
+    transition:.4s;
+  }
+
+  .nav-links.open{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .nav-cta{
+    width:100%;
+    text-align:center;
+  }
+
+  .hero{
+    min-height:100svh;
+    background-position:62% center;
+  }
+
+  .hero-content{
+    margin-left:6%;
+    width:88%;
+    padding-top:60px;
+  }
+
+  .hero h1{
+    font-size:clamp(58px,17vw,88px);
+  }
+
+  .hero-text{
+    font-size:15px;
+  }
+
+  .hero-scroll{
+    left:6%;
+  }
+
+  .about,
+  .collection,
+  .experience,
+  .services,
+  .enquiry{
+    padding:95px 0;
+  }
+
+  .about-grid,
+  .enquiry-grid{
+    grid-template-columns:1fr;
+    gap:65px;
+  }
+
+  .product{
+    flex:0 0 86%;
+  }
+
+  .product img{
+    height:500px;
+  }
+
+  .service{
+    grid-template-columns:55px 1fr;
+    gap:15px;
+  }
+
+  .service p{
+    grid-column:2;
+  }
+
+  .worldwide{
+    min-height:520px;
+    padding:100px 0;
+  }
+
+  .form-row{
+    grid-template-columns:1fr;
+  }
+
+  .footer-top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+  }
+
+  .cursor-glow{
+    display:none;
+  }
+
+  .float-enquiry{
+    left:15px;
+    bottom:15px;
+  }
+
+  .floating{
+    right:15px;
+    bottom:15px;
+  }
+}
+
+@media(max-width:500px){
+
+  .logo{
+    width:76px;
+  }
+
+  .hero h1{
+    font-size:60px;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .btn{
+    min-width:180px;
+  }
+
+  .product img{
+    height:470px;
+  }
+
+  .section-title{
+    font-size:52px;
+  }
+
+  .about-image::before,
+  .about-image::after{
+    width:70px;
+    height:70px;
+  }
+
+  .float-enquiry{
+    padding:12px 16px;
+    font-size:11px;
+  }
+
+  .float-btn{
+    width:48px;
+    height:48px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar" id="navbar">
+
+  <a href="#home">
+    <img src="logo.png" class="logo" alt="M.R. Moorti Art">
+  </a>
+
+  <nav class="nav-links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#collection">Collection</a>
+    <a href="#craft">Craft</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+
+    <a href="tel:+918741917946" class="nav-cta magnetic">
+      Call Us
+    </a>
+  </nav>
+
+  <button class="menu-btn" id="menuBtn">☰</button>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+  <div class="hero-content reveal">
+
+    <div class="eyebrow">
+      M.R. Moorti Art · Since 1992
+    </div>
+
+    <h1>
+      Art carved<br>
+      <span>for eternity.</span>
+    </h1>
+
+    <p class="hero-text">
+      Marble Murti, Handicrafts, Marble Mandir & Painting —
+      crafted with devotion, precision and timeless artistry.
+      Delivery all across the world.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a
+        href="#collection"
+        class="btn btn-gold magnetic">
+        Explore Collection
+      </a>
+
+      <a
+        href="https://wa.me/918741917946?text=Hello%20M.R.%20Moorti%20Art%2C%20I%20would%20like%20to%20know%20about%20your%20marble%20collection."
+        target="_blank"
+        class="btn btn-dark magnetic">
+        WhatsApp Us
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Scroll to discover
+  </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+  <div class="section-inner about-grid">
+
+    <div class="about-image reveal-left">
+      <img src="about.jpg" alt="M.R. Moorti Art craftsmanship">
+    </div>
+
+    <div class="about-copy reveal-right">
+
+      <div class="section-head">
+
+        <div class="section-kicker">
+          Our Story
+        </div>
+
+        <h2 class="section-title">
+          Where marble<br>
+          becomes <em>art.</em>
+        </h2>
+
+      </div>
+
+      <p>
+        M.R. Moorti Art is dedicated to the timeless tradition of
+        marble craftsmanship. Every creation carries the character
+        of the artisan who shaped it and the heritage that inspired it.
+      </p>
+
+      <p>
+        From divine marble murtis and handcrafted temple art to
+        statement handicrafts and custom marble work, our creations
+        are made with patience, precision and devotion.
+      </p>
+
+      <div class="about-quote">
+        "Every piece is more than marble. It is a story carved by hand."
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= COLLECTION ================= -->
+
+<section class="collection" id="collection">
+
+  <div class="section-inner">
+
+    <div class="section-head reveal">
+
+      <div class="section-kicker">
+        Signature Collection
+      </div>
+
+      <h2 class="section-title">
+        Crafted pieces.<br>
+        <em>Timeless presence.</em>
+      </h2>
+
+      <p class="section-description">
+        Explore our handcrafted collection created for homes,
+        temples, spaces and collectors around the world.
+      </p>
+
+    </div>
+
+
+    <div class="collection-wrap reveal">
+
+      <div class="slider" id="slider">
+
+        <div class="slider-track" id="sliderTrack">
+
+          <article class="product">
+            <img src="p1.jpg" alt="Marble Murti">
+            <div class="product-info">
+              <span class="product-number">01 / COLLECTION</span>
+              <h3>Divine Marble Murti</h3>
+              <p>Handcrafted spiritual art</p>
+            </div>
+          </article>
+
+          <article class="product">
+            <img src="p2.jpg" alt="Handcrafted Marble Art">
+            <div class="product-info">
+              <span class="product-number">02 / COLLECTION</span>
+              <h3>Handcrafted Art</h3>
+              <p>Detailed marble craftsmanship</p>
+            </div>
+          </article>
+
+          <article class="product">
+            <img src="p3.jpg" alt="Marble Handicraft">
+            <div class="product-info">
+              <span class="product-number">03 / COLLECTION</span>
+              <h3>Marble Handicraft</h3>
+              <p>Made with timeless precision</p>
+            </div>
+          </article>
+
+          <article class="product">
+            <img src="p4.jpg" alt="Marble Mandir">
+            <div class="product-info">
+              <span class="product-number">04 / COLLECTION</span>
+              <h3>Marble Mandir</h3>
+              <p>Designed for sacred spaces</p>
+            </div>
+          </article>
+
+          <article class="product">
+            <img src="p5.jpg" alt="Custom Marble Art">
+            <div class="product-info">
+              <span class="product-number">05 / COLLECTION</span>
+              <h3>Custom Marble Art</h3>
+              <p>Created around your vision</p>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+
+
+      <div class="slider-controls">
+
+        <button class="slider-btn magnetic" id="prevBtn">
+          ←
+        </button>
+
+        <button class="slider-btn magnetic" id="nextBtn">
+          →
+        </button>
+
+      </div>
+
+      <div class="slider-progress">
+        <span id="progressBar"></span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CRAFT SECTION ================= -->
+
+<section class="experience" id="craft">
+
+  <div class="section-inner">
+
+    <div class="experience-content reveal">
+
+      <div class="section-kicker">
+        The Art of Craft
+      </div>
+
+      <h2 class="experience-title">
+        Not just marble.<br>
+        <span>A legacy in stone.</span>
+      </h2>
+
+      <p class="experience-copy">
+        Our artisans transform natural marble into forms that carry
+        devotion, beauty and character. Every curve, expression,
+        ornament and detail is patiently refined by skilled hands.
+      </p>
+
+      <div style="margin-top:35px;">
+        <a
+          href="https://wa.me/918741917946?text=Hello%20M.R.%20Moorti%20Art%2C%20I%20am%20interested%20in%20your%20custom%20marble%20art."
+          target="_blank"
+          class="btn btn-gold magnetic">
+          Discuss Your Requirement
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+
+<section class="services" id="services">
+
+  <div class="section-inner">
+
+    <div class="section-head reveal">
+
+      <div class="section-kicker">
+        What We Create
+      </div>
+
+      <h2 class="section-title">
+        From sacred spaces<br>
+        to <em>statement pieces.</em>
+      </h2>
+
+    </div>
+
+
+    <div class="service-list">
+
+      <div class="service reveal">
+
+        <div class="service-no">01</div>
+
+        <h3>Marble Murti</h3>
+
+        <p>
+          Traditional and custom marble murtis crafted
+          with exceptional detailing and devotional precision.
+        </p>
+
+      </div>
+
+
+      <div class="service reveal">
+
+        <div class="service-no">02</div>
+
+        <h3>Marble Mandir</h3>
+
+        <p>
+          Elegant marble temple designs created for homes,
+          institutions and spiritual spaces.
+        </p>
+
+      </div>
+
+
+      <div class="service reveal">
+
+        <div class="service-no">03</div>
+
+        <h3>Handicrafts</h3>
+
+        <p>
+          Unique handcrafted marble pieces that bring
+          Rajasthan's artistic heritage into modern spaces.
+        </p>
+
+      </div>
+
+
+      <div class="service reveal">
+
+        <div class="service-no">04</div>
+
+        <h3>Custom Art</h3>
+
+        <p>
+          Bespoke marble creations developed around your
+          preferred design, size and artistic vision.
+        </p>
+
+      </div>
+
+
+      <div class="service reveal">
+
+        <div class="service-no">05</div>
+
+        <h3>Paintings</h3>
+
+        <p>
+          Artistic works selected and created to complement
+          interiors, spiritual spaces and collections.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= WORLDWIDE ================= -->
+
+<section class="worldwide">
+
+  <div class="worldwide-inner reveal">
+
+    <div class="section-kicker">
+      From Rajasthan · To The World
+    </div>
+
+    <h2>
+      Rajasthan's art.<br>
+      <span>Delivered worldwide.</span>
+    </h2>
+
+    <p>
+      Our creations travel beyond borders, bringing the beauty
+      of Indian marble craftsmanship to homes, temples,
+      collectors and spaces around the world.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ================= ENQUIRY ================= -->
+
+<section class="enquiry" id="contact">
+
+  <div class="section-inner enquiry-grid">
+
+    <div class="enquiry-copy reveal-left">
+
+      <div class="section-kicker">
+        Start A Conversation
+      </div>
+
+      <h2>
+        Have a vision?<br>
+        <span>Let's carve it.</span>
+      </h2>
+
+      <p>
+        Tell us what you're looking for. Whether it is a marble
+        murti, mandir, handcrafted piece or a completely custom
+        creation, our team will help you bring it to life.
+      </p>
+
+      <div class="contact-details">
+
+        <a href="tel:+918741917946">
+          ☎ +91 87419 17946
+        </a>
+
+        <a
+          href="https://wa.me/918741917946"
+          target="_blank">
+          WhatsApp · +91 87419 17946
+        </a>
+
+        <a
+          href="https://instagram.com/mr_marble_art"
+          target="_blank">
+          Instagram · @mr_marble_art
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <form class="enquiry-form reveal-right" id="enquiryForm">
+
+      <div class="form-row">
+
+        <input
+          type="text"
+          id="name"
+          placeholder="Your Name"
+          required>
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="Phone Number"
+          required>
+
+      </div>
+
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Email Address">
+
+
+      <select id="requirement">
+
+        <option value="">What are you looking for?</option>
+        <option>Marble Murti</option>
+        <option>Marble Mandir</option>
+        <option>Handicrafts</option>
+        <option>Custom Marble Art</option>
+        <option>Painting</option>
+        <option>Other</option>
+
+      </select>
+
+
+      <textarea
+        id="message"
+        placeholder="Tell us about your requirement..."></textarea>
+
+
+      <button
+        type="submit"
+        class="btn btn-gold form-submit magnetic">
+        Send Enquiry →
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <div class="footer-top">
+
+    <img
+      src="logo.png"
+      alt="M.R. Moorti Art"
+      class="footer-logo">
+
+    <div class="footer-tagline">
+      Made with devotion. Built to last.
+    </div>
+
+    <div class="socials">
+
+      <a
+        href="https://instagram.com/mr_marble_art"
+        target="_blank"
+        class="social magnetic"
+        aria-label="Instagram">
+        ◎
+      </a>
+
+      <a
+        href="https://wa.me/918741917946"
+        target="_blank"
+        class="social magnetic"
+        aria-label="WhatsApp">
+        ◇
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © <span id="year"></span> M.R. Moorti Art. All rights reserved.
+    </span>
+
+    <span class="footer-credit">
+      Crafted by Marwar Infotech
+    </span>
+
+  </div>
+
+</footer>
+
+
+<!-- ================= FLOATING BUTTONS ================= -->
+
+<a
+  href="#contact"
+  class="float-enquiry magnetic">
+  Enquire Now
+</a>
+
+<div class="floating">
+
+  <a
+    href="tel:+918741917946"
+    class="float-btn call magnetic"
+    aria-label="Call">
+    ☎
+  </a>
+
+  <a
+    href="https://wa.me/918741917946"
+    target="_blank"
+    class="float-btn whatsapp magnetic"
+    aria-label="WhatsApp">
+    ◇
+  </a>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   M.R. MOORTI ART — JAVASCRIPT
+========================================================= */
+
+
+/* ---------- YEAR ---------- */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+/* ---------- NAVBAR ---------- */
+
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+
+  if(window.scrollY > 50){
+    navbar.classList.add("scrolled");
+  }else{
+    navbar.classList.remove("scrolled");
+  }
+
+});
+
+
+/* ---------- MOBILE MENU ---------- */
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+
+  navLinks.classList.toggle("open");
+
+  menuBtn.textContent =
+    navLinks.classList.contains("open") ? "×" : "☰";
+
+});
+
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+
+  link.addEventListener("click", () => {
+
+    navLinks.classList.remove("open");
+    menuBtn.textContent = "☰";
+
+  });
+
+});
+
+
+/* ---------- SCROLL REVEAL ---------- */
+
+const revealElements =
+  document.querySelectorAll(
+    ".reveal,.reveal-left,.reveal-right"
+  );
+
+const revealObserver = new IntersectionObserver(
+
+  (entries) => {
+
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+
+        entry.target.classList.add("active");
+
+        revealObserver.unobserve(entry.target);
+
+      }
+
+    });
+
+  },
+
+  {
+    threshold:.08,
+    rootMargin:"0px 0px -50px 0px"
+  }
+
+);
+
+
+revealElements.forEach(el => {
+  revealObserver.observe(el);
+});
+
+
+/* ---------- COLLECTION SLIDER ---------- */
+
+const track =
+  document.getElementById("sliderTrack");
+
+const slider =
+  document.getElementById("slider");
+
+const nextBtn =
+  document.getElementById("nextBtn");
+
+const prevBtn =
+  document.getElementById("prevBtn");
+
+const progress =
+  document.getElementById("progressBar");
+
+let currentIndex = 0;
+let autoSlide;
+
+function getVisibleCards(){
+
+  if(window.innerWidth <= 700){
+    return 1;
+  }
+
+  if(window.innerWidth <= 1000){
+    return 2;
+  }
+
+  return 3;
+
+}
+
+
+function getMaxIndex(){
+
+  const visible = getVisibleCards();
+  const total = track.children.length;
+
+  return Math.max(0,total-visible);
+
+}
+
+
+function updateSlider(){
+
+  const visible = getVisibleCards();
+
+  const gap = 22;
+
+  const cardWidth =
+    track.children[0].getBoundingClientRect().width;
+
+  const move =
+    currentIndex * (cardWidth + gap);
+
+  track.style.transform =
+    `translateX(-${move}px)`;
+
+  const max =
+    getMaxIndex();
+
+  const percentage =
+    max === 0
+      ? 100
+      : ((currentIndex / max) * 100);
+
+  progress.style.width =
+    Math.max(20,percentage) + "%";
+
+}
+
+
+function nextSlide(){
+
+  const max =
+    getMaxIndex();
+
+  currentIndex =
+    currentIndex >= max
+      ? 0
+      : currentIndex + 1;
+
+  updateSlider();
+
+}
+
+
+function prevSlide(){
+
+  const max =
+    getMaxIndex();
+
+  currentIndex =
+    currentIndex <= 0
+      ? max
+      : currentIndex - 1;
+
+  updateSlider();
+
+}
+
+
+nextBtn.addEventListener("click",() => {
+
+  nextSlide();
+  restartAuto();
+
+});
+
+
+prevBtn.addEventListener("click",() => {
+
+  prevSlide();
+  restartAuto();
+
+});
+
+
+/* ---------- AUTO SLIDE ---------- */
+
+function startAuto(){
+
+  autoSlide =
+    setInterval(() => {
+
+      nextSlide();
+
+    },4500);
+
+}
+
+
+function restartAuto(){
+
+  clearInterval(autoSlide);
+  startAuto();
+
+}
+
+
+slider.addEventListener("mouseenter",() => {
+  clearInterval(autoSlide);
+});
+
+
+slider.addEventListener("mouseleave",() => {
+  startAuto();
+});
+
+
+/* ---------- DRAG / SWIPE ---------- */
+
+let startX = 0;
+let dragging = false;
+
+slider.addEventListener("pointerdown",(e) => {
+
+  dragging = true;
+  startX = e.clientX;
+
+});
+
+
+slider.addEventListener("pointerup",(e) => {
+
+  if(!dragging) return;
+
+  const difference =
+    e.clientX - startX;
+
+  dragging = false;
+
+  if(Math.abs(difference) > 50){
+
+    if(difference < 0){
+      nextSlide();
+    }else{
+      prevSlide();
+    }
+
+    restartAuto();
+
+  }
+
+});
+
+
+slider.addEventListener("pointerleave",() => {
+  dragging = false;
+});
+
+
+slider.addEventListener("pointercancel",() => {
+  dragging = false;
+});
+
+
+window.addEventListener("resize",() => {
+
+  currentIndex =
+    Math.min(currentIndex,getMaxIndex());
+
+  updateSlider();
+
+});
+
+
+updateSlider();
+startAuto();
+
+
+/* ---------- MAGNETIC BUTTONS ---------- */
+
+const magneticElements =
+  document.querySelectorAll(".magnetic");
+
+magneticElements.forEach(element => {
+
+  element.addEventListener("mousemove",(e) => {
+
+    const rect =
+      element.getBoundingClientRect();
+
+    const x =
+      e.clientX - rect.left - rect.width / 2;
+
+    const y =
+      e.clientY - rect.top - rect.height / 2;
+
+    const strength =
+      window.innerWidth < 700 ? .08 : .22;
+
+    element.style.transform =
+      `translate(${x * strength}px,${y * strength}px)`;
+
+  });
+
+
+  element.addEventListener("mouseleave",() => {
+
+    element.style.transform =
+      "translate(0,0)";
+
+  });
+
+});
+
+
+/* ---------- CURSOR GLOW ---------- */
+
+const cursorGlow =
+  document.getElementById("cursorGlow");
+
+document.addEventListener("mousemove",(e) => {
+
+  cursorGlow.style.left =
+    e.clientX + "px";
+
+  cursorGlow.style.top =
+    e.clientY + "px";
+
+});
+
+
+/* ---------- ENQUIRY → WHATSAPP ---------- */
+
+const enquiryForm =
+  document.getElementById("enquiryForm");
+
+enquiryForm.addEventListener("submit",(e) => {
+
+  e.preventDefault();
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const requirement =
+    document.getElementById("requirement").value;
+
+  const message =
+    document.getElementById("message").value.trim();
+
+
+  const whatsappMessage =
+`Hello M.R. Moorti Art,
+
+I would like to make an enquiry.
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+Requirement: ${requirement || "Not specified"}
+
+Message:
+${message || "I would like to know more about your collection."}`;
+
+
+  const url =
+    "https://wa.me/918741917946?text=" +
+    encodeURIComponent(whatsappMessage);
+
+
+  window.open(url,"_blank");
+
+});
+
+
+/* ---------- SMOOTH INTERNAL LINKS ---------- */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+  anchor.addEventListener("click",(e) => {
+
+    const target =
+      document.querySelector(anchor.getAttribute("href"));
+
+    if(!target) return;
+
+    e.preventDefault();
+
+    target.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  });
+
+});
+
+
+/* ---------- PARALLAX HERO ---------- */
+
+const hero =
+  document.querySelector(".hero");
+
+window.addEventListener("scroll",() => {
+
+  if(window.innerWidth > 800){
+
+    const y =
+      window.scrollY * .18;
+
+    hero.style.backgroundPosition =
+      `center calc(50% + ${y}px)`;
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>

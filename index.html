@@ -1,2254 +1,3407 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>M.R. Moorti Art | Marble Art & Craftsmanship</title>
+<title>M.R. Moorti Art | Marble Art & Craftsmanship</title>
 
-    <meta name="description"
-        content="M.R. Moorti Art — timeless marble artistry, handcrafted murtis, mandirs, handicrafts and custom marble creations from Rajasthan.">
+<meta name="description" content="M.R. Moorti Art — premium marble murtis, marble mandirs, handicrafts, custom marble art and paintings from Rajasthan.">
 
-    <meta name="keywords"
-        content="M.R. Moorti Art, Marble Murti, Marble Mandir, Marble Handicrafts, Marble Art, Jaipur Marble, Rajasthan Marble Art">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <meta name="author" content="M.R. Moorti Art">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
-    <!-- Luxury Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
-        rel="stylesheet">
+/* =========================================================
+   M.R. MOORTI ART — LUXURY REBUILD
+   HTML + CSS + JS — SINGLE FILE
+========================================================= */
 
-    <!-- Font Awesome Icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+:root{
+  --white:#f8f8f6;
+  --paper:#efefec;
+  --soft:#e5e5e1;
+  --stone:#c9c8c3;
+  --dark:#181817;
+  --dark2:#242421;
+  --text:#20201e;
+  --muted:#777772;
+  --line:rgba(24,24,23,.14);
+  --light-line:rgba(255,255,255,.18);
 
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+  --serif:"Playfair Display",serif;
+  --sans:"DM Sans",sans-serif;
+
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+
+/* RESET */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--white);
+  color:var(--text);
+  font-family:var(--sans);
+  overflow-x:hidden;
+}
+
+body.loading{
+  overflow:hidden;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+
+
+/* =========================================================
+   PRELOADER
+========================================================= */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:#181817;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:
+    opacity 1s var(--ease),
+    visibility 1s;
+}
+
+.preloader.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.loader-inner{
+  text-align:center;
+}
+
+.loader-mark{
+  width:58px;
+  height:58px;
+  margin:auto;
+  position:relative;
+  transform:rotate(45deg);
+}
+
+.loader-mark span{
+  position:absolute;
+  inset:0;
+  border:1px solid rgba(255,255,255,.6);
+}
+
+.loader-mark span:nth-child(2){
+  inset:10px;
+  border-color:rgba(255,255,255,.3);
+}
+
+.loader-label{
+  margin-top:30px;
+  font-size:10px;
+  letter-spacing:.42em;
+  text-transform:uppercase;
+  color:#aaa;
+}
+
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+.cursor{
+  position:fixed;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#181817;
+  pointer-events:none;
+  z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:
+    width .35s var(--ease),
+    height .35s var(--ease),
+    background .35s;
+}
+
+.cursor-ring{
+  position:fixed;
+  width:38px;
+  height:38px;
+  border:1px solid rgba(24,24,23,.35);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9997;
+  transform:translate(-50%,-50%);
+  transition:
+    width .45s var(--ease),
+    height .45s var(--ease),
+    border-color .35s;
+}
+
+.cursor.active{
+  width:5px;
+  height:5px;
+}
+
+.cursor-ring.active{
+  width:65px;
+  height:65px;
+  border-color:rgba(24,24,23,.65);
+}
+
+@media(max-width:800px){
+  .cursor,
+  .cursor-ring{
+    display:none;
+  }
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:92px;
+  padding:0 5%;
+  z-index:9000;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  color:white;
+
+  transition:
+    height .7s var(--ease),
+    background .7s,
+    color .5s,
+    border .5s;
+}
+
+.navbar.scrolled{
+  height:72px;
+  background:rgba(248,248,246,.88);
+  color:var(--text);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+}
+
+
+/* CSS LOGO MARK
+   No "MR" text. Replace .brand-mark with
+   actual logo image later if desired.
+*/
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.brand-mark{
+  width:42px;
+  height:42px;
+  position:relative;
+  transform:rotate(45deg);
+}
+
+.brand-mark::before,
+.brand-mark::after{
+  content:"";
+  position:absolute;
+  border:1px solid currentColor;
+}
+
+.brand-mark::before{
+  inset:2px;
+}
+
+.brand-mark::after{
+  inset:9px;
+  opacity:.5;
+}
+
+.brand-name{
+  font-family:var(--serif);
+  font-size:19px;
+  letter-spacing:.04em;
+}
+
+.brand-sub{
+  display:block;
+  font-family:var(--sans);
+  font-size:7px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  opacity:.6;
+  margin-top:2px;
+}
+
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+
+.nav-links a{
+  position:relative;
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width:0;
+  height:1px;
+  background:currentColor;
+  transition:width .5s var(--ease);
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+.nav-call{
+  border:1px solid currentColor;
+  padding:12px 19px;
+  border-radius:100px;
+}
+
+.nav-call::after{
+  display:none;
+}
+
+.menu{
+  display:none;
+  background:none;
+  border:0;
+  cursor:pointer;
+  font-size:25px;
+  color:inherit;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  min-height:100svh;
+  position:relative;
+  overflow:hidden;
+
+  display:flex;
+  align-items:center;
+
+  background:
+    radial-gradient(
+      ellipse at 72% 45%,
+      rgba(255,255,255,.92) 0%,
+      rgba(215,215,210,.55) 28%,
+      rgba(166,166,160,.28) 48%,
+      transparent 70%
+    ),
+    linear-gradient(
+      120deg,
+      #171716 0%,
+      #343431 23%,
+      #a8a8a2 55%,
+      #eeeeeb 100%
+    );
+}
+
+
+/* Large stone-like abstract forms */
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:72vw;
+  height:110vh;
+  right:-17vw;
+  top:-12vh;
+
+  border-radius:48% 52% 38% 62%;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(255,255,255,.1),
+      rgba(255,255,255,.75) 38%,
+      rgba(155,155,149,.3) 61%,
+      rgba(255,255,255,.7)
+    );
+
+  filter:blur(1px);
+  transform:rotate(-14deg);
+  opacity:.75;
+}
+
+
+/* Marble vein */
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:70%;
+  height:160%;
+  right:-8%;
+  top:-25%;
+
+  background:
+    repeating-linear-gradient(
+      115deg,
+      transparent 0 70px,
+      rgba(70,70,67,.10) 72px,
+      transparent 75px 145px
+    );
+
+  transform:rotate(10deg);
+  opacity:.55;
+}
+
+
+.hero-content{
+  width:min(1200px,90%);
+  margin:auto;
+  position:relative;
+  z-index:3;
+  padding-top:70px;
+}
+
+.hero-kicker{
+  font-size:10px;
+  letter-spacing:.42em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+  color:#deded9;
+}
+
+.hero h1{
+  max-width:900px;
+  font-family:var(--serif);
+  font-size:clamp(65px,9vw,140px);
+  line-height:.82;
+  font-weight:400;
+  letter-spacing:-.055em;
+  color:white;
+}
+
+.hero h1 em{
+  color:#d8d8d2;
+  font-style:italic;
+}
+
+.hero-copy{
+  width:min(520px,100%);
+  margin-top:38px;
+  color:#e0e0dc;
+  font-size:15px;
+  line-height:1.9;
+}
+
+.hero-actions{
+  margin-top:38px;
+  display:flex;
+  gap:13px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  min-width:165px;
+  padding:16px 24px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:100px;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:
+    transform .5s var(--ease),
+    background .4s,
+    color .4s,
+    box-shadow .5s;
+}
+
+.btn-light{
+  background:#f5f5f2;
+  color:#171716;
+}
+
+.btn-outline{
+  border:1px solid rgba(255,255,255,.55);
+  color:white;
+}
+
+.btn:hover{
+  box-shadow:0 20px 45px rgba(0,0,0,.16);
+}
+
+.hero-bottom{
+  position:absolute;
+  bottom:35px;
+  left:5%;
+  right:5%;
+  z-index:4;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  color:rgba(255,255,255,.7);
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+
+.hero-scroll{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.scroll-line{
+  width:55px;
+  height:1px;
+  background:rgba(255,255,255,.5);
+}
+
+
+/* =========================================================
+   SECTION COMMON
+========================================================= */
+
+section{
+  position:relative;
+  overflow:hidden;
+}
+
+.section{
+  width:min(1200px,90%);
+  margin:auto;
+}
+
+.kicker{
+  font-size:10px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:#777771;
+  margin-bottom:18px;
+}
+
+.title{
+  font-family:var(--serif);
+  font-size:clamp(50px,6vw,88px);
+  line-height:.92;
+  font-weight:400;
+  letter-spacing:-.045em;
+}
+
+.title em{
+  font-style:italic;
+  color:#777771;
+}
+
+.description{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.9;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about{
+  padding:170px 0;
+  background:var(--white);
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:110px;
+  align-items:center;
+}
+
+
+/* Built-in visual instead of uploaded about image */
+
+.about-art{
+  min-height:670px;
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d9d9d5,
+      #f5f5f2 35%,
+      #b9b9b4 60%,
+      #ecece8
+    );
+}
+
+.about-art::before{
+  content:"";
+  position:absolute;
+  width:75%;
+  height:115%;
+  left:-15%;
+  top:-10%;
+  border-radius:48%;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.9),
+      rgba(170,170,165,.18),
+      rgba(255,255,255,.7)
+    );
+  transform:rotate(20deg);
+}
+
+.about-art::after{
+  content:"";
+  position:absolute;
+  width:130%;
+  height:2px;
+  left:-10%;
+  top:48%;
+  background:rgba(80,80,76,.25);
+  transform:rotate(-27deg);
+  box-shadow:
+    0 90px rgba(80,80,76,.09),
+    0 -110px rgba(80,80,76,.08);
+}
+
+.art-caption{
+  position:absolute;
+  left:35px;
+  bottom:32px;
+  z-index:2;
+
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:#33332f;
+}
+
+.about-copy{
+  padding-right:5%;
+}
+
+.about-copy .description{
+  margin-top:30px;
+  max-width:500px;
+}
+
+.about-quote{
+  margin-top:38px;
+  padding-left:22px;
+  border-left:1px solid #777771;
+  font-family:var(--serif);
+  font-size:24px;
+  line-height:1.4;
+  color:#393936;
+}
+
+
+/* =========================================================
+   COLLECTION
+========================================================= */
+
+.collection{
+  padding:160px 0 175px;
+  background:#e8e8e4;
+}
+
+.collection-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:50px;
+  margin-bottom:70px;
+}
+
+.collection-head .description{
+  max-width:390px;
+}
+
+
+/* Gallery */
+
+.gallery{
+  overflow:hidden;
+}
+
+.gallery-track{
+  display:flex;
+  gap:20px;
+  transition:transform 1s var(--ease);
+}
+
+.card{
+  flex:0 0 calc(33.333% - 14px);
+  position:relative;
+  overflow:hidden;
+  background:#d3d3cf;
+  cursor:pointer;
+}
+
+.card-image{
+  width:100%;
+  height:600px;
+  object-fit:cover;
+  transition:
+    transform 1.3s var(--ease),
+    filter 1s var(--ease);
+}
+
+.card:hover .card-image{
+  transform:scale(1.06);
+  filter:saturate(.8);
+}
+
+.card-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.68),
+      transparent 45%
+    );
+  opacity:.75;
+}
+
+.card-info{
+  position:absolute;
+  left:28px;
+  right:28px;
+  bottom:27px;
+  color:white;
+  z-index:2;
+  transform:translateY(8px);
+  transition:transform .7s var(--ease);
+}
+
+.card:hover .card-info{
+  transform:translateY(0);
+}
+
+.card-number{
+  font-size:9px;
+  letter-spacing:.25em;
+  opacity:.7;
+}
+
+.card-info h3{
+  font-family:var(--serif);
+  font-size:29px;
+  font-weight:400;
+  margin-top:5px;
+}
+
+.card-info p{
+  font-size:10px;
+  letter-spacing:.08em;
+  opacity:.7;
+  margin-top:4px;
+}
+
+.slider-controls{
+  margin-top:25px;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.slider-btn{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:1px solid #858580;
+  background:transparent;
+  cursor:pointer;
+  font-size:19px;
+  transition:
+    transform .5s var(--ease),
+    background .4s,
+    color .4s;
+}
+
+.slider-btn:hover{
+  background:#1c1c1a;
+  color:white;
+}
+
+.progress{
+  margin-top:25px;
+  width:100%;
+  height:1px;
+  background:#c5c5c0;
+}
+
+.progress span{
+  display:block;
+  width:20%;
+  height:100%;
+  background:#22221f;
+  transition:width .8s var(--ease);
+}
+
+
+/* =========================================================
+   CRAFT / HERITAGE
+========================================================= */
+
+.craft{
+  min-height:720px;
+  padding:160px 0;
+  display:flex;
+  align-items:center;
+
+  background:
+    radial-gradient(
+      circle at 70% 45%,
+      #686864,
+      #2d2d2a 45%,
+      #161615 100%
+    );
+
+  color:white;
+}
+
+
+/* Code-built sculpture */
+
+.craft-object{
+  position:absolute;
+  right:7%;
+  top:50%;
+  width:520px;
+  height:620px;
+  transform:translateY(-50%) rotate(8deg);
+  opacity:.32;
+}
+
+.craft-object::before{
+  content:"";
+  position:absolute;
+  width:390px;
+  height:570px;
+  left:60px;
+  top:20px;
+
+  border-radius:
+    48% 52% 42% 58% /
+    30% 35% 65% 70%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eee,
+      #777,
+      #ddd,
+      #555
+    );
+
+  box-shadow:
+    -50px 40px 100px rgba(0,0,0,.4);
+}
+
+.craft-object::after{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:1px;
+  left:40px;
+  top:50%;
+  background:rgba(255,255,255,.35);
+  transform:rotate(-30deg);
+  box-shadow:
+    0 80px rgba(255,255,255,.15),
+    0 -100px rgba(255,255,255,.1);
+}
+
+.craft-content{
+  position:relative;
+  z-index:2;
+  max-width:760px;
+}
+
+.craft .kicker{
+  color:#aaa;
+}
+
+.craft .title{
+  font-size:clamp(60px,8vw,110px);
+}
+
+.craft .title em{
+  color:#aaa;
+}
+
+.craft .description{
+  max-width:580px;
+  margin-top:30px;
+  color:#b8b8b3;
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services{
+  padding:165px 0;
+  background:#f2f2ef;
+}
+
+.services-head{
+  max-width:750px;
+}
+
+.service-list{
+  margin-top:75px;
+}
+
+.service{
+  display:grid;
+  grid-template-columns:90px 1fr 1fr;
+  gap:35px;
+  padding:32px 0;
+
+  border-top:1px solid var(--line);
+
+  transition:
+    padding .7s var(--ease),
+    background .5s;
+}
+
+.service:last-child{
+  border-bottom:1px solid var(--line);
+}
+
+.service:hover{
+  padding-left:20px;
+}
+
+.service-no{
+  font-family:var(--serif);
+  font-size:28px;
+  color:#888883;
+}
+
+.service h3{
+  font-family:var(--serif);
+  font-size:34px;
+  font-weight:400;
+}
+
+.service p{
+  max-width:450px;
+  color:#74746f;
+  line-height:1.8;
+  font-size:13px;
+}
+
+
+/* =========================================================
+   WORLDWIDE
+========================================================= */
+
+.worldwide{
+  min-height:720px;
+  padding:150px 0;
+
+  display:flex;
+  align-items:center;
+
+  background:
+    linear-gradient(
+      120deg,
+      #d1d1cc,
+      #eeeeeb 50%,
+      #b7b7b1
+    );
+}
+
+
+/* Architectural code visual */
+
+.worldwide::before{
+  content:"";
+  position:absolute;
+  width:55vw;
+  height:90vh;
+  right:-15vw;
+  top:-10vh;
+
+  border-radius:50%;
+
+  background:
+    repeating-linear-gradient(
+      95deg,
+      rgba(255,255,255,.7) 0 2px,
+      transparent 2px 55px
+    );
+
+  transform:rotate(-15deg);
+  opacity:.5;
+}
+
+.worldwide-content{
+  position:relative;
+  z-index:2;
+}
+
+.worldwide .title{
+  font-size:clamp(65px,9vw,130px);
+  max-width:1000px;
+}
+
+.worldwide .description{
+  max-width:550px;
+  margin-top:35px;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact{
+  padding:160px 0;
+  background:#191918;
+  color:white;
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:100px;
+}
+
+.contact .kicker{
+  color:#999993;
+}
+
+.contact .title{
+  font-size:clamp(55px,7vw,100px);
+}
+
+.contact .title em{
+  color:#aaa9a3;
+}
+
+.contact-intro{
+  margin-top:30px;
+  max-width:480px;
+  color:#969690;
+  line-height:1.9;
+  font-size:14px;
+}
+
+.contact-details{
+  margin-top:45px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.contact-details a{
+  font-family:var(--serif);
+  font-size:22px;
+  color:#dddcd7;
+  transition:color .4s;
+}
+
+.contact-details a:hover{
+  color:white;
+}
+
+.address{
+  color:#858580;
+  font-size:12px;
+  line-height:1.8;
+  max-width:300px;
+}
+
+
+/* Form */
+
+.form{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.field{
+  position:relative;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  padding:17px 2px;
+
+  color:white;
+  background:transparent;
+
+  border:0;
+  border-bottom:1px solid #393936;
+
+  outline:none;
+
+  border-radius:0;
+
+  transition:border .4s;
+}
+
+.field textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.field select option{
+  background:#1b1b19;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+  border-color:#aaa9a3;
+}
+
+.form-submit{
+  margin-top:10px;
+  align-self:flex-start;
+  border:0;
+  cursor:pointer;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+  padding:65px 5% 30px;
+  background:#111110;
+  color:#aaa9a3;
+}
+
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:50px;
+}
+
+.footer-brand{
+  color:white;
+}
+
+.footer-brand .brand-mark{
+  width:38px;
+  height:38px;
+}
+
+.footer-tagline{
+  margin-top:20px;
+  font-family:var(--serif);
+  font-size:25px;
+  color:#d0cfca;
+}
+
+.footer-contact{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  font-size:12px;
+  text-align:right;
+}
+
+.footer-contact a:hover{
+  color:white;
+}
+
+.footer-address{
+  max-width:300px;
+  line-height:1.7;
+}
+
+.footer-bottom{
+  margin-top:55px;
+  padding-top:22px;
+  border-top:1px solid #2d2d2b;
+
+  display:flex;
+  justify-content:space-between;
+
+  font-size:9px;
+  letter-spacing:.1em;
+  color:#666661;
+}
+
+.footer-credit{
+  color:#aaa9a3;
+}
+
+
+/* =========================================================
+   FLOATING BUTTONS
+========================================================= */
+
+.floating{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:8000;
+
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.float-btn{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:white;
+
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
+
+  transition:
+    transform .45s var(--ease),
+    box-shadow .45s;
+}
+
+.float-btn:hover{
+  transform:translateY(-5px) scale(1.05);
+  box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+.float-call{
+  background:#22221f;
+}
+
+.float-whatsapp{
+  background:#1c9b55;
+}
+
+.float-icon{
+  width:20px;
+  height:20px;
+}
+
+
+/* =========================================================
+   REVEAL ANIMATIONS
+========================================================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(70px);
+  transition:
+    opacity 1.2s var(--ease),
+    transform 1.2s var(--ease);
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.reveal-left{
+  opacity:0;
+  transform:translateX(-80px);
+  transition:
+    opacity 1.3s var(--ease),
+    transform 1.3s var(--ease);
+}
+
+.reveal-left.active{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.reveal-right{
+  opacity:0;
+  transform:translateX(80px);
+  transition:
+    opacity 1.3s var(--ease),
+    transform 1.3s var(--ease);
+}
+
+.reveal-right.active{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.scale-reveal{
+  opacity:0;
+  transform:scale(.94);
+  transition:
+    opacity 1.4s var(--ease),
+    transform 1.4s var(--ease);
+}
+
+.scale-reveal.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+
+/* =========================================================
+   TEXT STAGGER
+========================================================= */
+
+.word{
+  display:inline-block;
+  overflow:hidden;
+}
+
+.word span{
+  display:inline-block;
+  transform:translateY(110%);
+  transition:transform 1s var(--ease);
+}
+
+.active .word span{
+  transform:translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+  .navbar{
+    height:75px;
+    padding:0 6%;
+  }
+
+  .navbar.scrolled{
+    height:68px;
+  }
+
+  .nav-links{
+    position:absolute;
+    top:68px;
+    left:0;
+    width:100%;
+
+    padding:28px 6% 35px;
+
+    flex-direction:column;
+    align-items:flex-start;
+
+    background:rgba(248,248,246,.97);
+    color:#181817;
+
+    transform:translateY(-120%);
+    opacity:0;
+    pointer-events:none;
+
+    transition:
+      transform .7s var(--ease),
+      opacity .5s;
+  }
+
+  .nav-links.open{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .hero-content{
+    width:88%;
+  }
+
+  .hero h1{
+    font-size:clamp(62px,16vw,95px);
+  }
+
+  .hero-copy{
+    font-size:14px;
+  }
+
+  .about,
+  .collection,
+  .services,
+  .contact{
+    padding:110px 0;
+  }
+
+  .about-grid,
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:60px;
+  }
+
+  .about-art{
+    min-height:500px;
+  }
+
+  .collection-head{
+    display:block;
+  }
+
+  .collection-head .description{
+    margin-top:25px;
+  }
+
+  .card{
+    flex:0 0 82%;
+  }
+
+  .card-image{
+    height:520px;
+  }
+
+  .craft{
+    min-height:620px;
+    padding:110px 0;
+  }
+
+  .craft-object{
+    width:380px;
+    height:470px;
+    right:-90px;
+    opacity:.22;
+  }
+
+  .service{
+    grid-template-columns:55px 1fr;
+    gap:15px;
+  }
+
+  .service p{
+    grid-column:2;
+  }
+
+  .worldwide{
+    min-height:600px;
+    padding:110px 0;
+  }
+
+  .worldwide .title{
+    font-size:clamp(58px,15vw,95px);
+  }
+
+  .form-row{
+    grid-template-columns:1fr;
+  }
+
+  .footer-top{
+    flex-direction:column;
+  }
+
+  .footer-contact{
+    text-align:left;
+  }
+
+  .footer-bottom{
+    flex-direction:column;
+    gap:12px;
+  }
+}
+
+
+@media(max-width:500px){
+
+  .brand-name{
+    font-size:16px;
+  }
+
+  .brand-sub{
+    font-size:6px;
+  }
+
+  .brand-mark{
+    width:35px;
+    height:35px;
+  }
+
+  .hero h1{
+    font-size:60px;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .btn{
+    min-width:185px;
+  }
+
+  .about-art{
+    min-height:420px;
+  }
+
+  .card{
+    flex:0 0 88%;
+  }
+
+  .card-image{
+    height:470px;
+  }
+
+  .slider-controls{
+    justify-content:flex-start;
+  }
+
+  .service h3{
+    font-size:27px;
+  }
+
+  .float-btn{
+    width:48px;
+    height:48px;
+  }
+}
+
+</style>
 </head>
 
-<body>
 
-    <!-- =========================================================
-         PAGE LOADER
-    ========================================================== -->
+<body class="loading">
 
-    <div class="page-loader" id="pageLoader">
 
-        <div class="loader-inner">
+<!-- =======================================================
+     PRELOADER
+======================================================= -->
 
-            <div class="loader-mark">
-                <span>M</span>
-                <span>R</span>
-            </div>
+<div class="preloader" id="preloader">
 
-            <div class="loader-line">
-                <span></span>
-            </div>
+  <div class="loader-inner">
 
-            <p>MARBLE · ART · HERITAGE</p>
-
-        </div>
-
+    <div class="loader-mark">
+      <span></span>
+      <span></span>
     </div>
 
-
-    <!-- =========================================================
-         CUSTOM CURSOR
-    ========================================================== -->
-
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-    <div class="cursor-text" id="cursorText">VIEW</div>
-
-
-    <!-- =========================================================
-         BACKGROUND GRAIN
-    ========================================================== -->
-
-    <div class="grain-layer"></div>
-
-
-    <!-- =========================================================
-         NAVBAR
-    ========================================================== -->
-
-    <header class="site-header" id="siteHeader">
-
-        <div class="nav-container">
-
-            <!-- Brand / Logo -->
-            <a href="#home" class="brand magnetic">
-
-                <div class="brand-symbol">
-
-                    <span class="brand-symbol-line line-one"></span>
-                    <span class="brand-symbol-line line-two"></span>
-
-                    <div class="brand-monogram">
-                        <span>M</span>
-                        <span>R</span>
-                    </div>
-
-                </div>
-
-                <div class="brand-copy">
-                    <strong>M.R. MOORTI ART</strong>
-                    <small>MARBLE · CRAFT · HERITAGE</small>
-                </div>
-
-            </a>
-
-
-            <!-- Desktop Navigation -->
-            <nav class="main-nav" id="mainNav">
-
-                <a href="#home" class="nav-link active">
-                    <span>01</span>
-                    Home
-                </a>
-
-                <a href="#about" class="nav-link">
-                    <span>02</span>
-                    About
-                </a>
-
-                <a href="#collection" class="nav-link">
-                    <span>03</span>
-                    Collection
-                </a>
-
-                <a href="#craft" class="nav-link">
-                    <span>04</span>
-                    Craft
-                </a>
-
-                <a href="#services" class="nav-link">
-                    <span>05</span>
-                    Services
-                </a>
-
-                <a href="#contact" class="nav-link">
-                    <span>06</span>
-                    Contact
-                </a>
-
-            </nav>
-
-
-            <!-- Navigation CTA -->
-            <a
-                href="tel:+918741917946"
-                class="nav-contact magnetic">
-
-                <span>Enquire</span>
-
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-            </a>
-
-
-            <!-- Mobile Menu -->
-            <button
-                class="menu-toggle magnetic"
-                id="menuToggle"
-                aria-label="Open menu">
-
-                <span></span>
-                <span></span>
-
-            </button>
-
-        </div>
-
-    </header>
-
-
-
-    <!-- =========================================================
-         MOBILE MENU
-    ========================================================== -->
-
-    <div class="mobile-menu" id="mobileMenu">
-
-        <div class="mobile-menu-background"></div>
-
-        <div class="mobile-menu-inner">
-
-            <div class="mobile-menu-top">
-
-                <span>MENU</span>
-
-                <button
-                    class="mobile-close magnetic"
-                    id="mobileClose"
-                    aria-label="Close menu">
-
-                    <i class="fa-solid fa-xmark"></i>
-
-                </button>
-
-            </div>
-
-
-            <div class="mobile-links">
-
-                <a href="#home">
-                    <span>01</span>
-                    Home
-                </a>
-
-                <a href="#about">
-                    <span>02</span>
-                    About
-                </a>
-
-                <a href="#collection">
-                    <span>03</span>
-                    Collection
-                </a>
-
-                <a href="#craft">
-                    <span>04</span>
-                    Craft
-                </a>
-
-                <a href="#services">
-                    <span>05</span>
-                    Services
-                </a>
-
-                <a href="#contact">
-                    <span>06</span>
-                    Contact
-                </a>
-
-            </div>
-
-
-            <div class="mobile-menu-footer">
-
-                <div>
-                    <small>CALL</small>
-                    <a href="tel:+918741917946">
-                        +91 87419 17946
-                    </a>
-                </div>
-
-                <div>
-                    <small>EMAIL</small>
-                    <a href="mailto:umsharma1993@gmail.com">
-                        umsharma1993@gmail.com
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-
+    <div class="loader-label">
+      M.R. Moorti Art
     </div>
 
+  </div>
 
+</div>
 
-    <!-- =========================================================
-         HERO
-    ========================================================== -->
 
-    <main>
+<!-- CURSOR -->
 
-        <section
-            class="hero-section"
-            id="home">
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-            <!-- CSS generated marble atmosphere -->
-            <div class="hero-marble-bg">
 
-                <div class="marble-orb orb-one"></div>
-                <div class="marble-orb orb-two"></div>
-                <div class="marble-orb orb-three"></div>
+<!-- =======================================================
+     NAVBAR
+======================================================= -->
 
-                <div class="marble-vein vein-one"></div>
-                <div class="marble-vein vein-two"></div>
-                <div class="marble-vein vein-three"></div>
+<header class="navbar" id="navbar">
 
-            </div>
+  <a href="#home" class="brand magnetic">
 
+    <div class="brand-mark"></div>
 
-            <!-- Architectural Grid -->
-            <div class="hero-grid"></div>
+    <div>
+      <div class="brand-name">
+        M.R. Moorti Art
+      </div>
 
-
-            <!-- Decorative Rings -->
-            <div class="hero-rings">
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </div>
-
-
-            <!-- Hero Content -->
-            <div class="hero-container">
-
-                <div class="hero-topline reveal-up">
-
-                    <span class="hero-index">01 / 06</span>
-
-                    <span class="hero-location">
-                        JAIPUR · RAJASTHAN
-                    </span>
-
-                </div>
-
-
-                <div class="hero-content">
-
-                    <div class="hero-kicker reveal-up">
-
-                        <span class="kicker-line"></span>
-
-                        <span>
-                            TIMELESS MARBLE ARTISTRY
-                        </span>
-
-                    </div>
-
-
-                    <h1 class="hero-title">
-
-                        <span class="hero-title-line reveal-up">
-                            Carved
-                        </span>
-
-                        <span class="hero-title-line italic reveal-up">
-                            for eternity.
-                        </span>
-
-                    </h1>
-
-
-                    <div class="hero-bottom">
-
-                        <div class="hero-description reveal-up">
-
-                            <p>
-                                Where natural marble meets the
-                                patience of the artisan — creating
-                                timeless forms inspired by Indian
-                                heritage, devotion and art.
-                            </p>
-
-                        </div>
-
-
-                        <div class="hero-actions reveal-up">
-
-                            <a
-                                href="#collection"
-                                class="luxury-button magnetic">
-
-                                <span>
-                                    Explore Collection
-                                </span>
-
-                                <i class="fa-solid fa-arrow-down"></i>
-
-                            </a>
-
-
-                            <a
-                                href="https://wa.me/918741917946"
-                                target="_blank"
-                                class="round-action magnetic"
-                                aria-label="WhatsApp">
-
-                                <i class="fa-brands fa-whatsapp"></i>
-
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Hero Vertical Text -->
-            <div class="hero-side-label">
-
-                <span>MARBLE</span>
-                <span>ART</span>
-                <span>HERITAGE</span>
-
-            </div>
-
-
-            <!-- Scroll Indicator -->
-            <a
-                href="#about"
-                class="hero-scroll magnetic">
-
-                <span class="scroll-number">SCROLL</span>
-
-                <span class="scroll-line">
-                    <i></i>
-                </span>
-
-                <i class="fa-solid fa-arrow-down"></i>
-
-            </a>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             INTRO / BRAND STATEMENT
-        ====================================================== -->
-
-        <section class="intro-section">
-
-            <div class="section-container">
-
-                <div class="intro-grid">
-
-                    <div class="intro-number reveal-up">
-                        01
-                    </div>
-
-
-                    <div class="intro-content">
-
-                        <span class="eyebrow reveal-up">
-                            THE ART OF TIME
-                        </span>
-
-
-                        <h2 class="intro-title reveal-up">
-
-                            Some things are made
-                            <em>to last.</em>
-
-                        </h2>
-
-
-                        <p class="intro-text reveal-up">
-
-                            Marble has a language of its own.
-                            Every vein, every curve and every
-                            detail becomes part of a story shaped
-                            slowly by skilled hands.
-
-                        </p>
-
-
-                        <div class="intro-signature reveal-up">
-
-                            <span class="signature-line"></span>
-
-                            <span>
-                                M.R. MOORTI ART
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             ABOUT
-        ====================================================== -->
-
-        <section
-            class="about-section"
-            id="about">
-
-            <div class="about-background-shape"></div>
-
-            <div class="section-container">
-
-                <div class="about-grid">
-
-
-                    <!-- Visual built through CSS -->
-                    <div class="about-visual reveal-left">
-
-                        <div class="about-frame">
-
-                            <div class="about-marble">
-
-                                <div class="about-vein vein-a"></div>
-                                <div class="about-vein vein-b"></div>
-                                <div class="about-vein vein-c"></div>
-
-                                <div class="sculpture-shadow"></div>
-
-                                <div class="sculpture-form">
-
-                                    <div class="sculpture-head"></div>
-
-                                    <div class="sculpture-body"></div>
-
-                                    <div class="sculpture-base"></div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="about-frame-corner corner-top"></div>
-                            <div class="about-frame-corner corner-bottom"></div>
-
-                        </div>
-
-
-                        <div class="about-floating-label">
-                            EST. 1992
-                        </div>
-
-                    </div>
-
-
-                    <!-- About Content -->
-                    <div class="about-content reveal-right">
-
-                        <span class="eyebrow">
-                            OUR STORY
-                        </span>
-
-
-                        <h2 class="section-title">
-
-                            Where marble
-                            becomes <em>art.</em>
-
-                        </h2>
-
-
-                        <div class="about-copy">
-
-                            <p>
-                                M.R. Moorti Art is dedicated to the
-                                timeless tradition of marble craftsmanship.
-                                Every creation carries the character of
-                                the artisan who shaped it and the heritage
-                                that inspired it.
-                            </p>
-
-                            <p>
-                                From divine marble murtis and handcrafted
-                                temple art to statement handicrafts and
-                                custom marble work, every creation is
-                                developed with patience, precision and
-                                devotion.
-                            </p>
-
-                        </div>
-
-
-                        <div class="about-stats">
-
-                            <div class="about-stat">
-
-                                <strong>1992</strong>
-
-                                <span>
-                                    SINCE
-                                </span>
-
-                            </div>
-
-
-                            <div class="about-stat">
-
-                                <strong>30+</strong>
-
-                                <span>
-                                    YEARS OF HERITAGE
-                                </span>
-
-                            </div>
-
-
-                            <div class="about-stat">
-
-                                <strong>∞</strong>
-
-                                <span>
-                                    CRAFT
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <a
-                            href="#craft"
-                            class="text-link magnetic">
-
-                            <span>
-                                Discover our craft
-                            </span>
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             COLLECTION HEADER
-        ====================================================== -->
-
-        <section
-            class="collection-section"
-            id="collection">
-
-            <div class="section-container">
-
-                <div class="collection-heading">
-
-                    <div class="collection-heading-left">
-
-                        <span class="eyebrow reveal-up">
-                            SIGNATURE COLLECTION
-                        </span>
-
-                        <h2 class="section-title reveal-up">
-
-                            Crafted pieces.
-                            <br>
-                            <em>Timeless presence.</em>
-
-                        </h2>
-
-                    </div>
-
-
-                    <div class="collection-heading-right reveal-up">
-
-                        <p>
-                            Explore a selection of handcrafted
-                            marble creations shaped by tradition,
-                            detail and contemporary sensibility.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Collection Counter -->
-                <div class="collection-meta reveal-up">
-
-                    <span>
-                        COLLECTION
-                    </span>
-
-                    <div class="collection-progress">
-                        <span id="collectionProgress"></span>
-                    </div>
-
-                    <span id="collectionCounter">
-                        01 / 15
-                    </span>
-
-                </div>
-
-
-                <!-- =================================================
-                     COLLECTION SLIDER
-                ================================================== -->
-
-                <div
-                    class="collection-slider reveal-up"
-                    id="collectionSlider">
-
-                    <div
-                        class="collection-track"
-                        id="collectionTrack">
-
-
-                        <!-- C1 -->
-                        <article
-                            class="collection-card"
-                            data-index="1">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c1.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 01"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    01
-                                </span>
-
-                                <button
-                                    class="view-card magnetic"
-                                    aria-label="View collection item">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 01
-                                </span>
-
-                                <h3>
-                                    Marble Artistry
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C2 -->
-                        <article
-                            class="collection-card"
-                            data-index="2">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c2.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 02"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    02
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 02
-                                </span>
-
-                                <h3>
-                                    Divine Sculpture
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C3 -->
-                        <article
-                            class="collection-card"
-                            data-index="3">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c3.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 03"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    03
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 03
-                                </span>
-
-                                <h3>
-                                    Handcrafted Form
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C4 -->
-                        <article
-                            class="collection-card"
-                            data-index="4">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c4.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 04"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    04
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 04
-                                </span>
-
-                                <h3>
-                                    Sacred Craft
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C5 -->
-                        <article
-                            class="collection-card"
-                            data-index="5">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c5.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 05"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    05
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 05
-                                </span>
-
-                                <h3>
-                                    Marble Heritage
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C6 -->
-                        <article
-                            class="collection-card"
-                            data-index="6">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c6.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 06"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    06
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 06
-                                </span>
-
-                                <h3>
-                                    Sculpted Beauty
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C7 -->
-                        <article
-                            class="collection-card"
-                            data-index="7">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c7.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 07"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    07
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 07
-                                </span>
-
-                                <h3>
-                                    Artisan Detail
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C8 -->
-                        <article
-                            class="collection-card"
-                            data-index="8">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c8.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 08"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    08
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 08
-                                </span>
-
-                                <h3>
-                                    Timeless Stone
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C9 -->
-                        <article
-                            class="collection-card"
-                            data-index="9">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c9.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 09"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    09
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 09
-                                </span>
-
-                                <h3>
-                                    Crafted Legacy
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C10 -->
-                        <article
-                            class="collection-card"
-                            data-index="10">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c10.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 10"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    10
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 10
-                                </span>
-
-                                <h3>
-                                    Marble Expression
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C11 -->
-                        <article
-                            class="collection-card"
-                            data-index="11">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c11.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 11"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    11
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 11
-                                </span>
-
-                                <h3>
-                                    Fine Craft
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C12 -->
-                        <article
-                            class="collection-card"
-                            data-index="12">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c12.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 12"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    12
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 12
-                                </span>
-
-                                <h3>
-                                    Artistic Form
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C13 -->
-                        <article
-                            class="collection-card"
-                            data-index="13">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c13.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 13"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    13
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 13
-                                </span>
-
-                                <h3>
-                                    Heritage Sculpture
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C14 -->
-                        <article
-                            class="collection-card"
-                            data-index="14">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c14.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 14"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    14
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 14
-                                </span>
-
-                                <h3>
-                                    Masterpiece
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-
-                        <!-- C15 -->
-                        <article
-                            class="collection-card"
-                            data-index="15">
-
-                            <div class="collection-image">
-
-                                <img
-                                    src="c15.jpeg"
-                                    alt="M.R. Moorti Art Marble Collection 15"
-                                    loading="lazy">
-
-                                <div class="image-overlay"></div>
-
-                                <span class="collection-number">
-                                    15
-                                </span>
-
-                                <button
-                                    class="view-card magnetic">
-
-                                    <i class="fa-solid fa-arrow-up-right"></i>
-
-                                </button>
-
-                            </div>
-
-                            <div class="collection-info">
-
-                                <span>
-                                    COLLECTION / 15
-                                </span>
-
-                                <h3>
-                                    Eternal Art
-                                </h3>
-
-                            </div>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Slider Controls -->
-                <div class="collection-controls reveal-up">
-
-                    <button
-                        class="slider-arrow magnetic"
-                        id="collectionPrev"
-                        aria-label="Previous">
-
-                        <i class="fa-solid fa-arrow-left"></i>
-
-                    </button>
-
-
-                    <button
-                        class="slider-arrow magnetic"
-                        id="collectionNext"
-                        aria-label="Next">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             CRAFT / HERITAGE
-        ====================================================== -->
-
-        <section
-            class="craft-section"
-            id="craft">
-
-            <div class="craft-bg">
-
-                <div class="craft-marble-layer"></div>
-
-                <div class="craft-light"></div>
-
-                <div class="craft-architecture">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </div>
-
-            </div>
-
-
-            <div class="section-container">
-
-                <div class="craft-content">
-
-                    <div class="craft-top reveal-up">
-
-                        <span class="eyebrow">
-                            THE ART OF CRAFT
-                        </span>
-
-                        <span class="craft-number">
-                            02 / 06
-                        </span>
-
-                    </div>
-
-
-                    <h2 class="craft-title">
-
-                        Not just marble.
-
-                        <span>
-                            A legacy in stone.
-                        </span>
-
-                    </h2>
-
-
-                    <div class="craft-bottom">
-
-                        <p class="craft-description reveal-up">
-
-                            Our artisans transform natural marble
-                            into forms that carry devotion, beauty
-                            and character. Every curve, expression,
-                            ornament and detail is patiently refined
-                            by skilled hands.
-
-                        </p>
-
-
-                        <a
-                            href="#contact"
-                            class="luxury-button light magnetic reveal-up">
-
-                            <span>
-                                Discuss Your Requirement
-                            </span>
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             SERVICES
-        ====================================================== -->
-
-        <section
-            class="services-section"
-            id="services">
-
-            <div class="section-container">
-
-                <div class="services-heading">
-
-                    <div>
-
-                        <span class="eyebrow reveal-up">
-                            WHAT WE CREATE
-                        </span>
-
-                        <h2 class="section-title reveal-up">
-
-                            From sacred spaces
-                            <br>
-                            to <em>statement pieces.</em>
-
-                        </h2>
-
-                    </div>
-
-
-                    <p class="services-intro reveal-up">
-
-                        Traditional craftsmanship,
-                        contemporary design and a deep
-                        respect for natural marble.
-
-                    </p>
-
-                </div>
-
-
-                <div class="services-list">
-
-
-                    <article class="service-item reveal-up">
-
-                        <div class="service-number">
-                            01
-                        </div>
-
-                        <div class="service-name">
-                            Marble Murti
-                        </div>
-
-                        <div class="service-description">
-
-                            Traditional and custom marble
-                            murtis crafted with exceptional
-                            detailing and devotional precision.
-
-                        </div>
-
-                        <div class="service-arrow magnetic">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-
-                    </article>
-
-
-                    <article class="service-item reveal-up">
-
-                        <div class="service-number">
-                            02
-                        </div>
-
-                        <div class="service-name">
-                            Marble Mandir
-                        </div>
-
-                        <div class="service-description">
-
-                            Elegant marble temple designs
-                            created for homes, institutions
-                            and spiritual spaces.
-
-                        </div>
-
-                        <div class="service-arrow magnetic">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-
-                    </article>
-
-
-                    <article class="service-item reveal-up">
-
-                        <div class="service-number">
-                            03
-                        </div>
-
-                        <div class="service-name">
-                            Handicrafts
-                        </div>
-
-                        <div class="service-description">
-
-                            Unique handcrafted marble pieces
-                            bringing Rajasthan's artistic heritage
-                            into modern spaces.
-
-                        </div>
-
-                        <div class="service-arrow magnetic">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-
-                    </article>
-
-
-                    <article class="service-item reveal-up">
-
-                        <div class="service-number">
-                            04
-                        </div>
-
-                        <div class="service-name">
-                            Custom Art
-                        </div>
-
-                        <div class="service-description">
-
-                            Bespoke marble creations developed
-                            around your preferred design, size
-                            and artistic vision.
-
-                        </div>
-
-                        <div class="service-arrow magnetic">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-
-                    </article>
-
-
-                    <article class="service-item reveal-up">
-
-                        <div class="service-number">
-                            05
-                        </div>
-
-                        <div class="service-name">
-                            Paintings
-                        </div>
-
-                        <div class="service-description">
-
-                            Artistic works selected and created
-                            to complement interiors, spiritual
-                            spaces and collections.
-
-                        </div>
-
-                        <div class="service-arrow magnetic">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             WORLDWIDE / RAJASTHAN
-        ====================================================== -->
-
-        <section class="world-section">
-
-            <div class="world-visual">
-
-                <div class="world-marble"></div>
-
-                <div class="world-map">
-
-                    <span class="map-point point-jaipur"></span>
-                    <span class="map-point point-world"></span>
-
-                    <div class="map-line"></div>
-
-                </div>
-
-            </div>
-
-
-            <div class="section-container">
-
-                <div class="world-content reveal-up">
-
-                    <span class="eyebrow">
-                        FROM RAJASTHAN · TO THE WORLD
-                    </span>
-
-
-                    <h2>
-
-                        Rajasthan's art.
-
-                        <em>
-                            Delivered worldwide.
-                        </em>
-
-                    </h2>
-
-
-                    <p>
-
-                        Our creations travel beyond borders,
-                        bringing the beauty of Indian marble
-                        craftsmanship to homes, temples,
-                        collectors and spaces around the world.
-
-                    </p>
-
-
-                    <div class="world-location">
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        <span>
-                            Jaipur, Rajasthan · India
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             CONTACT / ENQUIRY
-        ====================================================== -->
-
-        <section
-            class="contact-section"
-            id="contact">
-
-            <div class="contact-bg"></div>
-
-            <div class="section-container">
-
-                <div class="contact-grid">
-
-
-                    <!-- Contact Information -->
-                    <div class="contact-info reveal-left">
-
-                        <span class="eyebrow">
-                            START A CONVERSATION
-                        </span>
-
-
-                        <h2 class="contact-title">
-
-                            Have a vision?
-
-                            <em>
-                                Let's carve it.
-                            </em>
-
-                        </h2>
-
-
-                        <p class="contact-description">
-
-                            Tell us what you're looking for.
-                            Whether it is a marble murti, mandir,
-                            handcrafted piece or a completely
-                            custom creation, our team will help
-                            you bring it to life.
-
-                        </p>
-
-
-                        <div class="contact-details">
-
-
-                            <a
-                                href="tel:+918741917946"
-                                class="contact-detail magnetic">
-
-                                <span class="detail-icon">
-                                    <i class="fa-solid fa-phone"></i>
-                                </span>
-
-                                <span class="detail-content">
-
-                                    <small>PHONE</small>
-
-                                    <strong>
-                                        +91 87419 17946
-                                    </strong>
-
-                                </span>
-
-                            </a>
-
-
-                            <a
-                                href="https://wa.me/918741917946"
-                                target="_blank"
-                                class="contact-detail magnetic">
-
-                                <span class="detail-icon">
-                                    <i class="fa-brands fa-whatsapp"></i>
-                                </span>
-
-                                <span class="detail-content">
-
-                                    <small>WHATSAPP</small>
-
-                                    <strong>
-                                        +91 87419 17946
-                                    </strong>
-
-                                </span>
-
-                            </a>
-
-
-                            <a
-                                href="mailto:umsharma1993@gmail.com"
-                                class="contact-detail magnetic">
-
-                                <span class="detail-icon">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </span>
-
-                                <span class="detail-content">
-
-                                    <small>EMAIL</small>
-
-                                    <strong>
-                                        umsharma1993@gmail.com
-                                    </strong>
-
-                                </span>
-
-                            </a>
-
-
-                            <div class="contact-detail address-detail">
-
-                                <span class="detail-icon">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                </span>
-
-                                <span class="detail-content">
-
-                                    <small>ADDRESS</small>
-
-                                    <strong>
-                                        P-4 Mahaveer Colony,
-                                        Kartarpura,
-                                        Jaipur, Rajasthan
-                                        <br>
-                                        PINCODE 302006
-                                    </strong>
-
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Enquiry Form -->
-                    <div class="contact-form-wrap reveal-right">
-
-                        <div class="form-heading">
-
-                            <span>
-                                ENQUIRY / 01
-                            </span>
-
-                            <p>
-                                Tell us about your requirement.
-                            </p>
-
-                        </div>
-
-
-                        <form
-                            class="enquiry-form"
-                            id="enquiryForm">
-
-
-                            <div class="form-field">
-
-                                <label for="name">
-                                    Your Name
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="name"
-                                    name="name"
-                                    autocomplete="name"
-                                    required>
-
-                                <span class="field-line"></span>
-
-                            </div>
-
-
-                            <div class="form-field">
-
-                                <label for="phone">
-                                    Phone Number
-                                </label>
-
-                                <input
-                                    type="tel"
-                                    id="phone"
-                                    name="phone"
-                                    autocomplete="tel"
-                                    required>
-
-                                <span class="field-line"></span>
-
-                            </div>
-
-
-                            <div class="form-field">
-
-                                <label for="email">
-                                    Email Address
-                                </label>
-
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    autocomplete="email">
-
-                                <span class="field-line"></span>
-
-                            </div>
-
-
-                            <div class="form-field">
-
-                                <label for="requirement">
-                                    What are you looking for?
-                                </label>
-
-                                <select
-                                    id="requirement"
-                                    name="requirement">
-
-                                    <option value="">
-                                        Select requirement
-                                    </option>
-
-                                    <option value="Marble Murti">
-                                        Marble Murti
-                                    </option>
-
-                                    <option value="Marble Mandir">
-                                        Marble Mandir
-                                    </option>
-
-                                    <option value="Handicrafts">
-                                        Handicrafts
-                                    </option>
-
-                                    <option value="Custom Marble Art">
-                                        Custom Marble Art
-                                    </option>
-
-                                    <option value="Painting">
-                                        Painting
-                                    </option>
-
-                                    <option value="Other">
-                                        Other
-                                    </option>
-
-                                </select>
-
-                                <span class="field-line"></span>
-
-                            </div>
-
-
-                            <div class="form-field">
-
-                                <label for="message">
-                                    Your Message
-                                </label>
-
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    rows="4"></textarea>
-
-                                <span class="field-line"></span>
-
-                            </div>
-
-
-                            <button
-                                type="submit"
-                                class="submit-button magnetic">
-
-                                <span>
-                                    Send Enquiry
-                                </span>
-
-                                <i class="fa-solid fa-arrow-up-right"></i>
-
-                            </button>
-
-
-                            <p class="form-note">
-
-                                Your enquiry will open directly
-                                in WhatsApp.
-
-                            </p>
-
-                        </form>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             FINAL STATEMENT
-        ====================================================== -->
-
-        <section class="final-section">
-
-            <div class="final-marble"></div>
-
-            <div class="section-container">
-
-                <div class="final-content reveal-up">
-
-                    <span class="eyebrow">
-                        M.R. MOORTI ART
-                    </span>
-
-                    <h2>
-                        Made with devotion.
-                        <br>
-                        <em>Built to last.</em>
-                    </h2>
-
-                    <a
-                        href="#home"
-                        class="final-arrow magnetic">
-
-                        <i class="fa-solid fa-arrow-up"></i>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
-
-    <footer class="site-footer">
-
-        <div class="section-container">
-
-            <div class="footer-main">
-
-
-                <div class="footer-brand">
-
-                    <a
-                        href="#home"
-                        class="footer-logo magnetic">
-
-                        <div class="footer-logo-mark">
-
-                            <span>M</span>
-                            <span>R</span>
-
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                M.R. MOORTI ART
-                            </strong>
-
-                            <small>
-                                MARBLE · CRAFT · HERITAGE
-                            </small>
-
-                        </div>
-
-                    </a>
-
-
-                    <p>
-                        Timeless marble artistry from
-                        Rajasthan to the world.
-                    </p>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <span class="footer-heading">
-                        NAVIGATE
-                    </span>
-
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#collection">Collection</a>
-                    <a href="#craft">Craft</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <span class="footer-heading">
-                        CONTACT
-                    </span>
-
-                    <a href="tel:+918741917946">
-                        +91 87419 17946
-                    </a>
-
-                    <a href="mailto:umsharma1993@gmail.com">
-                        umsharma1993@gmail.com
-                    </a>
-
-                    <span>
-                        P-4 Mahaveer Colony,
-                        Kartarpura,
-                        Jaipur, Rajasthan
-                        <br>
-                        302006
-                    </span>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <span class="footer-heading">
-                        CONNECT
-                    </span>
-
-                    <a
-                        href="https://wa.me/918741917946"
-                        target="_blank">
-
-                        WhatsApp
-                        <i class="fa-brands fa-whatsapp"></i>
-
-                    </a>
-
-                    <a
-                        href="https://instagram.com/mr_marble_art"
-                        target="_blank">
-
-                        Instagram
-                        <i class="fa-brands fa-instagram"></i>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="footer-bottom">
-
-                <span>
-                    © <span id="currentYear"></span>
-                    M.R. Moorti Art.
-                    All rights reserved.
-                </span>
-
-
-                <span class="footer-credit">
-                    Crafted by Marwar Infotech
-                </span>
-
-
-                <a
-                    href="#home"
-                    class="footer-top magnetic">
-
-                    BACK TO TOP
-
-                    <i class="fa-solid fa-arrow-up"></i>
-
-                </a>
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-
-    <!-- =========================================================
-         FLOATING CONTACT BUTTONS
-    ========================================================== -->
-
-    <div class="floating-actions">
-
-
-        <!-- Call -->
-        <a
-            href="tel:+918741917946"
-            class="floating-button call-button magnetic"
-            aria-label="Call M.R. Moorti Art">
-
-            <i class="fa-solid fa-phone"></i>
-
-            <span class="floating-tooltip">
-                Call Us
-            </span>
-
-        </a>
-
-
-        <!-- WhatsApp -->
-        <a
-            href="https://wa.me/918741917946"
-            target="_blank"
-            class="floating-button whatsapp-button magnetic"
-            aria-label="WhatsApp M.R. Moorti Art">
-
-            <i class="fa-brands fa-whatsapp"></i>
-
-            <span class="floating-tooltip">
-                WhatsApp
-            </span>
-
-        </a>
-
+      <span class="brand-sub">
+        Marble · Art · Craft
+      </span>
     </div>
 
+  </a>
 
 
-    <!-- =========================================================
-         FLOATING ENQUIRY
-    ========================================================== -->
+  <nav class="nav-links" id="navLinks">
+
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#collection">Collection</a>
+    <a href="#craft">Craft</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
 
     <a
-        href="#contact"
-        class="floating-enquiry magnetic">
-
-        <span>
-            Enquire Now
-        </span>
-
-        <i class="fa-solid fa-arrow-up-right"></i>
-
+      href="tel:+918741917946"
+      class="nav-call magnetic">
+      Call Us
     </a>
 
+  </nav>
 
 
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
+  <button class="menu" id="menuBtn">
+    ☰
+  </button>
 
-    <script src="script.js"></script>
+</header>
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section class="hero" id="home">
+
+  <div class="hero-content reveal">
+
+    <div class="hero-kicker">
+      Rajasthan · Since 1992
+    </div>
+
+
+    <h1>
+
+      <span class="word">
+        <span>Stone</span>
+      </span>
+
+      <br>
+
+      <span class="word">
+        <span>becomes</span>
+      </span>
+
+      <br>
+
+      <em>
+
+        <span class="word">
+          <span>art.</span>
+        </span>
+
+      </em>
+
+    </h1>
+
+
+    <p class="hero-copy">
+      Marble murtis, mandirs, handicrafts and custom
+      creations shaped with patience, precision and
+      timeless Indian artistry.
+    </p>
+
+
+    <div class="hero-actions">
+
+      <a
+        href="#collection"
+        class="btn btn-light magnetic">
+        Explore Collection
+      </a>
+
+      <a
+        href="https://wa.me/918741917946?text=Hello%20M.R.%20Moorti%20Art%2C%20I%20would%20like%20to%20know%20about%20your%20collection."
+        target="_blank"
+        class="btn btn-outline magnetic">
+        WhatsApp Us
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="hero-bottom">
+
+    <div class="hero-scroll">
+      <span class="scroll-line"></span>
+      Scroll to discover
+    </div>
+
+    <div>
+      Jaipur · Rajasthan · India
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     ABOUT
+======================================================= -->
+
+<section class="about" id="about">
+
+  <div class="section about-grid">
+
+    <div class="about-art scale-reveal">
+
+      <div class="art-caption">
+        The beauty of natural stone
+      </div>
+
+    </div>
+
+
+    <div class="about-copy reveal-right">
+
+      <div class="kicker">
+        Our Story
+      </div>
+
+      <h2 class="title">
+        Where stone<br>
+        finds its <em>soul.</em>
+      </h2>
+
+
+      <p class="description">
+
+        M.R. Moorti Art is dedicated to the timeless
+        tradition of marble craftsmanship. Every creation
+        carries the character of the artisan who shaped it
+        and the heritage that inspired it.
+
+      </p>
+
+
+      <p class="description" style="margin-top:20px;">
+
+        From divine marble murtis and handcrafted temple
+        art to statement handicrafts and custom marble
+        work, every piece is created with patience,
+        precision and devotion.
+
+      </p>
+
+
+      <div class="about-quote">
+
+        “Every piece is more than marble.
+        It is a story carved by hand.”
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     COLLECTION
+======================================================= -->
+
+<section class="collection" id="collection">
+
+  <div class="section">
+
+    <div class="collection-head reveal">
+
+      <div>
+
+        <div class="kicker">
+          Signature Collection
+        </div>
+
+        <h2 class="title">
+          Crafted pieces.<br>
+          <em>Timeless presence.</em>
+        </h2>
+
+      </div>
+
+
+      <p class="description">
+
+        Explore a curated selection of marble art,
+        spiritual creations and handcrafted pieces.
+
+      </p>
+
+    </div>
+
+
+    <div class="gallery scale-reveal" id="gallery">
+
+      <div class="gallery-track" id="galleryTrack">
+
+
+        <!-- 01 -->
+
+        <article class="card">
+
+          <img
+            src="c1.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 01"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              01 / COLLECTION
+            </div>
+
+            <h3>
+              Divine Sculpture
+            </h3>
+
+            <p>
+              Handcrafted marble artistry
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 02 -->
+
+        <article class="card">
+
+          <img
+            src="c2.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 02"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              02 / COLLECTION
+            </div>
+
+            <h3>
+              Marble Creation
+            </h3>
+
+            <p>
+              Refined by skilled hands
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 03 -->
+
+        <article class="card">
+
+          <img
+            src="c3.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 03"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              03 / COLLECTION
+            </div>
+
+            <h3>
+              Sacred Form
+            </h3>
+
+            <p>
+              Timeless spiritual artistry
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 04 -->
+
+        <article class="card">
+
+          <img
+            src="c4.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 04"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              04 / COLLECTION
+            </div>
+
+            <h3>
+              Marble Mandir
+            </h3>
+
+            <p>
+              Created for sacred spaces
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 05 -->
+
+        <article class="card">
+
+          <img
+            src="c5.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 05"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              05 / COLLECTION
+            </div>
+
+            <h3>
+              Heritage Craft
+            </h3>
+
+            <p>
+              Rajasthan's artistic tradition
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 06 -->
+
+        <article class="card">
+
+          <img
+            src="c6.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 06"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              06 / COLLECTION
+            </div>
+
+            <h3>
+              Artisan Detail
+            </h3>
+
+            <p>
+              Crafted with precision
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 07 -->
+
+        <article class="card">
+
+          <img
+            src="c7.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 07"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              07 / COLLECTION
+            </div>
+
+            <h3>
+              Sculpted Beauty
+            </h3>
+
+            <p>
+              Natural stone transformed
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 08 -->
+
+        <article class="card">
+
+          <img
+            src="c8.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 08"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              08 / COLLECTION
+            </div>
+
+            <h3>
+              Sacred Art
+            </h3>
+
+            <p>
+              Made with devotion
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 09 -->
+
+        <article class="card">
+
+          <img
+            src="c9.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 09"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              09 / COLLECTION
+            </div>
+
+            <h3>
+              Fine Marble
+            </h3>
+
+            <p>
+              Elegant handcrafted form
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 10 -->
+
+        <article class="card">
+
+          <img
+            src="c10.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 10"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              10 / COLLECTION
+            </div>
+
+            <h3>
+              Custom Creation
+            </h3>
+
+            <p>
+              Designed around your vision
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 11 -->
+
+        <article class="card">
+
+          <img
+            src="c11.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 11"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              11 / COLLECTION
+            </div>
+
+            <h3>
+              Marble Heritage
+            </h3>
+
+            <p>
+              Inspired by tradition
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 12 -->
+
+        <article class="card">
+
+          <img
+            src="c12.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 12"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              12 / COLLECTION
+            </div>
+
+            <h3>
+              Artistic Form
+            </h3>
+
+            <p>
+              Sculpted with patience
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 13 -->
+
+        <article class="card">
+
+          <img
+            src="c13.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 13"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              13 / COLLECTION
+            </div>
+
+            <h3>
+              Statement Piece
+            </h3>
+
+            <p>
+              Made for refined spaces
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 14 -->
+
+        <article class="card">
+
+          <img
+            src="c14.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 14"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              14 / COLLECTION
+            </div>
+
+            <h3>
+              Stone Elegance
+            </h3>
+
+            <p>
+              Crafted in Rajasthan
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 15 -->
+
+        <article class="card">
+
+          <img
+            src="c15.jpeg"
+            class="card-image"
+            alt="Marble Art Collection 15"
+            loading="lazy">
+
+          <div class="card-overlay"></div>
+
+          <div class="card-info">
+
+            <div class="card-number">
+              15 / COLLECTION
+            </div>
+
+            <h3>
+              Timeless Art
+            </h3>
+
+            <p>
+              A legacy in marble
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+
+    <div class="slider-controls">
+
+      <button
+        class="slider-btn magnetic"
+        id="prevBtn"
+        aria-label="Previous">
+        ←
+      </button>
+
+      <button
+        class="slider-btn magnetic"
+        id="nextBtn"
+        aria-label="Next">
+        →
+      </button>
+
+    </div>
+
+
+    <div class="progress">
+      <span id="progressBar"></span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     CRAFT
+======================================================= -->
+
+<section class="craft" id="craft">
+
+  <div class="craft-object"></div>
+
+  <div class="section craft-content reveal">
+
+    <div class="kicker">
+      The Art Of Craft
+    </div>
+
+    <h2 class="title">
+      Not just marble.<br>
+      <em>A legacy in stone.</em>
+    </h2>
+
+    <p class="description">
+
+      Our artisans transform natural marble into forms
+      that carry devotion, beauty and character.
+      Every curve, expression, ornament and detail is
+      patiently refined by skilled hands.
+
+    </p>
+
+
+    <div style="margin-top:38px;">
+
+      <a
+        href="https://wa.me/918741917946?text=Hello%20M.R.%20Moorti%20Art%2C%20I%20am%20interested%20in%20your%20custom%20marble%20art."
+        target="_blank"
+        class="btn btn-light magnetic">
+
+        Discuss Your Requirement
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     SERVICES
+======================================================= -->
+
+<section class="services" id="services">
+
+  <div class="section">
+
+    <div class="services-head reveal">
+
+      <div class="kicker">
+        What We Create
+      </div>
+
+      <h2 class="title">
+        From sacred spaces<br>
+        to <em>statement pieces.</em>
+      </h2>
+
+    </div>
+
+
+    <div class="service-list">
+
+
+      <div class="service reveal">
+
+        <div class="service-no">01</div>
+
+        <h3>Marble Murti</h3>
+
+        <p>
+          Traditional and custom marble murtis crafted
+          with exceptional detailing and devotional
+          precision.
+        </p>
+
+      </div>
+
+
+      <div class="service reveal">
+
+        <div class="service-no">02</div>
+
+        <h3>Marble Mandir</h3>
+
+        <p>
+          Elegant marble temple designs created for
+          homes, institutions and spiritual spaces.
+        </p>
+
+      </div>
+
+
+      <div class="service reveal">
+
+        <div class="service-no">03</div>
+
+        <h3>Handicrafts</h3>
+
+        <p>
+          Unique handcrafted marble pieces that bring
+          Rajasthan's artistic heritage into modern
+          spaces.
+        </p>
+
+      </div>
+
+
+      <div class="service reveal">
+
+        <div class="service-no">04</div>
+
+        <h3>Custom Art</h3>
+
+        <p>
+          Bespoke marble creations developed around
+          your preferred design, size and artistic
+          vision.
+        </p>
+
+      </div>
+
+
+      <div class="service reveal">
+
+        <div class="service-no">05</div>
+
+        <h3>Paintings</h3>
+
+        <p>
+          Artistic works selected and created to
+          complement interiors, spiritual spaces
+          and collections.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     WORLDWIDE
+======================================================= -->
+
+<section class="worldwide">
+
+  <div class="section worldwide-content reveal">
+
+    <div class="kicker">
+      From Rajasthan · To The World
+    </div>
+
+    <h2 class="title">
+      Rajasthan's art.<br>
+      <em>Delivered worldwide.</em>
+    </h2>
+
+    <p class="description">
+
+      Our creations travel beyond borders, bringing
+      the beauty of Indian marble craftsmanship to
+      homes, temples, collectors and spaces around
+      the world.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     CONTACT
+======================================================= -->
+
+<section class="contact" id="contact">
+
+  <div class="section contact-grid">
+
+
+    <div class="reveal-left">
+
+      <div class="kicker">
+        Start A Conversation
+      </div>
+
+      <h2 class="title">
+        Have a vision?<br>
+        <em>Let's carve it.</em>
+      </h2>
+
+
+      <p class="contact-intro">
+
+        Tell us what you're looking for. Whether it is
+        a marble murti, mandir, handcrafted piece or
+        a completely custom creation, our team will
+        help you bring it to life.
+
+      </p>
+
+
+      <div class="contact-details">
+
+        <a href="tel:+918741917946">
+          +91 87419 17946
+        </a>
+
+        <a href="mailto:umsharma1993@gmail.com">
+          umsharma1993@gmail.com
+        </a>
+
+        <div class="address">
+
+          P-4 Mahaveer Colony,<br>
+          Kartarpura, Jaipur,<br>
+          Rajasthan — 302006
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <form
+      class="form reveal-right"
+      id="enquiryForm">
+
+
+      <div class="form-row">
+
+        <div class="field">
+
+          <input
+            type="text"
+            id="name"
+            placeholder="Your Name"
+            required>
+
+        </div>
+
+
+        <div class="field">
+
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Phone Number"
+            required>
+
+        </div>
+
+      </div>
+
+
+      <div class="field">
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Email Address">
+
+      </div>
+
+
+      <div class="field">
+
+        <select id="requirement">
+
+          <option value="">
+            What are you looking for?
+          </option>
+
+          <option>Marble Murti</option>
+          <option>Marble Mandir</option>
+          <option>Handicrafts</option>
+          <option>Custom Marble Art</option>
+          <option>Painting</option>
+          <option>Other</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <textarea
+          id="message"
+          placeholder="Tell us about your requirement..."></textarea>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="btn btn-light form-submit magnetic">
+
+        Send Enquiry →
+
+      </button>
+
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+  <div class="footer-top">
+
+
+    <div class="footer-brand">
+
+      <div class="brand">
+
+        <div class="brand-mark"></div>
+
+        <div>
+
+          <div class="brand-name">
+            M.R. Moorti Art
+          </div>
+
+          <span class="brand-sub">
+            Marble · Art · Craft
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-tagline">
+        Made with devotion.<br>
+        Built to last.
+      </div>
+
+    </div>
+
+
+    <div class="footer-contact">
+
+      <a href="tel:+918741917946">
+        +91 87419 17946
+      </a>
+
+      <a href="mailto:umsharma1993@gmail.com">
+        umsharma1993@gmail.com
+      </a>
+
+      <div class="footer-address">
+
+        P-4 Mahaveer Colony,
+        Kartarpura, Jaipur,
+        Rajasthan — 302006
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+
+    <span>
+      © <span id="year"></span>
+      M.R. Moorti Art. All rights reserved.
+    </span>
+
+    <span class="footer-credit">
+      Crafted by Marwar Infotech
+    </span>
+
+  </div>
+
+</footer>
+
+
+<!-- =======================================================
+     FLOATING BUTTONS
+======================================================= -->
+
+<div class="floating">
+
+
+  <a
+    href="tel:+918741917946"
+    class="float-btn float-call magnetic"
+    aria-label="Call M.R. Moorti Art">
+
+    <svg
+      class="float-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8">
+
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2
+        19.79 19.79 0 0 1-8.63-3.07
+        19.5 19.5 0 0 1-6-6
+        A19.79 19.79 0 0 1 2.12 4.18
+        2 2 0 0 1 5.11 2h3
+        a2 2 0 0 1 2 1.72
+        12.84 12.84 0 0 0 .7 2.81
+        2 2 0 0 1-.45 2.11L9.09 9.91
+        a16 16 0 0 0 6 6l1.27-1.27
+        a2 2 0 0 1 2.11-.45
+        12.84 12.84 0 0 0 2.81.7
+        A2 2 0 0 1 22 16.92z"/>
+
+    </svg>
+
+  </a>
+
+
+  <a
+    href="https://wa.me/918741917946"
+    target="_blank"
+    class="float-btn float-whatsapp magnetic"
+    aria-label="WhatsApp M.R. Moorti Art">
+
+    <svg
+      class="float-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8">
+
+      <path
+        d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5
+        8.3 8.3 0 0 1-4-.99L3 20l1-5
+        a8.4 8.4 0 1 1 17-3.5z"/>
+
+      <path
+        d="M8 8.5c.2-.4.4-.4.7-.4h.5
+        c.2 0 .4.1.5.4l.6 1.4
+        c.1.2.1.4-.1.6l-.5.6
+        c.6 1.1 1.5 2 2.6 2.6
+        l.6-.5c.2-.2.4-.2.6-.1
+        l1.4.6c.3.1.4.3.4.5
+        v.5c0 .3-.1.5-.4.7
+        -.4.3-1.1.5-1.8.2
+        -2.5-.9-4.5-2.9-5.4-5.4
+        -.3-.7-.1-1.4.2-1.8z"/>
+
+    </svg>
+
+  </a>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   M.R. MOORTI ART — JAVASCRIPT
+========================================================= */
+
+
+/* =========================================================
+   PRELOADER
+========================================================= */
+
+window.addEventListener("load", () => {
+
+  setTimeout(() => {
+
+    document
+      .getElementById("preloader")
+      .classList.add("hide");
+
+    document.body.classList.remove("loading");
+
+  }, 900);
+
+});
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+const navbar =
+  document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+
+  if(window.scrollY > 60){
+
+    navbar.classList.add("scrolled");
+
+  }else{
+
+    navbar.classList.remove("scrolled");
+
+  }
+
+}, {passive:true});
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const menuBtn =
+  document.getElementById("menuBtn");
+
+const navLinks =
+  document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+
+  navLinks.classList.toggle("open");
+
+  menuBtn.textContent =
+    navLinks.classList.contains("open")
+      ? "×"
+      : "☰";
+
+});
+
+
+document
+  .querySelectorAll(".nav-links a")
+  .forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      navLinks.classList.remove("open");
+
+      menuBtn.textContent = "☰";
+
+    });
+
+  });
+
+
+/* =========================================================
+   SLOW SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+  document.querySelectorAll(
+    ".reveal,.reveal-left,.reveal-right,.scale-reveal"
+  );
+
+
+const observer =
+  new IntersectionObserver(
+
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          entry.target.classList.add("active");
+
+          observer.unobserve(entry.target);
+
+        }
+
+      });
+
+    },
+
+    {
+      threshold:.12,
+      rootMargin:"0px 0px -80px 0px"
+    }
+
+  );
+
+
+revealElements.forEach(element => {
+
+  observer.observe(element);
+
+});
+
+
+/* =========================================================
+   COLLECTION SLIDER
+========================================================= */
+
+const track =
+  document.getElementById("galleryTrack");
+
+const gallery =
+  document.getElementById("gallery");
+
+const nextBtn =
+  document.getElementById("nextBtn");
+
+const prevBtn =
+  document.getElementById("prevBtn");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+
+let currentIndex = 0;
+let autoSlide;
+
+
+/* Visible cards */
+
+function visibleCards(){
+
+  if(window.innerWidth <= 700)
+    return 1;
+
+  if(window.innerWidth <= 1000)
+    return 2;
+
+  return 3;
+
+}
+
+
+/* Maximum index */
+
+function maxIndex(){
+
+  return Math.max(
+    0,
+    track.children.length - visibleCards()
+  );
+
+}
+
+
+/* Update */
+
+function updateSlider(){
+
+  if(!track.children.length) return;
+
+  const cardWidth =
+    track.children[0]
+      .getBoundingClientRect()
+      .width;
+
+  const gap = 20;
+
+  const move =
+    currentIndex *
+    (cardWidth + gap);
+
+  track.style.transform =
+    `translateX(-${move}px)`;
+
+
+  const max =
+    maxIndex();
+
+  const percent =
+    max === 0
+      ? 100
+      : ((currentIndex / max) * 100);
+
+  progressBar.style.width =
+    Math.max(10,percent) + "%";
+
+}
+
+
+/* Next */
+
+function nextSlide(){
+
+  const max = maxIndex();
+
+  currentIndex =
+    currentIndex >= max
+      ? 0
+      : currentIndex + 1;
+
+  updateSlider();
+
+}
+
+
+/* Previous */
+
+function prevSlide(){
+
+  const max = maxIndex();
+
+  currentIndex =
+    currentIndex <= 0
+      ? max
+      : currentIndex - 1;
+
+  updateSlider();
+
+}
+
+
+nextBtn.addEventListener("click", () => {
+
+  nextSlide();
+  restartAuto();
+
+});
+
+
+prevBtn.addEventListener("click", () => {
+
+  prevSlide();
+  restartAuto();
+
+});
+
+
+/* Auto */
+
+function startAuto(){
+
+  autoSlide =
+    setInterval(() => {
+
+      nextSlide();
+
+    },5200);
+
+}
+
+
+function restartAuto(){
+
+  clearInterval(autoSlide);
+
+  startAuto();
+
+}
+
+
+gallery.addEventListener(
+  "mouseenter",
+  () => clearInterval(autoSlide)
+);
+
+
+gallery.addEventListener(
+  "mouseleave",
+  startAuto
+);
+
+
+/* Touch swipe */
+
+let touchStart = 0;
+let touchEnd = 0;
+
+
+gallery.addEventListener(
+  "touchstart",
+  e => {
+
+    touchStart =
+      e.changedTouches[0].screenX;
+
+  },
+  {passive:true}
+);
+
+
+gallery.addEventListener(
+  "touchend",
+  e => {
+
+    touchEnd =
+      e.changedTouches[0].screenX;
+
+    const difference =
+      touchEnd - touchStart;
+
+    if(Math.abs(difference) > 50){
+
+      if(difference < 0)
+        nextSlide();
+      else
+        prevSlide();
+
+      restartAuto();
+
+    }
+
+  },
+  {passive:true}
+);
+
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    currentIndex =
+      Math.min(
+        currentIndex,
+        maxIndex()
+      );
+
+    updateSlider();
+
+  }
+);
+
+
+updateSlider();
+startAuto();
+
+
+/* =========================================================
+   MAGNETIC EFFECT
+========================================================= */
+
+const magneticElements =
+  document.querySelectorAll(".magnetic");
+
+
+magneticElements.forEach(element => {
+
+  element.addEventListener(
+    "mousemove",
+    e => {
+
+      const rect =
+        element.getBoundingClientRect();
+
+      const x =
+        e.clientX -
+        rect.left -
+        rect.width / 2;
+
+      const y =
+        e.clientY -
+        rect.top -
+        rect.height / 2;
+
+      const strength =
+        window.innerWidth < 700
+          ? .08
+          : .20;
+
+      element.style.transform =
+        `translate(${x * strength}px,
+                   ${y * strength}px)`;
+
+    }
+  );
+
+
+  element.addEventListener(
+    "mouseleave",
+    () => {
+
+      element.style.transform =
+        "translate(0,0)";
+
+    }
+  );
+
+});
+
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+const cursor =
+  document.getElementById("cursor");
+
+const cursorRing =
+  document.getElementById("cursorRing");
+
+
+let mouseX = 0;
+let mouseY = 0;
+let ringX = 0;
+let ringY = 0;
+
+
+document.addEventListener(
+  "mousemove",
+  e => {
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    cursor.style.left =
+      mouseX + "px";
+
+    cursor.style.top =
+      mouseY + "px";
+
+  }
+);
+
+
+function animateCursor(){
+
+  ringX +=
+    (mouseX - ringX) * .12;
+
+  ringY +=
+    (mouseY - ringY) * .12;
+
+  cursorRing.style.left =
+    ringX + "px";
+
+  cursorRing.style.top =
+    ringY + "px";
+
+  requestAnimationFrame(
+    animateCursor
+  );
+
+}
+
+animateCursor();
+
+
+document
+  .querySelectorAll("a,button,.card")
+  .forEach(element => {
+
+    element.addEventListener(
+      "mouseenter",
+      () => {
+
+        cursor.classList.add("active");
+        cursorRing.classList.add("active");
+
+      }
+    );
+
+    element.addEventListener(
+      "mouseleave",
+      () => {
+
+        cursor.classList.remove("active");
+        cursorRing.classList.remove("active");
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   PARALLAX
+========================================================= */
+
+const hero =
+  document.querySelector(".hero");
+
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if(window.innerWidth > 900){
+
+      const y =
+        window.scrollY * .10;
+
+      hero.style.backgroundPosition =
+        `center ${y}px`;
+
+    }
+
+  },
+  {passive:true}
+);
+
+
+/* =========================================================
+   ENQUIRY → WHATSAPP
+========================================================= */
+
+const enquiryForm =
+  document.getElementById("enquiryForm");
+
+
+enquiryForm.addEventListener(
+  "submit",
+  e => {
+
+    e.preventDefault();
+
+
+    const name =
+      document.getElementById("name")
+      .value.trim();
+
+    const phone =
+      document.getElementById("phone")
+      .value.trim();
+
+    const email =
+      document.getElementById("email")
+      .value.trim();
+
+    const requirement =
+      document.getElementById("requirement")
+      .value;
+
+    const message =
+      document.getElementById("message")
+      .value.trim();
+
+
+    const whatsappMessage =
+
+`Hello M.R. Moorti Art,
+
+I would like to make an enquiry.
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+Requirement: ${requirement || "Not specified"}
+
+Message:
+${message || "I would like to know more about your collection."}`;
+
+
+    const url =
+      "https://wa.me/918741917946?text=" +
+      encodeURIComponent(
+        whatsappMessage
+      );
+
+
+    window.open(
+      url,
+      "_blank"
+    );
+
+  }
+);
+
+
+/* =========================================================
+   SMOOTH INTERNAL LINKS
+========================================================= */
+
+document
+  .querySelectorAll('a[href^="#"]')
+  .forEach(anchor => {
+
+    anchor.addEventListener(
+      "click",
+      e => {
+
+        const target =
+          document.querySelector(
+            anchor.getAttribute("href")
+          );
+
+        if(!target) return;
+
+        e.preventDefault();
+
+        target.scrollIntoView({
+          behavior:"smooth",
+          block:"start"
+        });
+
+      }
+    );
+
+  });
+
+
+</script>
 
 </body>
 </html>
+```

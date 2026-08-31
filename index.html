@@ -1353,23 +1353,6 @@ section{
     max-width:500px;
 }
 
-.contact-details{
-    margin-top:40px;
-    display:flex;
-    flex-direction:column;
-    gap:17px;
-}
-
-.contact-details a,
-.contact-address{
-    color:#ddd;
-    font-size:13px;
-    transition:.3s;
-}
-
-.contact-details a:hover{
-    color:var(--gold-soft);
-}
 
 .form{
     display:flex;
@@ -1424,70 +1407,310 @@ section{
 /* =========================================================
    FOOTER
 ========================================================= */
+/* =========================================================
+   PREMIUM LUXURY FOOTER
+========================================================= */
 
 footer{
-    background:#0b0b0a;
-    color:white;
-    padding:70px 5% 30px;
+    position:relative;
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255,255,255,.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #f4f4f2 0%,
+            #e8e8e6 45%,
+            #dcdcd9 100%
+        );
+    color:#171717;
+    padding:90px 5% 28px;
+    overflow:hidden;
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:5%;
+    right:5%;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(20,20,20,.28),
+        transparent
+    );
 }
 
 .footer-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
-    padding-bottom:55px;
+    position:relative;
+    display:grid;
+    grid-template-columns:
+        1.15fr
+        1fr
+        1.2fr
+        auto;
+    gap:45px;
+    align-items:start;
+    padding-bottom:65px;
+}
+.footer-top{
+    grid-template-columns:1fr 1fr;
+    gap:45px 30px;
+}
+
+.footer-brand-wrap{
+    grid-column:1 / -1;
+}
+
+.footer-bottom{
+    align-items:flex-start;
+}
+/* BRAND */
+
+.footer-brand-wrap{
+    max-width:280px;
 }
 
 .footer-brand{
     font-family:var(--serif);
-    font-size:30px;
+    font-size:38px;
+    line-height:1;
+    letter-spacing:-.04em;
+    color:#151515;
+}
+
+.footer-brand span{
+    display:block;
+    margin-top:12px;
+    font-family:var(--sans);
+    font-size:9px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:#777;
 }
 
 .footer-tagline{
+    margin-top:24px;
+    max-width:250px;
     font-family:var(--serif);
-    color:#aaa;
     font-style:italic;
-    font-size:21px;
+    font-size:19px;
+    line-height:1.5;
+    color:#555;
 }
+
+/* FOOTER HEADINGS */
+
+.footer-heading{
+    margin-bottom:20px;
+    font-size:9px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:#777;
+}
+
+/* CONTACT */
+
+.footer-contact{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.footer-contact-item{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    color:#222;
+    font-size:12px;
+    line-height:1.5;
+    transition:
+        transform .5s var(--ease),
+        color .4s ease;
+}
+
+.footer-contact-item:hover{
+    transform:translateX(7px);
+    color:#777;
+}
+
+.footer-contact-icon{
+    width:34px;
+    height:34px;
+    flex:0 0 34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(0,0,0,.15);
+    border-radius:50%;
+    background:rgba(255,255,255,.35);
+    transition:
+        transform .5s var(--ease),
+        background .4s ease,
+        border-color .4s ease;
+}
+
+.footer-contact-item:hover .footer-contact-icon{
+    transform:rotate(-8deg) scale(1.08);
+    background:#fff;
+    border-color:#111;
+}
+
+.footer-contact-icon svg{
+    width:15px;
+    height:15px;
+    stroke:currentColor;
+    fill:none;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* ADDRESS */
+
+.footer-address{
+    max-width:230px;
+    color:#444;
+    font-size:12px;
+    line-height:1.8;
+}
+
+/* SOCIAL */
 
 .socials{
     display:flex;
-    gap:10px;
+    gap:11px;
+    margin-top:4px;
 }
 
 .social{
-    width:45px;
-    height:45px;
-    border:1px solid #393937;
+    width:46px;
+    height:46px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(0,0,0,.18);
+    border-radius:50%;
+    color:#222;
+    background:rgba(255,255,255,.28);
+    transition:
+        transform .55s var(--ease),
+        background .4s ease,
+        color .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease;
+}
+
+.social svg{
+    width:17px;
+    height:17px;
+}
+
+.social:hover{
+    background:#171717;
+    color:#fff;
+    border-color:#171717;
+    transform:translateY(-7px) rotate(-4deg);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+/* BOTTOM */
+
+.footer-bottom{
+    position:relative;
+    border-top:1px solid rgba(0,0,0,.14);
+    padding-top:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    color:#777;
+    font-size:10px;
+    letter-spacing:.04em;
+}
+
+.footer-credit{
+    color:#333;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+}
+
+/* =========================================================
+   FLOATING BUTTONS
+========================================================= */
+
+.floating{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:4000;
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+}
+
+.float-btn{
+    width:54px;
+    height:54px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:11px;
-    transition:.5s var(--ease);
+    color:#fff;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.18);
+    transition:
+        transform .5s var(--ease),
+        box-shadow .4s ease;
 }
 
-.social:hover{
-    background:white;
+.float-btn svg{
+    width:21px;
+    height:21px;
+}
+
+.float-btn:hover{
+    transform:scale(1.1) translateY(-3px);
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.24);
+}
+
+.call{
+    background:#181818;
+}
+
+.whatsapp{
+    background:#20b858;
+}
+
+.float-enquiry{
+    position:fixed;
+    left:20px;
+    bottom:20px;
+    z-index:4000;
+    padding:15px 22px;
+    border-radius:100px;
+    background:#fff;
     color:#111;
-    transform:translateY(-5px);
-}
-
-.footer-bottom{
-    border-top:1px solid #252523;
-    padding-top:25px;
-    display:flex;
-    justify-content:space-between;
-    gap:20px;
-    color:#777;
+    border:1px solid #d5d5d2;
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
     font-size:10px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    transition:
+        background .4s ease,
+        color .4s ease,
+        transform .5s var(--ease);
 }
 
-.footer-credit{
-    color:var(--gold-soft);
+.float-enquiry:hover{
+    background:#111;
+    color:#fff;
 }
-
 /* =========================================================
    FLOATING BUTTONS
 ========================================================= */
@@ -1626,7 +1849,24 @@ footer{
 }
 
 @media(max-width:700px){
+.footer-top{
+    grid-template-columns:1fr;
+    gap:38px;
+}
 
+.footer-brand-wrap{
+    grid-column:auto;
+}
+
+.footer-brand{
+    font-size:32px;
+}
+
+.footer-bottom{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+}
     .navbar{
         height:72px;
         padding:0 5%;
@@ -2695,28 +2935,7 @@ footer{
                 custom artwork, send us your requirement.
             </p>
 
-            <div class="contact-details">
-
-                <a href="tel:+918741917946">
-                    +91 87419 17946
-                </a>
-
-                <a href="https://wa.me/918741917946"
-                   target="_blank">
-                    WhatsApp · +91 87419 17946
-                </a>
-
-                <a href="mailto:umsharma1993@gmail.com">
-                    umsharma1993@gmail.com
-                </a>
-
-                <div class="contact-address">
-                    P-4 Mahaveer Colony,<br>
-                    Kartarpura, Jaipur,<br>
-                    Rajasthan · 302006
-                </div>
-
-            </div>
+          
 
         </div>
 
@@ -2796,42 +3015,294 @@ footer{
      FOOTER
 ====================================================== -->
 
+<!-- ======================================================
+     PREMIUM FOOTER
+====================================================== -->
+
 <footer>
 
     <div class="footer-top">
 
-        <div class="footer-brand">
-            M.R. Moorti Art
+        <!-- BRAND -->
+        <div class="footer-brand-wrap">
+
+            <div class="footer-brand">
+                M.R. Moorti Art
+                <span>Marble · Art · Craftsmanship</span>
+            </div>
+
+            <div class="footer-tagline">
+                Made with devotion.<br>
+                Built to last.
+            </div>
+
         </div>
 
-        <div class="footer-tagline">
-            Made with devotion. Built to last.
+
+        <!-- CONTACT -->
+        <div>
+
+            <div class="footer-heading">
+                Contact
+            </div>
+
+            <div class="footer-contact">
+
+                <!-- PHONE -->
+                <a
+                    href="tel:+918741917946"
+                    class="footer-contact-item magnetic"
+                >
+
+                    <span class="footer-contact-icon">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                            19.79 19.79 0 0 1-8.63-3.07
+                            19.5 19.5 0 0 1-6-6
+                            A19.79 19.79 0 0 1 2.12 4.18
+                            2 2 0 0 1 4.11 2h3
+                            a2 2 0 0 1 2 1.72
+                            12.84 12.84 0 0 0 .7 2.81
+                            2 2 0 0 1-.45 2.11L8.09 9.91
+                            a16 16 0 0 0 6 6l1.27-1.27
+                            a2 2 0 0 1 2.11-.45
+                            12.84 12.84 0 0 0 2.81.7
+                            A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        +91 87419 17946
+                    </span>
+
+                </a>
+
+
+                <!-- WHATSAPP -->
+                <a
+                    href="https://wa.me/918741917946"
+                    target="_blank"
+                    rel="noopener"
+                    class="footer-contact-item magnetic"
+                >
+
+                    <span class="footer-contact-icon">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.52 3.48A11.8 11.8 0 0 0 12.13 0
+                            C5.58 0 .25 5.33.25 11.88
+                            c0 2.09.55 4.13 1.59 5.93L.15 24
+                            l6.35-1.66a11.86 11.86 0 0 0 5.63 1.43
+                            h.01c6.55 0 11.88-5.33 11.88-11.89
+                            0-3.18-1.24-6.16-3.5-8.4z"/>
+                            <path d="M8.3 6.8c.22-.5.46-.51.84-.52
+                            .21-.01.45-.01.69-.01
+                            .22 0 .57.08.87.68
+                            .31.62 1.04 2.54 1.13 2.72
+                            .09.19.15.4.03.64
+                            -.12.24-.18.4-.35.61
+                            -.18.21-.37.47-.53.63
+                            -.18.18-.36.37-.15.72
+                            .21.35.93 1.53 2 2.47
+                            1.37 1.22 2.52 1.6 2.88 1.78
+                            .35.18.56.15.77-.09
+                            .21-.24.89-1.04 1.13-1.4
+                            .24-.36.48-.3.8-.18
+                            .32.12 2.02.95 2.37 1.12
+                            .35.18.58.27.67.42
+                            .09.15.09.87-.21 1.7
+                            -.3.83-1.77 1.59-2.46 1.69
+                            -.63.09-1.42.13-2.29-.14
+                            -.53-.17-1.21-.4-2.09-.78
+                            -3.67-1.58-6.06-5.28-6.25-5.52
+                            -.18-.24-1.49-1.98-1.49-3.78
+                            0-1.8.94-2.68 1.28-3.05z"/>
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        WhatsApp · +91 87419 17946
+                    </span>
+
+                </a>
+
+
+                <!-- EMAIL -->
+                <a
+                    href="mailto:umsharma1993@gmail.com"
+                    class="footer-contact-item magnetic"
+                >
+
+                    <span class="footer-contact-icon">
+
+                        <svg viewBox="0 0 24 24">
+                            <rect
+                                x="3"
+                                y="5"
+                                width="18"
+                                height="14"
+                                rx="2"
+                            />
+                            <path d="m3 7 9 6 9-6"/>
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        umsharma1993@gmail.com
+                    </span>
+
+                </a>
+
+            </div>
+
         </div>
 
-        <div class="socials">
 
-            <a href="mailto:umsharma1993@gmail.com"
-               class="social magnetic"
-               aria-label="Email">
-                @
-            </a>
+        <!-- ADDRESS -->
+        <div>
 
-            <a href="https://wa.me/918741917946"
-               target="_blank"
-               class="social magnetic"
-               aria-label="WhatsApp">
-                W
-            </a>
+            <div class="footer-heading">
+                Studio
+            </div>
 
-            <a href="tel:+918741917946"
-               class="social magnetic"
-               aria-label="Call">
-                ☎
-            </a>
+            <div class="footer-address">
+
+                P-4 Mahaveer Colony,<br>
+                Kartarpura, Jaipur,<br>
+                Rajasthan · 302006
+
+            </div>
+
+        </div>
+
+
+        <!-- SOCIAL -->
+        <div>
+
+            <div class="footer-heading">
+                Follow
+            </div>
+
+            <div class="socials">
+
+                <!-- INSTAGRAM -->
+                <a
+                    href="https://www.instagram.com/mr_marble_art?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
+                    target="_blank"
+                    rel="noopener"
+                    class="social magnetic"
+                    aria-label="Instagram"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    >
+                        <rect
+                            x="3"
+                            y="3"
+                            width="18"
+                            height="18"
+                            rx="5"
+                        />
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="4"
+                        />
+                        <circle
+                            cx="17.5"
+                            cy="6.5"
+                            r="1"
+                            fill="currentColor"
+                            stroke="none"
+                        />
+                    </svg>
+
+                </a>
+
+
+                <!-- WHATSAPP -->
+                <a
+                    href="https://wa.me/918741917946"
+                    target="_blank"
+                    rel="noopener"
+                    class="social magnetic"
+                    aria-label="WhatsApp"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    >
+                        <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0
+                        C5.5 0 .2 5.3.2 11.9
+                        c0 2.1.5 4.1 1.6 5.9L.2 24
+                        l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4
+                        c6.6 0 11.9-5.3 11.9-11.9
+                        0-3.1-1.3-6.1-3.5-8.3z"/>
+
+                        <path d="M8.1 6.8c.2-.5.5-.5.8-.5h.7
+                        c.2 0 .5.1.7.6l1 2.4
+                        c.1.2.1.4 0 .6l-.4.6
+                        c-.2.2-.4.5-.5.6
+                        -.2.2-.4.4-.2.7
+                        .2.4.9 1.5 2 2.5
+                        1.4 1.2 2.5 1.6 2.9 1.8
+                        .4.2.6.1.8-.1l1.1-1.4
+                        c.2-.3.5-.3.8-.2
+                        l2.3 1.1c.3.2.5.3.6.4
+                        .1.2.1.9-.2 1.7
+                        -.3.8-1.7 1.6-2.4 1.7
+                        -.7.1-1.5.1-2.3-.1
+                        -.5-.2-1.2-.4-2.1-.8
+                        -3.7-1.6-6.1-5.3-6.3-5.5
+                        -.2-.2-1.5-2-1.5-3.8
+                        0-1.8.9-2.7 1.2-3.1z"/>
+                    </svg>
+
+                </a>
+
+
+                <!-- EMAIL -->
+                <a
+                    href="mailto:umsharma1993@gmail.com"
+                    class="social magnetic"
+                    aria-label="Email"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    >
+                        <rect
+                            x="3"
+                            y="5"
+                            width="18"
+                            height="14"
+                            rx="2"
+                        />
+                        <path d="m3 7 9 6 9-6"/>
+                    </svg>
+
+                </a>
+
+            </div>
 
         </div>
 
     </div>
+
 
     <div class="footer-bottom">
 
@@ -2851,25 +3322,107 @@ footer{
 <!-- ======================================================
      FLOATING BUTTONS
 ====================================================== -->
+ <!-- ======================================================
+     FLOATING ACTION BUTTONS
+====================================================== -->
 
-<a href="#contact"
-   class="float-enquiry magnetic">
+<a
+    href="#contact"
+    class="float-enquiry magnetic"
+>
     Enquire Now
 </a>
 
+
 <div class="floating">
 
-    <a href="tel:+918741917946"
-       class="float-btn call magnetic"
-       aria-label="Call">
-        ☎
+    <!-- CALL -->
+
+    <a
+        href="tel:+918741917946"
+        class="float-btn call magnetic"
+        aria-label="Call M.R. Moorti Art"
+    >
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+
+            <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2
+                19.79 19.79 0 0 1-8.63-3.07
+                19.5 19.5 0 0 1-6-6
+                A19.79 19.79 0 0 1 2.12 4.18
+                2 2 0 0 1 4.11 2h3
+                a2 2 0 0 1 2 1.72
+                12.84 12.84 0 0 0 .7 2.81
+                2 2 0 0 1-.45 2.11L8.09 9.91
+                a16 16 0 0 0 6 6l1.27-1.27
+                a2 2 0 0 1 2.11-.45
+                12.84 12.84 0 0 0 2.81.7
+                A2 2 0 0 1 22 16.92z"
+            />
+
+        </svg>
+
     </a>
 
-    <a href="https://wa.me/918741917946"
-       target="_blank"
-       class="float-btn whatsapp magnetic"
-       aria-label="WhatsApp">
-        W
+
+    <!-- WHATSAPP -->
+
+    <a
+        href="https://wa.me/918741917946"
+        target="_blank"
+        rel="noopener"
+        class="float-btn whatsapp magnetic"
+        aria-label="WhatsApp M.R. Moorti Art"
+    >
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+
+            <path
+                d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0
+                C5.5 0 .2 5.3.2 11.9
+                c0 2.1.5 4.1 1.6 5.9L.2 24
+                l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4
+                c6.6 0 11.9-5.3 11.9-11.9
+                0-3.1-1.3-6.1-3.5-8.3z"
+            />
+
+            <path
+                d="M8.1 6.8c.2-.5.5-.5.8-.5h.7
+                c.2 0 .5.1.7.6l1 2.4
+                c.1.2.1.4 0 .6l-.4.6
+                c-.2.2-.4.5-.5.6
+                -.2.2-.4.4-.2.7
+                .2.4.9 1.5 2 2.5
+                1.4 1.2 2.5 1.6 2.9 1.8
+                .4.2.6.1.8-.1l1.1-1.4
+                c.2-.3.5-.3.8-.2
+                l2.3 1.1c.3.2.5.3.6.4
+                .1.2.1.9-.2 1.7
+                -.3.8-1.7 1.6-2.4 1.7
+                -.7.1-1.5.1-2.3-.1
+                -.5-.2-1.2-.4-2.1-.8
+                -3.7-1.6-6.1-5.3-6.3-5.5
+                -.2-.2-1.5-2-1.5-3.8
+                0-1.8.9-2.7 1.2-3.1z"
+            />
+
+        </svg>
+
     </a>
 
 </div>

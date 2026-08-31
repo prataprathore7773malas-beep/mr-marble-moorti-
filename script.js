@@ -1,190 +1,102 @@
 /* =========================================================
-   M.R. MOORTI ART
-   PREMIUM LUXURY JAVASCRIPT
-========================================================= */
+   LUXURY WEBSITE — PREMIUM INTERACTIONS
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  "use strict";
+  /* =========================================================
+     1. PRELOADER
+     ========================================================= */
 
-
-  /* =======================================================
-     GLOBAL SELECTORS
-  ======================================================= */
-
-  const body = document.body;
-  const header = document.querySelector(".site-header");
-  const menuToggle = document.querySelector(".menu-toggle");
-  const navLinks = document.querySelector(".nav-links");
-
-  const cursorDot = document.querySelector(".cursor-dot");
-  const cursorRing = document.querySelector(".cursor-ring");
-
-  const loader = document.querySelector(".page-loader");
-
-
-
-  /* =======================================================
-     PAGE LOADER
-  ======================================================= */
+  const preloader = document.querySelector(".preloader");
 
   window.addEventListener("load", () => {
+    if (preloader) {
+      setTimeout(() => {
+        preloader.classList.add("loaded");
 
-    setTimeout(() => {
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 900);
 
-      if (loader) {
-        loader.classList.add("loaded");
-      }
-
-      document.body.classList.add("page-loaded");
-
-    }, 500);
-
+      }, 700);
+    }
   });
 
 
+  /* =========================================================
+     2. NAVBAR — SCROLL EFFECT
+     ========================================================= */
 
-  /* =======================================================
-     NAVBAR SCROLL EFFECT
-  ======================================================= */
+  const navbar = document.querySelector(".navbar");
 
-  let lastScroll = 0;
+  const handleNavbar = () => {
+    if (!navbar) return;
 
-  function handleHeader() {
-
-    const currentScroll = window.scrollY;
-
-    if (!header) return;
-
-    if (currentScroll > 60) {
-      header.classList.add("scrolled");
+    if (window.scrollY > 70) {
+      navbar.classList.add("scrolled");
     } else {
-      header.classList.remove("scrolled");
+      navbar.classList.remove("scrolled");
     }
+  };
 
-    /*
-      Optional hide/show effect on mobile
-    */
-
-    if (window.innerWidth <= 700) {
-
-      if (
-        currentScroll > lastScroll &&
-        currentScroll > 180
-      ) {
-
-        header.style.transform = "translateY(-100%)";
-
-      } else {
-
-        header.style.transform = "translateY(0)";
-
-      }
-
-    }
-
-    lastScroll = currentScroll;
-
-  }
-
-  window.addEventListener(
-    "scroll",
-    handleHeader,
-    { passive: true }
-  );
-
-  handleHeader();
+  window.addEventListener("scroll", handleNavbar, { passive: true });
+  handleNavbar();
 
 
+  /* =========================================================
+     3. MOBILE MENU
+     ========================================================= */
 
-  /* =======================================================
-     MOBILE MENU
-  ======================================================= */
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
 
   if (menuToggle && navLinks) {
 
     menuToggle.addEventListener("click", () => {
-
-      const isOpen =
-        navLinks.classList.toggle("open");
-
-      menuToggle.classList.toggle(
-        "active",
-        isOpen
-      );
-
-      body.classList.toggle(
-        "no-scroll",
-        isOpen
-      );
-
+      menuToggle.classList.toggle("active");
+      navLinks.classList.toggle("active");
+      document.body.classList.toggle("menu-open");
     });
 
-
-    /*
-      Close menu after clicking navigation
-    */
-
-    const menuItems =
-      navLinks.querySelectorAll("a");
-
-    menuItems.forEach(link => {
-
+    navLinks.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
-
-        navLinks.classList.remove("open");
-
         menuToggle.classList.remove("active");
-
-        body.classList.remove("no-scroll");
-
+        navLinks.classList.remove("active");
+        document.body.classList.remove("menu-open");
       });
-
     });
-
   }
 
 
+  /* =========================================================
+     4. SMOOTH SCROLL
+     ========================================================= */
 
-  /* =======================================================
-     SMOOTH ANCHOR SCROLL
-  ======================================================= */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    anchor.addEventListener("click", function (e) {
 
-    link.addEventListener("click", function (event) {
+      const targetID = this.getAttribute("href");
 
-      const targetId =
-        this.getAttribute("href");
+      if (!targetID || targetID === "#") return;
 
-      if (
-        !targetId ||
-        targetId === "#"
-      ) return;
-
-      const target =
-        document.querySelector(targetId);
+      const target = document.querySelector(targetID);
 
       if (!target) return;
 
-      event.preventDefault();
+      e.preventDefault();
 
-      const headerHeight =
-        header
-          ? header.offsetHeight
-          : 0;
+      const navbarHeight = navbar ? navbar.offsetHeight : 0;
 
       const targetPosition =
         target.getBoundingClientRect().top +
-        window.scrollY -
-        headerHeight;
+        window.pageYOffset -
+        navbarHeight;
 
       window.scrollTo({
-
         top: targetPosition,
-
         behavior: "smooth"
-
       });
 
     });
@@ -192,1193 +104,587 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
+  /* =========================================================
+     5. PREMIUM SCROLL REVEAL
+     ========================================================= */
 
-  /* =======================================================
-     SCROLL REVEAL
-  ======================================================= */
+  const revealElements = document.querySelectorAll(
+    ".reveal, .reveal-up, .reveal-left, .reveal-right, .fade-up, .section-heading, .collection-card, .about-content, .about-image, .contact-content, .contact-form, .service-card, .feature-card, .stat-item"
+  );
 
-  const revealElements =
-    document.querySelectorAll(
-      ".reveal-up, .reveal-left, .reveal-right"
-    );
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
 
+      entries.forEach(entry => {
 
-  if ("IntersectionObserver" in window) {
+        if (entry.isIntersecting) {
 
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
+          entry.target.classList.add("revealed");
 
-          entries.forEach(entry => {
+          observer.unobserve(entry.target);
 
-            if (!entry.isIntersecting) return;
-
-            entry.target.classList.add("active");
-
-            observer.unobserve(entry.target);
-
-          });
-
-        },
-        {
-          threshold: 0.12,
-
-          rootMargin:
-            "0px 0px -60px 0px"
         }
-      );
+
+      });
+
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -80px 0px"
+    }
+  );
+
+  revealElements.forEach(element => {
+    revealObserver.observe(element);
+  });
 
 
-    revealElements.forEach(element => {
+  /* =========================================================
+     6. STAGGERED COLLECTION ANIMATION
+     ========================================================= */
 
-      revealObserver.observe(element);
+  const collectionCards = document.querySelectorAll(
+    ".collection-card"
+  );
+
+  collectionCards.forEach((card, index) => {
+
+    card.style.transitionDelay =
+      `${Math.min(index * 90, 700)}ms`;
+
+  });
+
+
+  /* =========================================================
+     7. MAGNETIC BUTTON EFFECT
+     ========================================================= */
+
+  const magneticElements = document.querySelectorAll(
+    ".magnetic, .btn, .magnetic-btn, .cta-button, .whatsapp-float, .call-float"
+  );
+
+  magneticElements.forEach(element => {
+
+    element.addEventListener("mousemove", (e) => {
+
+      const rect = element.getBoundingClientRect();
+
+      const x =
+        e.clientX -
+        rect.left -
+        rect.width / 2;
+
+      const y =
+        e.clientY -
+        rect.top -
+        rect.height / 2;
+
+      const strength = 0.18;
+
+      element.style.transform =
+        `translate(${x * strength}px, ${y * strength}px)`;
 
     });
 
-  } else {
+    element.addEventListener("mouseleave", () => {
 
-    revealElements.forEach(element => {
-
-      element.classList.add("active");
-
-    });
-
-  }
-
-
-
-  /* =======================================================
-     STAGGERED REVEALS
-  ======================================================= */
-
-  const staggerGroups = [
-    ".service-item",
-    ".collection-card",
-    ".contact-detail",
-    ".form-field"
-  ];
-
-
-  staggerGroups.forEach(selector => {
-
-    const elements =
-      document.querySelectorAll(selector);
-
-    elements.forEach((element, index) => {
-
-      element.style.transitionDelay =
-        `${Math.min(index * 0.08, 0.5)}s`;
+      element.style.transform =
+        "translate(0px, 0px)";
 
     });
 
   });
 
 
-
-  /* =======================================================
-     MAGNETIC EFFECT
-  ======================================================= */
-
-  const magneticElements =
-    document.querySelectorAll(
-      ".magnetic, .luxury-btn, .circle-link, .slider-btn, .social-btn, .floating-btn"
-    );
-
-
-  /*
-    Disable magnetic movement on touch/mobile.
-  */
-
-  if (
-    window.matchMedia("(pointer:fine)").matches
-  ) {
-
-    magneticElements.forEach(element => {
-
-      element.addEventListener(
-        "mousemove",
-        event => {
-
-          const rect =
-            element.getBoundingClientRect();
-
-          const x =
-            event.clientX -
-            rect.left -
-            rect.width / 2;
-
-          const y =
-            event.clientY -
-            rect.top -
-            rect.height / 2;
-
-          const strength =
-            element.classList.contains(
-              "luxury-btn"
-            )
-              ? 0.18
-              : 0.28;
-
-          element.style.transform =
-            `translate(${x * strength}px, ${y * strength}px)`;
-
-        }
-      );
-
-
-      element.addEventListener(
-        "mouseleave",
-        () => {
-
-          element.style.transform =
-            "translate(0,0)";
-
-        }
-      );
-
-    });
-
-  }
-
-
-
-  /* =======================================================
-     CUSTOM CURSOR
-  ======================================================= */
-
-  if (
-    cursorDot &&
-    cursorRing &&
-    window.matchMedia("(pointer:fine)").matches
-  ) {
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-
-    let ringX = mouseX;
-    let ringY = mouseY;
-
-
-    document.addEventListener(
-      "mousemove",
-      event => {
-
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-
-        cursorDot.style.left =
-          `${mouseX}px`;
-
-        cursorDot.style.top =
-          `${mouseY}px`;
-
-      }
-    );
-
-
-    function animateCursor() {
-
-      ringX +=
-        (mouseX - ringX) * 0.12;
-
-      ringY +=
-        (mouseY - ringY) * 0.12;
-
-      cursorRing.style.left =
-        `${ringX}px`;
-
-      cursorRing.style.top =
-        `${ringY}px`;
-
-      requestAnimationFrame(
-        animateCursor
-      );
-
-    }
-
-    animateCursor();
-
-
-    /*
-      Cursor hover interaction
-    */
-
-    const cursorTargets =
-      document.querySelectorAll(
-        "a, button, .collection-card, .service-item, input, textarea, select"
-      );
-
-
-    cursorTargets.forEach(element => {
-
-      element.addEventListener(
-        "mouseenter",
-        () => {
-          body.classList.add("cursor-hover");
-        }
-      );
-
-      element.addEventListener(
-        "mouseleave",
-        () => {
-          body.classList.remove("cursor-hover");
-        }
-      );
-
-    });
-
-  }
-
-
-
-  /* =======================================================
-     HERO PARALLAX
-  ======================================================= */
-
-  const hero =
-    document.querySelector(".hero");
-
-  const heroImage =
-    document.querySelector(".hero-image");
-
-
-  if (
-    hero &&
-    heroImage &&
-    window.matchMedia("(pointer:fine)").matches
-  ) {
-
-    hero.addEventListener(
-      "mousemove",
-      event => {
-
-        const rect =
-          hero.getBoundingClientRect();
-
-        const x =
-          (event.clientX -
-            rect.left) /
-          rect.width -
-          0.5;
-
-        const y =
-          (event.clientY -
-            rect.top) /
-          rect.height -
-          0.5;
-
-        heroImage.style.transform =
-          `scale(1.04) translate(${x * -12}px, ${y * -12}px)`;
-
-      }
-    );
-
-
-    hero.addEventListener(
-      "mouseleave",
-      () => {
-
-        heroImage.style.transform =
-          "scale(1.04) translate(0,0)";
-
-      }
-    );
-
-  }
-
-
-
-  /* =======================================================
-     HERO SCROLL PARALLAX
-  ======================================================= */
-
-  function heroScrollEffect() {
-
-    if (!heroImage || !hero) return;
-
-    if (window.innerWidth <= 600) return;
-
-    const scroll =
-      window.scrollY;
-
-    const heroHeight =
-      hero.offsetHeight;
-
-    if (scroll <= heroHeight) {
-
-      heroImage.style.transform =
-        `scale(1.04) translateY(${scroll * 0.08}px)`;
-
-    }
-
-  }
-
-  window.addEventListener(
-    "scroll",
-    heroScrollEffect,
-    { passive: true }
+  /* =========================================================
+     8. IMAGE HOVER PARALLAX
+     ========================================================= */
+
+  const imageCards = document.querySelectorAll(
+    ".collection-card, .image-card, .about-image, .gallery-item"
   );
 
+  imageCards.forEach(card => {
 
+    const image = card.querySelector("img");
 
-  /* =======================================================
-     COLLECTION SLIDER
-  ======================================================= */
+    if (!image) return;
 
-  const slider =
-    document.querySelector(
-      ".collection-slider"
-    );
+    card.addEventListener("mousemove", (e) => {
 
-  const track =
-    document.querySelector(
-      ".collection-track"
-    );
+      const rect = card.getBoundingClientRect();
 
-  const cards =
-    document.querySelectorAll(
-      ".collection-card"
-    );
+      const x =
+        (e.clientX - rect.left) /
+        rect.width -
+        0.5;
 
-  const prevBtn =
-    document.querySelector(
-      ".slider-prev"
-    );
+      const y =
+        (e.clientY - rect.top) /
+        rect.height -
+        0.5;
 
-  const nextBtn =
-    document.querySelector(
-      ".slider-next"
-    );
-
-  const progress =
-    document.querySelector(
-      ".collection-progress span"
-    );
-
-  const currentCount =
-    document.querySelector(
-      ".current-count"
-    );
-
-  const totalCount =
-    document.querySelector(
-      ".total-count"
-    );
-
-
-  let currentSlide = 0;
-
-  let cardsPerView = 3;
-
-  let maxSlide = 0;
-
-
-  function calculateSlider() {
-
-    if (!track || !slider) return;
-
-    const width =
-      window.innerWidth;
-
-
-    if (width <= 600) {
-
-      cardsPerView = 1;
-
-    } else if (width <= 900) {
-
-      cardsPerView = 1.5;
-
-    } else if (width <= 1200) {
-
-      cardsPerView = 2;
-
-    } else {
-
-      cardsPerView = 3;
-
-    }
-
-
-    maxSlide =
-      Math.max(
-        0,
-        cards.length -
-        Math.floor(cardsPerView)
-      );
-
-
-    if (currentSlide > maxSlide) {
-
-      currentSlide = maxSlide;
-
-    }
-
-
-    updateSlider(false);
-
-  }
-
-
-
-  function getCardWidth() {
-
-    if (!cards.length) return 0;
-
-    const card =
-      cards[0];
-
-    const style =
-      window.getComputedStyle(
-        track
-      );
-
-    const gap =
-      parseFloat(
-        style.columnGap ||
-        style.gap ||
-        0
-      );
-
-    return (
-      card.getBoundingClientRect().width +
-      gap
-    );
-
-  }
-
-
-
-  function updateSlider(animate = true) {
-
-    if (!track) return;
-
-    const cardWidth =
-      getCardWidth();
-
-    if (!cardWidth) return;
-
-    if (!animate) {
-
-      track.style.transition =
-        "none";
-
-    } else {
-
-      track.style.transition =
-        "transform .85s cubic-bezier(.22,.61,.36,1)";
-
-    }
-
-
-    const offset =
-      currentSlide * cardWidth;
-
-    track.style.transform =
-      `translate3d(-${offset}px,0,0)`;
-
-
-    /*
-      Counter
-    */
-
-    if (currentCount) {
-
-      currentCount.textContent =
-        String(currentSlide + 1)
-          .padStart(2, "0");
-
-    }
-
-
-    if (totalCount) {
-
-      totalCount.textContent =
-        String(
-          Math.max(1, maxSlide + 1)
-        ).padStart(2, "0");
-
-    }
-
-
-    /*
-      Progress
-    */
-
-    if (progress) {
-
-      const percentage =
-        maxSlide === 0
-          ? 100
-          : ((currentSlide + 1) /
-             (maxSlide + 1)) *
-            100;
-
-      progress.style.width =
-        `${percentage}%`;
-
-    }
-
-
-    /*
-      Buttons
-    */
-
-    if (prevBtn) {
-
-      prevBtn.disabled =
-        currentSlide <= 0;
-
-      prevBtn.style.opacity =
-        currentSlide <= 0
-          ? ".35"
-          : "1";
-
-    }
-
-
-    if (nextBtn) {
-
-      nextBtn.disabled =
-        currentSlide >= maxSlide;
-
-      nextBtn.style.opacity =
-        currentSlide >= maxSlide
-          ? ".35"
-          : "1";
-
-    }
-
-
-    requestAnimationFrame(() => {
-
-      track.style.transition =
-        "transform .85s cubic-bezier(.22,.61,.36,1)";
+      image.style.transform =
+        `scale(1.07) translate(${x * 10}px, ${y * 10}px)`;
 
     });
 
-  }
+    card.addEventListener("mouseleave", () => {
+
+      image.style.transform =
+        "scale(1) translate(0,0)";
+
+    });
+
+  });
 
 
+  /* =========================================================
+     9. HERO PARALLAX
+     ========================================================= */
 
-  if (nextBtn) {
-
-    nextBtn.addEventListener(
-      "click",
-      () => {
-
-        if (
-          currentSlide <
-          maxSlide
-        ) {
-
-          currentSlide++;
-
-          updateSlider();
-
-        }
-
-      }
-    );
-
-  }
-
-
-  if (prevBtn) {
-
-    prevBtn.addEventListener(
-      "click",
-      () => {
-
-        if (
-          currentSlide > 0
-        ) {
-
-          currentSlide--;
-
-          updateSlider();
-
-        }
-
-      }
-    );
-
-  }
-
-
-  /*
-    Keyboard control
-  */
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key === "ArrowRight" &&
-        currentSlide < maxSlide
-      ) {
-
-        currentSlide++;
-
-        updateSlider();
-
-      }
-
-      if (
-        event.key === "ArrowLeft" &&
-        currentSlide > 0
-      ) {
-
-        currentSlide--;
-
-        updateSlider();
-
-      }
-
-    }
+  const hero = document.querySelector(".hero");
+  const heroBackground = document.querySelector(
+    ".hero-bg, .hero-background, .hero img"
   );
 
+  if (hero && heroBackground) {
 
-  /*
-    Touch / Swipe
-  */
+    window.addEventListener("scroll", () => {
 
-  if (slider) {
+      const scrollY = window.scrollY;
 
-    let startX = 0;
-    let startY = 0;
+      if (scrollY < window.innerHeight) {
 
-    let isDragging = false;
-
-
-    slider.addEventListener(
-      "pointerdown",
-      event => {
-
-        startX =
-          event.clientX;
-
-        startY =
-          event.clientY;
-
-        isDragging = true;
-
-        slider.setPointerCapture(
-          event.pointerId
-        );
+        heroBackground.style.transform =
+          `translateY(${scrollY * 0.12}px) scale(1.03)`;
 
       }
-    );
+
+    }, { passive: true });
+
+  }
 
 
-    slider.addEventListener(
-      "pointerup",
-      event => {
+  /* =========================================================
+     10. HERO CONTENT REVEAL
+     ========================================================= */
 
-        if (!isDragging) return;
+  const heroElements = document.querySelectorAll(
+    ".hero .hero-content > *, .hero-content > *"
+  );
 
-        const endX =
-          event.clientX;
+  heroElements.forEach((element, index) => {
 
-        const endY =
-          event.clientY;
+    element.style.opacity = "0";
+    element.style.transform = "translateY(35px)";
 
-        const diffX =
-          endX - startX;
+    element.style.transition =
+      `opacity 1.1s cubic-bezier(.16,1,.3,1) ${index * 160 + 500}ms,
+       transform 1.1s cubic-bezier(.16,1,.3,1) ${index * 160 + 500}ms`;
 
-        const diffY =
-          endY - startY;
+  });
+
+  setTimeout(() => {
+
+    heroElements.forEach(element => {
+
+      element.style.opacity = "1";
+      element.style.transform = "translateY(0)";
+
+    });
+
+  }, 400);
 
 
-        isDragging = false;
+  /* =========================================================
+     11. COUNTER ANIMATION
+     ========================================================= */
 
+  const counters = document.querySelectorAll(
+    ".counter, [data-counter]"
+  );
 
-        /*
-          Only horizontal gestures
-        */
+  const counterObserver = new IntersectionObserver(
+    entries => {
 
-        if (
-          Math.abs(diffX) >
-          45 &&
-          Math.abs(diffX) >
-          Math.abs(diffY)
-        ) {
+      entries.forEach(entry => {
 
-          if (
-            diffX < 0 &&
-            currentSlide < maxSlide
-          ) {
+        if (!entry.isIntersecting) return;
 
-            currentSlide++;
+        const counter = entry.target;
 
-          } else if (
-            diffX > 0 &&
-            currentSlide > 0
-          ) {
+        const target =
+          parseInt(
+            counter.getAttribute("data-counter") ||
+            counter.innerText.replace(/\D/g, ""),
+            10
+          );
 
-            currentSlide--;
+        if (isNaN(target)) return;
+
+        let current = 0;
+
+        const duration = 1800;
+        const increment = target / (duration / 16);
+
+        const updateCounter = () => {
+
+          current += increment;
+
+          if (current < target) {
+
+            counter.innerText =
+              Math.floor(current).toLocaleString();
+
+            requestAnimationFrame(updateCounter);
+
+          } else {
+
+            counter.innerText =
+              target.toLocaleString();
 
           }
 
-          updateSlider();
+        };
 
-        }
+        updateCounter();
 
-      }
-    );
+        counterObserver.unobserve(counter);
 
+      });
 
-    slider.addEventListener(
-      "pointercancel",
-      () => {
-
-        isDragging = false;
-
-      }
-    );
-
-  }
-
-
-  window.addEventListener(
-    "resize",
-    calculateSlider
+    },
+    {
+      threshold: 0.5
+    }
   );
 
-
-  calculateSlider();
-
-
-
-  /* =======================================================
-     IMAGE REVEAL
-  ======================================================= */
-
-  const lazyImages =
-    document.querySelectorAll(
-      "img"
-    );
-
-
-  lazyImages.forEach(image => {
-
-    image.addEventListener(
-      "load",
-      () => {
-
-        image.classList.add(
-          "image-loaded"
-        );
-
-      }
-    );
-
+  counters.forEach(counter => {
+    counterObserver.observe(counter);
   });
 
 
+  /* =========================================================
+     12. FAQ ACCORDION
+     ========================================================= */
 
-  /* =======================================================
-     IMAGE TILT EFFECT
-  ======================================================= */
-
-  const tiltElements =
-    document.querySelectorAll(
-      ".about-visual, .collection-card"
-    );
-
-
-  if (
-    window.matchMedia("(pointer:fine)").matches
-  ) {
-
-    tiltElements.forEach(element => {
-
-      element.addEventListener(
-        "mousemove",
-        event => {
-
-          const rect =
-            element.getBoundingClientRect();
-
-          const x =
-            event.clientX -
-            rect.left;
-
-          const y =
-            event.clientY -
-            rect.top;
-
-          const rotateX =
-            ((y / rect.height) -
-              0.5) *
-            -2.5;
-
-          const rotateY =
-            ((x / rect.width) -
-              0.5) *
-            2.5;
-
-
-          element.style.transform =
-            `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-        }
-      );
-
-
-      element.addEventListener(
-        "mouseleave",
-        () => {
-
-          element.style.transform =
-            "perspective(900px) rotateX(0) rotateY(0)";
-
-        }
-      );
-
-    });
-
-  }
-
-
-
-  /* =======================================================
-     FAQ ACCORDION
-  ======================================================= */
-
-  const faqItems =
-    document.querySelectorAll(
-      ".faq-item"
-    );
-
+  const faqItems = document.querySelectorAll(".faq-item");
 
   faqItems.forEach(item => {
 
     const question =
-      item.querySelector(
-        ".faq-question"
-      );
+      item.querySelector(".faq-question");
 
-    const answer =
-      item.querySelector(
-        ".faq-answer"
-      );
+    if (!question) return;
+
+    question.addEventListener("click", () => {
+
+      const isActive =
+        item.classList.contains("active");
+
+      faqItems.forEach(otherItem => {
+        otherItem.classList.remove("active");
+      });
+
+      if (!isActive) {
+        item.classList.add("active");
+      }
+
+    });
+
+  });
 
 
-    if (!question || !answer) return;
+  /* =========================================================
+     13. COLLECTION IMAGE LOAD REVEAL
+     ========================================================= */
+
+  const collectionImages =
+    document.querySelectorAll(
+      ".collection-card img"
+    );
+
+  collectionImages.forEach(image => {
+
+    image.addEventListener("load", () => {
+
+      image.classList.add("image-loaded");
+
+    });
+
+  });
 
 
-    question.addEventListener(
-      "click",
-      () => {
+  /* =========================================================
+     14. LAZY IMAGE REVEAL
+     ========================================================= */
 
-        const isActive =
-          item.classList.contains(
-            "active"
-          );
+  const lazyImages =
+    document.querySelectorAll("img[loading='lazy']");
+
+  const imageObserver = new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        const image = entry.target;
+
+        image.classList.add("visible");
+
+        imageObserver.unobserve(image);
+
+      });
+
+    },
+    {
+      rootMargin: "100px"
+    }
+  );
+
+  lazyImages.forEach(image => {
+    imageObserver.observe(image);
+  });
 
 
-        /*
-          Close all
-        */
+  /* =========================================================
+     15. SECTION ACTIVE NAVIGATION
+     ========================================================= */
 
-        faqItems.forEach(other => {
+  const sections =
+    document.querySelectorAll("section[id]");
 
-          other.classList.remove(
-            "active"
-          );
+  const navigationLinks =
+    document.querySelectorAll(
+      ".nav-links a[href^='#']"
+    );
 
-          const otherAnswer =
-            other.querySelector(
-              ".faq-answer"
-            );
+  const sectionObserver = new IntersectionObserver(
+    entries => {
 
-          if (otherAnswer) {
+      entries.forEach(entry => {
 
-            otherAnswer.style.maxHeight =
-              null;
+        if (!entry.isIntersecting) return;
 
+        const id = entry.target.getAttribute("id");
+
+        navigationLinks.forEach(link => {
+
+          link.classList.remove("active");
+
+          if (
+            link.getAttribute("href") === `#${id}`
+          ) {
+            link.classList.add("active");
           }
 
         });
 
+      });
 
-        /*
-          Open clicked
-        */
+    },
+    {
+      threshold: 0.35
+    }
+  );
 
-        if (!isActive) {
-
-          item.classList.add(
-            "active"
-          );
-
-          answer.style.maxHeight =
-            answer.scrollHeight +
-            "px";
-
-        }
-
-      }
-    );
-
+  sections.forEach(section => {
+    sectionObserver.observe(section);
   });
 
 
+  /* =========================================================
+     16. MOUSE LIGHT EFFECT
+     ========================================================= */
 
-  /* =======================================================
-     CONTACT FORM → WHATSAPP
-  ======================================================= */
+  const glow =
+    document.querySelector(".cursor-glow");
 
-  const contactForm =
-    document.querySelector(
-      ".contact-form"
+  if (glow && window.matchMedia(
+    "(pointer:fine)"
+  ).matches) {
+
+    window.addEventListener("mousemove", e => {
+
+      glow.style.left = `${e.clientX}px`;
+      glow.style.top = `${e.clientY}px`;
+
+    });
+
+  }
+
+
+  /* =========================================================
+     17. PREMIUM CARD TILT
+     ========================================================= */
+
+  const tiltCards =
+    document.querySelectorAll(
+      ".tilt-card, .service-card, .feature-card"
     );
 
+  if (window.matchMedia("(pointer:fine)").matches) {
 
-  if (contactForm) {
+    tiltCards.forEach(card => {
 
-    contactForm.addEventListener(
-      "submit",
-      event => {
+      card.addEventListener("mousemove", e => {
 
-        event.preventDefault();
+        const rect =
+          card.getBoundingClientRect();
 
+        const x =
+          e.clientX - rect.left;
 
-        const name =
-          contactForm.querySelector(
-            '[name="name"]'
-          )?.value.trim() || "";
+        const y =
+          e.clientY - rect.top;
 
+        const rotateX =
+          ((y / rect.height) - 0.5) * -5;
 
-        const phone =
-          contactForm.querySelector(
-            '[name="phone"]'
-          )?.value.trim() || "";
+        const rotateY =
+          ((x / rect.width) - 0.5) * 5;
 
+        card.style.transform =
+          `perspective(900px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           translateY(-4px)`;
 
-        const email =
-          contactForm.querySelector(
-            '[name="email"]'
-          )?.value.trim() || "";
+      });
 
+      card.addEventListener("mouseleave", () => {
 
-        const message =
-          contactForm.querySelector(
-            '[name="message"]'
-          )?.value.trim() || "";
+        card.style.transform =
+          "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
 
+      });
 
-        const project =
-          contactForm.querySelector(
-            '[name="project"]'
-          )?.value.trim() || "";
+    });
 
-
-        /*
-          Basic validation
-        */
-
-        if (!name) {
-
-          alert(
-            "Please enter your name."
-          );
-
-          return;
-
-        }
+  }
 
 
-        if (!phone) {
+  /* =========================================================
+     18. SCROLL PROGRESS
+     ========================================================= */
 
-          alert(
-            "Please enter your phone number."
-          );
+  const progressBar =
+    document.querySelector(".scroll-progress");
 
-          return;
+  if (progressBar) {
 
-        }
+    window.addEventListener("scroll", () => {
+
+      const scrollTop =
+        window.scrollY;
+
+      const documentHeight =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
+      const progress =
+        documentHeight > 0
+          ? (scrollTop / documentHeight) * 100
+          : 0;
+
+      progressBar.style.width =
+        `${progress}%`;
+
+    }, { passive: true });
+
+  }
 
 
-        /*
-          WhatsApp number
-          Replace if required.
-        */
+  /* =========================================================
+     19. BACK TO TOP
+     ========================================================= */
 
-        const whatsappNumber =
-          "91XXXXXXXXXX";
+  const backTop =
+    document.querySelector(
+      ".back-to-top"
+    );
+
+  if (backTop) {
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 600) {
+        backTop.classList.add("show");
+      } else {
+        backTop.classList.remove("show");
+      }
+
+    }, { passive: true });
+
+    backTop.addEventListener("click", () => {
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+  }
 
 
-        const whatsappMessage =
+  /* =========================================================
+     20. CONTACT FORM → WHATSAPP
+     ========================================================= */
 
-`Hello M.R. Moorti Art,
+  const enquiryForm =
+    document.querySelector(
+      "#enquiryForm, .enquiry-form, #contactForm"
+    );
 
-I would like to enquire about your work.
+  if (enquiryForm) {
+
+    enquiryForm.addEventListener("submit", function (e) {
+
+      e.preventDefault();
+
+      const name =
+        this.querySelector(
+          '[name="name"]'
+        )?.value.trim() || "";
+
+      const phone =
+        this.querySelector(
+          '[name="phone"]'
+        )?.value.trim() || "";
+
+      const email =
+        this.querySelector(
+          '[name="email"]'
+        )?.value.trim() || "";
+
+      const message =
+        this.querySelector(
+          '[name="message"]'
+        )?.value.trim() || "";
+
+      const whatsappNumber =
+        "918741917946";
+
+      const whatsappMessage =
+        `Hello, I would like to make an enquiry.
 
 Name: ${name}
 Phone: ${phone}
 Email: ${email}
-Project: ${project}
+Message: ${message}`;
 
-Message:
-${message}`;
+      const whatsappURL =
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+          whatsappMessage
+        )}`;
 
-
-        const whatsappURL =
-          `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-            whatsappMessage
-          )}`;
-
-
-        window.open(
-          whatsappURL,
-          "_blank"
-        );
-
-
-      }
-    );
-
-  }
-
-
-
-  /* =======================================================
-     PHONE / WHATSAPP FLOATING BUTTONS
-  ======================================================= */
-
-  const floatingButtons =
-    document.querySelectorAll(
-      ".floating-btn"
-    );
-
-
-  floatingButtons.forEach(button => {
-
-    button.addEventListener(
-      "click",
-      event => {
-
-        /*
-          Allows normal href behaviour.
-        */
-
-        if (
-          button.getAttribute("href")
-        ) {
-
-          return;
-
-        }
-
-      }
-    );
-
-  });
-
-
-
-  /* =======================================================
-     SCROLL TO TOP
-  ======================================================= */
-
-  const topButtons =
-    document.querySelectorAll(
-      ".back-to-top"
-    );
-
-
-  topButtons.forEach(button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        window.scrollTo({
-
-          top:0,
-
-          behavior:"smooth"
-
-        });
-
-      }
-    );
-
-  });
-
-
-
-  /* =======================================================
-     ACTIVE NAVIGATION
-  ======================================================= */
-
-  const sections =
-    document.querySelectorAll(
-      "section[id]"
-    );
-
-  const navigationLinks =
-    document.querySelectorAll(
-      '.nav-links a[href^="#"]'
-    );
-
-
-  if (
-    sections.length &&
-    navigationLinks.length
-  ) {
-
-    const sectionObserver =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (
-              !entry.isIntersecting
-            ) return;
-
-
-            const id =
-              entry.target.id;
-
-
-            navigationLinks.forEach(link => {
-
-              link.classList.remove(
-                "active"
-              );
-
-
-              if (
-                link.getAttribute("href") ===
-                `#${id}`
-              ) {
-
-                link.classList.add(
-                  "active"
-                );
-
-              }
-
-            });
-
-          });
-
-        },
-        {
-          threshold:.25
-        }
-      );
-
-
-    sections.forEach(section => {
-
-      sectionObserver.observe(
-        section
+      window.open(
+        whatsappURL,
+        "_blank",
+        "noopener,noreferrer"
       );
 
     });
@@ -1386,377 +692,317 @@ ${message}`;
   }
 
 
-
-  /* =======================================================
-     NUMBER COUNTER
-  ======================================================= */
-
-  const counters =
-    document.querySelectorAll(
-      "[data-counter]"
-    );
-
-
-  if (
-    counters.length &&
-    "IntersectionObserver" in window
-  ) {
-
-    const counterObserver =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (
-              !entry.isIntersecting
-            ) return;
-
-
-            const element =
-              entry.target;
-
-
-            const target =
-              parseInt(
-                element.dataset.counter,
-                10
-              );
-
-
-            if (
-              Number.isNaN(target)
-            ) return;
-
-
-            let current = 0;
-
-
-            const duration =
-              1500;
-
-
-            const startTime =
-              performance.now();
-
-
-            function animateCounter(
-              currentTime
-            ) {
-
-              const progress =
-                Math.min(
-                  (currentTime -
-                    startTime) /
-                  duration,
-                  1
-                );
-
-
-              const eased =
-                1 -
-                Math.pow(
-                  1 - progress,
-                  4
-                );
-
-
-              current =
-                Math.floor(
-                  eased * target
-                );
-
-
-              element.textContent =
-                current.toLocaleString();
-
-
-              if (
-                progress < 1
-              ) {
-
-                requestAnimationFrame(
-                  animateCounter
-                );
-
-              } else {
-
-                element.textContent =
-                  target.toLocaleString();
-
-              }
-
-            }
-
-
-            requestAnimationFrame(
-              animateCounter
-            );
-
-
-            counterObserver.unobserve(
-              element
-            );
-
-          });
-
-        },
-        {
-          threshold:.7
-        }
-      );
-
-
-    counters.forEach(counter => {
-
-      counterObserver.observe(
-        counter
-      );
-
-    });
-
-  }
-
-
-
-  /* =======================================================
-     HORIZONTAL LINE ANIMATION
-  ======================================================= */
-
-  const lines =
-    document.querySelectorAll(
-      ".gold-line, .label-line"
-    );
-
-
-  if (
-    "IntersectionObserver" in window
-  ) {
-
-    const lineObserver =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (
-              entry.isIntersecting
-            ) {
-
-              entry.target.classList.add(
-                "line-visible"
-              );
-
-              lineObserver.unobserve(
-                entry.target
-              );
-
-            }
-
-          });
-
-        },
-        {
-          threshold:.5
-        }
-      );
-
-
-    lines.forEach(line => {
-
-      lineObserver.observe(
-        line
-      );
-
-    });
-
-  }
-
-
-
-  /* =======================================================
-     MOUSE FOLLOW GLOW
-  ======================================================= */
-
-  const glowSections =
-    document.querySelectorAll(
-      ".collection-section, .worldwide-section"
-    );
-
-
-  if (
-    window.matchMedia("(pointer:fine)").matches
-  ) {
-
-    glowSections.forEach(section => {
-
-      section.addEventListener(
-        "mousemove",
-        event => {
-
-          const rect =
-            section.getBoundingClientRect();
-
-          const x =
-            event.clientX -
-            rect.left;
-
-          const y =
-            event.clientY -
-            rect.top;
-
-
-          section.style.setProperty(
-            "--mouse-x",
-            `${x}px`
-          );
-
-          section.style.setProperty(
-            "--mouse-y",
-            `${y}px`
-          );
-
-        }
-      );
-
-    });
-
-  }
-
-
-
-  /* =======================================================
-     ESCAPE KEY
-  ======================================================= */
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key === "Escape"
-      ) {
-
-        if (navLinks) {
-
-          navLinks.classList.remove(
-            "open"
-          );
-
-        }
-
-        if (menuToggle) {
-
-          menuToggle.classList.remove(
-            "active"
-          );
-
-        }
-
-        body.classList.remove(
-          "no-scroll"
-        );
-
-      }
-
-    }
-  );
-
-
-
-  /* =======================================================
-     PREVENT IMAGE DRAGGING
-  ======================================================= */
+  /* =========================================================
+     21. PHONE NUMBER CLICK TRACKING
+     ========================================================= */
 
   document.querySelectorAll(
-    "img"
-  ).forEach(image => {
+    'a[href^="tel:"]'
+  ).forEach(link => {
 
-    image.setAttribute(
-      "draggable",
-      "false"
+    link.addEventListener("click", () => {
+
+      console.log(
+        "Call initiated:",
+        link.getAttribute("href")
+      );
+
+    });
+
+  });
+
+
+  /* =========================================================
+     22. WHATSAPP LINKS
+     ========================================================= */
+
+  document.querySelectorAll(
+    ".whatsapp-link"
+  ).forEach(link => {
+
+    link.addEventListener("click", e => {
+
+      const number =
+        "918741917946";
+
+      const message =
+        "Hello, I would like to know more about your products and services.";
+
+      const url =
+        `https://wa.me/${number}?text=${encodeURIComponent(
+          message
+        )}`;
+
+      link.href = url;
+
+    });
+
+  });
+
+
+  /* =========================================================
+     23. IMAGE MAGNETIC HOVER
+     ========================================================= */
+
+  const magneticImages =
+    document.querySelectorAll(
+      ".magnetic-image"
     );
 
-    image.addEventListener(
-      "dragstart",
-      event => {
+  magneticImages.forEach(image => {
 
-        event.preventDefault();
+    image.addEventListener("mousemove", e => {
 
+      const rect =
+        image.getBoundingClientRect();
+
+      const x =
+        (e.clientX - rect.left - rect.width / 2) *
+        0.025;
+
+      const y =
+        (e.clientY - rect.top - rect.height / 2) *
+        0.025;
+
+      image.style.transform =
+        `translate(${x}px, ${y}px) scale(1.03)`;
+
+    });
+
+    image.addEventListener("mouseleave", () => {
+
+      image.style.transform =
+        "translate(0,0) scale(1)";
+
+    });
+
+  });
+
+
+  /* =========================================================
+     24. SCROLLING TEXT / MARQUEE PAUSE
+     ========================================================= */
+
+  document.querySelectorAll(
+    ".marquee, .marquee-track"
+  ).forEach(marquee => {
+
+    marquee.addEventListener(
+      "mouseenter",
+      () => {
+        marquee.style.animationPlayState =
+          "paused";
+      }
+    );
+
+    marquee.addEventListener(
+      "mouseleave",
+      () => {
+        marquee.style.animationPlayState =
+          "running";
       }
     );
 
   });
 
 
+  /* =========================================================
+     25. FORM FIELD FOCUS EFFECT
+     ========================================================= */
 
-  /* =======================================================
-     COLLECTION CARD CLICK
-  ======================================================= */
+  document.querySelectorAll(
+    ".form-group input, .form-group textarea, .form-group select"
+  ).forEach(field => {
 
-  cards.forEach(card => {
+    field.addEventListener("focus", () => {
 
-    card.addEventListener(
-      "click",
-      () => {
+      field.parentElement.classList.add(
+        "focused"
+      );
 
-        const link =
-          card.dataset.link;
+    });
 
-        if (link) {
+    field.addEventListener("blur", () => {
 
-          window.location.href =
-            link;
+      if (!field.value.trim()) {
+
+        field.parentElement.classList.remove(
+          "focused"
+        );
+
+      }
+
+    });
+
+  });
+
+
+  /* =========================================================
+     26. SCROLL-BASED HERO FADE
+     ========================================================= */
+
+  const heroContent =
+    document.querySelector(".hero-content");
+
+  if (heroContent) {
+
+    window.addEventListener("scroll", () => {
+
+      const scroll =
+        window.scrollY;
+
+      if (scroll < window.innerHeight) {
+
+        const opacity =
+          Math.max(
+            0,
+            1 - scroll / 650
+          );
+
+        const translate =
+          scroll * 0.12;
+
+        heroContent.style.opacity =
+          opacity;
+
+        heroContent.style.transform =
+          `translateY(${translate}px)`;
+
+      }
+
+    }, { passive: true });
+
+  }
+
+
+  /* =========================================================
+     27. COLLECTION FILTER
+     ========================================================= */
+
+  const filterButtons =
+    document.querySelectorAll(
+      "[data-filter]"
+    );
+
+  const filterItems =
+    document.querySelectorAll(
+      "[data-category]"
+    );
+
+  filterButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const filter =
+        button.getAttribute(
+          "data-filter"
+        );
+
+      filterButtons.forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+      button.classList.add("active");
+
+      filterItems.forEach(item => {
+
+        const category =
+          item.getAttribute(
+            "data-category"
+          );
+
+        if (
+          filter === "all" ||
+          category === filter
+        ) {
+
+          item.style.display = "";
+          
+          requestAnimationFrame(() => {
+            item.classList.remove("hidden");
+            item.classList.add("show");
+          });
+
+        } else {
+
+          item.classList.remove("show");
+          item.classList.add("hidden");
+
+          setTimeout(() => {
+            item.style.display = "none";
+          }, 450);
 
         }
 
-      }
-    );
+      });
+
+    });
 
   });
 
 
+  /* =========================================================
+     28. PREVENT IMAGE DRAG
+     ========================================================= */
 
-  /* =======================================================
-     PAGE VISIBILITY
-  ======================================================= */
+  document.querySelectorAll("img").forEach(img => {
 
-  document.addEventListener(
-    "visibilitychange",
-    () => {
+    img.addEventListener("dragstart", e => {
+      e.preventDefault();
+    });
 
-      if (
-        document.hidden
-      ) {
+  });
 
-        body.classList.add(
-          "page-hidden"
-        );
 
-      } else {
+  /* =========================================================
+     29. ESC KEY — CLOSE MOBILE MENU / FAQ
+     ========================================================= */
 
-        body.classList.remove(
-          "page-hidden"
-        );
+  document.addEventListener("keydown", e => {
+
+    if (e.key === "Escape") {
+
+      if (menuToggle && navLinks) {
+
+        menuToggle.classList.remove("active");
+        navLinks.classList.remove("active");
+        document.body.classList.remove("menu-open");
 
       }
 
+      faqItems.forEach(item => {
+        item.classList.remove("active");
+      });
+
     }
-  );
+
+  });
 
 
+  /* =========================================================
+     30. REDUCED MOTION ACCESSIBILITY
+     ========================================================= */
 
-  /* =======================================================
-     FINAL INITIALIZATION
-  ======================================================= */
+  const prefersReducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-  setTimeout(() => {
+  if (prefersReducedMotion) {
 
-    document.body.classList.add(
-      "js-ready"
+    document.documentElement.classList.add(
+      "reduce-motion"
     );
 
-  }, 100);
+  }
 
+
+  /* =========================================================
+     COMPLETE
+     ========================================================= */
+
+  console.log(
+    "Luxury website interactions initialized."
+  );
 
 });

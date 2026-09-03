@@ -253,24 +253,7 @@ body.cursor-hover .cursor-ring{
     position:relative;
 }
 
-.brand-mark::before{
-    content:"";
-    position:absolute;
-    inset:4px;
-    border:1px solid var(--dark);
-    transform:rotate(45deg);
-}
 
-.brand-mark::after{
-    content:"";
-    position:absolute;
-    width:17px;
-    height:17px;
-    border-left:1px solid var(--gold);
-    border-bottom:1px solid var(--gold);
-    left:14px;
-    top:14px;
-}
 
 .brand-text{
     display:flex;
@@ -361,16 +344,7 @@ body.cursor-hover .cursor-ring{
 .hero-visual{
     position:absolute;
     inset:0;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(250,250,248,.96) 0%,
-            rgba(250,250,248,.82) 38%,
-            rgba(250,250,248,.20) 72%,
-            rgba(250,250,248,.06) 100%
-        ),
-        url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=90")
-        center/cover no-repeat;
+    background:#e8e8e4;
 
     transform:scale(1.08);
     animation:heroZoom 2.5s var(--ease) forwards;
@@ -380,6 +354,29 @@ body.cursor-hover .cursor-ring{
     to{
         transform:scale(1);
     }
+}
+
+.hero-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.hero-video-overlay{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(250,250,248,.96) 0%,
+            rgba(250,250,248,.82) 38%,
+            rgba(250,250,248,.20) 72%,
+            rgba(250,250,248,.06) 100%
+        );
+    pointer-events:none;
 }
 
 .hero-glow{
@@ -720,14 +717,10 @@ section{
     top:0;
     object-fit:cover;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.1),
-            transparent
-        ),
-        url("https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=1500&q=90")
-        center/cover;
+    background-image:url("O1.jpg");
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
 }
 
 .about-image::after{
@@ -747,13 +740,10 @@ section{
     bottom:0;
     width:53%;
     height:280px;
-    background:
-        linear-gradient(
-            rgba(240,240,237,.55),
-            rgba(220,220,216,.85)
-        ),
-        url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=85")
-        center/cover;
+    background-image:url("O2.jpg");
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
     border:12px solid white;
 }
 
@@ -1849,6 +1839,15 @@ footer::before{
 }
 
 @media(max-width:700px){
+
+    .hero-video-overlay{
+        background:
+            linear-gradient(
+                90deg,
+                rgba(250,250,248,.96),
+                rgba(250,250,248,.58)
+            );
+    }
 .footer-top{
     grid-template-columns:1fr;
     gap:38px;
@@ -1877,8 +1876,8 @@ footer::before{
     }
 
     .brand-mark{
-        width:38px;
-        height:38px;
+        width:44px;
+        height:44px;
     }
 
     .brand-name{
@@ -1899,14 +1898,7 @@ footer::before{
     }
 
     .hero-visual{
-        background:
-            linear-gradient(
-                90deg,
-                rgba(250,250,248,.96),
-                rgba(250,250,248,.58)
-            ),
-            url("https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=90")
-            center/cover;
+        background:#e8e8e4;
     }
 
     .hero h1{
@@ -2084,7 +2076,9 @@ footer::before{
 
     <a href="#home" class="brand magnetic">
 
-        <div class="brand-mark"></div>
+        <div class="brand-mark">
+            <img src="LOGO.png" alt="M.R. Moorti Art Logo">
+        </div>
 
         <div class="brand-text">
             <div class="brand-name">M.R. Moorti Art</div>
@@ -2115,7 +2109,12 @@ footer::before{
 
 <section class="hero" id="home">
 
-    <div class="hero-visual" id="heroVisual"></div>
+    <div class="hero-visual" id="heroVisual">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto">
+            <source src="hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay"></div>
+    </div>
 
     <div class="hero-glow"></div>
 

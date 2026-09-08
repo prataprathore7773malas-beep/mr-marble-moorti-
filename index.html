@@ -1,12 +1,71 @@
+<!--
+=========================================================
+M.R. MOORTI ART — ONE-TIME SUPABASE SETUP
+Run this SQL once in Supabase SQL Editor.
+
+create table if not exists public.site_content (
+  content_key text primary key,
+  content_value text not null default '',
+  updated_at timestamptz not null default now()
+);
+
+alter table public.site_content enable row level security;
+
+drop policy if exists "Public can read site content" on public.site_content;
+create policy "Public can read site content"
+on public.site_content for select
+to anon, authenticated
+using (true);
+
+drop policy if exists "Authenticated can insert site content" on public.site_content;
+create policy "Authenticated can insert site content"
+on public.site_content for insert
+to authenticated
+with check (true);
+
+drop policy if exists "Authenticated can update site content" on public.site_content;
+create policy "Authenticated can update site content"
+on public.site_content for update
+to authenticated
+using (true)
+with check (true);
+
+drop policy if exists "Authenticated can delete site content" on public.site_content;
+create policy "Authenticated can delete site content"
+on public.site_content for delete
+to authenticated
+using (true);
+
+insert into storage.buckets (id, name, public)
+values ('site-media', 'site-media', true)
+on conflict (id) do update set public = true;
+
+drop policy if exists "Public can view site media" on storage.objects;
+create policy "Public can view site media"
+on storage.objects for select
+to public
+using (bucket_id = 'site-media');
+
+drop policy if exists "Authenticated can upload site media" on storage.objects;
+create policy "Authenticated can upload site media"
+on storage.objects for insert
+to authenticated
+with check (bucket_id = 'site-media');
+
+-- Then create ONE admin user in:
+-- Supabase Dashboard → Authentication → Users → Add user.
+-- Use that email/password in the #admin login screen.
+=========================================================
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>M.R. Moorti Art | Luxury Marble Art & Craftsmanship</title>
+<title data-cms-title="seo.title">M.R. Moorti Art | Luxury Marble Art & Craftsmanship</title>
 
-<meta name="description"
+<meta name="description" data-cms-meta="seo.description"
 content="M.R. Moorti Art — timeless marble craftsmanship, divine marble murtis, handcrafted art, marble mandirs and bespoke creations from Rajasthan.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2047,7 +2106,239 @@ footer::before{
 
 }
 
+
+/* =========================================================
+   CMS ADMIN PANEL
+========================================================= */
+#cmsAdminLauncher{
+    display:none;
+    position:fixed;
+    right:22px;
+    top:18px;
+    z-index:100001;
+    border:1px solid rgba(255,255,255,.18);
+    background:#111;
+    color:#fff;
+    padding:11px 16px;
+    border-radius:999px;
+    font:600 10px/1 Manrope,sans-serif;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    box-shadow:0 15px 45px rgba(0,0,0,.25);
+    cursor:pointer;
+}
+body.cms-admin #cmsAdminLauncher{display:block}
+#cmsAdminPanel{
+    position:fixed;
+    inset:0;
+    z-index:100000;
+    display:none;
+    background:rgba(10,10,10,.5);
+    backdrop-filter:blur(16px);
+    align-items:stretch;
+    justify-content:flex-end;
+}
+#cmsAdminPanel.open{display:flex}
+.cms-panel{
+    width:min(460px,94vw);
+    height:100%;
+    overflow:auto;
+    background:#f7f7f5;
+    color:#171716;
+    box-shadow:-25px 0 80px rgba(0,0,0,.28);
+    padding:26px;
+}
+.cms-panel-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding-bottom:20px;
+    border-bottom:1px solid #ddd;
+}
+.cms-panel-title{
+    font:500 27px/1 Playfair Display,serif;
+}
+.cms-panel-sub{
+    margin-top:6px;
+    color:#777;
+    font:12px/1.5 Manrope,sans-serif;
+}
+.cms-close,.cms-logout{
+    border:1px solid #ccc;
+    background:white;
+    border-radius:999px;
+    padding:9px 13px;
+    cursor:pointer;
+    font-size:11px;
+}
+.cms-section{
+    margin-top:20px;
+    border-top:1px solid #ddd;
+}
+.cms-section summary{
+    list-style:none;
+    cursor:pointer;
+    padding:17px 0;
+    font:500 16px/1 Manrope,sans-serif;
+}
+.cms-section summary::-webkit-details-marker{display:none}
+.cms-field{
+    margin:0 0 17px;
+}
+.cms-field label{
+    display:block;
+    margin-bottom:7px;
+    color:#666;
+    font:600 9px/1 Manrope,sans-serif;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+}
+.cms-field input,.cms-field textarea,.cms-field select{
+    width:100%;
+    border:1px solid #d7d7d3;
+    border-radius:12px;
+    background:#fff;
+    padding:12px 13px;
+    color:#171716;
+    outline:none;
+    font:13px/1.55 Manrope,sans-serif;
+}
+.cms-field textarea{min-height:100px;resize:vertical}
+.cms-field input:focus,.cms-field textarea:focus{border-color:#a58a60;box-shadow:0 0 0 3px rgba(183,155,104,.1)}
+.cms-actions{
+    position:sticky;
+    bottom:0;
+    margin:22px -26px -26px;
+    padding:16px 26px;
+    background:rgba(247,247,245,.94);
+    backdrop-filter:blur(14px);
+    border-top:1px solid #ddd;
+}
+.cms-save{
+    width:100%;
+    border:0;
+    border-radius:999px;
+    padding:15px 18px;
+    background:#171716;
+    color:#fff;
+    cursor:pointer;
+    font:600 10px/1 Manrope,sans-serif;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+}
+.cms-save:disabled{opacity:.55;cursor:wait}
+.cms-status{
+    text-align:center;
+    min-height:17px;
+    margin-top:10px;
+    color:#777;
+    font:11px/1.4 Manrope,sans-serif;
+}
+#cmsLogin{
+    position:fixed;
+    inset:0;
+    z-index:100002;
+    display:none;
+    place-items:center;
+    background:rgba(8,8,8,.58);
+    backdrop-filter:blur(18px);
+}
+#cmsLogin.open{display:grid}
+.cms-login-card{
+    width:min(410px,92vw);
+    background:#f7f7f5;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 30px 100px rgba(0,0,0,.35);
+}
+.cms-login-card h2{
+    font:500 34px/1 Playfair Display,serif;
+}
+.cms-login-card p{
+    color:#777;
+    font:12px/1.6 Manrope,sans-serif;
+    margin:9px 0 24px;
+}
+.cms-login-card input{
+    width:100%;
+    margin-bottom:12px;
+    border:1px solid #d4d4d0;
+    border-radius:12px;
+    padding:13px;
+    outline:none;
+    background:#fff;
+}
+.cms-login-card button{
+    width:100%;
+    border:0;
+    border-radius:999px;
+    padding:14px;
+    background:#171716;
+    color:white;
+    cursor:pointer;
+    font:600 10px/1 Manrope,sans-serif;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+}
+.cms-login-error{
+    color:#9a3b32;
+    min-height:17px;
+    margin-top:12px;
+    font:11px/1.4 Manrope,sans-serif;
+}
+body.cms-editing [data-cms],
+body.cms-editing [data-cms-image],
+body.cms-editing [data-cms-href]{
+    outline:1px dashed rgba(183,155,104,.75);
+    outline-offset:5px;
+    cursor:pointer!important;
+}
+body.cms-editing [data-cms]:hover,
+body.cms-editing [data-cms-image]:hover,
+body.cms-editing [data-cms-href]:hover{
+    outline:2px solid #b79b68;
+    background:rgba(183,155,104,.08);
+}
+.cms-edit-hint{
+    display:none;
+    position:fixed;
+    left:50%;
+    top:18px;
+    transform:translateX(-50%);
+    z-index:100001;
+    background:#b79b68;
+    color:#fff;
+    padding:9px 14px;
+    border-radius:999px;
+    font:600 9px/1 Manrope,sans-serif;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    pointer-events:none;
+}
+body.cms-editing .cms-edit-hint{display:block}
+.cms-image-preview{
+    width:100%;
+    max-height:150px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-top:8px;
+    border:1px solid #ddd;
+    display:none;
+}
+.cms-login-note{
+    margin-top:14px;
+    color:#888;
+    font:10px/1.5 Manrope,sans-serif;
+}
+@media(max-width:700px){
+    #cmsAdminLauncher{right:12px;top:12px}
+    .cms-panel{padding:20px}
+    .cms-actions{margin:20px -20px -20px;padding:14px 20px}
+}
+
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -2077,12 +2368,12 @@ footer::before{
     <a href="#home" class="brand magnetic">
 
         <div class="brand-mark">
-            <img src="logo.png" alt="M.R. Moorti Art Logo">
+            <img src="logo.png" alt="M.R. Moorti Art Logo" data-cms-image="brand.logo">
         </div>
 
         <div class="brand-text">
-            <div class="brand-name">M.R. Moorti Art</div>
-            <div class="brand-sub">Marble • Art • Heritage</div>
+            <div class="brand-name" data-cms="brand.name">M.R. Moorti Art</div>
+            <div class="brand-sub" data-cms="brand.sub">Marble • Art • Heritage</div>
         </div>
 
     </a>
@@ -2111,7 +2402,7 @@ footer::before{
 
     <div class="hero-visual" id="heroVisual">
         <video class="hero-video" autoplay muted loop playsinline preload="auto">
-            <source src="hero.mp4" type="video/mp4">
+            <source src="hero.mp4" type="video/mp4" data-cms-video="hero.video">
         </video>
         <div class="hero-video-overlay"></div>
     </div>
@@ -2120,16 +2411,16 @@ footer::before{
 
     <div class="hero-content">
 
-        <div class="hero-eyebrow">
+        <div class="hero-eyebrow" data-cms="hero.eyebrow">
             Rajasthan · Since 1992
         </div>
 
-        <h1>
+        <h1 data-cms="hero.title">
             Stone<br>
             <em>with a soul.</em>
         </h1>
 
-        <p class="hero-description">
+        <p class="hero-description" data-cms="hero.description">
             Timeless marble craftsmanship shaped with devotion,
             precision and artistic excellence. Discover divine
             murtis, handcrafted art, marble mandirs and bespoke
@@ -2140,23 +2431,23 @@ footer::before{
 
             <a href="#collection"
                class="btn btn-dark magnetic">
-                <span>Explore Collection</span>
+                <span data-cms="buttons.heroExplore">Explore Collection</span>
             </a>
 
             <a href="#contact"
                class="btn btn-light magnetic">
-                <span>Start A Conversation</span>
+                <span data-cms="buttons.heroConversation">Start A Conversation</span>
             </a>
 
         </div>
 
     </div>
 
-    <div class="hero-side">
+    <div class="hero-side" data-cms="hero.side">
         Crafted in Rajasthan · Delivered Worldwide
     </div>
 
-    <div class="hero-scroll">
+    <div class="hero-scroll" data-cms="hero.scroll">
         <span class="scroll-line"></span>
         Scroll to discover
     </div>
@@ -2173,9 +2464,9 @@ footer::before{
 
         <div class="about-visual reveal-left">
 
-            <div class="about-image"></div>
+            <div class="about-image" data-cms-image="about.image"></div>
 
-            <div class="about-detail"></div>
+            <div class="about-detail" data-cms-image="about.detailImage"></div>
 
             <div class="about-number">01</div>
 
@@ -2183,30 +2474,30 @@ footer::before{
 
         <div class="about-content reveal-right">
 
-            <div class="kicker">
+            <div class="kicker" data-cms="about.kicker">
                 Our Story
             </div>
 
-            <h2 class="section-title">
+            <h2 class="section-title" data-cms="about.title">
                 Where marble<br>
                 becomes <em>art.</em>
             </h2>
 
-            <p class="section-copy">
+            <p class="section-copy" data-cms="about.copy1">
                 M.R. Moorti Art is rooted in the timeless tradition
                 of marble craftsmanship. Every creation reflects
                 patience, precision and the character of the artisan
                 who shaped it.
             </p>
 
-            <p class="section-copy">
+            <p class="section-copy" data-cms="about.copy2">
                 From divine marble murtis and temple artistry to
                 handcrafted pieces and bespoke marble creations,
                 our work is designed to bring beauty, devotion and
                 heritage into meaningful spaces.
             </p>
 
-            <div class="about-quote">
+            <div class="about-quote" data-cms="about.quote">
                 Every piece is more than marble.
                 It is a story carved by hand.
             </div>
@@ -2226,23 +2517,23 @@ footer::before{
     <div class="container trust-grid">
 
         <div class="trust-item reveal">
-            <div class="trust-number">1992</div>
-            <div class="trust-label">Heritage & Experience</div>
+            <div class="trust-number" data-cms="trust.1.number">1992</div>
+            <div class="trust-label" data-cms="trust.1.label">Heritage & Experience</div>
         </div>
 
         <div class="trust-item reveal">
-            <div class="trust-number">15+</div>
-            <div class="trust-label">Signature Pieces</div>
+            <div class="trust-number" data-cms="trust.2.number">15+</div>
+            <div class="trust-label" data-cms="trust.2.label">Signature Pieces</div>
         </div>
 
         <div class="trust-item reveal">
-            <div class="trust-number">∞</div>
-            <div class="trust-label">Custom Possibilities</div>
+            <div class="trust-number" data-cms="trust.3.number">∞</div>
+            <div class="trust-label" data-cms="trust.3.label">Custom Possibilities</div>
         </div>
 
         <div class="trust-item reveal">
-            <div class="trust-number">01</div>
-            <div class="trust-label">Rajasthan Craftsmanship</div>
+            <div class="trust-number" data-cms="trust.4.number">01</div>
+            <div class="trust-label" data-cms="trust.4.label">Rajasthan Craftsmanship</div>
         </div>
 
     </div>
@@ -2261,16 +2552,16 @@ footer::before{
 
             <div class="collection-intro">
 
-                <div class="kicker">
+                <div class="kicker" data-cms="collection.kicker">
                     Signature Collection
                 </div>
 
-                <h2 class="section-title">
+                <h2 class="section-title" data-cms="collection.title">
                     Crafted pieces.<br>
                     <em>Timeless presence.</em>
                 </h2>
 
-                <p class="section-copy">
+                <p class="section-copy" data-cms="collection.copy">
                     Explore selected creations representing the
                     artistic character and craftsmanship of
                     M.R. Moorti Art.
@@ -2278,7 +2569,7 @@ footer::before{
 
             </div>
 
-            <div class="collection-meta">
+            <div class="collection-meta" data-cms="collection.meta">
                 15 Selected Works
             </div>
 
@@ -2290,152 +2581,152 @@ footer::before{
             <div class="collection-track" id="collectionTrack">
 
                 <!-- C1 -->
-                <article class="collection-card">
-                    <img src="c1.jpeg" alt="Marble Art Collection 01">
+                <article class="collection-card" data-cms-card="collection.1">
+                    <img src="c1.jpeg" alt="Marble Art Collection 01" data-cms-image="collection.1.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">01 / 15</div>
-                        <div class="collection-name">Divine Form</div>
-                        <div class="collection-caption">Marble craftsmanship</div>
+                        <div class="collection-index" data-cms="collection.1.index">01 / 15</div>
+                        <div class="collection-name" data-cms="collection.1.name">Divine Form</div>
+                        <div class="collection-caption" data-cms="collection.1.caption">Marble craftsmanship</div>
                     </div>
                 </article>
 
                 <!-- C2 -->
-                <article class="collection-card">
-                    <img src="c2.jpeg" alt="Marble Art Collection 02">
+                <article class="collection-card" data-cms-card="collection.2">
+                    <img src="c2.jpeg" alt="Marble Art Collection 02" data-cms-image="collection.2.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">02 / 15</div>
-                        <div class="collection-name">Sacred Detail</div>
-                        <div class="collection-caption">Handcrafted artistry</div>
+                        <div class="collection-index" data-cms="collection.2.index">02 / 15</div>
+                        <div class="collection-name" data-cms="collection.2.name">Sacred Detail</div>
+                        <div class="collection-caption" data-cms="collection.2.caption">Handcrafted artistry</div>
                     </div>
                 </article>
 
                 <!-- C3 -->
-                <article class="collection-card">
-                    <img src="c3.jpeg" alt="Marble Art Collection 03">
+                <article class="collection-card" data-cms-card="collection.3">
+                    <img src="c3.jpeg" alt="Marble Art Collection 03" data-cms-image="collection.3.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">03 / 15</div>
-                        <div class="collection-name">Pure Craft</div>
-                        <div class="collection-caption">Timeless marble work</div>
+                        <div class="collection-index" data-cms="collection.3.index">03 / 15</div>
+                        <div class="collection-name" data-cms="collection.3.name">Pure Craft</div>
+                        <div class="collection-caption" data-cms="collection.3.caption">Timeless marble work</div>
                     </div>
                 </article>
 
                 <!-- C4 -->
-                <article class="collection-card">
-                    <img src="c4.jpeg" alt="Marble Art Collection 04">
+                <article class="collection-card" data-cms-card="collection.4">
+                    <img src="c4.jpeg" alt="Marble Art Collection 04" data-cms-image="collection.4.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">04 / 15</div>
-                        <div class="collection-name">Heritage Form</div>
-                        <div class="collection-caption">Rajasthan artistry</div>
+                        <div class="collection-index" data-cms="collection.4.index">04 / 15</div>
+                        <div class="collection-name" data-cms="collection.4.name">Heritage Form</div>
+                        <div class="collection-caption" data-cms="collection.4.caption">Rajasthan artistry</div>
                     </div>
                 </article>
 
                 <!-- C5 -->
-                <article class="collection-card">
-                    <img src="c5.jpeg" alt="Marble Art Collection 05">
+                <article class="collection-card" data-cms-card="collection.5">
+                    <img src="c5.jpeg" alt="Marble Art Collection 05" data-cms-image="collection.5.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">05 / 15</div>
-                        <div class="collection-name">Stone Poetry</div>
-                        <div class="collection-caption">Refined craftsmanship</div>
+                        <div class="collection-index" data-cms="collection.5.index">05 / 15</div>
+                        <div class="collection-name" data-cms="collection.5.name">Stone Poetry</div>
+                        <div class="collection-caption" data-cms="collection.5.caption">Refined craftsmanship</div>
                     </div>
                 </article>
 
                 <!-- C6 -->
-                <article class="collection-card">
-                    <img src="c6.jpeg" alt="Marble Art Collection 06">
+                <article class="collection-card" data-cms-card="collection.6">
+                    <img src="c6.jpeg" alt="Marble Art Collection 06" data-cms-image="collection.6.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">06 / 15</div>
-                        <div class="collection-name">Divine Grace</div>
-                        <div class="collection-caption">Hand-finished marble</div>
+                        <div class="collection-index" data-cms="collection.6.index">06 / 15</div>
+                        <div class="collection-name" data-cms="collection.6.name">Divine Grace</div>
+                        <div class="collection-caption" data-cms="collection.6.caption">Hand-finished marble</div>
                     </div>
                 </article>
 
                 <!-- C7 -->
-                <article class="collection-card">
-                    <img src="c7.jpeg" alt="Marble Art Collection 07">
+                <article class="collection-card" data-cms-card="collection.7">
+                    <img src="c7.jpeg" alt="Marble Art Collection 07" data-cms-image="collection.7.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">07 / 15</div>
-                        <div class="collection-name">Sculpted Legacy</div>
-                        <div class="collection-caption">Artisan craftsmanship</div>
+                        <div class="collection-index" data-cms="collection.7.index">07 / 15</div>
+                        <div class="collection-name" data-cms="collection.7.name">Sculpted Legacy</div>
+                        <div class="collection-caption" data-cms="collection.7.caption">Artisan craftsmanship</div>
                     </div>
                 </article>
 
                 <!-- C8 -->
-                <article class="collection-card">
-                    <img src="c8.jpeg" alt="Marble Art Collection 08">
+                <article class="collection-card" data-cms-card="collection.8">
+                    <img src="c8.jpeg" alt="Marble Art Collection 08" data-cms-image="collection.8.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">08 / 15</div>
-                        <div class="collection-name">Marble Soul</div>
-                        <div class="collection-caption">Art with character</div>
+                        <div class="collection-index" data-cms="collection.8.index">08 / 15</div>
+                        <div class="collection-name" data-cms="collection.8.name">Marble Soul</div>
+                        <div class="collection-caption" data-cms="collection.8.caption">Art with character</div>
                     </div>
                 </article>
 
                 <!-- C9 -->
-                <article class="collection-card">
-                    <img src="c9.jpeg" alt="Marble Art Collection 09">
+                <article class="collection-card" data-cms-card="collection.9">
+                    <img src="c9.jpeg" alt="Marble Art Collection 09" data-cms-image="collection.9.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">09 / 15</div>
-                        <div class="collection-name">Sacred Lines</div>
-                        <div class="collection-caption">Detailed marble art</div>
+                        <div class="collection-index" data-cms="collection.9.index">09 / 15</div>
+                        <div class="collection-name" data-cms="collection.9.name">Sacred Lines</div>
+                        <div class="collection-caption" data-cms="collection.9.caption">Detailed marble art</div>
                     </div>
                 </article>
 
                 <!-- C10 -->
-                <article class="collection-card">
-                    <img src="c10.jpeg" alt="Marble Art Collection 10">
+                <article class="collection-card" data-cms-card="collection.10">
+                    <img src="c10.jpeg" alt="Marble Art Collection 10" data-cms-image="collection.10.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">10 / 15</div>
-                        <div class="collection-name">Quiet Grandeur</div>
-                        <div class="collection-caption">Luxury stonework</div>
+                        <div class="collection-index" data-cms="collection.10.index">10 / 15</div>
+                        <div class="collection-name" data-cms="collection.10.name">Quiet Grandeur</div>
+                        <div class="collection-caption" data-cms="collection.10.caption">Luxury stonework</div>
                     </div>
                 </article>
 
                 <!-- C11 -->
-                <article class="collection-card">
-                    <img src="c11.jpeg" alt="Marble Art Collection 11">
+                <article class="collection-card" data-cms-card="collection.11">
+                    <img src="c11.jpeg" alt="Marble Art Collection 11" data-cms-image="collection.11.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">11 / 15</div>
-                        <div class="collection-name">Artisan Spirit</div>
-                        <div class="collection-caption">Made by hand</div>
+                        <div class="collection-index" data-cms="collection.11.index">11 / 15</div>
+                        <div class="collection-name" data-cms="collection.11.name">Artisan Spirit</div>
+                        <div class="collection-caption" data-cms="collection.11.caption">Made by hand</div>
                     </div>
                 </article>
 
                 <!-- C12 -->
-                <article class="collection-card">
-                    <img src="c12.jpeg" alt="Marble Art Collection 12">
+                <article class="collection-card" data-cms-card="collection.12">
+                    <img src="c12.jpeg" alt="Marble Art Collection 12" data-cms-image="collection.12.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">12 / 15</div>
-                        <div class="collection-name">Eternal Beauty</div>
-                        <div class="collection-caption">Natural marble</div>
+                        <div class="collection-index" data-cms="collection.12.index">12 / 15</div>
+                        <div class="collection-name" data-cms="collection.12.name">Eternal Beauty</div>
+                        <div class="collection-caption" data-cms="collection.12.caption">Natural marble</div>
                     </div>
                 </article>
 
                 <!-- C13 -->
-                <article class="collection-card">
-                    <img src="c13.jpeg" alt="Marble Art Collection 13">
+                <article class="collection-card" data-cms-card="collection.13">
+                    <img src="c13.jpeg" alt="Marble Art Collection 13" data-cms-image="collection.13.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">13 / 15</div>
-                        <div class="collection-name">Sacred Art</div>
-                        <div class="collection-caption">Traditional influence</div>
+                        <div class="collection-index" data-cms="collection.13.index">13 / 15</div>
+                        <div class="collection-name" data-cms="collection.13.name">Sacred Art</div>
+                        <div class="collection-caption" data-cms="collection.13.caption">Traditional influence</div>
                     </div>
                 </article>
 
                 <!-- C14 -->
-                <article class="collection-card">
-                    <img src="c14.jpeg" alt="Marble Art Collection 14">
+                <article class="collection-card" data-cms-card="collection.14">
+                    <img src="c14.jpeg" alt="Marble Art Collection 14" data-cms-image="collection.14.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">14 / 15</div>
-                        <div class="collection-name">Timeless Stone</div>
-                        <div class="collection-caption">Refined details</div>
+                        <div class="collection-index" data-cms="collection.14.index">14 / 15</div>
+                        <div class="collection-name" data-cms="collection.14.name">Timeless Stone</div>
+                        <div class="collection-caption" data-cms="collection.14.caption">Refined details</div>
                     </div>
                 </article>
 
                 <!-- C15 -->
-                <article class="collection-card">
-                    <img src="c15.jpeg" alt="Marble Art Collection 15">
+                <article class="collection-card" data-cms-card="collection.15">
+                    <img src="c15.jpeg" alt="Marble Art Collection 15" data-cms-image="collection.15.image">
                     <div class="collection-overlay">
-                        <div class="collection-index">15 / 15</div>
-                        <div class="collection-name">The Masterpiece</div>
-                        <div class="collection-caption">Signature craftsmanship</div>
+                        <div class="collection-index" data-cms="collection.15.index">15 / 15</div>
+                        <div class="collection-name" data-cms="collection.15.name">The Masterpiece</div>
+                        <div class="collection-caption" data-cms="collection.15.caption">Signature craftsmanship</div>
                     </div>
                 </article>
 
@@ -2471,22 +2762,22 @@ footer::before{
      CRAFT
 ====================================================== -->
 
-<section class="craft section-pad" id="craft">
+<section class="craft section-pad" id="craft" data-cms-bg="craft.background">
 
     <div class="container">
 
         <div class="craft-content reveal">
 
-            <div class="kicker">
+            <div class="kicker" data-cms="craft.kicker">
                 The Art Of Craft
             </div>
 
-            <h2 class="craft-title">
+            <h2 class="craft-title" data-cms="craft.title">
                 Not just marble.<br>
                 <em>A legacy in stone.</em>
             </h2>
 
-            <p class="craft-copy">
+            <p class="craft-copy" data-cms="craft.copy">
                 Every curve, expression, ornament and detail is
                 patiently refined. Natural stone is transformed
                 into artwork through a balance of traditional
@@ -2497,7 +2788,7 @@ footer::before{
 
                 <a href="#contact"
                    class="btn btn-dark magnetic">
-                    <span>Discuss Your Requirement</span>
+                    <span data-cms="buttons.craft">Discuss Your Requirement</span>
                 </a>
 
             </div>
@@ -2534,7 +2825,7 @@ footer::before{
             <div class="service reveal">
                 <div class="service-no">01</div>
 
-                <h3>Marble Murti</h3>
+                <h3 data-cms="services.1.name">Marble Murti</h3>
 
                 <p>
                     Traditional and custom marble murtis crafted
@@ -2548,7 +2839,7 @@ footer::before{
             <div class="service reveal">
                 <div class="service-no">02</div>
 
-                <h3>Marble Mandir</h3>
+                <h3 data-cms="services.2.name">Marble Mandir</h3>
 
                 <p>
                     Elegant marble temple designs created for
@@ -2561,7 +2852,7 @@ footer::before{
             <div class="service reveal">
                 <div class="service-no">03</div>
 
-                <h3>Handicrafts</h3>
+                <h3 data-cms="services.3.name">Handicrafts</h3>
 
                 <p>
                     Unique handcrafted marble pieces bringing
@@ -2575,7 +2866,7 @@ footer::before{
             <div class="service reveal">
                 <div class="service-no">04</div>
 
-                <h3>Custom Art</h3>
+                <h3 data-cms="services.4.name">Custom Art</h3>
 
                 <p>
                     Bespoke marble creations developed around
@@ -2589,7 +2880,7 @@ footer::before{
             <div class="service reveal">
                 <div class="service-no">05</div>
 
-                <h3>Paintings</h3>
+                <h3 data-cms="services.5.name">Paintings</h3>
 
                 <p>
                     Artistic works selected and created to
@@ -2616,16 +2907,16 @@ footer::before{
 
         <div class="reveal">
 
-            <div class="kicker">
+            <div class="kicker" data-cms="process.kicker">
                 Our Approach
             </div>
 
-            <h2 class="section-title">
+            <h2 class="section-title" data-cms="process.title">
                 From vision<br>
                 to <em>creation.</em>
             </h2>
 
-            <p class="section-copy">
+            <p class="section-copy" data-cms="process.copy">
                 Every custom requirement follows a thoughtful
                 process designed around detail, craftsmanship
                 and the final space.
@@ -2638,7 +2929,7 @@ footer::before{
             <div class="process-card reveal">
                 <div class="process-number">01</div>
 
-                <h3>Understand</h3>
+                <h3 data-cms="process.1.name">Understand</h3>
 
                 <p>
                     We begin by understanding your requirement,
@@ -2650,7 +2941,7 @@ footer::before{
             <div class="process-card reveal">
                 <div class="process-number">02</div>
 
-                <h3>Create</h3>
+                <h3 data-cms="process.2.name">Create</h3>
 
                 <p>
                     The concept is translated into carefully
@@ -2662,7 +2953,7 @@ footer::before{
             <div class="process-card reveal">
                 <div class="process-number">03</div>
 
-                <h3>Deliver</h3>
+                <h3 data-cms="process.3.name">Deliver</h3>
 
                 <p>
                     The completed creation is prepared with
@@ -2681,22 +2972,22 @@ footer::before{
      WORLDWIDE
 ====================================================== -->
 
-<section class="worldwide section-pad">
+<section class="worldwide section-pad" data-cms-bg="worldwide.background">
 
     <div class="container">
 
         <div class="worldwide-content reveal">
 
-            <div class="kicker">
+            <div class="kicker" data-cms="worldwide.kicker">
                 Rajasthan · To The World
             </div>
 
-            <h2 class="worldwide-title">
+            <h2 class="worldwide-title" data-cms="worldwide.title">
                 Rajasthan's art.<br>
                 <em>Beyond borders.</em>
             </h2>
 
-            <p class="section-copy">
+            <p class="section-copy" data-cms="worldwide.copy">
                 Bringing the beauty of Indian marble craftsmanship
                 beyond Rajasthan to homes, temples, collectors
                 and meaningful spaces around the world.
@@ -2719,17 +3010,17 @@ footer::before{
         <div class="testimonial-head reveal">
 
             <div>
-                <div class="kicker">
+                <div class="kicker" data-cms="reviews.kicker">
                     Client Experience
                 </div>
 
-                <h2 class="section-title">
+                <h2 class="section-title" data-cms="reviews.title">
                     Words from<br>
                     <em>our clients.</em>
                 </h2>
             </div>
 
-            <p class="review-note">
+            <p class="review-note" data-cms="reviews.note">
                 Genuine client feedback can be added here as
                 your verified reviews are collected.
             </p>
@@ -2748,7 +3039,7 @@ footer::before{
                 </div>
 
                 <div class="review-author">
-                    Client Review · Jaipur
+                    <span data-cms="reviews.1.author">Client Review · Jaipur</span>
                 </div>
 
             </article>
@@ -2763,7 +3054,7 @@ footer::before{
                 </div>
 
                 <div class="review-author">
-                    Client Review · Rajasthan
+                    <span data-cms="reviews.2.author">Client Review · Rajasthan</span>
                 </div>
 
             </article>
@@ -2778,7 +3069,7 @@ footer::before{
                 </div>
 
                 <div class="review-author">
-                    Client Review · India
+                    <span data-cms="reviews.3.author">Client Review · India</span>
                 </div>
 
             </article>
@@ -2799,16 +3090,16 @@ footer::before{
 
         <div class="reveal-left">
 
-            <div class="kicker">
+            <div class="kicker" data-cms="faq.kicker">
                 Frequently Asked
             </div>
 
-            <h2 class="section-title">
+            <h2 class="section-title" data-cms="faq.title">
                 Questions,<br>
                 <em>answered.</em>
             </h2>
 
-            <p class="section-copy">
+            <p class="section-copy" data-cms="faq.copy">
                 Have a specific requirement? Send us your
                 details and our team can discuss the possibilities
                 with you directly.
@@ -2821,7 +3112,7 @@ footer::before{
             <div class="faq-item">
 
                 <button class="faq-question">
-                    <span>Do you create custom marble art?</span>
+                    <span data-cms="faq.1.question">Do you create custom marble art?</span>
                     <span class="faq-icon">+</span>
                 </button>
 
@@ -2838,7 +3129,7 @@ footer::before{
             <div class="faq-item">
 
                 <button class="faq-question">
-                    <span>Do you create marble mandirs?</span>
+                    <span data-cms="faq.2.question">Do you create marble mandirs?</span>
                     <span class="faq-icon">+</span>
                 </button>
 
@@ -2855,7 +3146,7 @@ footer::before{
             <div class="faq-item">
 
                 <button class="faq-question">
-                    <span>Can I enquire about a particular piece?</span>
+                    <span data-cms="faq.3.question">Can I enquire about a particular piece?</span>
                     <span class="faq-icon">+</span>
                 </button>
 
@@ -2872,7 +3163,7 @@ footer::before{
             <div class="faq-item">
 
                 <button class="faq-question">
-                    <span>Do you provide delivery outside Rajasthan?</span>
+                    <span data-cms="faq.4.question">Do you provide delivery outside Rajasthan?</span>
                     <span class="faq-icon">+</span>
                 </button>
 
@@ -2889,7 +3180,7 @@ footer::before{
             <div class="faq-item">
 
                 <button class="faq-question">
-                    <span>How can I request a quotation?</span>
+                    <span data-cms="faq.5.question">How can I request a quotation?</span>
                     <span class="faq-icon">+</span>
                 </button>
 
@@ -2919,16 +3210,16 @@ footer::before{
 
         <div class="reveal-left">
 
-            <div class="kicker">
+            <div class="kicker" data-cms="contact.kicker">
                 Start A Conversation
             </div>
 
-            <h2 class="contact-title">
+            <h2 class="contact-title" data-cms="contact.title">
                 Have a vision?<br>
                 <em>Let's create it.</em>
             </h2>
 
-            <p class="contact-copy">
+            <p class="contact-copy" data-cms="contact.copy">
                 Tell us what you're looking for. Whether it is
                 a marble murti, mandir, handcrafted piece or
                 custom artwork, send us your requirement.
@@ -3000,7 +3291,7 @@ footer::before{
                 type="submit"
                 class="btn btn-dark form-submit magnetic">
 
-                <span>Send Enquiry →</span>
+                <span data-cms="buttons.submit">Send Enquiry →</span>
 
             </button>
 
@@ -3025,12 +3316,12 @@ footer::before{
         <!-- BRAND -->
         <div class="footer-brand-wrap">
 
-            <div class="footer-brand">
+            <div class="footer-brand" data-cms="footer.brand">
                 M.R. Moorti Art
-                <span>Marble · Art · Craftsmanship</span>
+                <span data-cms="footer.brandSub">Marble · Art · Craftsmanship</span>
             </div>
 
-            <div class="footer-tagline">
+            <div class="footer-tagline" data-cms="footer.tagline">
                 Made with devotion.<br>
                 Built to last.
             </div>
@@ -3041,7 +3332,7 @@ footer::before{
         <!-- CONTACT -->
         <div>
 
-            <div class="footer-heading">
+            <div class="footer-heading" data-cms="footer.contactHeading">
                 Contact
             </div>
 
@@ -3049,7 +3340,7 @@ footer::before{
 
                 <!-- PHONE -->
                 <a
-                    href="tel:+918741917946"
+                    href="tel:+918741917946" data-cms-href="contact.phoneHref"
                     class="footer-contact-item magnetic"
                 >
 
@@ -3072,7 +3363,7 @@ footer::before{
 
                     </span>
 
-                    <span>
+                    <span data-cms="contact.phoneText">
                         +91 87419 17946 , +91 7976186788
                     </span>
 
@@ -3081,7 +3372,7 @@ footer::before{
 
                 <!-- WHATSAPP -->
                 <a
-                    href="https://wa.me/918741917946"
+                    href="https://wa.me/918741917946" data-cms-href="contact.whatsappHref"
                     target="_blank"
                     rel="noopener"
                     class="footer-contact-item magnetic"
@@ -3122,7 +3413,7 @@ footer::before{
 
                     </span>
 
-                    <span>
+                    <span data-cms="contact.whatsappText">
                         WhatsApp · +91 87419 17946
                     </span>
 
@@ -3131,7 +3422,7 @@ footer::before{
 
                 <!-- EMAIL -->
                 <a
-                    href="mailto:umsharma1993@gmail.com"
+                    href="mailto:umsharma1993@gmail.com" data-cms-href="contact.emailHref"
                     class="footer-contact-item magnetic"
                 >
 
@@ -3150,7 +3441,7 @@ footer::before{
 
                     </span>
 
-                    <span>
+                    <span data-cms="contact.email">
                         umsharma1993@gmail.com
                     </span>
 
@@ -3190,7 +3481,7 @@ footer::before{
 
                 <!-- INSTAGRAM -->
                 <a
-                    href="https://www.instagram.com/mr_marble_art?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
+                    href="https://www.instagram.com/mr_marble_art?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" data-cms-href="contact.instagramHref"
                     target="_blank"
                     rel="noopener"
                     class="social magnetic"
@@ -3229,7 +3520,7 @@ footer::before{
 
                 <!-- WHATSAPP -->
                 <a
-                    href="https://wa.me/918741917946"
+                    href="https://wa.me/918741917946" data-cms-href="contact.whatsappHref"
                     target="_blank"
                     rel="noopener"
                     class="social magnetic"
@@ -3273,7 +3564,7 @@ footer::before{
 
                 <!-- EMAIL -->
                 <a
-                    href="mailto:umsharma1993@gmail.com"
+                    href="mailto:umsharma1993@gmail.com" data-cms-href="contact.emailHref"
                     class="social magnetic"
                     aria-label="Email"
                 >
@@ -3338,7 +3629,7 @@ footer::before{
     <!-- CALL -->
 
     <a
-        href="tel:+918741917946"
+        href="tel:+918741917946" data-cms-href="contact.phoneHref"
         class="float-btn call magnetic"
         aria-label="Call M.R. Moorti Art"
     >
@@ -3375,7 +3666,7 @@ footer::before{
     <!-- WHATSAPP -->
 
     <a
-        href="https://wa.me/918741917946"
+        href="https://wa.me/918741917946" data-cms-href="contact.whatsappHref"
         target="_blank"
         rel="noopener"
         class="float-btn whatsapp magnetic"
@@ -3431,6 +3722,403 @@ footer::before{
 ====================================================== -->
 
 <script>
+
+
+/* =========================================================
+   M.R. MOORTI ART — SUPABASE CMS
+   IMPORTANT:
+   1) Use only the Supabase publishable/anon key in this file.
+   2) Never put the service_role key in frontend code.
+   3) Run the SQL setup supplied with this build once in Supabase.
+========================================================= */
+
+const CMS_CONFIG = {
+    SUPABASE_URL: "https://hddclcsbewaobnenopre.supabase.co",
+    SUPABASE_KEY: "sb_publishable_yEaomqiLNt-iaMt75q0kYg_ptYJzVQc",
+    TABLE: "site_content"
+};
+
+const cmsSupabase = window.supabase.createClient(
+    CMS_CONFIG.SUPABASE_URL,
+    CMS_CONFIG.SUPABASE_KEY
+);
+
+const CMS_EDITABLE = [
+    ["brand.name","Brand Name","text"],["brand.sub","Brand Subtitle","text"],["brand.logo","Logo Image","image"],
+    ["seo.title","SEO Title","text"],["seo.description","SEO Description","textarea"],["hero.video","Hero Video","video"],["hero.eyebrow","Hero Eyebrow","text"],["hero.title","Hero Title (HTML allowed)","textarea"],
+    ["hero.description","Hero Description","textarea"],["hero.side","Hero Side Text","text"],["hero.scroll","Hero Scroll Text","text"],
+    ["about.kicker","About Kicker","text"],["about.title","About Title (HTML allowed)","textarea"],
+    ["about.copy1","About Paragraph 1","textarea"],["about.copy2","About Paragraph 2","textarea"],["about.quote","About Quote","textarea"],
+    ["trust.1.number","Trust 1 Number","text"],["trust.1.label","Trust 1 Label","text"],
+    ["trust.2.number","Trust 2 Number","text"],["trust.2.label","Trust 2 Label","text"],
+    ["trust.3.number","Trust 3 Number","text"],["trust.3.label","Trust 3 Label","text"],
+    ["trust.4.number","Trust 4 Number","text"],["trust.4.label","Trust 4 Label","text"],
+    ["collection.kicker","Collection Kicker","text"],["collection.title","Collection Title (HTML allowed)","textarea"],
+    ["collection.copy","Collection Description","textarea"],["collection.meta","Collection Meta","text"],
+    ["craft.background","Craft Background","image"],["craft.kicker","Craft Kicker","text"],["craft.title","Craft Title (HTML allowed)","textarea"],["craft.copy","Craft Description","textarea"],
+    ["services.kicker","Services Kicker","text"],["services.title","Services Title (HTML allowed)","textarea"],
+    ["process.kicker","Process Kicker","text"],["process.title","Process Title (HTML allowed)","textarea"],["process.copy","Process Description","textarea"],
+    ["worldwide.background","Worldwide Background","image"],["worldwide.kicker","Worldwide Kicker","text"],["worldwide.title","Worldwide Title (HTML allowed)","textarea"],["worldwide.copy","Worldwide Description","textarea"],
+    ["reviews.kicker","Reviews Kicker","text"],["reviews.title","Reviews Title (HTML allowed)","textarea"],["reviews.note","Reviews Note","textarea"],
+    ["faq.kicker","FAQ Kicker","text"],["faq.title","FAQ Title (HTML allowed)","textarea"],["faq.copy","FAQ Intro","textarea"],
+    ["contact.kicker","Contact Kicker","text"],["contact.title","Contact Title (HTML allowed)","textarea"],["contact.copy","Contact Description","textarea"],
+    ["contact.phoneText","Phone Text","text"],["contact.whatsappText","WhatsApp Text","text"],["contact.email","Email","text"],["contact.address","Address (HTML allowed)","textarea"],
+    ["footer.brand","Footer Brand","text"],["footer.brandSub","Footer Brand Subtitle","text"],["buttons.heroExplore","Hero Explore Button","text"],["buttons.heroConversation","Hero Conversation Button","text"],["buttons.craft","Craft Button","text"],["buttons.submit","Submit Button","text"],["buttons.floatEnquiry","Floating Enquiry Button","text"],["footer.tagline","Footer Tagline","textarea"],
+];
+
+for(let i=1;i<=15;i++){
+    CMS_EDITABLE.push(
+        [`collection.${i}.index`,`Collection ${i} Index`,"text"],
+        [`collection.${i}.name`,`Collection ${i} Name`,"text"],
+        [`collection.${i}.caption`,`Collection ${i} Caption`,"text"],
+        [`collection.${i}.image`,`Collection ${i} Image URL`,"image"]
+    );
+}
+for(let i=1;i<=5;i++){
+    CMS_EDITABLE.push([`services.${i}.name`,`Service ${i} Name`,"text"],[`services.${i}.description`,`Service ${i} Description`,"textarea"]);
+}
+for(let i=1;i<=3;i++){
+    CMS_EDITABLE.push([`process.${i}.name`,`Process ${i} Name`,"text"],[`process.${i}.description`,`Process ${i} Description`,"textarea"]);
+    CMS_EDITABLE.push([`reviews.${i}.text`,`Review ${i} Text`,"textarea"],[`reviews.${i}.author`,`Review ${i} Author`,"text"]);
+}
+for(let i=1;i<=5;i++){
+    CMS_EDITABLE.push([`faq.${i}.question`,`FAQ ${i} Question`,"text"],[`faq.${i}.answer`,`FAQ ${i} Answer`,"textarea"]);
+}
+CMS_EDITABLE.push(
+    ["about.image","About Main Image URL","image"],
+    ["about.detailImage","About Detail Image URL","image"],
+    ["contact.phoneHref","Phone Link","href"],
+    ["contact.whatsappHref","WhatsApp Link","href"],
+    ["contact.emailHref","Email Link","href"],
+    ["contact.instagramHref","Instagram Link","href"]
+);
+
+const cmsDefaultValues = {};
+const cmsByKey = new Map(CMS_EDITABLE.map(x=>[x[0],x]));
+
+function cmsElement(key){
+    return document.querySelector(`[data-cms="${CSS.escape(key)}"]`);
+}
+function cmsBgElement(key){
+    return document.querySelector(`[data-cms-bg="${CSS.escape(key)}"]`);
+}
+function cmsVideoElement(key){
+    return document.querySelector(`[data-cms-video="${CSS.escape(key)}"]`);
+}
+function cmsImageElement(key){
+    return document.querySelector(`[data-cms-image="${CSS.escape(key)}"]`);
+}
+function cmsHrefElements(key){
+    return document.querySelectorAll(`[data-cms-href="${CSS.escape(key)}"]`);
+}
+
+function cmsGetValue(key,type){
+    if(type==="image"){
+        const el=cmsImageElement(key);
+        if(el){
+            if(el.tagName==="IMG") return el.getAttribute("src")||"";
+            const m=(el.style.backgroundImage||"").match(/url\\(["']?(.*?)["']?\\)/);
+            if(m) return m[1];
+            const cs=getComputedStyle(el).backgroundImage;
+            const cm=cs.match(/url\\(["']?(.*?)["']?\\)/);
+            return cm ? cm[1] : "";
+        }
+        const bg=cmsBgElement(key);
+        if(bg){
+            const cs=bg.style.backgroundImage || getComputedStyle(bg).backgroundImage;
+            const cm=cs.match(/url\\(["']?(.*?)["']?\\)/);
+            return cm ? cm[1] : "";
+        }
+        return "";
+    }
+    if(type==="video"){
+        const el=cmsVideoElement(key);
+        return el ? (el.getAttribute("src")||"") : "";
+    }
+    if(type==="href"){
+        const el=document.querySelector(`[data-cms-href="${CSS.escape(key)}"]`);
+        return el ? (el.getAttribute("href")||"") : "";
+    }
+    const el=cmsElement(key);
+    return el ? el.innerHTML.trim() : "";
+}
+
+function cmsApply(key,value,type){
+    if(type==="image"){
+        const el=cmsImageElement(key);
+        if(el){
+            if(el.tagName==="IMG"){
+                el.src=value;
+            }else{
+                el.style.backgroundImage=value ? `url("${value}")` : "";
+            }
+            return;
+        }
+        const bg=cmsBgElement(key);
+        if(bg){
+            const current=getComputedStyle(bg).backgroundImage;
+            const replacement=current.replace(/url\\(["']?.*?["']?\\)/, value ? `url("${value}")` : "none");
+            bg.style.backgroundImage=value ? replacement : "none";
+        }
+        return;
+    }
+    if(type==="video"){
+        const el=cmsVideoElement(key);
+        if(el){
+            el.src=value;
+            const video=el.closest("video");
+            if(video){
+                video.load();
+                video.play().catch(()=>{});
+            }
+        }
+        return;
+    }
+    if(type==="href"){
+        cmsHrefElements(key).forEach(el=>{
+            el.setAttribute("href",value);
+        });
+        return;
+    }
+    if(key==="seo.title"){
+        document.title=value;
+        return;
+    }
+    if(key==="seo.description"){
+        const meta=document.querySelector('meta[data-cms-meta="seo.description"]');
+        if(meta) meta.setAttribute("content",value);
+        return;
+    }
+    const el=cmsElement(key);
+    if(el) el.innerHTML=value;
+}
+
+function cmsSnapshotDefaults(){
+    CMS_EDITABLE.forEach(([key,,type])=>{
+        cmsDefaultValues[key]=cmsGetValue(key,type);
+    });
+}
+
+async function cmsLoad(){
+    const {data,error}=await cmsSupabase
+        .from(CMS_CONFIG.TABLE)
+        .select("content_key,content_value")
+        .order("content_key");
+    if(error){
+        console.warn("CMS load:",error.message);
+        return;
+    }
+    (data||[]).forEach(row=>{
+        const meta=cmsByKey.get(row.content_key);
+        if(meta) cmsApply(row.content_key,row.content_value ?? "",meta[2]);
+    });
+}
+
+function cmsBuildFields(){
+    const host=document.getElementById("cmsFields");
+    host.innerHTML="";
+    const groups=[
+        ["SEO",CMS_EDITABLE.filter(x=>x[0].startsWith("seo."))],
+        ["Brand",CMS_EDITABLE.filter(x=>x[0].startsWith("brand."))],
+        ["Hero",CMS_EDITABLE.filter(x=>x[0].startsWith("hero."))],
+        ["About",CMS_EDITABLE.filter(x=>x[0].startsWith("about."))],
+        ["Trust",CMS_EDITABLE.filter(x=>x[0].startsWith("trust."))],
+        ["Collection",CMS_EDITABLE.filter(x=>x[0].startsWith("collection."))],
+        ["Craft",CMS_EDITABLE.filter(x=>x[0].startsWith("craft."))],
+        ["Services",CMS_EDITABLE.filter(x=>x[0].startsWith("services."))],
+        ["Process",CMS_EDITABLE.filter(x=>x[0].startsWith("process."))],
+        ["Worldwide",CMS_EDITABLE.filter(x=>x[0].startsWith("worldwide."))],
+        ["Reviews",CMS_EDITABLE.filter(x=>x[0].startsWith("reviews."))],
+        ["FAQ",CMS_EDITABLE.filter(x=>x[0].startsWith("faq."))],
+        ["Contact & Footer",CMS_EDITABLE.filter(x=>x[0].startsWith("contact.")||x[0].startsWith("footer."))]
+    ];
+    groups.forEach(([title,fields],gi)=>{
+        const details=document.createElement("details");
+        details.className="cms-section";
+        details.open=gi<3;
+        const summary=document.createElement("summary");
+        summary.textContent=title;
+        details.appendChild(summary);
+        fields.forEach(([key,label,type])=>{
+            const wrap=document.createElement("div");
+            wrap.className="cms-field";
+            const lab=document.createElement("label");
+            lab.textContent=label;
+            wrap.appendChild(lab);
+            let input;
+            if(type==="textarea"){
+                input=document.createElement("textarea");
+            }else{
+                input=document.createElement("input");
+                input.type=(type==="image"||type==="video"||type==="href") ? "url" : "text";
+            }
+            input.dataset.cmsInput=key;
+            input.value=cmsGetValue(key,type);
+            input.placeholder=type==="image" ? "Paste image URL or upload below" : (type==="video" ? "Paste MP4 video URL or upload below" : "");
+            wrap.appendChild(input);
+            if(type==="image" || type==="video"){
+                const file=document.createElement("input");
+                file.type="file";
+                file.accept=type==="video" ? "video/mp4,video/webm" : "image/*";
+                file.style.marginTop="7px";
+                file.dataset.cmsFile=key;
+                wrap.appendChild(file);
+            }
+            if(type==="image"){
+                const preview=document.createElement("img");
+                preview.className="cms-image-preview";
+                preview.dataset.cmsPreview=key;
+                if(input.value){preview.src=input.value;preview.style.display="block";}
+                input.addEventListener("input",()=>{
+                    preview.src=input.value;
+                    preview.style.display=input.value?"block":"none";
+                });
+                wrap.appendChild(preview);
+            }
+            details.appendChild(wrap);
+        });
+        host.appendChild(details);
+    });
+}
+
+function cmsOpenPanel(){
+    document.getElementById("cmsAdminPanel").classList.add("open");
+    document.getElementById("cmsAdminPanel").setAttribute("aria-hidden","false");
+    document.body.classList.add("cms-editing","cms-admin");
+    cmsBuildFields();
+}
+function cmsClosePanel(){
+    document.getElementById("cmsAdminPanel").classList.remove("open");
+    document.getElementById("cmsAdminPanel").setAttribute("aria-hidden","true");
+    document.body.classList.remove("cms-editing");
+}
+function cmsOpenLogin(){
+    document.getElementById("cmsLogin").classList.add("open");
+    document.getElementById("cmsLogin").setAttribute("aria-hidden","false");
+}
+function cmsCloseLogin(){
+    document.getElementById("cmsLogin").classList.remove("open");
+    document.getElementById("cmsLogin").setAttribute("aria-hidden","true");
+}
+async function cmsRequireAuth(){
+    const {data}=await cmsSupabase.auth.getSession();
+    if(data.session){
+        cmsOpenPanel();
+    }else{
+        cmsOpenLogin();
+    }
+}
+
+document.getElementById("cmsAdminLauncher").addEventListener("click",cmsRequireAuth);
+document.getElementById("cmsClose").addEventListener("click",cmsClosePanel);
+
+document.getElementById("cmsLogout").addEventListener("click",async()=>{
+    await cmsSupabase.auth.signOut();
+    cmsClosePanel();
+    location.hash="";
+});
+
+document.getElementById("cmsLoginForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const email=document.getElementById("cmsEmail").value.trim();
+    const password=document.getElementById("cmsPassword").value;
+    const err=document.getElementById("cmsLoginError");
+    err.textContent="Signing in…";
+    const {error}=await cmsSupabase.auth.signInWithPassword({email,password});
+    if(error){
+        err.textContent=error.message;
+        return;
+    }
+    err.textContent="";
+    cmsCloseLogin();
+    cmsOpenPanel();
+});
+
+
+async function cmsUploadFile(file,key){
+    const ext=(file.name.split(".").pop()||"bin").toLowerCase().replace(/[^a-z0-9]/g,"");
+    const safeKey=key.replace(/[^a-z0-9._-]/gi,"-");
+    const path=`${safeKey}-${Date.now()}.${ext}`;
+    const {error}=await cmsSupabase.storage.from("site-media").upload(path,file,{upsert:false,contentType:file.type});
+    if(error) throw error;
+    const {data}=cmsSupabase.storage.from("site-media").getPublicUrl(path);
+    return data.publicUrl;
+}
+
+document.getElementById("cmsSave").addEventListener("click",async()=>{
+    const btn=document.getElementById("cmsSave");
+    const status=document.getElementById("cmsStatus");
+    btn.disabled=true;
+    status.textContent="Preparing changes…";
+    try{
+        const rows=[];
+        for(const input of document.querySelectorAll("[data-cms-input]")){
+            const key=input.dataset.cmsInput;
+            const meta=cmsByKey.get(key);
+            if(!meta) continue;
+            let value=input.value;
+            const fileInput=document.querySelector(`[data-cms-file="${CSS.escape(key)}"]`);
+            if(fileInput && fileInput.files && fileInput.files[0]){
+                status.textContent=`Uploading ${key}…`;
+                value=await cmsUploadFile(fileInput.files[0],key);
+                input.value=value;
+            }
+            cmsApply(key,value,meta[2]);
+            rows.push({content_key:key,content_value:value,updated_at:new Date().toISOString()});
+        }
+        status.textContent="Saving to database…";
+        const {error}=await cmsSupabase.from(CMS_CONFIG.TABLE).upsert(rows,{onConflict:"content_key"});
+        if(error) throw error;
+        status.textContent="Saved. Live website updated.";
+        document.querySelectorAll("[data-cms-file]").forEach(x=>x.value="");
+        setTimeout(()=>status.textContent="",2600);
+    }catch(error){
+        console.error(error);
+        status.textContent="Save failed: "+error.message;
+    }finally{
+        btn.disabled=false;
+    }
+});
+
+document.addEventListener("click",e=>{
+    if(!document.body.classList.contains("cms-editing")) return;
+    const el=e.target.closest("[data-cms],[data-cms-image],[data-cms-href]");
+    if(!el || el.closest("#cmsAdminPanel") || el.id==="cmsAdminLauncher") return;
+    e.preventDefault();
+    e.stopPropagation();
+    const key=el.dataset.cms||el.dataset.cmsImage||el.dataset.cmsHref;
+    const meta=cmsByKey.get(key);
+    if(!meta) return;
+    cmsOpenPanel();
+    const input=document.querySelector(`[data-cms-input="${CSS.escape(key)}"]`);
+    if(input){
+        const details=input.closest("details");
+        if(details) details.open=true;
+        input.focus();
+        input.scrollIntoView({behavior:"smooth",block:"center"});
+    }
+},true);
+
+window.addEventListener("hashchange",()=>{
+    if(location.hash.toLowerCase()==="#admin"){
+        document.body.classList.add("cms-admin");
+        cmsRequireAuth();
+    }else{
+        cmsClosePanel();
+        cmsCloseLogin();
+        document.body.classList.remove("cms-admin");
+    }
+});
+
+window.addEventListener("load",async()=>{
+    cmsSnapshotDefaults();
+    await cmsLoad();
+    if(location.hash.toLowerCase()==="#admin"){
+        document.body.classList.add("cms-admin");
+        await cmsRequireAuth();
+    }
+});
+
 
 /* =========================================================
    PRELOADER
@@ -4132,6 +4820,49 @@ window.addEventListener("scroll",()=>{
 });
 
 </script>
+
+
+<!-- ======================================================
+     CMS ADMIN / #admin
+====================================================== -->
+<button id="cmsAdminLauncher" type="button">Admin Panel</button>
+<div class="cms-edit-hint">Edit Mode · Click any highlighted item</div>
+
+<div id="cmsLogin" aria-hidden="true">
+  <div class="cms-login-card">
+    <h2>Website Admin</h2>
+    <p>Sign in with the Supabase Auth account created for this website. The editor opens only from <strong>#admin</strong>.</p>
+    <form id="cmsLoginForm">
+      <input id="cmsEmail" type="email" autocomplete="username" placeholder="Admin email" required>
+      <input id="cmsPassword" type="password" autocomplete="current-password" placeholder="Password" required>
+      <button type="submit">Sign In</button>
+    </form>
+    <div id="cmsLoginError" class="cms-login-error"></div>
+    <div class="cms-login-note">For security, the Supabase service-role key is never placed in this HTML file.</div>
+  </div>
+</div>
+
+<div id="cmsAdminPanel" aria-hidden="true">
+  <aside class="cms-panel">
+    <div class="cms-panel-head">
+      <div>
+        <div class="cms-panel-title">M.R. Moorti Art</div>
+        <div class="cms-panel-sub">Content Manager · click Edit Mode items or use the sections below.</div>
+      </div>
+      <div style="display:flex;gap:7px">
+        <button class="cms-logout" id="cmsLogout" type="button">Logout</button>
+        <button class="cms-close" id="cmsClose" type="button">×</button>
+      </div>
+    </div>
+
+    <div id="cmsFields"></div>
+
+    <div class="cms-actions">
+      <button class="cms-save" id="cmsSave" type="button">Save All Changes</button>
+      <div class="cms-status" id="cmsStatus"></div>
+    </div>
+  </aside>
+</div>
 
 </body>
 </html>

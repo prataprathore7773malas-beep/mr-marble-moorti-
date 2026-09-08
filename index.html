@@ -3738,10 +3738,20 @@ const CMS_CONFIG = {
     TABLE: "site_content"
 };
 
-const cmsSupabase = window.supabase.createClient(
-    CMS_CONFIG.SUPABASE_URL,
-    CMS_CONFIG.SUPABASE_KEY
-);
+let cmsSupabase = null;
+
+// CMS must NEVER prevent the public website from loading.
+// If Supabase/CDN is temporarily unavailable, the normal website still runs.
+if(window.supabase && typeof window.supabase.createClient === "function"){
+    try{
+        cmsSupabase = window.supabase.createClient(
+            CMS_CONFIG.SUPABASE_URL,
+            CMS_CONFIG.SUPABASE_KEY
+        );
+    }catch(err){
+        console.warn("CMS initialization skipped:", err);
+    }
+}
 
 const CMS_EDITABLE = [
     ["brand.name","Brand Name","text"],["brand.sub","Brand Subtitle","text"],["brand.logo","Logo Image","image"],
@@ -3900,6 +3910,7 @@ function cmsSnapshotDefaults(){
 }
 
 async function cmsLoad(){
+    if(!cmsSupabase) return;
     const {data,error}=await cmsSupabase
         .from(CMS_CONFIG.TABLE)
         .select("content_key,content_value")
@@ -4001,6 +4012,10 @@ function cmsCloseLogin(){
     document.getElementById("cmsLogin").setAttribute("aria-hidden","true");
 }
 async function cmsRequireAuth(){
+    if(!cmsSupabase){
+        alert("Admin system could not connect to Supabase. Please check the internet connection and Supabase settings.");
+        return;
+    }
     const {data}=await cmsSupabase.auth.getSession();
     if(data.session){
         cmsOpenPanel();
@@ -4043,6 +4058,7 @@ window.addEventListener("DOMContentLoaded",()=>{
 
 
 async function cmsUploadFile(file,key){
+    if(!cmsSupabase) throw new Error("Supabase is not connected.");
     const ext=(file.name.split(".").pop()||"bin").toLowerCase().replace(/[^a-z0-9]/g,"");
     const safeKey=key.replace(/[^a-z0-9._-]/gi,"-");
     const path=`${safeKey}-${Date.now()}.${ext}`;

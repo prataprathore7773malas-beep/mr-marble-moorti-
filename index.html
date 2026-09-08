@@ -4816,16 +4816,26 @@ window.addEventListener("scroll",()=>{
   }
 
   async function loadSite(){
-    const {data,error}=await sb.from(CONTENT_TABLE).select("content").eq("id",CONTENT_ID).maybeSingle();
+    const {data,error}=await sb.from(CONTENT_TABLE)
+      .select("content_key,content_value")
+      .eq("content_key",CONTENT_ID)
+      .maybeSingle();
     if(error){
-      setStatus("Supabase connected, but content table is not ready: "+error.message,"err");
+      setStatus("Supabase connected, but site_content is not ready: "+error.message,"err");
       return;
     }
-    if(data?.content){
-      siteData=mergeDeep(JSON.parse(JSON.stringify(defaults)),data.content);
-      applySiteData();
-      renderEditors();
-      setStatus("Connected • latest saved content loaded","ok");
+    if(data?.content_value){
+      try{
+        const parsed=JSON.parse(data.content_value);
+        siteData=mergeDeep(JSON.parse(JSON.stringify(defaults)),parsed);
+        applySiteData();
+        renderEditors();
+        setStatus("Connected • latest saved content loaded","ok");
+      }catch(parseErr){
+        console.error(parseErr);
+        setStatus("Saved content is not valid JSON. Defaults are active.","err");
+        applySiteData(); renderEditors();
+      }
     }else{
       applySiteData(); renderEditors();
       setStatus("Connected • no saved content yet; defaults are active","ok");
@@ -4836,17 +4846,17 @@ window.addEventListener("scroll",()=>{
     try{
       setStatus("Saving changes…");
       const {error}=await sb.from(CONTENT_TABLE).upsert({
-        id:CONTENT_ID,
-        content:siteData,
+        content_key:CONTENT_ID,
+        content_value:JSON.stringify(siteData),
         updated_at:new Date().toISOString()
-      },{onConflict:"id"});
+      },{onConflict:"content_key"});
       if(error) throw error;
       applySiteData();
       setStatus("All changes saved successfully.","ok");
     }catch(err){
       console.error(err);
       setStatus("Save failed: "+(err.message||err),"err");
-      alert("Save failed.\n\nIf Supabase says relation/table or policy is missing, create the site_content table and RLS policies for the logged-in admin.");
+      alert("Save failed.\n\nCheck that site_content has a UNIQUE constraint on content_key and that RLS allows authenticated admins to insert/update.");
     }
   }
 

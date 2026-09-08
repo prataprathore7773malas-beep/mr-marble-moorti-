@@ -4,22 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>M.R. Moorti Art | Luxury Marble Art & Craftsmanship</title>
+<title>M.R. Moorti Art | Luxury Marble Art & Craftsmanship[cite: 1]</title>
 
 <meta name="description"
-content="M.R. Moorti Art — timeless marble craftsmanship, divine marble murtis, handcrafted art, marble mandirs and bespoke creations from Rajasthan.">
+content="M.R. Moorti Art — timeless marble craftsmanship, divine marble murtis, handcrafted art, marble mandirs and bespoke creations from Rajasthan.[cite: 1]">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
+<!-- Supabase JS SDK[cite: 1] -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 /* =========================================================
    M.R. MOORTI ART
    LUXURY WHITE / GREY EDITION
-   SINGLE FILE WEBSITE
+   SINGLE FILE WEBSITE[cite: 1]
 ========================================================= */
 
 :root{
@@ -155,13 +158,6 @@ body.cursor-hover .cursor-ring{
     transition:
         opacity 1s var(--ease),
         visibility 1s;
-    /* Public site must never depend on the CMS/CDN. */
-    animation:mrPreloaderFailsafe 1.6s ease forwards;
-}
-
-@keyframes mrPreloaderFailsafe{
-    0%,65%{opacity:1;visibility:visible;pointer-events:auto;}
-    100%{opacity:0;visibility:hidden;pointer-events:none;}
 }
 
 .preloader.hide{
@@ -259,8 +255,6 @@ body.cursor-hover .cursor-ring{
     height:45px;
     position:relative;
 }
-
-
 
 .brand-text{
     display:flex;
@@ -1350,7 +1344,6 @@ section{
     max-width:500px;
 }
 
-
 .form{
     display:flex;
     flex-direction:column;
@@ -1404,10 +1397,6 @@ section{
 /* =========================================================
    FOOTER
 ========================================================= */
-/* =========================================================
-   PREMIUM LUXURY FOOTER
-========================================================= */
-
 footer{
     position:relative;
     background:
@@ -1445,30 +1434,14 @@ footer::before{
 .footer-top{
     position:relative;
     display:grid;
-    grid-template-columns:
-        1.15fr
-        1fr
-        1.2fr
-        auto;
-    gap:45px;
-    align-items:start;
-    padding-bottom:65px;
-}
-.footer-top{
     grid-template-columns:1fr 1fr;
     gap:45px 30px;
+    align-items:start;
+    padding-bottom:65px;
 }
 
 .footer-brand-wrap{
     grid-column:1 / -1;
-}
-
-.footer-bottom{
-    align-items:flex-start;
-}
-/* BRAND */
-
-.footer-brand-wrap{
     max-width:280px;
 }
 
@@ -1500,8 +1473,6 @@ footer::before{
     color:#555;
 }
 
-/* FOOTER HEADINGS */
-
 .footer-heading{
     margin-bottom:20px;
     font-size:9px;
@@ -1509,8 +1480,6 @@ footer::before{
     text-transform:uppercase;
     color:#777;
 }
-
-/* CONTACT */
 
 .footer-contact{
     display:flex;
@@ -1567,16 +1536,12 @@ footer::before{
     stroke-linejoin:round;
 }
 
-/* ADDRESS */
-
 .footer-address{
     max-width:230px;
     color:#444;
     font-size:12px;
     line-height:1.8;
 }
-
-/* SOCIAL */
 
 .socials{
     display:flex;
@@ -1615,15 +1580,13 @@ footer::before{
     box-shadow:0 15px 35px rgba(0,0,0,.15);
 }
 
-/* BOTTOM */
-
 .footer-bottom{
     position:relative;
     border-top:1px solid rgba(0,0,0,.14);
     padding-top:24px;
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    align-items:flex-start;
     gap:20px;
     color:#777;
     font-size:10px;
@@ -1636,78 +1599,6 @@ footer::before{
     text-transform:uppercase;
 }
 
-/* =========================================================
-   FLOATING BUTTONS
-========================================================= */
-
-.floating{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:4000;
-    display:flex;
-    flex-direction:column;
-    gap:11px;
-}
-
-.float-btn{
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.18);
-    transition:
-        transform .5s var(--ease),
-        box-shadow .4s ease;
-}
-
-.float-btn svg{
-    width:21px;
-    height:21px;
-}
-
-.float-btn:hover{
-    transform:scale(1.1) translateY(-3px);
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.24);
-}
-
-.call{
-    background:#181818;
-}
-
-.whatsapp{
-    background:#20b858;
-}
-
-.float-enquiry{
-    position:fixed;
-    left:20px;
-    bottom:20px;
-    z-index:4000;
-    padding:15px 22px;
-    border-radius:100px;
-    background:#fff;
-    color:#111;
-    border:1px solid #d5d5d2;
-    box-shadow:0 15px 35px rgba(0,0,0,.12);
-    font-size:10px;
-    letter-spacing:.15em;
-    text-transform:uppercase;
-    transition:
-        background .4s ease,
-        color .4s ease,
-        transform .5s var(--ease);
-}
-
-.float-enquiry:hover{
-    background:#111;
-    color:#fff;
-}
 /* =========================================================
    FLOATING BUTTONS
 ========================================================= */
@@ -1767,6 +1658,62 @@ footer::before{
 .float-enquiry:hover{
     background:#111;
     color:white;
+}
+
+/* =========================================================
+   ADMIN PANEL STYLES
+========================================================= */
+.editable-active {
+    outline: 2px dashed #b79b68 !important;
+    outline-offset: 4px;
+    position: relative;
+}
+.editable-img-active {
+    outline: 3px solid #b79b68 !important;
+    cursor: pointer !important;
+}
+#admin-toolbar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99999;
+    background: #171716;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: none;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+#admin-toolbar button {
+    background: #b79b68;
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.delete-product-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+    font-size: 10px;
+    border-radius: 4px;
+}
+body.admin-mode .delete-product-btn {
+    display: block;
 }
 
 /* =========================================================
@@ -1855,24 +1802,24 @@ footer::before{
                 rgba(250,250,248,.58)
             );
     }
-.footer-top{
-    grid-template-columns:1fr;
-    gap:38px;
-}
+    .footer-top{
+        grid-template-columns:1fr;
+        gap:38px;
+    }
 
-.footer-brand-wrap{
-    grid-column:auto;
-}
+    .footer-brand-wrap{
+        grid-column:auto;
+    }
 
-.footer-brand{
-    font-size:32px;
-}
+    .footer-brand{
+        font-size:32px;
+    }
 
-.footer-bottom{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:14px;
-}
+    .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+    }
     .navbar{
         height:72px;
         padding:0 5%;
@@ -2008,16 +1955,6 @@ footer::before{
         grid-template-columns:1fr;
     }
 
-    .footer-top,
-    .footer-bottom{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .footer-tagline{
-        font-size:18px;
-    }
-
     .float-enquiry{
         left:12px;
         bottom:12px;
@@ -2055,26 +1992,17 @@ footer::before{
 }
 
 </style>
-
-
-<style id="mr-admin-css">
-#mrAdminPanel{display:none;position:fixed;inset:0;z-index:2147483647;background:rgba(10,10,10,.72);align-items:center;justify-content:center;font-family:Manrope,Arial,sans-serif}
-#mrAdminPanel.open{display:flex}
-#mrAdminPanel *{box-sizing:border-box}
-#mrAdminLogin{width:min(420px,calc(100% - 32px));background:#fff;color:#171716;border-radius:18px;padding:30px;box-shadow:0 30px 100px #0008}
-#mrAdminLogin h1{font:500 30px 'Playfair Display',serif;margin:0 0 6px}#mrAdminLogin p{margin:0 0 22px;color:#777}
-#mrAdminLogin label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin:13px 0 6px;color:#777}
-#mrAdminLogin input{width:100%;padding:12px;border:1px solid #d7d2c7;border-radius:8px;font:14px Manrope,Arial}
-.mrA-btn{border:1px solid #b79b68;background:#b79b68;color:#111;padding:11px 16px;border-radius:8px;cursor:pointer;font-weight:800}.mrA-btn.dark{background:#151515;color:#fff;border-color:#151515}.mrA-btn.ghost{background:#fff;color:#171716}.mrA-msg{margin-top:12px;font-size:13px;color:#9c2c2c}
-#mrEditorBar{display:none;position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:2147483646;width:min(900px,calc(100% - 24px));background:#111;color:#fff;border:1px solid #b79b68;border-radius:16px;padding:12px 14px;box-shadow:0 20px 60px #0008;align-items:center;gap:10px;justify-content:space-between}
-#mrEditorBar.open{display:flex}.mrA-bar-title{font-weight:800}.mrA-bar-sub{font-size:11px;color:#aaa;margin-top:2px}.mrA-bar-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-offset:4px;cursor:text;min-height:1em}body.mrVisualEdit [data-mr-editable="image"]{outline:3px solid #b79b68;outline-offset:3px;cursor:pointer}body.mrVisualEdit [data-mr-editable="text"]:focus{outline:2px solid #b79b68}
-#mrImageEditor{display:none;position:fixed;z-index:2147483647;inset:0;background:rgba(0,0,0,.65);align-items:center;justify-content:center}#mrImageEditor.open{display:flex}.mr-img-card{width:min(470px,calc(100% - 30px));background:#fff;border-radius:16px;padding:22px;color:#171716}.mr-img-card h3{margin:0 0 8px;font:500 23px 'Playfair Display',serif}.mr-img-card p{font-size:13px;color:#777}.mr-img-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-@media(max-width:650px){#mrEditorBar{bottom:8px;align-items:flex-start;flex-direction:column}.mrA-bar-actions{width:100%}.mrA-bar-actions button{flex:1}}
-</style>
 </head>
 
 <body>
+
+<!-- Admin Toolbar -->
+<div id="admin-toolbar">
+    <span>Admin Mode Active</span>
+    <button id="addProductBtn" style="background:#20a956;">Add Product</button>
+    <button id="saveChangesBtn">Save Changes</button>
+    <button id="logoutBtn" style="background:#444;">Logout</button>
+</div>
 
 <!-- ======================================================
      PRELOADER
@@ -2086,13 +2014,6 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
         <div class="loader-line"></div>
     </div>
 </div>
-<script>
-(function(){
-  function releasePreloader(){var el=document.getElementById("preloader");if(el)el.classList.add("hide");}
-  setTimeout(releasePreloader,1400);
-  document.addEventListener("DOMContentLoaded",releasePreloader,{once:true});
-})();
-</script>
 
 <div class="noise"></div>
 
@@ -2108,12 +2029,12 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
     <a href="#home" class="brand magnetic">
 
         <div class="brand-mark">
-            <img src="logo.png" alt="M.R. Moorti Art Logo">
+            <img src="logo.png" alt="M.R. Moorti Art Logo" data-img-id="logo-img">
         </div>
 
         <div class="brand-text">
-            <div class="brand-name">M.R. Moorti Art</div>
-            <div class="brand-sub">Marble • Art • Heritage</div>
+            <div class="brand-name" data-key="brand-name">M.R. Moorti Art</div>
+            <div class="brand-sub" data-key="brand-sub">Marble • Art • Heritage</div>
         </div>
 
     </a>
@@ -2151,16 +2072,16 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
 
     <div class="hero-content">
 
-        <div class="hero-eyebrow">
+        <div class="hero-eyebrow" data-key="hero-eyebrow">
             Rajasthan · Since 1992
         </div>
 
-        <h1>
+        <h1 data-key="hero-title">
             Stone<br>
             <em>with a soul.</em>
         </h1>
 
-        <p class="hero-description">
+        <p class="hero-description" data-key="hero-desc">
             Timeless marble craftsmanship shaped with devotion,
             precision and artistic excellence. Discover divine
             murtis, handcrafted art, marble mandirs and bespoke
@@ -2204,9 +2125,9 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
 
         <div class="about-visual reveal-left">
 
-            <div class="about-image"></div>
+            <div class="about-image" data-img-id="about-img-1" style="background-image: url('o1.png');"></div>
 
-            <div class="about-detail"></div>
+            <div class="about-detail" data-img-id="about-img-2" style="background-image: url('o2.png');"></div>
 
             <div class="about-number">01</div>
 
@@ -2218,26 +2139,26 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
                 Our Story
             </div>
 
-            <h2 class="section-title">
+            <h2 class="section-title" data-key="about-title">
                 Where marble<br>
                 becomes <em>art.</em>
             </h2>
 
-            <p class="section-copy">
+            <p class="section-copy" data-key="about-copy-1">
                 M.R. Moorti Art is rooted in the timeless tradition
                 of marble craftsmanship. Every creation reflects
                 patience, precision and the character of the artisan
                 who shaped it.
             </p>
 
-            <p class="section-copy">
+            <p class="section-copy" data-key="about-copy-2">
                 From divine marble murtis and temple artistry to
                 handcrafted pieces and bespoke marble creations,
                 our work is designed to bring beauty, devotion and
                 heritage into meaningful spaces.
             </p>
 
-            <div class="about-quote">
+            <div class="about-quote" data-key="about-quote">
                 Every piece is more than marble.
                 It is a story carved by hand.
             </div>
@@ -2310,7 +2231,7 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
             </div>
 
             <div class="collection-meta">
-                15 Selected Works
+                Selected Works
             </div>
 
         </div>
@@ -2320,155 +2241,7 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
 
             <div class="collection-track" id="collectionTrack">
 
-                <!-- C1 -->
-                <article class="collection-card">
-                    <img src="c1.jpeg" alt="Marble Art Collection 01">
-                    <div class="collection-overlay">
-                        <div class="collection-index">01 / 15</div>
-                        <div class="collection-name">Divine Form</div>
-                        <div class="collection-caption">Marble craftsmanship</div>
-                    </div>
-                </article>
-
-                <!-- C2 -->
-                <article class="collection-card">
-                    <img src="c2.jpeg" alt="Marble Art Collection 02">
-                    <div class="collection-overlay">
-                        <div class="collection-index">02 / 15</div>
-                        <div class="collection-name">Sacred Detail</div>
-                        <div class="collection-caption">Handcrafted artistry</div>
-                    </div>
-                </article>
-
-                <!-- C3 -->
-                <article class="collection-card">
-                    <img src="c3.jpeg" alt="Marble Art Collection 03">
-                    <div class="collection-overlay">
-                        <div class="collection-index">03 / 15</div>
-                        <div class="collection-name">Pure Craft</div>
-                        <div class="collection-caption">Timeless marble work</div>
-                    </div>
-                </article>
-
-                <!-- C4 -->
-                <article class="collection-card">
-                    <img src="c4.jpeg" alt="Marble Art Collection 04">
-                    <div class="collection-overlay">
-                        <div class="collection-index">04 / 15</div>
-                        <div class="collection-name">Heritage Form</div>
-                        <div class="collection-caption">Rajasthan artistry</div>
-                    </div>
-                </article>
-
-                <!-- C5 -->
-                <article class="collection-card">
-                    <img src="c5.jpeg" alt="Marble Art Collection 05">
-                    <div class="collection-overlay">
-                        <div class="collection-index">05 / 15</div>
-                        <div class="collection-name">Stone Poetry</div>
-                        <div class="collection-caption">Refined craftsmanship</div>
-                    </div>
-                </article>
-
-                <!-- C6 -->
-                <article class="collection-card">
-                    <img src="c6.jpeg" alt="Marble Art Collection 06">
-                    <div class="collection-overlay">
-                        <div class="collection-index">06 / 15</div>
-                        <div class="collection-name">Divine Grace</div>
-                        <div class="collection-caption">Hand-finished marble</div>
-                    </div>
-                </article>
-
-                <!-- C7 -->
-                <article class="collection-card">
-                    <img src="c7.jpeg" alt="Marble Art Collection 07">
-                    <div class="collection-overlay">
-                        <div class="collection-index">07 / 15</div>
-                        <div class="collection-name">Sculpted Legacy</div>
-                        <div class="collection-caption">Artisan craftsmanship</div>
-                    </div>
-                </article>
-
-                <!-- C8 -->
-                <article class="collection-card">
-                    <img src="c8.jpeg" alt="Marble Art Collection 08">
-                    <div class="collection-overlay">
-                        <div class="collection-index">08 / 15</div>
-                        <div class="collection-name">Marble Soul</div>
-                        <div class="collection-caption">Art with character</div>
-                    </div>
-                </article>
-
-                <!-- C9 -->
-                <article class="collection-card">
-                    <img src="c9.jpeg" alt="Marble Art Collection 09">
-                    <div class="collection-overlay">
-                        <div class="collection-index">09 / 15</div>
-                        <div class="collection-name">Sacred Lines</div>
-                        <div class="collection-caption">Detailed marble art</div>
-                    </div>
-                </article>
-
-                <!-- C10 -->
-                <article class="collection-card">
-                    <img src="c10.jpeg" alt="Marble Art Collection 10">
-                    <div class="collection-overlay">
-                        <div class="collection-index">10 / 15</div>
-                        <div class="collection-name">Quiet Grandeur</div>
-                        <div class="collection-caption">Luxury stonework</div>
-                    </div>
-                </article>
-
-                <!-- C11 -->
-                <article class="collection-card">
-                    <img src="c11.jpeg" alt="Marble Art Collection 11">
-                    <div class="collection-overlay">
-                        <div class="collection-index">11 / 15</div>
-                        <div class="collection-name">Artisan Spirit</div>
-                        <div class="collection-caption">Made by hand</div>
-                    </div>
-                </article>
-
-                <!-- C12 -->
-                <article class="collection-card">
-                    <img src="c12.jpeg" alt="Marble Art Collection 12">
-                    <div class="collection-overlay">
-                        <div class="collection-index">12 / 15</div>
-                        <div class="collection-name">Eternal Beauty</div>
-                        <div class="collection-caption">Natural marble</div>
-                    </div>
-                </article>
-
-                <!-- C13 -->
-                <article class="collection-card">
-                    <img src="c13.jpeg" alt="Marble Art Collection 13">
-                    <div class="collection-overlay">
-                        <div class="collection-index">13 / 15</div>
-                        <div class="collection-name">Sacred Art</div>
-                        <div class="collection-caption">Traditional influence</div>
-                    </div>
-                </article>
-
-                <!-- C14 -->
-                <article class="collection-card">
-                    <img src="c14.jpeg" alt="Marble Art Collection 14">
-                    <div class="collection-overlay">
-                        <div class="collection-index">14 / 15</div>
-                        <div class="collection-name">Timeless Stone</div>
-                        <div class="collection-caption">Refined details</div>
-                    </div>
-                </article>
-
-                <!-- C15 -->
-                <article class="collection-card">
-                    <img src="c15.jpeg" alt="Marble Art Collection 15">
-                    <div class="collection-overlay">
-                        <div class="collection-index">15 / 15</div>
-                        <div class="collection-name">The Masterpiece</div>
-                        <div class="collection-caption">Signature craftsmanship</div>
-                    </div>
-                </article>
+                <!-- Dynamic Collection Cards will be rendered here -->
 
             </div>
 
@@ -2965,8 +2738,6 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
                 custom artwork, send us your requirement.
             </p>
 
-          
-
         </div>
 
         <form class="form reveal-right" id="enquiryForm">
@@ -3045,10 +2816,6 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
      FOOTER
 ====================================================== -->
 
-<!-- ======================================================
-     PREMIUM FOOTER
-====================================================== -->
-
 <footer>
 
     <div class="footer-top">
@@ -3068,7 +2835,6 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
 
         </div>
 
-
         <!-- CONTACT -->
         <div>
 
@@ -3078,119 +2844,30 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
 
             <div class="footer-contact">
 
-                <!-- PHONE -->
-                <a
-                    href="tel:+918741917946"
-                    class="footer-contact-item magnetic"
-                >
-
+                <a href="tel:+918741917946" class="footer-contact-item magnetic">
                     <span class="footer-contact-icon">
-
-                        <svg viewBox="0 0 24 24">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2
-                            19.79 19.79 0 0 1-8.63-3.07
-                            19.5 19.5 0 0 1-6-6
-                            A19.79 19.79 0 0 1 2.12 4.18
-                            2 2 0 0 1 4.11 2h3
-                            a2 2 0 0 1 2 1.72
-                            12.84 12.84 0 0 0 .7 2.81
-                            2 2 0 0 1-.45 2.11L8.09 9.91
-                            a16 16 0 0 0 6 6l1.27-1.27
-                            a2 2 0 0 1 2.11-.45
-                            12.84 12.84 0 0 0 2.81.7
-                            A2 2 0 0 1 22 16.92z"/>
-                        </svg>
-
+                        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3 a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91 a16 16 0 0 0 6 6l1.27-1.27 a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 A2 2 0 0 1 22 16.92z"/></svg>
                     </span>
-
-                    <span>
-                        +91 87419 17946 , +91 7976186788
-                    </span>
-
+                    <span>+91 87419 17946 , +91 7976186788</span>
                 </a>
 
-
-                <!-- WHATSAPP -->
-                <a
-                    href="https://wa.me/918741917946"
-                    target="_blank"
-                    rel="noopener"
-                    class="footer-contact-item magnetic"
-                >
-
+                <a href="https://wa.me/918741917946" target="_blank" rel="noopener" class="footer-contact-item magnetic">
                     <span class="footer-contact-icon">
-
-                        <svg viewBox="0 0 24 24">
-                            <path d="M20.52 3.48A11.8 11.8 0 0 0 12.13 0
-                            C5.58 0 .25 5.33.25 11.88
-                            c0 2.09.55 4.13 1.59 5.93L.15 24
-                            l6.35-1.66a11.86 11.86 0 0 0 5.63 1.43
-                            h.01c6.55 0 11.88-5.33 11.88-11.89
-                            0-3.18-1.24-6.16-3.5-8.4z"/>
-                            <path d="M8.3 6.8c.22-.5.46-.51.84-.52
-                            .21-.01.45-.01.69-.01
-                            .22 0 .57.08.87.68
-                            .31.62 1.04 2.54 1.13 2.72
-                            .09.19.15.4.03.64
-                            -.12.24-.18.4-.35.61
-                            -.18.21-.37.47-.53.63
-                            -.18.18-.36.37-.15.72
-                            .21.35.93 1.53 2 2.47
-                            1.37 1.22 2.52 1.6 2.88 1.78
-                            .35.18.56.15.77-.09
-                            .21-.24.89-1.04 1.13-1.4
-                            .24-.36.48-.3.8-.18
-                            .32.12 2.02.95 2.37 1.12
-                            .35.18.58.27.67.42
-                            .09.15.09.87-.21 1.7
-                            -.3.83-1.77 1.59-2.46 1.69
-                            -.63.09-1.42.13-2.29-.14
-                            -.53-.17-1.21-.4-2.09-.78
-                            -3.67-1.58-6.06-5.28-6.25-5.52
-                            -.18-.24-1.49-1.98-1.49-3.78
-                            0-1.8.94-2.68 1.28-3.05z"/>
-                        </svg>
-
+                        <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.13 0 C5.58 0 .25 5.33.25 11.88 c0 2.09.55 4.13 1.59 5.93L.15 24 l6.35-1.66a11.86 11.86 0 0 0 5.63 1.43 h.01c6.55 0 11.88-5.33 11.88-11.89 0-3.18-1.24-6.16-3.5-8.4z"/></svg>
                     </span>
-
-                    <span>
-                        WhatsApp · +91 87419 17946
-                    </span>
-
+                    <span>WhatsApp · +91 87419 17946</span>
                 </a>
 
-
-                <!-- EMAIL -->
-                <a
-                    href="mailto:umsharma1993@gmail.com"
-                    class="footer-contact-item magnetic"
-                >
-
+                <a href="mailto:umsharma1993@gmail.com" class="footer-contact-item magnetic">
                     <span class="footer-contact-icon">
-
-                        <svg viewBox="0 0 24 24">
-                            <rect
-                                x="3"
-                                y="5"
-                                width="18"
-                                height="14"
-                                rx="2"
-                            />
-                            <path d="m3 7 9 6 9-6"/>
-                        </svg>
-
+                        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
                     </span>
-
-                    <span>
-                        umsharma1993@gmail.com
-                    </span>
-
+                    <span>umsharma1993@gmail.com</span>
                 </a>
 
             </div>
 
         </div>
-
 
         <!-- ADDRESS -->
         <div>
@@ -3200,15 +2877,12 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
             </div>
 
             <div class="footer-address">
-
                 P-4 Mahaveer Colony,<br>
                 Kartarpura, Jaipur,<br>
                 Rajasthan · 302006
-
             </div>
 
         </div>
-
 
         <!-- SOCIAL -->
         <div>
@@ -3218,133 +2892,24 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
             </div>
 
             <div class="socials">
-
-                <!-- INSTAGRAM -->
-                <a
-                    href="https://www.instagram.com/mr_marble_art?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
-                    target="_blank"
-                    rel="noopener"
-                    class="social magnetic"
-                    aria-label="Instagram"
-                >
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                    >
-                        <rect
-                            x="3"
-                            y="3"
-                            width="18"
-                            height="18"
-                            rx="5"
-                        />
-                        <circle
-                            cx="12"
-                            cy="12"
-                            r="4"
-                        />
-                        <circle
-                            cx="17.5"
-                            cy="6.5"
-                            r="1"
-                            fill="currentColor"
-                            stroke="none"
-                        />
-                    </svg>
-
+                <a href="https://www.instagram.com/mr_marble_art" target="_blank" rel="noopener" class="social magnetic" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
                 </a>
-
-
-                <!-- WHATSAPP -->
-                <a
-                    href="https://wa.me/918741917946"
-                    target="_blank"
-                    rel="noopener"
-                    class="social magnetic"
-                    aria-label="WhatsApp"
-                >
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                    >
-                        <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0
-                        C5.5 0 .2 5.3.2 11.9
-                        c0 2.1.5 4.1 1.6 5.9L.2 24
-                        l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4
-                        c6.6 0 11.9-5.3 11.9-11.9
-                        0-3.1-1.3-6.1-3.5-8.3z"/>
-
-                        <path d="M8.1 6.8c.2-.5.5-.5.8-.5h.7
-                        c.2 0 .5.1.7.6l1 2.4
-                        c.1.2.1.4 0 .6l-.4.6
-                        c-.2.2-.4.5-.5.6
-                        -.2.2-.4.4-.2.7
-                        .2.4.9 1.5 2 2.5
-                        1.4 1.2 2.5 1.6 2.9 1.8
-                        .4.2.6.1.8-.1l1.1-1.4
-                        c.2-.3.5-.3.8-.2
-                        l2.3 1.1c.3.2.5.3.6.4
-                        .1.2.1.9-.2 1.7
-                        -.3.8-1.7 1.6-2.4 1.7
-                        -.7.1-1.5.1-2.3-.1
-                        -.5-.2-1.2-.4-2.1-.8
-                        -3.7-1.6-6.1-5.3-6.3-5.5
-                        -.2-.2-1.5-2-1.5-3.8
-                        0-1.8.9-2.7 1.2-3.1z"/>
-                    </svg>
-
+                <a href="https://wa.me/918741917946" target="_blank" rel="noopener" class="social magnetic" aria-label="WhatsApp">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 C5.5 0 .2 5.3.2 11.9 c0 2.1.5 4.1 1.6 5.9L.2 24 l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4 c6.6 0 11.9-5.3 11.9-11.9 0-3.1-1.3-6.1-3.5-8.3z"/></svg>
                 </a>
-
-
-                <!-- EMAIL -->
-                <a
-                    href="mailto:umsharma1993@gmail.com"
-                    class="social magnetic"
-                    aria-label="Email"
-                >
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                    >
-                        <rect
-                            x="3"
-                            y="5"
-                            width="18"
-                            height="14"
-                            rx="2"
-                        />
-                        <path d="m3 7 9 6 9-6"/>
-                    </svg>
-
+                <a href="mailto:umsharma1993@gmail.com" class="social magnetic" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
                 </a>
-
             </div>
 
         </div>
 
     </div>
 
-
     <div class="footer-bottom">
-
-        <span>
-            © <span id="year"></span>
-            M.R. Moorti Art. All rights reserved.
-        </span>
-
-        <span class="footer-credit">
-            Crafted by Marwar Infotech
-        </span>
-
+        <span>© <span id="year"></span> M.R. Moorti Art. All rights reserved.</span>
+        <span class="footer-credit">Crafted by Marwar Infotech</span>
     </div>
 
 </footer>
@@ -3352,109 +2917,16 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
 <!-- ======================================================
      FLOATING BUTTONS
 ====================================================== -->
- <!-- ======================================================
-     FLOATING ACTION BUTTONS
-====================================================== -->
 
-<a
-    href="#contact"
-    class="float-enquiry magnetic"
->
-    Enquire Now
-</a>
-
+<a href="#contact" class="float-enquiry magnetic">Enquire Now</a>
 
 <div class="floating">
-
-    <!-- CALL -->
-
-    <a
-        href="tel:+918741917946"
-        class="float-btn call magnetic"
-        aria-label="Call M.R. Moorti Art"
-    >
-
-        <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        >
-
-            <path
-                d="M22 16.92v3a2 2 0 0 1-2.18 2
-                19.79 19.79 0 0 1-8.63-3.07
-                19.5 19.5 0 0 1-6-6
-                A19.79 19.79 0 0 1 2.12 4.18
-                2 2 0 0 1 4.11 2h3
-                a2 2 0 0 1 2 1.72
-                12.84 12.84 0 0 0 .7 2.81
-                2 2 0 0 1-.45 2.11L8.09 9.91
-                a16 16 0 0 0 6 6l1.27-1.27
-                a2 2 0 0 1 2.11-.45
-                12.84 12.84 0 0 0 2.81.7
-                A2 2 0 0 1 22 16.92z"
-            />
-
-        </svg>
-
+    <a href="tel:+918741917946" class="float-btn call magnetic" aria-label="Call">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3 a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91 a16 16 0 0 0 6 6l1.27-1.27 a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 A2 2 0 0 1 22 16.92z"/></svg>
     </a>
-
-
-    <!-- WHATSAPP -->
-
-    <a
-        href="https://wa.me/918741917946"
-        target="_blank"
-        rel="noopener"
-        class="float-btn whatsapp magnetic"
-        aria-label="WhatsApp M.R. Moorti Art"
-    >
-
-        <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        >
-
-            <path
-                d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0
-                C5.5 0 .2 5.3.2 11.9
-                c0 2.1.5 4.1 1.6 5.9L.2 24
-                l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4
-                c6.6 0 11.9-5.3 11.9-11.9
-                0-3.1-1.3-6.1-3.5-8.3z"
-            />
-
-            <path
-                d="M8.1 6.8c.2-.5.5-.5.8-.5h.7
-                c.2 0 .5.1.7.6l1 2.4
-                c.1.2.1.4 0 .6l-.4.6
-                c-.2.2-.4.5-.5.6
-                -.2.2-.4.4-.2.7
-                .2.4.9 1.5 2 2.5
-                1.4 1.2 2.5 1.6 2.9 1.8
-                .4.2.6.1.8-.1l1.1-1.4
-                c.2-.3.5-.3.8-.2
-                l2.3 1.1c.3.2.5.3.6.4
-                .1.2.1.9-.2 1.7
-                -.3.8-1.7 1.6-2.4 1.7
-                -.7.1-1.5.1-2.3-.1
-                -.5-.2-1.2-.4-2.1-.8
-                -3.7-1.6-6.1-5.3-6.3-5.5
-                -.2-.2-1.5-2-1.5-3.8
-                0-1.8.9-2.7 1.2-3.1z"
-            />
-
-        </svg>
-
+    <a href="https://wa.me/918741917946" target="_blank" rel="noopener" class="float-btn whatsapp magnetic" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 C5.5 0 .2 5.3.2 11.9 c0 2.1.5 4.1 1.6 5.9L.2 24 l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4 c6.6 0 11.9-5.3 11.9-11.9 0-3.1-1.3-6.1-3.5-8.3z"/></svg>
     </a>
-
 </div>
 
 <!-- ======================================================
@@ -3462,640 +2934,293 @@ body.mrVisualEdit [data-mr-editable="text"]{outline:2px dashed #b79b68;outline-o
 ====================================================== -->
 
 <script>
+const SUPABASE_URL = "https://kyxjrqqkuavbelfixnyl.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_tvIXgDw3YLYhg1OZ4dwKPA__HSKWUiR";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let isAdminMode = false;
+
+// Default Collection Items
+let collectionItems = [
+    { img: "c1.jpeg", name: "Divine Form", caption: "Marble craftsmanship" },
+    { img: "c2.jpeg", name: "Sacred Detail", caption: "Handcrafted artistry" },
+    { img: "c3.jpeg", name: "Pure Craft", caption: "Timeless marble work" },
+    { img: "c4.jpeg", name: "Heritage Form", caption: "Rajasthan artistry" },
+    { img: "c5.jpeg", name: "Stone Poetry", caption: "Refined craftsmanship" },
+    { img: "c6.jpeg", name: "Divine Grace", caption: "Hand-finished marble" },
+    { img: "c7.jpeg", name: "Sculpted Legacy", caption: "Artisan craftsmanship" },
+    { img: "c8.jpeg", name: "Marble Soul", caption: "Art with character" },
+    { img: "c9.jpeg", name: "Sacred Lines", caption: "Detailed marble art" },
+    { img: "c10.jpeg", name: "Quiet Grandeur", caption: "Luxury stonework" },
+    { img: "c11.jpeg", name: "Artisan Spirit", caption: "Made by hand" },
+    { img: "c12.jpeg", name: "Eternal Beauty", caption: "Natural marble" },
+    { img: "c13.jpeg", name: "Sacred Art", caption: "Traditional influence" },
+    { img: "c14.jpeg", name: "Timeless Stone", caption: "Refined details" },
+    { img: "c15.jpeg", name: "The Masterpiece", caption: "Signature craftsmanship" }
+];
+
+async function renderCollection() {
+    const track = document.getElementById("collectionTrack");
+    track.innerHTML = "";
+    
+    collectionItems.forEach((item, index) => {
+        const article = document.createElement("article");
+        article.className = "collection-card";
+        article.innerHTML = `
+            ${isAdminMode ? `<button class="delete-product-btn" onclick="deleteProduct(${index})">Delete</button>` : ""}
+            <img src="${item.img}" alt="Collection ${index + 1}" ${isAdminMode ? `class="editable-img-active" onclick="editCollectionImage(${index})"` : ""}>
+            <div class="collection-overlay">
+                <div class="collection-index">${String(index + 1).padStart(2, '0')} / ${collectionItems.length}</div>
+                <div class="collection-name" ${isAdminMode ? `contenteditable="true" onblur="updateCollectionData(${index}, 'name', this.innerText)"` : ""}>${item.name}</div>
+                <div class="collection-caption" ${isAdminMode ? `contenteditable="true" onblur="updateCollectionData(${index}, 'caption', this.innerText)"` : ""}>${item.caption}</div>
+            </div>
+        `;
+        track.appendChild(article);
+    });
+    updateSlider();
+}
+
+function editCollectionImage(index) {
+    const newUrl = prompt("Enter new image URL/path:", collectionItems[index].img);
+    if (newUrl) {
+        collectionItems[index].img = newUrl;
+        renderCollection();
+    }
+}
+
+function updateCollectionData(index, field, value) {
+    collectionItems[index][field] = value;
+}
+
+function deleteProduct(index) {
+    if (confirm("Are you sure you want to delete this item?")) {
+        collectionItems.splice(index, 1);
+        renderCollection();
+    }
+}
+
+document.getElementById("addProductBtn").addEventListener("click", () => {
+    const img = prompt("Enter image URL/path (e.g. c16.jpeg):", "c16.jpeg");
+    if (!img) return;
+    const name = prompt("Enter Product Name:", "New Masterpiece");
+    const caption = prompt("Enter Caption:", "Custom marble work");
+    
+    collectionItems.push({ img, name: name || "New Art", caption: caption || "Custom Art" });
+    renderCollection();
+});
+
+async function checkAdminRoute() {
+    if (window.location.hash === "#admin") {
+        const username = prompt("Enter Admin Email/Username:");
+        const password = prompt("Enter Admin Password:");
+
+        if (username === "umsharma1993@gmail.com" && password === "umesh1992") {
+            isAdminMode = true;
+            document.body.classList.add("admin-mode");
+            document.getElementById("admin-toolbar").style.display = "flex";
+            enableEditing();
+            renderCollection();
+            alert("Admin Login Successful!");
+        } else {
+            alert("Invalid Credentials!");
+            window.location.hash = "";
+        }
+    }
+}
+
+function enableEditing() {
+    document.querySelectorAll("[data-key]").forEach(el => {
+        el.setAttribute("contenteditable", "true");
+        el.classList.add("editable-active");
+    });
+    document.querySelectorAll("[data-img-id]").forEach(el => {
+        el.classList.add("editable-img-active");
+        el.addEventListener("click", function() {
+            const newImg = prompt("Enter new image URL/path:", "");
+            if(newImg) {
+                if(this.tagName === 'IMG') {
+                    this.src = newImg;
+                } else {
+                    this.style.backgroundImage = `url('${newImg}')`;
+                }
+            }
+        });
+    });
+}
+
+async function loadWebsiteContent() {
+    const { data, error } = await supabaseClient.from('site_content').select('*');
+    if (data && data.length > 0) {
+        data.forEach(item => {
+            if (item.key === "collection_data") {
+                try {
+                    collectionItems = JSON.parse(item.value);
+                } catch(e) {}
+            } else {
+                const el = document.querySelector(`[data-key="${item.key}"]`);
+                if (el) el.innerHTML = item.value;
+            }
+        });
+    }
+    renderCollection();
+}
+
+document.getElementById("saveChangesBtn").addEventListener("click", async () => {
+    // Save text contents
+    const elements = document.querySelectorAll("[data-key]");
+    for (let el of elements) {
+        const key = el.getAttribute("data-key");
+        const value = el.innerHTML;
+        await supabaseClient.from('site_content').upsert({ key: key, value: value }, { onConflict: 'key' });
+    }
+
+    // Save Collection items array
+    await supabaseClient.from('site_content').upsert({ key: "collection_data", value: JSON.stringify(collectionItems) }, { onConflict: 'key' });
+
+    alert("Changes saved successfully to Supabase!");
+});
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    window.location.hash = "";
+    location.reload();
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    loadWebsiteContent();
+    checkAdminRoute();
+});
 
 /* =========================================================
    PRELOADER
 ========================================================= */
-
 window.addEventListener("load",()=>{
-
     setTimeout(()=>{
-
-        document
-            .getElementById("preloader")
-            .classList.add("hide");
-
+        document.getElementById("preloader").classList.add("hide");
     },900);
-
 });
 
-/* =========================================================
-   YEAR
-========================================================= */
+document.getElementById("year").textContent = new Date().getFullYear();
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
-const navbar =
-    document.getElementById("navbar");
-
+const navbar = document.getElementById("navbar");
 window.addEventListener("scroll",()=>{
-
-    navbar.classList.toggle(
-        "scrolled",
-        window.scrollY > 50
-    );
-
+    navbar.classList.toggle("scrolled", window.scrollY > 50);
 });
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-const menuBtn =
-    document.getElementById("menuBtn");
-
-const navLinks =
-    document.getElementById("navLinks");
-
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
 menuBtn.addEventListener("click",()=>{
-
     navLinks.classList.toggle("open");
-
-    menuBtn.textContent =
-        navLinks.classList.contains("open")
-            ? "×"
-            : "☰";
-
+    menuBtn.textContent = navLinks.classList.contains("open") ? "×" : "☰";
 });
-
-document
-    .querySelectorAll(".nav-links a")
-    .forEach(link=>{
-
-        link.addEventListener("click",()=>{
-
-            navLinks.classList.remove("open");
-
-            menuBtn.textContent="☰";
-
-        });
-
+document.querySelectorAll(".nav-links a").forEach(link=>{
+    link.addEventListener("click",()=>{
+        navLinks.classList.remove("open");
+        menuBtn.textContent="☰";
     });
-
-/* =========================================================
-   SLOW SCROLL REVEAL
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(
-        ".reveal,.reveal-left,.reveal-right,.scale-reveal"
-    );
-
-const observer =
-    new IntersectionObserver(
-
-        entries=>{
-
-            entries.forEach(entry=>{
-
-                if(entry.isIntersecting){
-
-                    entry.target.classList.add("active");
-
-                    observer.unobserve(entry.target);
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold:.08,
-
-            /*
-              Deliberately slow sensitivity:
-              elements reveal only after they
-              properly enter the viewport.
-            */
-
-            rootMargin:"0px 0px -90px 0px"
-        }
-
-    );
-
-revealElements.forEach(el=>{
-    observer.observe(el);
 });
 
 /* =========================================================
-   STAGGER SERVICE / REVIEW / PROCESS ELEMENTS
+   COLLECTION SLIDER LOGIC
 ========================================================= */
-
-document
-    .querySelectorAll(
-        ".service,.review,.process-card,.trust-item"
-    )
-    .forEach((el,index)=>{
-
-        el.style.transitionDelay =
-            `${Math.min(index * .08,.45)}s`;
-
-    });
-
-/* =========================================================
-   MAGNETIC ELEMENTS
-========================================================= */
-
-const magneticElements =
-    document.querySelectorAll(".magnetic");
-
-magneticElements.forEach(element=>{
-
-    element.addEventListener("mousemove",e=>{
-
-        const rect =
-            element.getBoundingClientRect();
-
-        const x =
-            e.clientX -
-            rect.left -
-            rect.width / 2;
-
-        const y =
-            e.clientY -
-            rect.top -
-            rect.height / 2;
-
-        const strength =
-            window.innerWidth < 700
-                ? .08
-                : .18;
-
-        element.style.transform =
-            `translate(${x * strength}px,
-                       ${y * strength}px)`;
-
-        if(element.classList.contains("btn")){
-
-            element.style.setProperty(
-                "--mx",
-                `${e.clientX - rect.left}px`
-            );
-
-            element.style.setProperty(
-                "--my",
-                `${e.clientY - rect.top}px`
-            );
-
-        }
-
-    });
-
-    element.addEventListener("mouseleave",()=>{
-
-        element.style.transform =
-            "translate(0,0)";
-
-    });
-
-});
-
-/* =========================================================
-   CUSTOM CURSOR
-========================================================= */
-
-const cursor =
-    document.getElementById("cursor");
-
-const cursorRing =
-    document.getElementById("cursorRing");
-
-let mouseX=0;
-let mouseY=0;
-let ringX=0;
-let ringY=0;
-
-document.addEventListener("mousemove",e=>{
-
-    mouseX=e.clientX;
-    mouseY=e.clientY;
-
-    cursor.style.left=mouseX+"px";
-    cursor.style.top=mouseY+"px";
-
-});
-
-function animateCursor(){
-
-    ringX +=
-        (mouseX-ringX)*.12;
-
-    ringY +=
-        (mouseY-ringY)*.12;
-
-    cursorRing.style.left=ringX+"px";
-    cursorRing.style.top=ringY+"px";
-
-    requestAnimationFrame(animateCursor);
-
-}
-
-animateCursor();
-
-document
-    .querySelectorAll(
-        "a,button,.collection-card,.service,.review"
-    )
-    .forEach(el=>{
-
-        el.addEventListener("mouseenter",()=>{
-            document.body.classList.add("cursor-hover");
-        });
-
-        el.addEventListener("mouseleave",()=>{
-            document.body.classList.remove("cursor-hover");
-        });
-
-    });
-
-/* =========================================================
-   HERO PARALLAX
-========================================================= */
-
-const heroVisual =
-    document.getElementById("heroVisual");
-
-window.addEventListener("scroll",()=>{
-
-    if(window.innerWidth > 800){
-
-        const y =
-            window.scrollY * .10;
-
-        heroVisual.style.transform =
-            `scale(1.02) translateY(${y}px)`;
-
-    }
-
-});
-
-/* =========================================================
-   COLLECTION SLIDER
-========================================================= */
-
-const track =
-    document.getElementById("collectionTrack");
-
-const windowBox =
-    document.getElementById("collectionWindow");
-
-const nextBtn =
-    document.getElementById("nextBtn");
-
-const prevBtn =
-    document.getElementById("prevBtn");
-
-const progressBar =
-    document.getElementById("progressBar");
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+const progressBar = document.getElementById("progressBar");
+const windowBox = document.getElementById("collectionWindow");
 
 let currentIndex=0;
 
 function visibleCards(){
-
-    if(window.innerWidth <= 700)
-        return 1;
-
-    if(window.innerWidth <= 1000)
-        return 2;
-
+    if(window.innerWidth <= 700) return 1;
+    if(window.innerWidth <= 1000) return 2;
     return 3;
-
 }
 
 function maxIndex(){
-
-    return Math.max(
-        0,
-        track.children.length -
-        visibleCards()
-    );
-
+    const track = document.getElementById("collectionTrack");
+    return Math.max(0, track.children.length - visibleCards());
 }
 
 function updateSlider(){
+    const track = document.getElementById("collectionTrack");
+    if(!track.children.length) return;
 
-    if(!track.children.length)
-        return;
+    const cardWidth = track.children[0].getBoundingClientRect().width;
+    const gap = window.innerWidth <= 700 ? 15 : 22;
+    const movement = currentIndex * (cardWidth + gap);
 
-    const cardWidth =
-        track.children[0]
-        .getBoundingClientRect()
-        .width;
+    track.style.transform = `translateX(-${movement}px)`;
 
-    const gap =
-        window.innerWidth <= 700
-            ? 15
-            : 22;
-
-    const movement =
-        currentIndex *
-        (cardWidth + gap);
-
-    track.style.transform =
-        `translateX(-${movement}px)`;
-
-    const max=maxIndex();
-
-    const percentage =
-        max===0
-            ? 100
-            : ((currentIndex/max)*100);
-
-    progressBar.style.width =
-        Math.max(18,percentage)+"%";
-
+    const max = maxIndex();
+    const percentage = max === 0 ? 100 : ((currentIndex/max)*100);
+    progressBar.style.width = Math.max(18, percentage) + "%";
 }
 
 function nextSlide(){
-
-    const max=maxIndex();
-
-    currentIndex =
-        currentIndex >= max
-            ? 0
-            : currentIndex+1;
-
+    const max = maxIndex();
+    currentIndex = currentIndex >= max ? 0 : currentIndex + 1;
     updateSlider();
-
 }
 
 function previousSlide(){
-
-    const max=maxIndex();
-
-    currentIndex =
-        currentIndex <= 0
-            ? max
-            : currentIndex-1;
-
+    const max = maxIndex();
+    currentIndex = currentIndex <= 0 ? max : currentIndex - 1;
     updateSlider();
-
 }
 
-nextBtn.addEventListener(
-    "click",
-    nextSlide
-);
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", previousSlide);
 
-prevBtn.addEventListener(
-    "click",
-    previousSlide
-);
-
-window.addEventListener(
-    "resize",
-    ()=>{
-
-        currentIndex =
-            Math.min(
-                currentIndex,
-                maxIndex()
-            );
-
-        updateSlider();
-
-    }
-);
-
-updateSlider();
-
-/* =========================================================
-   COLLECTION DRAG / SWIPE
-========================================================= */
-
-let dragStart=0;
-let dragging=false;
-
-windowBox.addEventListener(
-    "pointerdown",
-    e=>{
-
-        dragging=true;
-        dragStart=e.clientX;
-
-        windowBox.setPointerCapture(e.pointerId);
-
-    }
-);
-
-windowBox.addEventListener(
-    "pointerup",
-    e=>{
-
-        if(!dragging)
-            return;
-
-        const diff =
-            e.clientX-dragStart;
-
-        dragging=false;
-
-        if(Math.abs(diff)>60){
-
-            if(diff<0)
-                nextSlide();
-            else
-                previousSlide();
-
-        }
-
-    }
-);
-
-windowBox.addEventListener(
-    "pointercancel",
-    ()=>{
-        dragging=false;
-    }
-);
-
-/* =========================================================
-   COLLECTION AUTO SLIDE
-========================================================= */
+window.addEventListener("resize", () => {
+    currentIndex = Math.min(currentIndex, maxIndex());
+    updateSlider();
+});
 
 let autoSlider;
-
 function startAuto(){
-
     clearInterval(autoSlider);
-
-    autoSlider =
-        setInterval(
-            nextSlide,
-            5200
-        );
-
+    autoSlider = setInterval(nextSlide, 5200);
 }
-
 startAuto();
 
-windowBox.addEventListener(
-    "mouseenter",
-    ()=>{
-        clearInterval(autoSlider);
-    }
-);
-
-windowBox.addEventListener(
-    "mouseleave",
-    ()=>{
-        startAuto();
-    }
-);
+windowBox.addEventListener("mouseenter", () => clearInterval(autoSlider));
+windowBox.addEventListener("mouseleave", startAuto);
 
 /* =========================================================
    FAQ
 ========================================================= */
+document.querySelectorAll(".faq-question").forEach(question=>{
+    question.addEventListener("click",()=>{
+        const item = question.parentElement;
+        const answer = item.querySelector(".faq-answer");
 
-document
-    .querySelectorAll(".faq-question")
-    .forEach(question=>{
-
-        question.addEventListener(
-            "click",
-            ()=>{
-
-                const item =
-                    question.parentElement;
-
-                const answer =
-                    item.querySelector(
-                        ".faq-answer"
-                    );
-
-                document
-                    .querySelectorAll(".faq-item")
-                    .forEach(other=>{
-
-                        if(other!==item){
-
-                            other.classList.remove(
-                                "open"
-                            );
-
-                            other
-                                .querySelector(
-                                    ".faq-answer"
-                                )
-                                .style.maxHeight=null;
-
-                        }
-
-                    });
-
-                item.classList.toggle("open");
-
-                if(item.classList.contains("open")){
-
-                    answer.style.maxHeight =
-                        answer.scrollHeight+"px";
-
-                }else{
-
-                    answer.style.maxHeight=null;
-
-                }
-
+        document.querySelectorAll(".faq-item").forEach(other=>{
+            if(other!==item){
+                other.classList.remove("open");
+                other.querySelector(".faq-answer").style.maxHeight=null;
             }
-        );
+        });
 
+        item.classList.toggle("open");
+        if(item.classList.contains("open")){
+            answer.style.maxHeight = answer.scrollHeight+"px";
+        }else{
+            answer.style.maxHeight=null;
+        }
     });
+});
 
 /* =========================================================
-   SMOOTH ANCHOR SCROLL
+   ENQUIRY FORM
 ========================================================= */
+document.getElementById("enquiryForm").addEventListener("submit", e=>{
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const requirement = document.getElementById("requirement").value;
+    const message = document.getElementById("message").value.trim();
 
-document
-    .querySelectorAll('a[href^="#"]')
-    .forEach(anchor=>{
-
-        anchor.addEventListener(
-            "click",
-            e=>{
-
-                const target =
-                    document.querySelector(
-                        anchor.getAttribute("href")
-                    );
-
-                if(!target)
-                    return;
-
-                e.preventDefault();
-
-                const offset =
-                    navbar.offsetHeight;
-
-                const top =
-                    target.getBoundingClientRect().top +
-                    window.scrollY -
-                    offset;
-
-                window.scrollTo({
-
-                    top:top,
-
-                    behavior:"smooth"
-
-                });
-
-            }
-        );
-
-    });
-
-/* =========================================================
-   ENQUIRY → WHATSAPP
-========================================================= */
-
-const enquiryForm =
-    document.getElementById(
-        "enquiryForm"
-    );
-
-enquiryForm.addEventListener(
-    "submit",
-    e=>{
-
-        e.preventDefault();
-
-        const name =
-            document
-                .getElementById("name")
-                .value
-                .trim();
-
-        const phone =
-            document
-                .getElementById("phone")
-                .value
-                .trim();
-
-        const email =
-            document
-                .getElementById("email")
-                .value
-                .trim();
-
-        const requirement =
-            document
-                .getElementById("requirement")
-                .value;
-
-        const message =
-            document
-                .getElementById("message")
-                .value
-                .trim();
-
-        const whatsappMessage =
-`Hello M.R. Moorti Art,
+    const whatsappMessage = `Hello M.R. Moorti Art,
 
 I would like to make an enquiry.
 
@@ -4107,105 +3232,9 @@ Requirement: ${requirement || "Not specified"}
 Message:
 ${message || "I would like to know more about your collection."}`;
 
-        const whatsappURL =
-            "https://wa.me/918741917946?text="+
-            encodeURIComponent(
-                whatsappMessage
-            );
-
-        window.open(
-            whatsappURL,
-            "_blank"
-        );
-
-    }
-);
-
-/* =========================================================
-   IMAGE PARALLAX SECTIONS
-========================================================= */
-
-const parallaxSections =
-    document.querySelectorAll(
-        ".about-image,.about-detail,.worldwide"
-    );
-
-window.addEventListener("scroll",()=>{
-
-    if(window.innerWidth < 900)
-        return;
-
-    parallaxSections.forEach(el=>{
-
-        const rect =
-            el.getBoundingClientRect();
-
-        const center =
-            rect.top +
-            rect.height/2;
-
-        const viewport =
-            window.innerHeight/2;
-
-        const distance =
-            (center-viewport)*.035;
-
-        if(el.classList.contains("about-image") ||
-           el.classList.contains("about-detail")){
-
-            el.style.transform =
-                `translateY(${distance}px)`;
-
-        }
-
-    });
-
+    window.open("https://wa.me/918741917946?text=" + encodeURIComponent(whatsappMessage), "_blank");
 });
-
 </script>
 
-
-<div id="mrAdminPanel" aria-hidden="true">
-  <div id="mrAdminLogin">
-    <h1>M.R. Moorti Art</h1><p>Website Admin Login</p>
-    <label>Email</label><input id="mrAdminEmail" type="email" autocomplete="username" placeholder="Admin email">
-    <label>Password</label><input id="mrAdminPassword" type="password" autocomplete="current-password" placeholder="Password">
-    <button id="mrAdminLoginBtn" class="mrA-btn" style="margin-top:18px;width:100%">Login to Website</button>
-    <div id="mrAdminLoginMsg" class="mrA-msg"></div>
-  </div>
-</div>
-<div id="mrEditorBar" aria-hidden="true">
-  <div><div class="mrA-bar-title">M.R. Moorti Art — Website Manager</div><div class="mrA-bar-sub">Click <b>Edit Website</b>, then click any text or photo on the website.</div></div>
-  <div class="mrA-bar-actions"><button id="mrEditStart" class="mrA-btn">Edit Website</button><button id="mrSaveChanges" class="mrA-btn dark" style="display:none">Save Changes</button><button id="mrEditCancel" class="mrA-btn ghost" style="display:none">Cancel</button><button id="mrAdminExit" class="mrA-btn ghost">Exit Admin</button></div>
-</div>
-<div id="mrImageEditor" aria-hidden="true"><div class="mr-img-card"><h3>Change Photo</h3><p>Select a new image. It will upload to Supabase Storage and replace this photo.</p><input id="mrImageFile" type="file" accept="image/*"><div class="mr-img-actions"><button id="mrImageUpload" class="mrA-btn dark">Upload & Replace</button><button id="mrImageCancel" class="mrA-btn ghost">Cancel</button></div><div id="mrImageMsg" class="mrA-msg"></div></div></div>
-<script id="mr-admin-js">
-(function(){'use strict';
-const SUPABASE_URL='https://kyxjrqqkuavbelfixnyl.supabase.co';
-const SUPABASE_KEY='sb_publishable_tvIXgDw3YLYhg1OZ4dwKPA__HSKWUiR';
-const BUCKET='site-media'; let sb=null,visualEdit=false,dirty=false,activeImage=null,snapshot=null;
-const $=id=>document.getElementById(id),panel=()=>$('mrAdminPanel'),bar=()=>$('mrEditorBar');
-function ensureSupabase(){if(window.supabase)return Promise.resolve(window.supabase);return new Promise((resolve,reject)=>{let sc=document.getElementById('mr-supabase-cdn');if(!sc){sc=document.createElement('script');sc.id='mr-supabase-cdn';sc.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';sc.onload=()=>window.supabase?resolve(window.supabase):reject(new Error('Supabase unavailable'));sc.onerror=()=>reject(new Error('Supabase CDN unavailable'));document.head.appendChild(sc)}else{sc.addEventListener('load',()=>window.supabase?resolve(window.supabase):reject(new Error('Supabase unavailable')),{once:true});sc.addEventListener('error',()=>reject(new Error('Supabase CDN unavailable')),{once:true})}})}
-async function connect(){await ensureSupabase();if(!sb)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);return sb}
-function openLogin(){panel().classList.add('open');panel().setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}function closeLogin(){panel().classList.remove('open');panel().setAttribute('aria-hidden','true');document.body.style.overflow=''}function openBar(){bar().classList.add('open');bar().setAttribute('aria-hidden','false')}function closeBar(){bar().classList.remove('open');bar().setAttribute('aria-hidden','true')}
-function keyFor(el,i){if(el.dataset.mrKey)return el.dataset.mrKey;let base=el.id||el.className||('n'+i);return 'visual_'+el.tagName.toLowerCase()+'_'+String(base).replace(/[^a-z0-9_-]+/gi,'_')+'_'+i}
-function markEditable(){let i=0;document.querySelectorAll('body *').forEach(el=>{if(el.closest('#mrAdminPanel,#mrEditorBar,#mrImageEditor,script,style'))return;if(el.matches('img')){el.dataset.mrEditable='image';el.dataset.mrKey=keyFor(el,i++);return}if(el.children.length>0)return;let t=(el.textContent||'').trim();if(!t||el.matches('script,style,svg,path'))return;el.dataset.mrEditable='text';el.dataset.mrKey=keyFor(el,i++)})}
-function capture(){let text={},images={};document.querySelectorAll('[data-mr-editable="text"]').forEach(el=>text[el.dataset.mrKey]=el.innerHTML);document.querySelectorAll('[data-mr-editable="image"]').forEach(el=>images[el.dataset.mrKey]=el.getAttribute('src')||'');let d=document.querySelector('meta[name="description"]');return {text,images,meta:{title:document.title,description:d?d.content:''}}}
-function apply(data){if(!data)return;if(data.text)Object.entries(data.text).forEach(([k,v])=>{let el=document.querySelector('[data-mr-key="'+CSS.escape(k)+'"]');if(el)el.innerHTML=v});if(data.images)Object.entries(data.images).forEach(([k,v])=>{let el=document.querySelector('[data-mr-key="'+CSS.escape(k)+'"]');if(el&&v)el.src=v});if(data.meta){if(data.meta.title)document.title=data.meta.title;let d=document.querySelector('meta[name="description"]');if(d&&data.meta.description)d.content=data.meta.description}}
-async function loadSaved(){try{await connect();let {data,error}=await sb.from('site_content').select('content_value').eq('content_key','website_cms').maybeSingle();if(error)throw error;if(data&&data.content_value)apply(JSON.parse(data.content_value))}catch(e){console.warn('CMS load skipped:',e.message||e)}}
-async function save(){let payload=capture();let {error}=await sb.from('site_content').upsert({content_key:'website_cms',content_value:JSON.stringify(payload),updated_at:new Date().toISOString()},{onConflict:'content_key'});if(error)throw error;dirty=false;snapshot=JSON.parse(JSON.stringify(payload));alert('Website changes saved successfully.')}
-function setEditing(on){visualEdit=on;document.body.classList.toggle('mrVisualEdit',on);$('mrEditStart').style.display=on?'none':'';$('mrSaveChanges').style.display=on?'':'none';$('mrEditCancel').style.display=on?'':'none';if(on)markEditable()}
-async function enterAdmin(){closeLogin();openBar();await loadSaved();markEditable()}
-async function openAdmin(){openLogin();try{await connect();let {data:{session}}=await sb.auth.getSession();if(session)await enterAdmin()}catch(e){$('mrAdminLoginMsg').textContent='Supabase connection unavailable. Please check internet connection.'}}
-function exitAdmin(){setEditing(false);closeBar();closeLogin();if(sb)sb.auth.signOut().catch(()=>{});if(location.hash.toLowerCase()==='#admin')history.replaceState(null,'',location.pathname+location.search)}
-function openImageEditor(img){activeImage=img;$('mrImageFile').value='';$('mrImageMsg').textContent='';$('mrImageEditor').classList.add('open');$('mrImageEditor').setAttribute('aria-hidden','false')}function closeImageEditor(){activeImage=null;$('mrImageEditor').classList.remove('open');$('mrImageEditor').setAttribute('aria-hidden','true')}
-window.addEventListener('hashchange',()=>{if(location.hash.toLowerCase()==='#admin')openAdmin()});
-document.addEventListener('DOMContentLoaded',async()=>{if(location.hash.toLowerCase()==='#admin')await openAdmin();
-$('mrAdminLoginBtn').addEventListener('click',async()=>{let email=$('mrAdminEmail').value.trim(),password=$('mrAdminPassword').value,msg=$('mrAdminLoginMsg');if(!email||!password){msg.textContent='Enter email and password.';return}try{await connect();let {error}=await sb.auth.signInWithPassword({email,password});if(error)throw error;msg.textContent='';await enterAdmin()}catch(e){msg.textContent=e.message||'Login failed.'}});
-$('mrAdminPassword').addEventListener('keydown',e=>{if(e.key==='Enter')$('mrAdminLoginBtn').click()});$('mrEditStart').addEventListener('click',()=>{snapshot=capture();setEditing(true)});$('mrEditCancel').addEventListener('click',()=>{apply(snapshot);dirty=false;setEditing(false)});$('mrSaveChanges').addEventListener('click',async()=>{try{await save();setEditing(false)}catch(e){alert('Save failed: '+(e.message||e))}});$('mrAdminExit').addEventListener('click',exitAdmin);document.addEventListener('input',e=>{if(visualEdit&&e.target.matches('[data-mr-editable="text"]'))dirty=true});
-document.addEventListener('click',e=>{if(!visualEdit)return;let img=e.target.closest('[data-mr-editable="image"]');if(img){e.preventDefault();e.stopPropagation();openImageEditor(img)}},true);
-$('mrImageCancel').addEventListener('click',closeImageEditor);$('mrImageUpload').addEventListener('click',async()=>{let file=$('mrImageFile').files[0],msg=$('mrImageMsg');if(!file){msg.textContent='Please choose an image.';return}if(!activeImage)return;msg.textContent='Uploading...';try{let ext=(file.name.split('.').pop()||'jpg').toLowerCase(),path='website/'+Date.now()+'_'+Math.random().toString(36).slice(2)+'.'+ext;let {error}=await sb.storage.from(BUCKET).upload(path,file,{upsert:false,contentType:file.type||'image/jpeg'});if(error)throw error;let {data}=sb.storage.from(BUCKET).getPublicUrl(path);activeImage.src=data.publicUrl;dirty=true;msg.textContent='Photo replaced.';setTimeout(closeImageEditor,500)}catch(e){msg.textContent=e.message||'Upload failed.'}});panel().addEventListener('click',e=>{if(e.target===panel())closeLogin()})
-});})();
-</script>
 </body>
 </html>

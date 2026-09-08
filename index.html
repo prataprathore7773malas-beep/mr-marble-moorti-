@@ -14,6 +14,9 @@ content="M.R. Moorti Art — timeless marble craftsmanship, divine marble murtis
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
+<!-- Supabase JS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 /* =========================================================
@@ -155,13 +158,6 @@ body.cursor-hover .cursor-ring{
     transition:
         opacity 1s var(--ease),
         visibility 1s;
-    /* Public site must never depend on the CMS/CDN. */
-    animation:mrPreloaderFailsafe 1.6s ease forwards;
-}
-
-@keyframes mrPreloaderFailsafe{
-    0%,65%{opacity:1;visibility:visible;pointer-events:auto;}
-    100%{opacity:0;visibility:hidden;pointer-events:none;}
 }
 
 .preloader.hide{
@@ -1770,6 +1766,41 @@ footer::before{
 }
 
 /* =========================================================
+   ADMIN PANEL STYLES
+========================================================= */
+.editable-active {
+    outline: 2px dashed #b79b68 !important;
+    outline-offset: 4px;
+    position: relative;
+}
+#admin-toolbar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 99999;
+    background: #171716;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: none;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+#admin-toolbar button {
+    background: #b79b68;
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -2055,21 +2086,16 @@ footer::before{
 }
 
 </style>
-
-
-<style id="mr-admin-css">
-#mrAdminPanel{display:none;position:fixed;inset:0;z-index:2147483647;background:#f7f7f5;color:#171716;font-family:Manrope,Arial,sans-serif;overflow:auto}
-#mrAdminPanel.open{display:block}
-#mrAdminPanel *{box-sizing:border-box}
-.mr-admin-top{position:sticky;top:0;z-index:5;background:#111;color:#fff;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 8px 30px #0002}
-.mr-admin-top h2{margin:0;font:500 22px Playfair Display,serif}.mr-admin-top small{opacity:.65}
-.mr-admin-actions{display:flex;gap:8px;flex-wrap:wrap}.mr-admin-btn{border:1px solid #b79b68;background:#b79b68;color:#111;padding:10px 15px;border-radius:7px;cursor:pointer;font-weight:700}.mr-admin-btn.secondary{background:transparent;color:#fff}.mr-admin-wrap{max-width:1200px;margin:0 auto;padding:28px 20px 60px}.mr-admin-note{background:#fff;border:1px solid #ddd8cc;padding:15px 18px;border-radius:10px;margin-bottom:20px}.mr-admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.mr-admin-card{background:#fff;border:1px solid #ddd8cc;border-radius:12px;padding:18px}.mr-admin-card h3{margin:0 0 12px;font:500 19px Playfair Display,serif}.mr-admin-card label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin:12px 0 6px;color:#777}.mr-admin-card input,.mr-admin-card textarea{width:100%;padding:11px 12px;border:1px solid #d7d2c7;border-radius:7px;background:#fff;font:14px Manrope,Arial}.mr-admin-card textarea{min-height:90px;resize:vertical}.mr-admin-full{grid-column:1/-1}.mr-admin-login{max-width:420px;margin:12vh auto;background:#fff;border:1px solid #ddd8cc;border-radius:14px;padding:28px;box-shadow:0 20px 60px #0001}.mr-admin-login h1{font:500 30px Playfair Display,serif;margin:0 0 8px}.mr-admin-error{color:#9c2c2c;margin-top:10px;font-size:13px}.mr-admin-success{color:#2b6b43;margin-top:10px;font-size:13px}
-@media(max-width:760px){.mr-admin-grid{grid-template-columns:1fr}.mr-admin-full{grid-column:auto}.mr-admin-top{align-items:flex-start}.mr-admin-top h2{font-size:18px}}
-body.mr-admin-editing [data-mr-editable="true"]{outline:1px dashed #b79b68;outline-offset:3px;cursor:text}
-</style>
 </head>
 
 <body>
+
+<!-- Admin Toolbar -->
+<div id="admin-toolbar">
+    <span>Admin Mode Active</span>
+    <button id="saveChangesBtn">Save Changes</button>
+    <button id="logoutBtn" style="background:#444;">Logout</button>
+</div>
 
 <!-- ======================================================
      PRELOADER
@@ -2081,13 +2107,6 @@ body.mr-admin-editing [data-mr-editable="true"]{outline:1px dashed #b79b68;outli
         <div class="loader-line"></div>
     </div>
 </div>
-<script>
-(function(){
-  function releasePreloader(){var el=document.getElementById("preloader");if(el)el.classList.add("hide");}
-  setTimeout(releasePreloader,1400);
-  document.addEventListener("DOMContentLoaded",releasePreloader,{once:true});
-})();
-</script>
 
 <div class="noise"></div>
 
@@ -2107,8 +2126,8 @@ body.mr-admin-editing [data-mr-editable="true"]{outline:1px dashed #b79b68;outli
         </div>
 
         <div class="brand-text">
-            <div class="brand-name">M.R. Moorti Art</div>
-            <div class="brand-sub">Marble • Art • Heritage</div>
+            <div class="brand-name" data-key="brand-name">M.R. Moorti Art</div>
+            <div class="brand-sub" data-key="brand-sub">Marble • Art • Heritage</div>
         </div>
 
     </a>
@@ -2146,16 +2165,16 @@ body.mr-admin-editing [data-mr-editable="true"]{outline:1px dashed #b79b68;outli
 
     <div class="hero-content">
 
-        <div class="hero-eyebrow">
+        <div class="hero-eyebrow" data-key="hero-eyebrow">
             Rajasthan · Since 1992
         </div>
 
-        <h1>
+        <h1 data-key="hero-title">
             Stone<br>
             <em>with a soul.</em>
         </h1>
 
-        <p class="hero-description">
+        <p class="hero-description" data-key="hero-desc">
             Timeless marble craftsmanship shaped with devotion,
             precision and artistic excellence. Discover divine
             murtis, handcrafted art, marble mandirs and bespoke
@@ -2213,26 +2232,26 @@ body.mr-admin-editing [data-mr-editable="true"]{outline:1px dashed #b79b68;outli
                 Our Story
             </div>
 
-            <h2 class="section-title">
+            <h2 class="section-title" data-key="about-title">
                 Where marble<br>
                 becomes <em>art.</em>
             </h2>
 
-            <p class="section-copy">
+            <p class="section-copy" data-key="about-copy-1">
                 M.R. Moorti Art is rooted in the timeless tradition
                 of marble craftsmanship. Every creation reflects
                 patience, precision and the character of the artisan
                 who shaped it.
             </p>
 
-            <p class="section-copy">
+            <p class="section-copy" data-key="about-copy-2">
                 From divine marble murtis and temple artistry to
                 handcrafted pieces and bespoke marble creations,
                 our work is designed to bring beauty, devotion and
                 heritage into meaningful spaces.
             </p>
 
-            <div class="about-quote">
+            <div class="about-quote" data-key="about-quote">
                 Every piece is more than marble.
                 It is a story carved by hand.
             </div>
@@ -3457,6 +3476,78 @@ body.mr-admin-editing [data-mr-editable="true"]{outline:1px dashed #b79b68;outli
 ====================================================== -->
 
 <script>
+/* =========================================================
+   SUPABASE CONNECTION & ADMIN PANEL LOGIC
+========================================================= */
+const SUPABASE_URL = "https://kyxjrqqkuavbelfixnyl.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_tvIXgDw3YLYhg1OZ4dwKPA__HSKWUiR";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let isAdminMode = false;
+
+async function checkAdminRoute() {
+    if (window.location.hash === "#admin") {
+        const username = prompt("Enter Admin Username:");
+        const password = prompt("Enter Admin Password:");
+
+        // Supabase table 'admin_users' se verify karna (or custom check)
+        const { data, error } = await supabaseClient
+            .from('admin_users')
+            .select('*')
+            .eq('username', username)
+            .eq('password', password);
+
+        if (data && data.length > 0) {
+            isAdminMode = true;
+            document.getElementById("admin-toolbar").style.display = "flex";
+            enableEditing();
+            alert("Admin Login Successful!");
+        } else {
+            alert("Invalid Credentials!");
+            window.location.hash = "";
+        }
+    }
+}
+
+function enableEditing() {
+    document.querySelectorAll("[data-key]").forEach(el => {
+        el.setAttribute("contenteditable", "true");
+        el.classList.add("editable-active");
+    });
+}
+
+async function loadWebsiteContent() {
+    const { data, error } = await supabaseClient.from('site_content').select('*');
+    if (data && data.length > 0) {
+        data.forEach(item => {
+            const el = document.querySelector(`[data-key="${item.key}"]`);
+            if (el) el.innerHTML = item.value;
+        });
+    }
+}
+
+document.getElementById("saveChangesBtn").addEventListener("click", async () => {
+    const elements = document.querySelectorAll("[data-key]");
+    for (let el of elements) {
+        const key = el.getAttribute("data-key");
+        const value = el.innerHTML;
+
+        await supabaseClient
+            .from('site_content')
+            .upsert({ key: key, value: value }, { onConflict: 'key' });
+    }
+    alert("Changes saved successfully to Supabase!");
+});
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    window.location.hash = "";
+    location.reload();
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    loadWebsiteContent();
+    checkAdminRoute();
+});
 
 /* =========================================================
    PRELOADER
@@ -3562,13 +3653,6 @@ const observer =
 
         {
             threshold:.08,
-
-            /*
-              Deliberately slow sensitivity:
-              elements reveal only after they
-              properly enter the viewport.
-            */
-
             rootMargin:"0px 0px -90px 0px"
         }
 
@@ -4133,7 +4217,7 @@ window.addEventListener("scroll",()=>{
     parallaxSections.forEach(el=>{
 
         const rect =
-            el.getBoundingClientRect();
+            el.getcwdBoundingClientRect ? el.getBoundingClientRect() : el.getBoundingClientRect();
 
         const center =
             rect.top +
@@ -4159,117 +4243,5 @@ window.addEventListener("scroll",()=>{
 
 </script>
 
-
-<div id="mrAdminPanel" aria-hidden="true">
-  <div id="mrAdminLogin" class="mr-admin-login">
-    <h1>M.R. Moorti Art</h1><p>Admin Panel</p>
-    <label>Email</label><input id="mrAdminEmail" type="email" autocomplete="username" placeholder="Admin email">
-    <label>Password</label><input id="mrAdminPassword" type="password" autocomplete="current-password" placeholder="Password">
-    <button id="mrAdminLoginBtn" class="mr-admin-btn" style="margin-top:16px;width:100%">Login</button>
-    <div id="mrAdminLoginMsg"></div>
-  </div>
-  <div id="mrAdminApp" style="display:none">
-    <div class="mr-admin-top"><div><h2>M.R. Moorti Art — Website Manager</h2><small>Click any highlighted website text to edit it.</small></div><div class="mr-admin-actions"><button class="mr-admin-btn" id="mrAdminSave">Save Changes</button><button class="mr-admin-btn secondary" id="mrAdminPreview">Preview Website</button><button class="mr-admin-btn secondary" id="mrAdminLogout">Logout</button></div></div>
-    <div class="mr-admin-wrap">
-      <div class="mr-admin-note"><b>Easy Edit Mode:</b> नीचे fields में भी content बदल सकते हो। या Preview करके website में highlighted text पर click करके सीधे edit कर सकते हो. फिर <b>Save Changes</b> दबाओ.</div>
-      <div class="mr-admin-grid">
-        <div class="mr-admin-card"><h3>SEO</h3><label>Page Title</label><input id="cms_title"><label>Description</label><textarea id="cms_description"></textarea></div>
-        <div class="mr-admin-card"><h3>Contact</h3><label>Phone</label><input id="cms_phone"><label>WhatsApp Number</label><input id="cms_whatsapp"><label>Email</label><input id="cms_email"></div>
-        <div class="mr-admin-card mr-admin-full"><h3>Quick Website Text Editor</h3><label>Tip</label><textarea id="cms_quick" placeholder="Preview Website पर click करके text edit करो. Changes यहाँ automatically appear नहीं होंगे until Save."></textarea></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script id="mr-admin-js">
-(function(){
-'use strict';
-const SUPABASE_URL='https://kyxjrqqkuavbelfixnyl.supabase.co';
-const SUPABASE_KEY='sb_publishable_tvIXgDw3YLYhg1OZ4dwKPA__HSKWUiR';
-let sb=null, adminOriginalHash=false, editMode=false;
-const panel=()=>document.getElementById('mrAdminPanel');
-function ensureSupabase(){
-  if(window.supabase)return Promise.resolve(window.supabase);
-  return new Promise((resolve,reject)=>{
-    let script=document.getElementById('mr-supabase-cdn');
-    if(!script){
-      script=document.createElement('script');script.id='mr-supabase-cdn';
-      script.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-      script.onload=()=>window.supabase?resolve(window.supabase):reject(new Error('Supabase unavailable'));
-      script.onerror=()=>reject(new Error('Supabase CDN unavailable'));
-      document.head.appendChild(script);
-    }else{
-      script.addEventListener('load',()=>window.supabase?resolve(window.supabase):reject(new Error('Supabase unavailable')),{once:true});
-      script.addEventListener('error',()=>reject(new Error('Supabase CDN unavailable')),{once:true});
-    }
-  });
-}
-function showPanel(){panel().classList.add('open');panel().setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
-function hidePanel(){panel().classList.remove('open');panel().setAttribute('aria-hidden','true');document.body.style.overflow='';}
-function initEditable(){
-  const selectors='h1,h2,h3,h4,h5,p,span,a,button,li,label,blockquote';
-  document.querySelectorAll(selectors).forEach((el,i)=>{
-    if(el.closest('#mrAdminPanel')) return;
-    if(!el.textContent.trim() || el.children.length>3) return;
-    el.dataset.mrEditable='true'; el.dataset.mrKey=el.dataset.mrKey||('el_'+i);
-  });
-}
-async function loadContent(){
-  if(!sb)return;
-  try{
-    const {data,error}=await sb.from('site_content').select('content_value').eq('content_key','website_cms').maybeSingle();
-    if(error||!data?.content_value)return;
-    const obj=JSON.parse(data.content_value);
-    if(obj.text){Object.entries(obj.text).forEach(([key,val])=>{const el=document.querySelector('[data-mr-key="'+CSS.escape(key)+'"]');if(el&&typeof val==='string')el.innerHTML=val;});}
-    if(obj.images){Object.entries(obj.images).forEach(([key,val])=>{const el=document.querySelector('[data-mr-key="'+CSS.escape(key)+'"]');if(el&&el.tagName==='IMG')el.src=val;});}
-    if(obj.meta){if(obj.meta.title)document.title=obj.meta.title; const d=document.querySelector('meta[name="description"]');if(d&&obj.meta.description)d.content=obj.meta.description;}
-  }catch(e){console.warn('CMS content load skipped:',e);}
-}
-async function saveContent(){
-  if(!sb)return alert('Supabase connection unavailable.');
-  const text={}; const images={};
-  document.querySelectorAll('[data-mr-editable="true"]').forEach(el=>{const k=el.dataset.mrKey;if(k)text[k]=el.innerHTML;});
-  document.querySelectorAll('[data-mr-key]').forEach(el=>{if(el.tagName==='IMG')images[el.dataset.mrKey]=el.getAttribute('src');});
-  const d=document.querySelector('meta[name="description"]');
-  const payload={text,images,meta:{title:document.title,description:d?d.content:''},saved_at:new Date().toISOString()};
-  const {error}=await sb.from('site_content').upsert({content_key:'website_cms',content_value:JSON.stringify(payload),updated_at:new Date().toISOString()},{onConflict:'content_key'});
-  if(error)throw error;
-  alert('Changes saved successfully.');
-}
-async function openAdmin(){
-  showPanel();
-  const msg=document.getElementById('mrAdminLoginMsg');
-  try{
-    await ensureSupabase();
-    if(!sb)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-    const {data:{session}}=await sb.auth.getSession();
-    if(session)showApp();
-  }catch(e){
-    if(msg)msg.innerHTML='<div class="mr-admin-error">Admin connection unavailable. Check your internet connection.</div>';
-  }
-}
-function showApp(){document.getElementById('mrAdminLogin').style.display='none';document.getElementById('mrAdminApp').style.display='block';initEditable();editMode=true;document.body.classList.add('mr-admin-editing');}
-function closeAdmin(){hidePanel();document.body.classList.remove('mr-admin-editing');editMode=false;if(location.hash.toLowerCase()==='#admin')history.replaceState(null,'',location.pathname+location.search);}
-window.addEventListener('hashchange',()=>{if(location.hash.toLowerCase()==='#admin')openAdmin();else if(panel().classList.contains('open'))closeAdmin();});
-document.addEventListener('DOMContentLoaded',async()=>{
-  if(location.hash.toLowerCase()==='#admin')await openAdmin();
-  document.getElementById('mrAdminLoginBtn').addEventListener('click',async()=>{
-    const email=document.getElementById('mrAdminEmail').value.trim(), password=document.getElementById('mrAdminPassword').value;
-    if(!email||!password)return;
-    try{await ensureSupabase();}catch(e){document.getElementById('mrAdminLoginMsg').innerHTML='<div class="mr-admin-error">Supabase connection unavailable. Check your internet connection.</div>';return;}
-    if(!sb)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-    const {error}=await sb.auth.signInWithPassword({email,password});
-    const msg=document.getElementById('mrAdminLoginMsg');
-    if(error){msg.innerHTML='<div class="mr-admin-error">'+(error.message||'Login failed')+'</div>';return;}
-    msg.innerHTML='<div class="mr-admin-success">Login successful.</div>';showApp();
-  });
-  document.getElementById('mrAdminSave').addEventListener('click',async()=>{try{await saveContent()}catch(e){alert('Save failed: '+(e.message||e));}});
-  document.getElementById('mrAdminPreview').addEventListener('click',closeAdmin);
-  document.getElementById('mrAdminLogout').addEventListener('click',async()=>{if(sb)await sb.auth.signOut();closeAdmin();});
-  document.getElementById('mrAdminPanel').addEventListener('click',e=>{if(e.target===panel())closeAdmin();});
-  // Supabase is loaded only when #admin is opened.
-});
-})();
-</script>
 </body>
 </html>

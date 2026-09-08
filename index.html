@@ -4009,29 +4009,36 @@ async function cmsRequireAuth(){
     }
 }
 
-document.getElementById("cmsAdminLauncher").addEventListener("click",cmsRequireAuth);
-document.getElementById("cmsClose").addEventListener("click",cmsClosePanel);
+window.addEventListener("DOMContentLoaded",()=>{
+    const launcher=document.getElementById("cmsAdminLauncher");
+    const closeBtn=document.getElementById("cmsClose");
+    const logoutBtn=document.getElementById("cmsLogout");
+    const loginForm=document.getElementById("cmsLoginForm");
 
-document.getElementById("cmsLogout").addEventListener("click",async()=>{
-    await cmsSupabase.auth.signOut();
-    cmsClosePanel();
-    location.hash="";
-});
+    if(launcher) launcher.addEventListener("click",cmsRequireAuth);
+    if(closeBtn) closeBtn.addEventListener("click",cmsClosePanel);
 
-document.getElementById("cmsLoginForm").addEventListener("submit",async e=>{
-    e.preventDefault();
-    const email=document.getElementById("cmsEmail").value.trim();
-    const password=document.getElementById("cmsPassword").value;
-    const err=document.getElementById("cmsLoginError");
-    err.textContent="Signing in…";
-    const {error}=await cmsSupabase.auth.signInWithPassword({email,password});
-    if(error){
-        err.textContent=error.message;
-        return;
-    }
-    err.textContent="";
-    cmsCloseLogin();
-    cmsOpenPanel();
+    if(logoutBtn) logoutBtn.addEventListener("click",async()=>{
+        await cmsSupabase.auth.signOut();
+        cmsClosePanel();
+        location.hash="";
+    });
+
+    if(loginForm) loginForm.addEventListener("submit",async e=>{
+        e.preventDefault();
+        const email=document.getElementById("cmsEmail").value.trim();
+        const password=document.getElementById("cmsPassword").value;
+        const err=document.getElementById("cmsLoginError");
+        err.textContent="Signing in…";
+        const {error}=await cmsSupabase.auth.signInWithPassword({email,password});
+        if(error){
+            err.textContent=error.message;
+            return;
+        }
+        err.textContent="";
+        cmsCloseLogin();
+        cmsOpenPanel();
+    });
 });
 
 

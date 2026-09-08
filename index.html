@@ -256,8 +256,6 @@ body.cursor-hover .cursor-ring{
     position:relative;
 }
 
-
-
 .brand-text{
     display:flex;
     flex-direction:column;
@@ -719,8 +717,6 @@ section{
     right:0;
     top:0;
     object-fit:cover;
-
-    background-image:url("o1.png");
     background-position:center;
     background-size:cover;
     background-repeat:no-repeat;
@@ -743,7 +739,6 @@ section{
     bottom:0;
     width:53%;
     height:280px;
-    background-image:url("o2.png");
     background-position:center;
     background-size:cover;
     background-repeat:no-repeat;
@@ -970,7 +965,6 @@ section{
     min-height:800px;
     display:flex;
     align-items:center;
-
     background:
         linear-gradient(
             90deg,
@@ -980,7 +974,6 @@ section{
         ),
         url("https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=2400&q=90")
         center/cover fixed;
-
     color:white;
 }
 
@@ -1346,7 +1339,6 @@ section{
     max-width:500px;
 }
 
-
 .form{
     display:flex;
     flex-direction:column;
@@ -1398,8 +1390,9 @@ section{
 }
 
 /* =========================================================
-   FOOTER
+   PREMIUM LUXURY FOOTER
 ========================================================= */
+
 footer{
     position:relative;
     background:
@@ -1575,7 +1568,7 @@ footer::before{
 }
 
 /* =========================================================
-   FLOATING BUTTONS & ADMIN PANEL STYLES
+   FLOATING BUTTONS
 ========================================================= */
 
 .floating{
@@ -1619,10 +1612,12 @@ footer::before{
     text-transform:uppercase;
 }
 
+/* =========================================================
+   ADMIN PANEL STYLES
+========================================================= */
 .editable-active {
     outline: 2px dashed #b79b68 !important;
     outline-offset: 4px;
-    position: relative;
     cursor: text !important;
 }
 .img-editable-active {
@@ -1766,6 +1761,13 @@ footer::before{
             <a href="#contact" class="btn btn-light magnetic"><span data-editable-text="hero-btn-2">Start A Conversation</span></a>
         </div>
     </div>
+    <div class="hero-side">
+        Crafted in Rajasthan · Delivered Worldwide
+    </div>
+    <div class="hero-scroll">
+        <span class="scroll-line"></span>
+        Scroll to discover
+    </div>
 </section>
 
 <!-- ======================================================
@@ -1874,26 +1876,238 @@ footer::before{
                         <div class="collection-caption" data-editable-text="col-cap-3">Timeless marble work</div>
                     </div>
                 </article>
+                <article class="collection-card">
+                    <img src="c4.jpeg" alt="Marble Art Collection 04" data-editable-img="col-img-4">
+                    <div class="collection-overlay">
+                        <div class="collection-index">04 / 15</div>
+                        <div class="collection-name" data-editable-text="col-name-4">Heritage Form</div>
+                        <div class="collection-caption" data-editable-text="col-cap-4">Rajasthan artistry</div>
+                    </div>
+                </article>
+                <article class="collection-card">
+                    <img src="c5.jpeg" alt="Marble Art Collection 05" data-editable-img="col-img-5">
+                    <div class="collection-overlay">
+                        <div class="collection-index">05 / 15</div>
+                        <div class="collection-name" data-editable-text="col-name-5">Stone Poetry</div>
+                        <div class="collection-caption" data-editable-text="col-cap-5">Refined craftsmanship</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="collection-controls reveal">
+            <div class="progress"><span id="progressBar"></span></div>
+            <div class="slider-buttons">
+                <button class="slider-btn magnetic" id="prevBtn">←</button>
+                <button class="slider-btn magnetic" id="nextBtn">→</button>
             </div>
         </div>
     </div>
 </section>
 
 <!-- ======================================================
-     CONTACT & FOOTER
+     CRAFT
+====================================================== -->
+<section class="craft section-pad" id="craft">
+    <div class="container">
+        <div class="craft-content reveal">
+            <div class="kicker" data-editable-text="craft-kicker">The Art Of Craft</div>
+            <h2 class="craft-title" data-editable-text="craft-title">
+                Not just marble.<br>
+                <em>A legacy in stone.</em>
+            </h2>
+            <p class="craft-copy" data-editable-text="craft-copy">
+                Every curve, expression, ornament and detail is
+                patiently refined. Natural stone is transformed
+                into artwork through a balance of traditional
+                craftsmanship and artistic vision.
+            </p>
+            <div style="margin-top:38px">
+                <a href="#contact" class="btn btn-dark magnetic"><span data-editable-text="craft-btn">Discuss Your Requirement</span></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     SERVICES
+====================================================== -->
+<section class="services section-pad" id="services">
+    <div class="container">
+        <div class="reveal">
+            <div class="kicker" data-editable-text="serv-kicker">What We Create</div>
+            <h2 class="section-title" data-editable-text="serv-title">
+                From sacred spaces<br>
+                to <em>statement pieces.</em>
+            </h2>
+        </div>
+        <div class="service-list">
+            <div class="service reveal">
+                <div class="service-no">01</div>
+                <h3 data-editable-text="serv-h-1">Marble Murti</h3>
+                <p data-editable-text="serv-p-1">Traditional and custom marble murtis crafted with exceptional detailing and devotional precision.</p>
+                <div class="service-arrow">↗</div>
+            </div>
+            <div class="service reveal">
+                <div class="service-no">02</div>
+                <h3 data-editable-text="serv-h-2">Marble Mandir</h3>
+                <p data-editable-text="serv-p-2">Elegant marble temple designs created for homes, institutions and spiritual spaces.</p>
+                <div class="service-arrow">↗</div>
+            </div>
+            <div class="service reveal">
+                <div class="service-no">03</div>
+                <h3 data-editable-text="serv-h-3">Handicrafts</h3>
+                <p data-editable-text="serv-p-3">Unique handcrafted marble pieces bringing Rajasthan's artistic heritage into modern spaces.</p>
+                <div class="service-arrow">↗</div>
+            </div>
+            <div class="service reveal">
+                <div class="service-no">04</div>
+                <h3 data-editable-text="serv-h-4">Custom Art</h3>
+                <p data-editable-text="serv-p-4">Bespoke marble creations developed around your preferred design, size and artistic vision.</p>
+                <div class="service-arrow">↗</div>
+            </div>
+            <div class="service reveal">
+                <div class="service-no">05</div>
+                <h3 data-editable-text="serv-h-5">Paintings</h3>
+                <p data-editable-text="serv-p-5">Artistic works selected and created to complement interiors, spiritual spaces and collections.</p>
+                <div class="service-arrow">↗</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     PROCESS
+====================================================== -->
+<section class="process section-pad">
+    <div class="container">
+        <div class="reveal">
+            <div class="kicker" data-editable-text="proc-kicker">Our Approach</div>
+            <h2 class="section-title" data-editable-text="proc-title">
+                From vision<br>
+                to <em>creation.</em>
+            </h2>
+            <p class="section-copy" data-editable-text="proc-copy">
+                Every custom requirement follows a thoughtful process designed around detail, craftsmanship and the final space.
+            </p>
+        </div>
+        <div class="process-grid">
+            <div class="process-card reveal">
+                <div class="process-number">01</div>
+                <h3 data-editable-text="proc-h-1">Understand</h3>
+                <p data-editable-text="proc-p-1">We begin by understanding your requirement, design preference, dimensions and intended space.</p>
+            </div>
+            <div class="process-card reveal">
+                <div class="process-number">02</div>
+                <h3 data-editable-text="proc-h-2">Create</h3>
+                <p data-editable-text="proc-p-2">The concept is translated into carefully crafted marble artwork through skilled hands and detailed finishing.</p>
+            </div>
+            <div class="process-card reveal">
+                <div class="process-number">03</div>
+                <h3 data-editable-text="proc-h-3">Deliver</h3>
+                <p data-editable-text="proc-p-3">The completed creation is prepared with attention to presentation and delivery requirements.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     WORLDWIDE
+====================================================== -->
+<section class="worldwide section-pad">
+    <div class="container">
+        <div class="worldwide-content reveal">
+            <div class="kicker" data-editable-text="world-kicker">Rajasthan · To The World</div>
+            <h2 class="worldwide-title" data-editable-text="world-title">
+                Rajasthan's art.<br>
+                <em>Beyond borders.</em>
+            </h2>
+            <p class="section-copy" data-editable-text="world-copy">
+                Bringing the beauty of Indian marble craftsmanship beyond Rajasthan to homes, temples, collectors and meaningful spaces around the world.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     REVIEWS
+====================================================== -->
+<section class="testimonials section-pad">
+    <div class="container">
+        <div class="testimonial-head reveal">
+            <div>
+                <div class="kicker" data-editable-text="rev-kicker">Client Experience</div>
+                <h2 class="section-title" data-editable-text="rev-title">
+                    Words from<br>
+                    <em>our clients.</em>
+                </h2>
+            </div>
+            <p class="review-note" data-editable-text="rev-note">Genuine client feedback can be added here as your verified reviews are collected.</p>
+        </div>
+        <div class="reviews-grid">
+            <article class="review reveal">
+                <div class="stars">★★★★★</div>
+                <div class="review-text" data-editable-text="rev-text-1">“Beautiful craftsmanship and attention to detail. The final piece felt truly special.”</div>
+                <div class="review-author" data-editable-text="rev-auth-1">Client Review · Jaipur</div>
+            </article>
+            <article class="review reveal">
+                <div class="stars">★★★★★</div>
+                <div class="review-text" data-editable-text="rev-text-2">“The detailing and finish were exactly what we were looking for.”</div>
+                <div class="review-author" data-editable-text="rev-auth-2">Client Review · Rajasthan</div>
+            </article>
+            <article class="review reveal">
+                <div class="stars">★★★★★</div>
+                <div class="review-text" data-editable-text="rev-text-3">“A beautiful combination of traditional artistry and refined workmanship.”</div>
+                <div class="review-author" data-editable-text="rev-auth-3">Client Review · India</div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     FAQ
+====================================================== -->
+<section class="faq section-pad" id="faq">
+    <div class="container faq-layout">
+        <div class="reveal-left">
+            <div class="kicker" data-editable-text="faq-kicker">Frequently Asked</div>
+            <h2 class="section-title" data-editable-text="faq-title">
+                Questions,<br>
+                <em>answered.</em>
+            </h2>
+            <p class="section-copy" data-editable-text="faq-copy">
+                Have a specific requirement? Send us your details and our team can discuss the possibilities with you directly.
+            </p>
+        </div>
+        <div class="faq-list reveal-right">
+            <div class="faq-item">
+                <button class="faq-question"><span data-editable-text="faq-q-1">Do you create custom marble art?</span><span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p data-editable-text="faq-a-1">Yes. Custom marble creations can be discussed according to design, dimensions, artistic requirements and intended space.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question"><span data-editable-text="faq-q-2">Do you create marble mandirs?</span><span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p data-editable-text="faq-a-2">Yes. Marble mandir requirements for homes, institutions and spiritual spaces can be discussed with the team.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question"><span data-editable-text="faq-q-3">Can I enquire about a particular piece?</span><span class="faq-icon">+</span></button>
+                <div class="faq-answer"><p data-editable-text="faq-a-3">Absolutely. Mention the piece or collection image you are interested in and send your requirement through WhatsApp.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================
+     CONTACT
 ====================================================== -->
 <section class="contact section-pad" id="contact">
     <div class="container contact-grid">
         <div class="reveal-left">
-            <div class="kicker" data-editable-text="contact-kicker">Start A Conversation</div>
-            <h2 class="contact-title" data-editable-text="contact-title">
+            <div class="kicker" data-editable-text="cont-kicker">Start A Conversation</div>
+            <h2 class="contact-title" data-editable-text="cont-title">
                 Have a vision?<br>
                 <em>Let's create it.</em>
             </h2>
-            <p class="contact-copy" data-editable-text="contact-copy">
-                Tell us what you're looking for. Whether it is
-                a marble murti, mandir, handcrafted piece or
-                custom artwork, send us your requirement.
+            <p class="contact-copy" data-editable-text="cont-copy">
+                Tell us what you're looking for. Whether it is a marble murti, mandir, handcrafted piece or custom artwork, send us your requirement.
             </p>
         </div>
         <form class="form reveal-right" id="enquiryForm">
@@ -1908,6 +2122,9 @@ footer::before{
                     <option>Marble Murti</option>
                     <option>Marble Mandir</option>
                     <option>Handicrafts</option>
+                    <option>Custom Marble Art</option>
+                    <option>Painting</option>
+                    <option>Other</option>
                 </select>
             </div>
             <div class="field"><textarea id="message" placeholder="Tell us about your requirement..."></textarea></div>
@@ -1916,21 +2133,46 @@ footer::before{
     </div>
 </section>
 
+<!-- ======================================================
+     FOOTER
+====================================================== -->
 <footer>
     <div class="footer-top">
         <div class="footer-brand-wrap">
             <div class="footer-brand">
-                <span data-editable-text="footer-brand-title">M.R. Moorti Art</span>
+                <span data-editable-text="footer-brand-name">M.R. Moorti Art</span>
                 <span data-editable-text="footer-brand-sub">Marble · Art · Craftsmanship</span>
             </div>
             <div class="footer-tagline" data-editable-text="footer-tagline">Made with devotion.<br>Built to last.</div>
         </div>
+        <div>
+            <div class="footer-heading">Studio</div>
+            <div class="footer-address" data-editable-text="footer-address">
+                P-4 Mahaveer Colony,<br>
+                Kartarpura, Jaipur,<br>
+                Rajasthan · 302006
+            </div>
+        </div>
     </div>
     <div class="footer-bottom">
-        <span data-editable-text="footer-copy">© 2026 M.R. Moorti Art. All rights reserved.</span>
+        <span data-editable-text="footer-copy">© <span id="year"></span> M.R. Moorti Art. All rights reserved.</span>
         <span class="footer-credit" data-editable-text="footer-credit">Crafted by Marwar Infotech</span>
     </div>
 </footer>
+
+<!-- ======================================================
+     FLOATING ACTION BUTTONS
+====================================================== -->
+<a href="#contact" class="float-enquiry magnetic">Enquire Now</a>
+
+<div class="floating">
+    <a href="tel:+918741917946" class="float-btn call magnetic" aria-label="Call">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3 a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91 a16 16 0 0 0 6 6l1.27-1.27 a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 A2 2 0 0 1 22 16.92z"/></svg>
+    </a>
+    <a href="https://wa.me/918741917946" target="_blank" rel="noopener" class="float-btn whatsapp magnetic" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 C5.5 0 .2 5.3.2 11.9 c0 2.1.5 4.1 1.6 5.9L.2 24 l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4 c6.6 0 11.9-5.3 11.9-11.9 0-3.1-1.3-6.1-3.5-8.3z"/></svg>
+    </a>
+</div>
 
 <!-- ======================================================
      JAVASCRIPT (SUPABASE & LIVE ADMIN EDITING)
@@ -1960,13 +2202,13 @@ async function checkAdminRoute() {
 }
 
 function enableEditingTools() {
-    // Text elements
+    // Enable Text Editing
     document.querySelectorAll("[data-editable-text]").forEach(el => {
         el.setAttribute("contenteditable", "true");
         el.classList.add("editable-active");
     });
 
-    // Image elements
+    // Enable Image Editing on Click
     document.querySelectorAll("[data-editable-img]").forEach(img => {
         img.classList.add("img-editable-active");
         img.addEventListener("click", (e) => {
@@ -1978,7 +2220,7 @@ function enableEditingTools() {
         });
     });
 
-    // Background Image elements
+    // Enable Background Image Editing on Click
     document.querySelectorAll("[data-editable-bg]").forEach(bg => {
         bg.classList.add("img-editable-active");
         bg.addEventListener("click", (e) => {
@@ -2028,9 +2270,11 @@ document.getElementById("saveChangesBtn").addEventListener("click", async () => 
     const bgElements = document.querySelectorAll("[data-editable-bg]");
     for (let bg of bgElements) {
         const key = bg.getAttribute("data-editable-bg");
-        // Extract url from style string
-        const bgImageVal = bg.style.backgroundImage.slice(5, -2);
-        await supabaseClient.from('site_content').upsert({ key: key, value: bgImageVal }, { onConflict: 'key' });
+        let bgVal = bg.style.backgroundImage;
+        if (bgVal.startsWith('url(')) {
+            bgVal = bgVal.slice(4, -1).replace(/["']/g, "");
+        }
+        await supabaseClient.from('site_content').upsert({ key: key, value: bgVal }, { onConflict: 'key' });
     }
 
     alert("All Changes Saved Successfully to Supabase!");
@@ -2047,14 +2291,19 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================================================
-   STANDARD SITE SCRIPTS
+   STANDARD SCRIPTS
 ========================================================= */
 window.addEventListener("load",()=>{
     setTimeout(()=>{ document.getElementById("preloader").classList.add("hide"); },900);
 });
+
 document.getElementById("year").textContent = new Date().getFullYear();
+
 const navbar = document.getElementById("navbar");
-window.addEventListener("scroll",()=>{ navbar.classList.toggle("scrolled", window.scrollY > 50); });
+window.addEventListener("scroll",()=>{
+    navbar.classList.toggle("scrolled", window.scrollY > 50);
+});
+
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 menuBtn.addEventListener("click",()=>{

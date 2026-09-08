@@ -14,9 +14,6 @@ content="M.R. Moorti Art — timeless marble craftsmanship, divine marble murtis
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
-<!-- Supabase JS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 
 /* =========================================================
@@ -255,6 +252,8 @@ body.cursor-hover .cursor-ring{
     height:45px;
     position:relative;
 }
+
+
 
 .brand-text{
     display:flex;
@@ -717,6 +716,8 @@ section{
     right:0;
     top:0;
     object-fit:cover;
+
+    background-image:url("o1.png");
     background-position:center;
     background-size:cover;
     background-repeat:no-repeat;
@@ -739,6 +740,7 @@ section{
     bottom:0;
     width:53%;
     height:280px;
+    background-image:url("o2.png");
     background-position:center;
     background-size:cover;
     background-repeat:no-repeat;
@@ -965,6 +967,7 @@ section{
     min-height:800px;
     display:flex;
     align-items:center;
+
     background:
         linear-gradient(
             90deg,
@@ -974,6 +977,7 @@ section{
         ),
         url("https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=2400&q=90")
         center/cover fixed;
+
     color:white;
 }
 
@@ -1339,6 +1343,7 @@ section{
     max-width:500px;
 }
 
+
 .form{
     display:flex;
     flex-direction:column;
@@ -1390,6 +1395,9 @@ section{
 }
 
 /* =========================================================
+   FOOTER
+========================================================= */
+/* =========================================================
    PREMIUM LUXURY FOOTER
 ========================================================= */
 
@@ -1430,14 +1438,30 @@ footer::before{
 .footer-top{
     position:relative;
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:45px 30px;
+    grid-template-columns:
+        1.15fr
+        1fr
+        1.2fr
+        auto;
+    gap:45px;
     align-items:start;
     padding-bottom:65px;
+}
+.footer-top{
+    grid-template-columns:1fr 1fr;
+    gap:45px 30px;
 }
 
 .footer-brand-wrap{
     grid-column:1 / -1;
+}
+
+.footer-bottom{
+    align-items:flex-start;
+}
+/* BRAND */
+
+.footer-brand-wrap{
     max-width:280px;
 }
 
@@ -1469,6 +1493,8 @@ footer::before{
     color:#555;
 }
 
+/* FOOTER HEADINGS */
+
 .footer-heading{
     margin-bottom:20px;
     font-size:9px;
@@ -1476,6 +1502,8 @@ footer::before{
     text-transform:uppercase;
     color:#777;
 }
+
+/* CONTACT */
 
 .footer-contact{
     display:flex;
@@ -1490,7 +1518,9 @@ footer::before{
     color:#222;
     font-size:12px;
     line-height:1.5;
-    transition:transform .5s var(--ease), color .4s ease;
+    transition:
+        transform .5s var(--ease),
+        color .4s ease;
 }
 
 .footer-contact-item:hover{
@@ -1508,6 +1538,16 @@ footer::before{
     border:1px solid rgba(0,0,0,.15);
     border-radius:50%;
     background:rgba(255,255,255,.35);
+    transition:
+        transform .5s var(--ease),
+        background .4s ease,
+        border-color .4s ease;
+}
+
+.footer-contact-item:hover .footer-contact-icon{
+    transform:rotate(-8deg) scale(1.08);
+    background:#fff;
+    border-color:#111;
 }
 
 .footer-contact-icon svg{
@@ -1516,7 +1556,11 @@ footer::before{
     stroke:currentColor;
     fill:none;
     stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
+
+/* ADDRESS */
 
 .footer-address{
     max-width:230px;
@@ -1524,6 +1568,8 @@ footer::before{
     font-size:12px;
     line-height:1.8;
 }
+
+/* SOCIAL */
 
 .socials{
     display:flex;
@@ -1541,6 +1587,12 @@ footer::before{
     border-radius:50%;
     color:#222;
     background:rgba(255,255,255,.28);
+    transition:
+        transform .55s var(--ease),
+        background .4s ease,
+        color .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease;
 }
 
 .social svg{
@@ -1548,13 +1600,23 @@ footer::before{
     height:17px;
 }
 
+.social:hover{
+    background:#171717;
+    color:#fff;
+    border-color:#171717;
+    transform:translateY(-7px) rotate(-4deg);
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+/* BOTTOM */
+
 .footer-bottom{
     position:relative;
     border-top:1px solid rgba(0,0,0,.14);
     padding-top:24px;
     display:flex;
     justify-content:space-between;
-    align-items:flex-start;
+    align-items:center;
     gap:20px;
     color:#777;
     font-size:10px;
@@ -1578,6 +1640,78 @@ footer::before{
     z-index:4000;
     display:flex;
     flex-direction:column;
+    gap:11px;
+}
+
+.float-btn{
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.18);
+    transition:
+        transform .5s var(--ease),
+        box-shadow .4s ease;
+}
+
+.float-btn svg{
+    width:21px;
+    height:21px;
+}
+
+.float-btn:hover{
+    transform:scale(1.1) translateY(-3px);
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.24);
+}
+
+.call{
+    background:#181818;
+}
+
+.whatsapp{
+    background:#20b858;
+}
+
+.float-enquiry{
+    position:fixed;
+    left:20px;
+    bottom:20px;
+    z-index:4000;
+    padding:15px 22px;
+    border-radius:100px;
+    background:#fff;
+    color:#111;
+    border:1px solid #d5d5d2;
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+    font-size:10px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    transition:
+        background .4s ease,
+        color .4s ease,
+        transform .5s var(--ease);
+}
+
+.float-enquiry:hover{
+    background:#111;
+    color:#fff;
+}
+/* =========================================================
+   FLOATING BUTTONS
+========================================================= */
+
+.floating{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:4000;
+    display:flex;
+    flex-direction:column;
     gap:10px;
 }
 
@@ -1589,12 +1723,22 @@ footer::before{
     align-items:center;
     justify-content:center;
     box-shadow:0 15px 35px rgba(0,0,0,.18);
+    transition:.4s var(--ease);
     color:white;
     font-size:20px;
 }
 
-.call{ background:#222; }
-.whatsapp{ background:#20a956; }
+.float-btn:hover{
+    transform:scale(1.1);
+}
+
+.call{
+    background:#222;
+}
+
+.whatsapp{
+    background:#20a956;
+}
 
 .float-enquiry{
     position:fixed;
@@ -1610,48 +1754,20 @@ footer::before{
     font-size:10px;
     letter-spacing:.15em;
     text-transform:uppercase;
+    transition:.4s var(--ease);
+}
+
+.float-enquiry:hover{
+    background:#111;
+    color:white;
 }
 
 /* =========================================================
-   ADMIN PANEL STYLES
+   MOBILE
 ========================================================= */
-.editable-active {
-    outline: 2px dashed #b79b68 !important;
-    outline-offset: 4px;
-    cursor: text !important;
-}
-.img-editable-active {
-    outline: 3px solid #b79b68 !important;
-    cursor: pointer !important;
-}
-#admin-toolbar {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 99999;
-    background: #171716;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 50px;
-    display: none;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-#admin-toolbar button {
-    background: #b79b68;
-    border: none;
-    color: white;
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-}
 
 @media(max-width:1000px){
+
     .nav-links{
         position:absolute;
         top:72px;
@@ -1668,32 +1784,344 @@ footer::before{
         pointer-events:none;
         transition:.7s var(--ease);
     }
+
     .nav-links.open{
         transform:translateY(0);
         opacity:1;
         pointer-events:auto;
     }
-    .menu{ display:block; }
-    .about-grid, .contact-grid, .faq-layout{ grid-template-columns:1fr; gap:60px; }
-    .trust-grid{ grid-template-columns:repeat(2,1fr); }
-    .collection-card{ flex:0 0 70%; }
-    .process-grid, .reviews-grid{ grid-template-columns:1fr; }
+
+    .menu{
+        display:block;
+    }
+
+    .about-grid,
+    .contact-grid,
+    .faq-layout{
+        grid-template-columns:1fr;
+        gap:60px;
+    }
+
+    .trust-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .trust-item:nth-child(2){
+        border-right:0;
+    }
+
+    .collection-card{
+        flex:0 0 70%;
+    }
+
+    .process-grid,
+    .reviews-grid{
+        grid-template-columns:1fr;
+    }
+
+    .service{
+        grid-template-columns:65px 1fr 45px;
+    }
+
+    .service p{
+        grid-column:2;
+    }
+
+    .service-arrow{
+        grid-column:3;
+        grid-row:1 / span 2;
+    }
+
+    .about-visual{
+        min-height:580px;
+    }
+
 }
+
+@media(max-width:700px){
+
+    .hero-video-overlay{
+        background:
+            linear-gradient(
+                90deg,
+                rgba(250,250,248,.96),
+                rgba(250,250,248,.58)
+            );
+    }
+.footer-top{
+    grid-template-columns:1fr;
+    gap:38px;
+}
+
+.footer-brand-wrap{
+    grid-column:auto;
+}
+
+.footer-brand{
+    font-size:32px;
+}
+
+.footer-bottom{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+}
+    .navbar{
+        height:72px;
+        padding:0 5%;
+    }
+
+    .navbar.scrolled{
+        height:65px;
+    }
+
+    .brand-mark{
+        width:44px;
+        height:44px;
+    }
+
+    .brand-name{
+        font-size:17px;
+    }
+
+    .brand-sub{
+        font-size:6px;
+    }
+
+    .hero-content{
+        margin-left:6%;
+        width:88%;
+    }
+
+    .hero{
+        min-height:100svh;
+    }
+
+    .hero-visual{
+        background:#e8e8e4;
+    }
+
+    .hero h1{
+        font-size:clamp(58px,17vw,82px);
+    }
+
+    .hero-description{
+        font-size:14px;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .btn{
+        min-width:190px;
+    }
+
+    .section-pad{
+        padding:100px 0;
+    }
+
+    .collection-head,
+    .testimonial-head{
+        display:block;
+    }
+
+    .collection-meta,
+    .review-note{
+        margin-top:25px;
+    }
+
+    .collection-card{
+        flex:0 0 86%;
+        height:530px;
+    }
+
+    .collection-track{
+        gap:15px;
+    }
+
+    .progress{
+        width:150px;
+    }
+
+    .craft{
+        min-height:650px;
+        background-attachment:scroll;
+    }
+
+    .service{
+        grid-template-columns:45px 1fr 40px;
+        gap:13px;
+    }
+
+    .service h3{
+        font-size:27px;
+    }
+
+    .service p{
+        font-size:12px;
+    }
+
+    .about-visual{
+        min-height:500px;
+    }
+
+    .about-image{
+        width:84%;
+        height:420px;
+    }
+
+    .about-detail{
+        width:60%;
+        height:210px;
+    }
+
+    .trust-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .trust-item{
+        padding:20px;
+    }
+
+    .trust-number{
+        font-size:38px;
+    }
+
+    .reviews-grid{
+        gap:15px;
+    }
+
+    .review{
+        min-height:300px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .footer-top,
+    .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .footer-tagline{
+        font-size:18px;
+    }
+
+    .float-enquiry{
+        left:12px;
+        bottom:12px;
+        padding:13px 16px;
+        font-size:9px;
+    }
+
+    .floating{
+        right:12px;
+        bottom:12px;
+    }
+
+    .float-btn{
+        width:48px;
+        height:48px;
+    }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        scroll-behavior:auto!important;
+        transition-duration:.01ms!important;
+    }
+
+}
+
+
+/* =========================================================
+   SUPABASE ADMIN PANEL
+========================================================= */
+#adminPanel{position:fixed;inset:0;z-index:200000;display:none;background:#0b0b0a;color:#fff;font-family:var(--body);overflow:auto}
+#adminPanel.open{display:block}
+.admin-shell{min-height:100%;display:grid;grid-template-columns:270px 1fr}
+.admin-side{background:#11110f;border-right:1px solid #2b2b27;padding:26px 18px;position:sticky;top:0;height:100vh}
+.admin-logo{font-family:var(--serif);font-size:24px;line-height:1.05;margin-bottom:7px}
+.admin-sub{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#85857e;margin-bottom:30px}
+.admin-nav{display:grid;gap:7px}
+.admin-nav button{width:100%;text-align:left;background:transparent;border:1px solid transparent;color:#aaa;padding:12px 13px;border-radius:10px;cursor:pointer;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.admin-nav button.active,.admin-nav button:hover{background:#1c1c19;border-color:#35352f;color:#fff}
+.admin-main{padding:28px 4%;max-width:1500px;width:100%}
+.admin-top{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid #292925;padding-bottom:20px;margin-bottom:25px}
+.admin-top h2{font-family:var(--serif);font-weight:400;font-size:38px}
+.admin-actions{display:flex;gap:9px;flex-wrap:wrap}
+.admin-btn{border:1px solid #44443d;background:#181816;color:#fff;border-radius:999px;padding:11px 17px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.admin-btn.primary{background:#b79b68;color:#111;border-color:#b79b68}
+.admin-btn.danger{border-color:#6d3838;color:#ffb3b3}
+.admin-btn:hover{transform:translateY(-1px)}
+.admin-status{font-size:11px;color:#8f8f88;margin:10px 0 22px}
+.admin-status.ok{color:#a8d5a8}.admin-status.err{color:#ff9e9e}
+.admin-tab{display:none}.admin-tab.active{display:block}
+.admin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.admin-card{background:#121210;border:1px solid #292925;border-radius:16px;padding:20px}
+.admin-card.full{grid-column:1/-1}
+.admin-card h3{font-family:var(--serif);font-weight:400;font-size:25px;margin-bottom:16px}
+.admin-fields{display:grid;gap:13px}
+.admin-field label{display:block;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:#85857e;margin-bottom:7px}
+.admin-field input,.admin-field textarea,.admin-field select{width:100%;background:#0d0d0b;border:1px solid #34342f;color:#fff;border-radius:9px;padding:11px 12px;outline:none;font-size:12px}
+.admin-field textarea{min-height:105px;resize:vertical;line-height:1.6}
+.admin-field input:focus,.admin-field textarea:focus{border-color:#b79b68}
+.admin-inline{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.admin-collections{display:grid;gap:12px}
+.admin-collection{display:grid;grid-template-columns:86px 1fr auto;gap:14px;align-items:center;background:#0d0d0b;border:1px solid #292925;border-radius:12px;padding:10px}
+.admin-thumb{width:86px;height:100px;object-fit:cover;border-radius:8px;background:#1b1b18}
+.admin-collection-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.admin-collection-fields input{min-width:0}
+.admin-collection-fields input:last-child{grid-column:1/-1}
+.admin-file{font-size:10px;color:#aaa}
+.admin-login{position:fixed;inset:0;z-index:210000;background:rgba(0,0,0,.82);backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;padding:20px}
+.admin-login-card{width:min(430px,100%);background:#151513;border:1px solid #363630;border-radius:20px;padding:30px;box-shadow:0 30px 100px rgba(0,0,0,.5)}
+.admin-login-card h2{font-family:var(--serif);font-size:38px;font-weight:400}
+.admin-login-card p{font-size:12px;color:#999;margin:9px 0 24px;line-height:1.6}
+.admin-login-card .admin-fields{margin-bottom:18px}
+.admin-user{font-size:10px;color:#777;margin-right:auto}
+.admin-note{font-size:11px;line-height:1.7;color:#85857e;background:#0d0d0b;border:1px solid #292925;padding:13px;border-radius:10px;margin-top:14px}
+@media(max-width:900px){
+ .admin-shell{grid-template-columns:1fr}
+ .admin-side{position:relative;height:auto;border-right:0;border-bottom:1px solid #2b2b27;padding:15px}
+ .admin-nav{display:flex;overflow:auto}
+ .admin-nav button{white-space:nowrap;width:auto}
+ .admin-main{padding:20px 15px}
+ .admin-grid{grid-template-columns:1fr}
+ .admin-card.full{grid-column:auto}
+ .admin-top{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:600px){
+ .admin-collection{grid-template-columns:65px 1fr}
+ .admin-thumb{width:65px;height:75px}
+ .admin-collection > .admin-btn{grid-column:2}
+ .admin-collection-fields{grid-template-columns:1fr}
+ .admin-collection-fields input:last-child{grid-column:auto}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- Admin Toolbar -->
-<div id="admin-toolbar">
-    <span>Admin Mode Active</span>
-    <button id="saveChangesBtn">Save Changes</button>
-    <button id="logoutBtn" style="background:#444;">Logout</button>
-</div>
-
 <!-- ======================================================
      PRELOADER
 ====================================================== -->
+
 <div class="preloader" id="preloader">
     <div class="loader-inner">
         <div class="loader-brand">M.R. Moorti Art</div>
@@ -1702,24 +2130,31 @@ footer::before{
 </div>
 
 <div class="noise"></div>
+
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
 <!-- ======================================================
      NAVBAR
 ====================================================== -->
+
 <header class="navbar" id="navbar">
+
     <a href="#home" class="brand magnetic">
+
         <div class="brand-mark">
-            <img src="logo.png" alt="M.R. Moorti Art Logo" data-editable-img="logo-img">
+            <img src="logo.png" alt="M.R. Moorti Art Logo">
         </div>
+
         <div class="brand-text">
-            <div class="brand-name" data-editable-text="brand-name">M.R. Moorti Art</div>
-            <div class="brand-sub" data-editable-text="brand-sub">Marble • Art • Heritage</div>
+            <div class="brand-name">M.R. Moorti Art</div>
+            <div class="brand-sub">Marble • Art • Heritage</div>
         </div>
+
     </a>
 
     <nav class="nav-links" id="navLinks">
+
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#collection">Collection</a>
@@ -1727,589 +2162,2817 @@ footer::before{
         <a href="#services">Services</a>
         <a href="#faq">FAQ</a>
         <a href="#contact" class="nav-cta magnetic">Enquire</a>
+
     </nav>
+
     <button class="menu" id="menuBtn">☰</button>
+
 </header>
 
 <!-- ======================================================
      HERO
 ====================================================== -->
+
 <section class="hero" id="home">
+
     <div class="hero-visual" id="heroVisual">
         <video class="hero-video" autoplay muted loop playsinline preload="auto">
             <source src="hero.mp4" type="video/mp4">
         </video>
         <div class="hero-video-overlay"></div>
     </div>
+
     <div class="hero-glow"></div>
+
     <div class="hero-content">
-        <div class="hero-eyebrow" data-editable-text="hero-eyebrow">
+
+        <div class="hero-eyebrow">
             Rajasthan · Since 1992
         </div>
-        <h1 data-editable-text="hero-title">
+
+        <h1>
             Stone<br>
             <em>with a soul.</em>
         </h1>
-        <p class="hero-description" data-editable-text="hero-desc">
+
+        <p class="hero-description">
             Timeless marble craftsmanship shaped with devotion,
             precision and artistic excellence. Discover divine
             murtis, handcrafted art, marble mandirs and bespoke
             creations inspired by the heritage of Rajasthan.
         </p>
+
         <div class="hero-actions">
-            <a href="#collection" class="btn btn-dark magnetic"><span data-editable-text="hero-btn-1">Explore Collection</span></a>
-            <a href="#contact" class="btn btn-light magnetic"><span data-editable-text="hero-btn-2">Start A Conversation</span></a>
+
+            <a href="#collection"
+               class="btn btn-dark magnetic">
+                <span>Explore Collection</span>
+            </a>
+
+            <a href="#contact"
+               class="btn btn-light magnetic">
+                <span>Start A Conversation</span>
+            </a>
+
         </div>
+
     </div>
+
     <div class="hero-side">
         Crafted in Rajasthan · Delivered Worldwide
     </div>
+
     <div class="hero-scroll">
         <span class="scroll-line"></span>
         Scroll to discover
     </div>
+
 </section>
 
 <!-- ======================================================
      ABOUT
 ====================================================== -->
+
 <section class="about section-pad" id="about">
+
     <div class="container about-grid">
+
         <div class="about-visual reveal-left">
-            <div class="about-image" data-editable-bg="about-img-1" style="background-image:url('o1.png');"></div>
-            <div class="about-detail" data-editable-bg="about-img-2" style="background-image:url('o2.png');"></div>
+
+            <div class="about-image"></div>
+
+            <div class="about-detail"></div>
+
             <div class="about-number">01</div>
+
         </div>
+
         <div class="about-content reveal-right">
-            <div class="kicker" data-editable-text="about-kicker">Our Story</div>
-            <h2 class="section-title" data-editable-text="about-title">
+
+            <div class="kicker">
+                Our Story
+            </div>
+
+            <h2 class="section-title">
                 Where marble<br>
                 becomes <em>art.</em>
             </h2>
-            <p class="section-copy" data-editable-text="about-copy-1">
+
+            <p class="section-copy">
                 M.R. Moorti Art is rooted in the timeless tradition
                 of marble craftsmanship. Every creation reflects
                 patience, precision and the character of the artisan
                 who shaped it.
             </p>
-            <p class="section-copy" data-editable-text="about-copy-2">
+
+            <p class="section-copy">
                 From divine marble murtis and temple artistry to
                 handcrafted pieces and bespoke marble creations,
                 our work is designed to bring beauty, devotion and
                 heritage into meaningful spaces.
             </p>
-            <div class="about-quote" data-editable-text="about-quote">
+
+            <div class="about-quote">
                 Every piece is more than marble.
                 It is a story carved by hand.
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      TRUST
 ====================================================== -->
+
 <section class="trust">
+
     <div class="container trust-grid">
+
         <div class="trust-item reveal">
-            <div class="trust-number" data-editable-text="trust-num-1">1992</div>
-            <div class="trust-label" data-editable-text="trust-lab-1">Heritage & Experience</div>
+            <div class="trust-number">1992</div>
+            <div class="trust-label">Heritage & Experience</div>
         </div>
+
         <div class="trust-item reveal">
-            <div class="trust-number" data-editable-text="trust-num-2">15+</div>
-            <div class="trust-label" data-editable-text="trust-lab-2">Signature Pieces</div>
+            <div class="trust-number">15+</div>
+            <div class="trust-label">Signature Pieces</div>
         </div>
+
         <div class="trust-item reveal">
-            <div class="trust-number" data-editable-text="trust-num-3">∞</div>
-            <div class="trust-label" data-editable-text="trust-lab-3">Custom Possibilities</div>
+            <div class="trust-number">∞</div>
+            <div class="trust-label">Custom Possibilities</div>
         </div>
+
         <div class="trust-item reveal">
-            <div class="trust-number" data-editable-text="trust-num-4">01</div>
-            <div class="trust-label" data-editable-text="trust-lab-4">Rajasthan Craftsmanship</div>
+            <div class="trust-number">01</div>
+            <div class="trust-label">Rajasthan Craftsmanship</div>
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      COLLECTION
 ====================================================== -->
+
 <section class="collection section-pad" id="collection">
+
     <div class="container">
+
         <div class="collection-head reveal">
+
             <div class="collection-intro">
-                <div class="kicker" data-editable-text="col-kicker">Signature Collection</div>
-                <h2 class="section-title" data-editable-text="col-title">
+
+                <div class="kicker">
+                    Signature Collection
+                </div>
+
+                <h2 class="section-title">
                     Crafted pieces.<br>
                     <em>Timeless presence.</em>
                 </h2>
-                <p class="section-copy" data-editable-text="col-copy">
+
+                <p class="section-copy">
                     Explore selected creations representing the
                     artistic character and craftsmanship of
                     M.R. Moorti Art.
                 </p>
+
             </div>
-            <div class="collection-meta" data-editable-text="col-meta">15 Selected Works</div>
+
+            <div class="collection-meta">
+                15 Selected Works
+            </div>
+
         </div>
-        <div class="collection-window reveal scale-reveal" id="collectionWindow">
+
+        <div class="collection-window reveal scale-reveal"
+             id="collectionWindow">
+
             <div class="collection-track" id="collectionTrack">
+
+                <!-- C1 -->
                 <article class="collection-card">
-                    <img src="c1.jpeg" alt="Marble Art Collection 01" data-editable-img="col-img-1">
+                    <img src="c1.jpeg" alt="Marble Art Collection 01">
                     <div class="collection-overlay">
                         <div class="collection-index">01 / 15</div>
-                        <div class="collection-name" data-editable-text="col-name-1">Divine Form</div>
-                        <div class="collection-caption" data-editable-text="col-cap-1">Marble craftsmanship</div>
+                        <div class="collection-name">Divine Form</div>
+                        <div class="collection-caption">Marble craftsmanship</div>
                     </div>
                 </article>
+
+                <!-- C2 -->
                 <article class="collection-card">
-                    <img src="c2.jpeg" alt="Marble Art Collection 02" data-editable-img="col-img-2">
+                    <img src="c2.jpeg" alt="Marble Art Collection 02">
                     <div class="collection-overlay">
                         <div class="collection-index">02 / 15</div>
-                        <div class="collection-name" data-editable-text="col-name-2">Sacred Detail</div>
-                        <div class="collection-caption" data-editable-text="col-cap-2">Handcrafted artistry</div>
+                        <div class="collection-name">Sacred Detail</div>
+                        <div class="collection-caption">Handcrafted artistry</div>
                     </div>
                 </article>
+
+                <!-- C3 -->
                 <article class="collection-card">
-                    <img src="c3.jpeg" alt="Marble Art Collection 03" data-editable-img="col-img-3">
+                    <img src="c3.jpeg" alt="Marble Art Collection 03">
                     <div class="collection-overlay">
                         <div class="collection-index">03 / 15</div>
-                        <div class="collection-name" data-editable-text="col-name-3">Pure Craft</div>
-                        <div class="collection-caption" data-editable-text="col-cap-3">Timeless marble work</div>
+                        <div class="collection-name">Pure Craft</div>
+                        <div class="collection-caption">Timeless marble work</div>
                     </div>
                 </article>
+
+                <!-- C4 -->
                 <article class="collection-card">
-                    <img src="c4.jpeg" alt="Marble Art Collection 04" data-editable-img="col-img-4">
+                    <img src="c4.jpeg" alt="Marble Art Collection 04">
                     <div class="collection-overlay">
                         <div class="collection-index">04 / 15</div>
-                        <div class="collection-name" data-editable-text="col-name-4">Heritage Form</div>
-                        <div class="collection-caption" data-editable-text="col-cap-4">Rajasthan artistry</div>
+                        <div class="collection-name">Heritage Form</div>
+                        <div class="collection-caption">Rajasthan artistry</div>
                     </div>
                 </article>
+
+                <!-- C5 -->
                 <article class="collection-card">
-                    <img src="c5.jpeg" alt="Marble Art Collection 05" data-editable-img="col-img-5">
+                    <img src="c5.jpeg" alt="Marble Art Collection 05">
                     <div class="collection-overlay">
                         <div class="collection-index">05 / 15</div>
-                        <div class="collection-name" data-editable-text="col-name-5">Stone Poetry</div>
-                        <div class="collection-caption" data-editable-text="col-cap-5">Refined craftsmanship</div>
+                        <div class="collection-name">Stone Poetry</div>
+                        <div class="collection-caption">Refined craftsmanship</div>
                     </div>
                 </article>
+
+                <!-- C6 -->
+                <article class="collection-card">
+                    <img src="c6.jpeg" alt="Marble Art Collection 06">
+                    <div class="collection-overlay">
+                        <div class="collection-index">06 / 15</div>
+                        <div class="collection-name">Divine Grace</div>
+                        <div class="collection-caption">Hand-finished marble</div>
+                    </div>
+                </article>
+
+                <!-- C7 -->
+                <article class="collection-card">
+                    <img src="c7.jpeg" alt="Marble Art Collection 07">
+                    <div class="collection-overlay">
+                        <div class="collection-index">07 / 15</div>
+                        <div class="collection-name">Sculpted Legacy</div>
+                        <div class="collection-caption">Artisan craftsmanship</div>
+                    </div>
+                </article>
+
+                <!-- C8 -->
+                <article class="collection-card">
+                    <img src="c8.jpeg" alt="Marble Art Collection 08">
+                    <div class="collection-overlay">
+                        <div class="collection-index">08 / 15</div>
+                        <div class="collection-name">Marble Soul</div>
+                        <div class="collection-caption">Art with character</div>
+                    </div>
+                </article>
+
+                <!-- C9 -->
+                <article class="collection-card">
+                    <img src="c9.jpeg" alt="Marble Art Collection 09">
+                    <div class="collection-overlay">
+                        <div class="collection-index">09 / 15</div>
+                        <div class="collection-name">Sacred Lines</div>
+                        <div class="collection-caption">Detailed marble art</div>
+                    </div>
+                </article>
+
+                <!-- C10 -->
+                <article class="collection-card">
+                    <img src="c10.jpeg" alt="Marble Art Collection 10">
+                    <div class="collection-overlay">
+                        <div class="collection-index">10 / 15</div>
+                        <div class="collection-name">Quiet Grandeur</div>
+                        <div class="collection-caption">Luxury stonework</div>
+                    </div>
+                </article>
+
+                <!-- C11 -->
+                <article class="collection-card">
+                    <img src="c11.jpeg" alt="Marble Art Collection 11">
+                    <div class="collection-overlay">
+                        <div class="collection-index">11 / 15</div>
+                        <div class="collection-name">Artisan Spirit</div>
+                        <div class="collection-caption">Made by hand</div>
+                    </div>
+                </article>
+
+                <!-- C12 -->
+                <article class="collection-card">
+                    <img src="c12.jpeg" alt="Marble Art Collection 12">
+                    <div class="collection-overlay">
+                        <div class="collection-index">12 / 15</div>
+                        <div class="collection-name">Eternal Beauty</div>
+                        <div class="collection-caption">Natural marble</div>
+                    </div>
+                </article>
+
+                <!-- C13 -->
+                <article class="collection-card">
+                    <img src="c13.jpeg" alt="Marble Art Collection 13">
+                    <div class="collection-overlay">
+                        <div class="collection-index">13 / 15</div>
+                        <div class="collection-name">Sacred Art</div>
+                        <div class="collection-caption">Traditional influence</div>
+                    </div>
+                </article>
+
+                <!-- C14 -->
+                <article class="collection-card">
+                    <img src="c14.jpeg" alt="Marble Art Collection 14">
+                    <div class="collection-overlay">
+                        <div class="collection-index">14 / 15</div>
+                        <div class="collection-name">Timeless Stone</div>
+                        <div class="collection-caption">Refined details</div>
+                    </div>
+                </article>
+
+                <!-- C15 -->
+                <article class="collection-card">
+                    <img src="c15.jpeg" alt="Marble Art Collection 15">
+                    <div class="collection-overlay">
+                        <div class="collection-index">15 / 15</div>
+                        <div class="collection-name">The Masterpiece</div>
+                        <div class="collection-caption">Signature craftsmanship</div>
+                    </div>
+                </article>
+
             </div>
+
         </div>
+
         <div class="collection-controls reveal">
-            <div class="progress"><span id="progressBar"></span></div>
-            <div class="slider-buttons">
-                <button class="slider-btn magnetic" id="prevBtn">←</button>
-                <button class="slider-btn magnetic" id="nextBtn">→</button>
+
+            <div class="progress">
+                <span id="progressBar"></span>
             </div>
+
+            <div class="slider-buttons">
+
+                <button class="slider-btn magnetic" id="prevBtn">
+                    ←
+                </button>
+
+                <button class="slider-btn magnetic" id="nextBtn">
+                    →
+                </button>
+
+            </div>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      CRAFT
 ====================================================== -->
+
 <section class="craft section-pad" id="craft">
+
     <div class="container">
+
         <div class="craft-content reveal">
-            <div class="kicker" data-editable-text="craft-kicker">The Art Of Craft</div>
-            <h2 class="craft-title" data-editable-text="craft-title">
+
+            <div class="kicker">
+                The Art Of Craft
+            </div>
+
+            <h2 class="craft-title">
                 Not just marble.<br>
                 <em>A legacy in stone.</em>
             </h2>
-            <p class="craft-copy" data-editable-text="craft-copy">
+
+            <p class="craft-copy">
                 Every curve, expression, ornament and detail is
                 patiently refined. Natural stone is transformed
                 into artwork through a balance of traditional
                 craftsmanship and artistic vision.
             </p>
+
             <div style="margin-top:38px">
-                <a href="#contact" class="btn btn-dark magnetic"><span data-editable-text="craft-btn">Discuss Your Requirement</span></a>
+
+                <a href="#contact"
+                   class="btn btn-dark magnetic">
+                    <span>Discuss Your Requirement</span>
+                </a>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      SERVICES
 ====================================================== -->
+
 <section class="services section-pad" id="services">
+
     <div class="container">
+
         <div class="reveal">
-            <div class="kicker" data-editable-text="serv-kicker">What We Create</div>
-            <h2 class="section-title" data-editable-text="serv-title">
+
+            <div class="kicker">
+                What We Create
+            </div>
+
+            <h2 class="section-title">
                 From sacred spaces<br>
                 to <em>statement pieces.</em>
             </h2>
+
         </div>
+
         <div class="service-list">
+
             <div class="service reveal">
                 <div class="service-no">01</div>
-                <h3 data-editable-text="serv-h-1">Marble Murti</h3>
-                <p data-editable-text="serv-p-1">Traditional and custom marble murtis crafted with exceptional detailing and devotional precision.</p>
+
+                <h3>Marble Murti</h3>
+
+                <p>
+                    Traditional and custom marble murtis crafted
+                    with exceptional detailing and devotional
+                    precision.
+                </p>
+
                 <div class="service-arrow">↗</div>
             </div>
+
             <div class="service reveal">
                 <div class="service-no">02</div>
-                <h3 data-editable-text="serv-h-2">Marble Mandir</h3>
-                <p data-editable-text="serv-p-2">Elegant marble temple designs created for homes, institutions and spiritual spaces.</p>
+
+                <h3>Marble Mandir</h3>
+
+                <p>
+                    Elegant marble temple designs created for
+                    homes, institutions and spiritual spaces.
+                </p>
+
                 <div class="service-arrow">↗</div>
             </div>
+
             <div class="service reveal">
                 <div class="service-no">03</div>
-                <h3 data-editable-text="serv-h-3">Handicrafts</h3>
-                <p data-editable-text="serv-p-3">Unique handcrafted marble pieces bringing Rajasthan's artistic heritage into modern spaces.</p>
+
+                <h3>Handicrafts</h3>
+
+                <p>
+                    Unique handcrafted marble pieces bringing
+                    Rajasthan's artistic heritage into modern
+                    spaces.
+                </p>
+
                 <div class="service-arrow">↗</div>
             </div>
+
             <div class="service reveal">
                 <div class="service-no">04</div>
-                <h3 data-editable-text="serv-h-4">Custom Art</h3>
-                <p data-editable-text="serv-p-4">Bespoke marble creations developed around your preferred design, size and artistic vision.</p>
+
+                <h3>Custom Art</h3>
+
+                <p>
+                    Bespoke marble creations developed around
+                    your preferred design, size and artistic
+                    vision.
+                </p>
+
                 <div class="service-arrow">↗</div>
             </div>
+
             <div class="service reveal">
                 <div class="service-no">05</div>
-                <h3 data-editable-text="serv-h-5">Paintings</h3>
-                <p data-editable-text="serv-p-5">Artistic works selected and created to complement interiors, spiritual spaces and collections.</p>
+
+                <h3>Paintings</h3>
+
+                <p>
+                    Artistic works selected and created to
+                    complement interiors, spiritual spaces
+                    and collections.
+                </p>
+
                 <div class="service-arrow">↗</div>
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      PROCESS
 ====================================================== -->
+
 <section class="process section-pad">
+
     <div class="container">
+
         <div class="reveal">
-            <div class="kicker" data-editable-text="proc-kicker">Our Approach</div>
-            <h2 class="section-title" data-editable-text="proc-title">
+
+            <div class="kicker">
+                Our Approach
+            </div>
+
+            <h2 class="section-title">
                 From vision<br>
                 to <em>creation.</em>
             </h2>
-            <p class="section-copy" data-editable-text="proc-copy">
-                Every custom requirement follows a thoughtful process designed around detail, craftsmanship and the final space.
+
+            <p class="section-copy">
+                Every custom requirement follows a thoughtful
+                process designed around detail, craftsmanship
+                and the final space.
             </p>
+
         </div>
+
         <div class="process-grid">
+
             <div class="process-card reveal">
                 <div class="process-number">01</div>
-                <h3 data-editable-text="proc-h-1">Understand</h3>
-                <p data-editable-text="proc-p-1">We begin by understanding your requirement, design preference, dimensions and intended space.</p>
+
+                <h3>Understand</h3>
+
+                <p>
+                    We begin by understanding your requirement,
+                    design preference, dimensions and intended
+                    space.
+                </p>
             </div>
+
             <div class="process-card reveal">
                 <div class="process-number">02</div>
-                <h3 data-editable-text="proc-h-2">Create</h3>
-                <p data-editable-text="proc-p-2">The concept is translated into carefully crafted marble artwork through skilled hands and detailed finishing.</p>
+
+                <h3>Create</h3>
+
+                <p>
+                    The concept is translated into carefully
+                    crafted marble artwork through skilled
+                    hands and detailed finishing.
+                </p>
             </div>
+
             <div class="process-card reveal">
                 <div class="process-number">03</div>
-                <h3 data-editable-text="proc-h-3">Deliver</h3>
-                <p data-editable-text="proc-p-3">The completed creation is prepared with attention to presentation and delivery requirements.</p>
+
+                <h3>Deliver</h3>
+
+                <p>
+                    The completed creation is prepared with
+                    attention to presentation and delivery
+                    requirements.
+                </p>
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      WORLDWIDE
 ====================================================== -->
+
 <section class="worldwide section-pad">
+
     <div class="container">
+
         <div class="worldwide-content reveal">
-            <div class="kicker" data-editable-text="world-kicker">Rajasthan · To The World</div>
-            <h2 class="worldwide-title" data-editable-text="world-title">
+
+            <div class="kicker">
+                Rajasthan · To The World
+            </div>
+
+            <h2 class="worldwide-title">
                 Rajasthan's art.<br>
                 <em>Beyond borders.</em>
             </h2>
-            <p class="section-copy" data-editable-text="world-copy">
-                Bringing the beauty of Indian marble craftsmanship beyond Rajasthan to homes, temples, collectors and meaningful spaces around the world.
+
+            <p class="section-copy">
+                Bringing the beauty of Indian marble craftsmanship
+                beyond Rajasthan to homes, temples, collectors
+                and meaningful spaces around the world.
             </p>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      REVIEWS
 ====================================================== -->
+
 <section class="testimonials section-pad">
+
     <div class="container">
+
         <div class="testimonial-head reveal">
+
             <div>
-                <div class="kicker" data-editable-text="rev-kicker">Client Experience</div>
-                <h2 class="section-title" data-editable-text="rev-title">
+                <div class="kicker">
+                    Client Experience
+                </div>
+
+                <h2 class="section-title">
                     Words from<br>
                     <em>our clients.</em>
                 </h2>
             </div>
-            <p class="review-note" data-editable-text="rev-note">Genuine client feedback can be added here as your verified reviews are collected.</p>
+
+            <p class="review-note">
+                Genuine client feedback can be added here as
+                your verified reviews are collected.
+            </p>
+
         </div>
+
         <div class="reviews-grid">
+
             <article class="review reveal">
+
                 <div class="stars">★★★★★</div>
-                <div class="review-text" data-editable-text="rev-text-1">“Beautiful craftsmanship and attention to detail. The final piece felt truly special.”</div>
-                <div class="review-author" data-editable-text="rev-auth-1">Client Review · Jaipur</div>
+
+                <div class="review-text">
+                    “Beautiful craftsmanship and attention to
+                    detail. The final piece felt truly special.”
+                </div>
+
+                <div class="review-author">
+                    Client Review · Jaipur
+                </div>
+
             </article>
+
             <article class="review reveal">
+
                 <div class="stars">★★★★★</div>
-                <div class="review-text" data-editable-text="rev-text-2">“The detailing and finish were exactly what we were looking for.”</div>
-                <div class="review-author" data-editable-text="rev-auth-2">Client Review · Rajasthan</div>
+
+                <div class="review-text">
+                    “The detailing and finish were exactly what
+                    we were looking for.”
+                </div>
+
+                <div class="review-author">
+                    Client Review · Rajasthan
+                </div>
+
             </article>
+
             <article class="review reveal">
+
                 <div class="stars">★★★★★</div>
-                <div class="review-text" data-editable-text="rev-text-3">“A beautiful combination of traditional artistry and refined workmanship.”</div>
-                <div class="review-author" data-editable-text="rev-auth-3">Client Review · India</div>
+
+                <div class="review-text">
+                    “A beautiful combination of traditional
+                    artistry and refined workmanship.”
+                </div>
+
+                <div class="review-author">
+                    Client Review · India
+                </div>
+
             </article>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      FAQ
 ====================================================== -->
+
 <section class="faq section-pad" id="faq">
+
     <div class="container faq-layout">
+
         <div class="reveal-left">
-            <div class="kicker" data-editable-text="faq-kicker">Frequently Asked</div>
-            <h2 class="section-title" data-editable-text="faq-title">
+
+            <div class="kicker">
+                Frequently Asked
+            </div>
+
+            <h2 class="section-title">
                 Questions,<br>
                 <em>answered.</em>
             </h2>
-            <p class="section-copy" data-editable-text="faq-copy">
-                Have a specific requirement? Send us your details and our team can discuss the possibilities with you directly.
+
+            <p class="section-copy">
+                Have a specific requirement? Send us your
+                details and our team can discuss the possibilities
+                with you directly.
             </p>
+
         </div>
+
         <div class="faq-list reveal-right">
+
             <div class="faq-item">
-                <button class="faq-question"><span data-editable-text="faq-q-1">Do you create custom marble art?</span><span class="faq-icon">+</span></button>
-                <div class="faq-answer"><p data-editable-text="faq-a-1">Yes. Custom marble creations can be discussed according to design, dimensions, artistic requirements and intended space.</p></div>
+
+                <button class="faq-question">
+                    <span>Do you create custom marble art?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p>
+                        Yes. Custom marble creations can be
+                        discussed according to design, dimensions,
+                        artistic requirements and intended space.
+                    </p>
+                </div>
+
             </div>
+
             <div class="faq-item">
-                <button class="faq-question"><span data-editable-text="faq-q-2">Do you create marble mandirs?</span><span class="faq-icon">+</span></button>
-                <div class="faq-answer"><p data-editable-text="faq-a-2">Yes. Marble mandir requirements for homes, institutions and spiritual spaces can be discussed with the team.</p></div>
+
+                <button class="faq-question">
+                    <span>Do you create marble mandirs?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p>
+                        Yes. Marble mandir requirements for homes,
+                        institutions and spiritual spaces can be
+                        discussed with the team.
+                    </p>
+                </div>
+
             </div>
+
             <div class="faq-item">
-                <button class="faq-question"><span data-editable-text="faq-q-3">Can I enquire about a particular piece?</span><span class="faq-icon">+</span></button>
-                <div class="faq-answer"><p data-editable-text="faq-a-3">Absolutely. Mention the piece or collection image you are interested in and send your requirement through WhatsApp.</p></div>
+
+                <button class="faq-question">
+                    <span>Can I enquire about a particular piece?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p>
+                        Absolutely. Mention the piece or collection
+                        image you are interested in and send your
+                        requirement through WhatsApp.
+                    </p>
+                </div>
+
             </div>
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    <span>Do you provide delivery outside Rajasthan?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p>
+                        Delivery requirements can be discussed
+                        depending on the destination and nature
+                        of the creation.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="faq-item">
+
+                <button class="faq-question">
+                    <span>How can I request a quotation?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <p>
+                        Use the enquiry form below or contact us
+                        directly on WhatsApp with your name,
+                        requirement and preferred details.
+                    </p>
+                </div>
+
+            </div>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      CONTACT
 ====================================================== -->
+
 <section class="contact section-pad" id="contact">
+
     <div class="container contact-grid">
+
         <div class="reveal-left">
-            <div class="kicker" data-editable-text="cont-kicker">Start A Conversation</div>
-            <h2 class="contact-title" data-editable-text="cont-title">
+
+            <div class="kicker">
+                Start A Conversation
+            </div>
+
+            <h2 class="contact-title">
                 Have a vision?<br>
                 <em>Let's create it.</em>
             </h2>
-            <p class="contact-copy" data-editable-text="cont-copy">
-                Tell us what you're looking for. Whether it is a marble murti, mandir, handcrafted piece or custom artwork, send us your requirement.
+
+            <p class="contact-copy">
+                Tell us what you're looking for. Whether it is
+                a marble murti, mandir, handcrafted piece or
+                custom artwork, send us your requirement.
             </p>
+
+          
+
         </div>
+
         <form class="form reveal-right" id="enquiryForm">
+
             <div class="form-row">
-                <div class="field"><input type="text" id="name" placeholder="Your Name" required></div>
-                <div class="field"><input type="tel" id="phone" placeholder="Phone Number" required></div>
+
+                <div class="field">
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Your Name"
+                        required>
+                </div>
+
+                <div class="field">
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Phone Number"
+                        required>
+                </div>
+
             </div>
-            <div class="field"><input type="email" id="email" placeholder="Email Address"></div>
+
             <div class="field">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email Address">
+
+            </div>
+
+            <div class="field">
+
                 <select id="requirement">
-                    <option value="">What are you looking for?</option>
+
+                    <option value="">
+                        What are you looking for?
+                    </option>
+
                     <option>Marble Murti</option>
                     <option>Marble Mandir</option>
                     <option>Handicrafts</option>
                     <option>Custom Marble Art</option>
                     <option>Painting</option>
                     <option>Other</option>
+
                 </select>
+
             </div>
-            <div class="field"><textarea id="message" placeholder="Tell us about your requirement..."></textarea></div>
-            <button type="submit" class="btn btn-dark form-submit magnetic"><span>Send Enquiry →</span></button>
+
+            <div class="field">
+
+                <textarea
+                    id="message"
+                    placeholder="Tell us about your requirement..."></textarea>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-dark form-submit magnetic">
+
+                <span>Send Enquiry →</span>
+
+            </button>
+
         </form>
+
     </div>
+
 </section>
 
 <!-- ======================================================
      FOOTER
 ====================================================== -->
+
+<!-- ======================================================
+     PREMIUM FOOTER
+====================================================== -->
+
 <footer>
+
     <div class="footer-top">
+
+        <!-- BRAND -->
         <div class="footer-brand-wrap">
+
             <div class="footer-brand">
-                <span data-editable-text="footer-brand-name">M.R. Moorti Art</span>
-                <span data-editable-text="footer-brand-sub">Marble · Art · Craftsmanship</span>
+                M.R. Moorti Art
+                <span>Marble · Art · Craftsmanship</span>
             </div>
-            <div class="footer-tagline" data-editable-text="footer-tagline">Made with devotion.<br>Built to last.</div>
+
+            <div class="footer-tagline">
+                Made with devotion.<br>
+                Built to last.
+            </div>
+
         </div>
+
+
+        <!-- CONTACT -->
         <div>
-            <div class="footer-heading">Studio</div>
-            <div class="footer-address" data-editable-text="footer-address">
+
+            <div class="footer-heading">
+                Contact
+            </div>
+
+            <div class="footer-contact">
+
+                <!-- PHONE -->
+                <a
+                    href="tel:+918741917946"
+                    class="footer-contact-item magnetic"
+                >
+
+                    <span class="footer-contact-icon">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                            19.79 19.79 0 0 1-8.63-3.07
+                            19.5 19.5 0 0 1-6-6
+                            A19.79 19.79 0 0 1 2.12 4.18
+                            2 2 0 0 1 4.11 2h3
+                            a2 2 0 0 1 2 1.72
+                            12.84 12.84 0 0 0 .7 2.81
+                            2 2 0 0 1-.45 2.11L8.09 9.91
+                            a16 16 0 0 0 6 6l1.27-1.27
+                            a2 2 0 0 1 2.11-.45
+                            12.84 12.84 0 0 0 2.81.7
+                            A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        +91 87419 17946 , +91 7976186788
+                    </span>
+
+                </a>
+
+
+                <!-- WHATSAPP -->
+                <a
+                    href="https://wa.me/918741917946"
+                    target="_blank"
+                    rel="noopener"
+                    class="footer-contact-item magnetic"
+                >
+
+                    <span class="footer-contact-icon">
+
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.52 3.48A11.8 11.8 0 0 0 12.13 0
+                            C5.58 0 .25 5.33.25 11.88
+                            c0 2.09.55 4.13 1.59 5.93L.15 24
+                            l6.35-1.66a11.86 11.86 0 0 0 5.63 1.43
+                            h.01c6.55 0 11.88-5.33 11.88-11.89
+                            0-3.18-1.24-6.16-3.5-8.4z"/>
+                            <path d="M8.3 6.8c.22-.5.46-.51.84-.52
+                            .21-.01.45-.01.69-.01
+                            .22 0 .57.08.87.68
+                            .31.62 1.04 2.54 1.13 2.72
+                            .09.19.15.4.03.64
+                            -.12.24-.18.4-.35.61
+                            -.18.21-.37.47-.53.63
+                            -.18.18-.36.37-.15.72
+                            .21.35.93 1.53 2 2.47
+                            1.37 1.22 2.52 1.6 2.88 1.78
+                            .35.18.56.15.77-.09
+                            .21-.24.89-1.04 1.13-1.4
+                            .24-.36.48-.3.8-.18
+                            .32.12 2.02.95 2.37 1.12
+                            .35.18.58.27.67.42
+                            .09.15.09.87-.21 1.7
+                            -.3.83-1.77 1.59-2.46 1.69
+                            -.63.09-1.42.13-2.29-.14
+                            -.53-.17-1.21-.4-2.09-.78
+                            -3.67-1.58-6.06-5.28-6.25-5.52
+                            -.18-.24-1.49-1.98-1.49-3.78
+                            0-1.8.94-2.68 1.28-3.05z"/>
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        WhatsApp · +91 87419 17946
+                    </span>
+
+                </a>
+
+
+                <!-- EMAIL -->
+                <a
+                    href="mailto:umsharma1993@gmail.com"
+                    class="footer-contact-item magnetic"
+                >
+
+                    <span class="footer-contact-icon">
+
+                        <svg viewBox="0 0 24 24">
+                            <rect
+                                x="3"
+                                y="5"
+                                width="18"
+                                height="14"
+                                rx="2"
+                            />
+                            <path d="m3 7 9 6 9-6"/>
+                        </svg>
+
+                    </span>
+
+                    <span>
+                        umsharma1993@gmail.com
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ADDRESS -->
+        <div>
+
+            <div class="footer-heading">
+                Studio
+            </div>
+
+            <div class="footer-address">
+
                 P-4 Mahaveer Colony,<br>
                 Kartarpura, Jaipur,<br>
                 Rajasthan · 302006
+
             </div>
+
         </div>
+
+
+        <!-- SOCIAL -->
+        <div>
+
+            <div class="footer-heading">
+                Follow
+            </div>
+
+            <div class="socials">
+
+                <!-- INSTAGRAM -->
+                <a
+                    href="https://www.instagram.com/mr_marble_art?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
+                    target="_blank"
+                    rel="noopener"
+                    class="social magnetic"
+                    aria-label="Instagram"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    >
+                        <rect
+                            x="3"
+                            y="3"
+                            width="18"
+                            height="18"
+                            rx="5"
+                        />
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="4"
+                        />
+                        <circle
+                            cx="17.5"
+                            cy="6.5"
+                            r="1"
+                            fill="currentColor"
+                            stroke="none"
+                        />
+                    </svg>
+
+                </a>
+
+
+                <!-- WHATSAPP -->
+                <a
+                    href="https://wa.me/918741917946"
+                    target="_blank"
+                    rel="noopener"
+                    class="social magnetic"
+                    aria-label="WhatsApp"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    >
+                        <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0
+                        C5.5 0 .2 5.3.2 11.9
+                        c0 2.1.5 4.1 1.6 5.9L.2 24
+                        l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4
+                        c6.6 0 11.9-5.3 11.9-11.9
+                        0-3.1-1.3-6.1-3.5-8.3z"/>
+
+                        <path d="M8.1 6.8c.2-.5.5-.5.8-.5h.7
+                        c.2 0 .5.1.7.6l1 2.4
+                        c.1.2.1.4 0 .6l-.4.6
+                        c-.2.2-.4.5-.5.6
+                        -.2.2-.4.4-.2.7
+                        .2.4.9 1.5 2 2.5
+                        1.4 1.2 2.5 1.6 2.9 1.8
+                        .4.2.6.1.8-.1l1.1-1.4
+                        c.2-.3.5-.3.8-.2
+                        l2.3 1.1c.3.2.5.3.6.4
+                        .1.2.1.9-.2 1.7
+                        -.3.8-1.7 1.6-2.4 1.7
+                        -.7.1-1.5.1-2.3-.1
+                        -.5-.2-1.2-.4-2.1-.8
+                        -3.7-1.6-6.1-5.3-6.3-5.5
+                        -.2-.2-1.5-2-1.5-3.8
+                        0-1.8.9-2.7 1.2-3.1z"/>
+                    </svg>
+
+                </a>
+
+
+                <!-- EMAIL -->
+                <a
+                    href="mailto:umsharma1993@gmail.com"
+                    class="social magnetic"
+                    aria-label="Email"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                    >
+                        <rect
+                            x="3"
+                            y="5"
+                            width="18"
+                            height="14"
+                            rx="2"
+                        />
+                        <path d="m3 7 9 6 9-6"/>
+                    </svg>
+
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
+
+
     <div class="footer-bottom">
-        <span data-editable-text="footer-copy">© <span id="year"></span> M.R. Moorti Art. All rights reserved.</span>
-        <span class="footer-credit" data-editable-text="footer-credit">Crafted by Marwar Infotech</span>
+
+        <span>
+            © <span id="year"></span>
+            M.R. Moorti Art. All rights reserved.
+        </span>
+
+        <span class="footer-credit">
+            Crafted by Marwar Infotech
+        </span>
+
     </div>
+
 </footer>
 
 <!-- ======================================================
+     FLOATING BUTTONS
+====================================================== -->
+ <!-- ======================================================
      FLOATING ACTION BUTTONS
 ====================================================== -->
-<a href="#contact" class="float-enquiry magnetic">Enquire Now</a>
+
+<a
+    href="#contact"
+    class="float-enquiry magnetic"
+>
+    Enquire Now
+</a>
+
 
 <div class="floating">
-    <a href="tel:+918741917946" class="float-btn call magnetic" aria-label="Call">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3 a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91 a16 16 0 0 0 6 6l1.27-1.27 a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 A2 2 0 0 1 22 16.92z"/></svg>
+
+    <!-- CALL -->
+
+    <a
+        href="tel:+918741917946"
+        class="float-btn call magnetic"
+        aria-label="Call M.R. Moorti Art"
+    >
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+
+            <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2
+                19.79 19.79 0 0 1-8.63-3.07
+                19.5 19.5 0 0 1-6-6
+                A19.79 19.79 0 0 1 2.12 4.18
+                2 2 0 0 1 4.11 2h3
+                a2 2 0 0 1 2 1.72
+                12.84 12.84 0 0 0 .7 2.81
+                2 2 0 0 1-.45 2.11L8.09 9.91
+                a16 16 0 0 0 6 6l1.27-1.27
+                a2 2 0 0 1 2.11-.45
+                12.84 12.84 0 0 0 2.81.7
+                A2 2 0 0 1 22 16.92z"
+            />
+
+        </svg>
+
     </a>
-    <a href="https://wa.me/918741917946" target="_blank" rel="noopener" class="float-btn whatsapp magnetic" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 C5.5 0 .2 5.3.2 11.9 c0 2.1.5 4.1 1.6 5.9L.2 24 l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4 c6.6 0 11.9-5.3 11.9-11.9 0-3.1-1.3-6.1-3.5-8.3z"/></svg>
+
+
+    <!-- WHATSAPP -->
+
+    <a
+        href="https://wa.me/918741917946"
+        target="_blank"
+        rel="noopener"
+        class="float-btn whatsapp magnetic"
+        aria-label="WhatsApp M.R. Moorti Art"
+    >
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        >
+
+            <path
+                d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0
+                C5.5 0 .2 5.3.2 11.9
+                c0 2.1.5 4.1 1.6 5.9L.2 24
+                l6.4-1.7a11.8 11.8 0 0 0 5.5 1.4
+                c6.6 0 11.9-5.3 11.9-11.9
+                0-3.1-1.3-6.1-3.5-8.3z"
+            />
+
+            <path
+                d="M8.1 6.8c.2-.5.5-.5.8-.5h.7
+                c.2 0 .5.1.7.6l1 2.4
+                c.1.2.1.4 0 .6l-.4.6
+                c-.2.2-.4.5-.5.6
+                -.2.2-.4.4-.2.7
+                .2.4.9 1.5 2 2.5
+                1.4 1.2 2.5 1.6 2.9 1.8
+                .4.2.6.1.8-.1l1.1-1.4
+                c.2-.3.5-.3.8-.2
+                l2.3 1.1c.3.2.5.3.6.4
+                .1.2.1.9-.2 1.7
+                -.3.8-1.7 1.6-2.4 1.7
+                -.7.1-1.5.1-2.3-.1
+                -.5-.2-1.2-.4-2.1-.8
+                -3.7-1.6-6.1-5.3-6.3-5.5
+                -.2-.2-1.5-2-1.5-3.8
+                0-1.8.9-2.7 1.2-3.1z"
+            />
+
+        </svg>
+
     </a>
+
 </div>
 
 <!-- ======================================================
-     JAVASCRIPT (SUPABASE & LIVE ADMIN EDITING)
+     JAVASCRIPT
 ====================================================== -->
+
 <script>
-const SUPABASE_URL = "https://kyxjrqqkuavbelfixnyl.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_tvIXgDw3YLYhg1OZ4dwKPA__HSKWUiR";
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-let isAdminMode = false;
+/* =========================================================
+   PRELOADER
+========================================================= */
 
-async function checkAdminRoute() {
-    if (window.location.hash === "#admin") {
-        const username = prompt("Enter Admin Email/Username:");
-        const password = prompt("Enter Admin Password:");
+window.addEventListener("load",()=>{
 
-        if (username === "umsharma1993@gmail.com" && password === "umesh1992") {
-            isAdminMode = true;
-            document.getElementById("admin-toolbar").style.display = "flex";
-            enableEditingTools();
-            alert("Admin Login Successful!");
-        } else {
-            alert("Invalid Credentials!");
-            window.location.hash = "";
-        }
-    }
-}
+    setTimeout(()=>{
 
-function enableEditingTools() {
-    // Enable Text Editing
-    document.querySelectorAll("[data-editable-text]").forEach(el => {
-        el.setAttribute("contenteditable", "true");
-        el.classList.add("editable-active");
-    });
+        document
+            .getElementById("preloader")
+            .classList.add("hide");
 
-    // Enable Image Editing on Click
-    document.querySelectorAll("[data-editable-img]").forEach(img => {
-        img.classList.add("img-editable-active");
-        img.addEventListener("click", (e) => {
-            e.preventDefault();
-            const newUrl = prompt("Enter new Image URL/Path:", img.src);
-            if (newUrl) {
-                img.src = newUrl;
-            }
-        });
-    });
+    },900);
 
-    // Enable Background Image Editing on Click
-    document.querySelectorAll("[data-editable-bg]").forEach(bg => {
-        bg.classList.add("img-editable-active");
-        bg.addEventListener("click", (e) => {
-            e.preventDefault();
-            const newUrl = prompt("Enter new Background Image URL/Path:", "");
-            if (newUrl) {
-                bg.style.backgroundImage = `url('${newUrl}')`;
-            }
-        });
-    });
-}
-
-async function loadWebsiteContent() {
-    const { data, error } = await supabaseClient.from('site_content').select('*');
-    if (data && data.length > 0) {
-        data.forEach(item => {
-            const textEl = document.querySelector(`[data-editable-text="${item.key}"]`);
-            if (textEl) textEl.innerHTML = item.value;
-
-            const imgEl = document.querySelector(`[data-editable-img="${item.key}"]`);
-            if (imgEl) imgEl.src = item.value;
-
-            const bgEl = document.querySelector(`[data-editable-bg="${item.key}"]`);
-            if (bgEl) bgEl.style.backgroundImage = `url('${item.value}')`;
-        });
-    }
-}
-
-document.getElementById("saveChangesBtn").addEventListener("click", async () => {
-    // Save Texts
-    const textElements = document.querySelectorAll("[data-editable-text]");
-    for (let el of textElements) {
-        const key = el.getAttribute("data-editable-text");
-        const value = el.innerHTML;
-        await supabaseClient.from('site_content').upsert({ key: key, value: value }, { onConflict: 'key' });
-    }
-
-    // Save Images
-    const imgElements = document.querySelectorAll("[data-editable-img]");
-    for (let img of imgElements) {
-        const key = img.getAttribute("data-editable-img");
-        const value = img.src;
-        await supabaseClient.from('site_content').upsert({ key: key, value: value }, { onConflict: 'key' });
-    }
-
-    // Save Background Images
-    const bgElements = document.querySelectorAll("[data-editable-bg]");
-    for (let bg of bgElements) {
-        const key = bg.getAttribute("data-editable-bg");
-        let bgVal = bg.style.backgroundImage;
-        if (bgVal.startsWith('url(')) {
-            bgVal = bgVal.slice(4, -1).replace(/["']/g, "");
-        }
-        await supabaseClient.from('site_content').upsert({ key: key, value: bgVal }, { onConflict: 'key' });
-    }
-
-    alert("All Changes Saved Successfully to Supabase!");
-});
-
-document.getElementById("logoutBtn").addEventListener("click", () => {
-    window.location.hash = "";
-    location.reload();
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-    loadWebsiteContent();
-    checkAdminRoute();
 });
 
 /* =========================================================
-   STANDARD SCRIPTS
+   YEAR
 ========================================================= */
-window.addEventListener("load",()=>{
-    setTimeout(()=>{ document.getElementById("preloader").classList.add("hide"); },900);
-});
 
-document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-const navbar = document.getElementById("navbar");
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+const navbar =
+    document.getElementById("navbar");
+
 window.addEventListener("scroll",()=>{
-    navbar.classList.toggle("scrolled", window.scrollY > 50);
+
+    navbar.classList.toggle(
+        "scrolled",
+        window.scrollY > 50
+    );
+
 });
 
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const menuBtn =
+    document.getElementById("menuBtn");
+
+const navLinks =
+    document.getElementById("navLinks");
+
 menuBtn.addEventListener("click",()=>{
+
     navLinks.classList.toggle("open");
-    menuBtn.textContent = navLinks.classList.contains("open") ? "×" : "☰";
+
+    menuBtn.textContent =
+        navLinks.classList.contains("open")
+            ? "×"
+            : "☰";
+
 });
+
+document
+    .querySelectorAll(".nav-links a")
+    .forEach(link=>{
+
+        link.addEventListener("click",()=>{
+
+            navLinks.classList.remove("open");
+
+            menuBtn.textContent="☰";
+
+        });
+
+    });
+
+/* =========================================================
+   SLOW SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal,.reveal-left,.reveal-right,.scale-reveal"
+    );
+
+const observer =
+    new IntersectionObserver(
+
+        entries=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("active");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold:.08,
+
+            /*
+              Deliberately slow sensitivity:
+              elements reveal only after they
+              properly enter the viewport.
+            */
+
+            rootMargin:"0px 0px -90px 0px"
+        }
+
+    );
+
+revealElements.forEach(el=>{
+    observer.observe(el);
+});
+
+/* =========================================================
+   STAGGER SERVICE / REVIEW / PROCESS ELEMENTS
+========================================================= */
+
+document
+    .querySelectorAll(
+        ".service,.review,.process-card,.trust-item"
+    )
+    .forEach((el,index)=>{
+
+        el.style.transitionDelay =
+            `${Math.min(index * .08,.45)}s`;
+
+    });
+
+/* =========================================================
+   MAGNETIC ELEMENTS
+========================================================= */
+
+const magneticElements =
+    document.querySelectorAll(".magnetic");
+
+magneticElements.forEach(element=>{
+
+    element.addEventListener("mousemove",e=>{
+
+        const rect =
+            element.getBoundingClientRect();
+
+        const x =
+            e.clientX -
+            rect.left -
+            rect.width / 2;
+
+        const y =
+            e.clientY -
+            rect.top -
+            rect.height / 2;
+
+        const strength =
+            window.innerWidth < 700
+                ? .08
+                : .18;
+
+        element.style.transform =
+            `translate(${x * strength}px,
+                       ${y * strength}px)`;
+
+        if(element.classList.contains("btn")){
+
+            element.style.setProperty(
+                "--mx",
+                `${e.clientX - rect.left}px`
+            );
+
+            element.style.setProperty(
+                "--my",
+                `${e.clientY - rect.top}px`
+            );
+
+        }
+
+    });
+
+    element.addEventListener("mouseleave",()=>{
+
+        element.style.transform =
+            "translate(0,0)";
+
+    });
+
+});
+
+/* =========================================================
+   CUSTOM CURSOR
+========================================================= */
+
+const cursor =
+    document.getElementById("cursor");
+
+const cursorRing =
+    document.getElementById("cursorRing");
+
+let mouseX=0;
+let mouseY=0;
+let ringX=0;
+let ringY=0;
+
+document.addEventListener("mousemove",e=>{
+
+    mouseX=e.clientX;
+    mouseY=e.clientY;
+
+    cursor.style.left=mouseX+"px";
+    cursor.style.top=mouseY+"px";
+
+});
+
+function animateCursor(){
+
+    ringX +=
+        (mouseX-ringX)*.12;
+
+    ringY +=
+        (mouseY-ringY)*.12;
+
+    cursorRing.style.left=ringX+"px";
+    cursorRing.style.top=ringY+"px";
+
+    requestAnimationFrame(animateCursor);
+
+}
+
+animateCursor();
+
+document
+    .querySelectorAll(
+        "a,button,.collection-card,.service,.review"
+    )
+    .forEach(el=>{
+
+        el.addEventListener("mouseenter",()=>{
+            document.body.classList.add("cursor-hover");
+        });
+
+        el.addEventListener("mouseleave",()=>{
+            document.body.classList.remove("cursor-hover");
+        });
+
+    });
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+const heroVisual =
+    document.getElementById("heroVisual");
+
+window.addEventListener("scroll",()=>{
+
+    if(window.innerWidth > 800){
+
+        const y =
+            window.scrollY * .10;
+
+        heroVisual.style.transform =
+            `scale(1.02) translateY(${y}px)`;
+
+    }
+
+});
+
+/* =========================================================
+   COLLECTION SLIDER
+========================================================= */
+
+const track =
+    document.getElementById("collectionTrack");
+
+const windowBox =
+    document.getElementById("collectionWindow");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const prevBtn =
+    document.getElementById("prevBtn");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+let currentIndex=0;
+
+function visibleCards(){
+
+    if(window.innerWidth <= 700)
+        return 1;
+
+    if(window.innerWidth <= 1000)
+        return 2;
+
+    return 3;
+
+}
+
+function maxIndex(){
+
+    return Math.max(
+        0,
+        track.children.length -
+        visibleCards()
+    );
+
+}
+
+function updateSlider(){
+
+    if(!track.children.length)
+        return;
+
+    const cardWidth =
+        track.children[0]
+        .getBoundingClientRect()
+        .width;
+
+    const gap =
+        window.innerWidth <= 700
+            ? 15
+            : 22;
+
+    const movement =
+        currentIndex *
+        (cardWidth + gap);
+
+    track.style.transform =
+        `translateX(-${movement}px)`;
+
+    const max=maxIndex();
+
+    const percentage =
+        max===0
+            ? 100
+            : ((currentIndex/max)*100);
+
+    progressBar.style.width =
+        Math.max(18,percentage)+"%";
+
+}
+
+function nextSlide(){
+
+    const max=maxIndex();
+
+    currentIndex =
+        currentIndex >= max
+            ? 0
+            : currentIndex+1;
+
+    updateSlider();
+
+}
+
+function previousSlide(){
+
+    const max=maxIndex();
+
+    currentIndex =
+        currentIndex <= 0
+            ? max
+            : currentIndex-1;
+
+    updateSlider();
+
+}
+
+nextBtn.addEventListener(
+    "click",
+    nextSlide
+);
+
+prevBtn.addEventListener(
+    "click",
+    previousSlide
+);
+
+window.addEventListener(
+    "resize",
+    ()=>{
+
+        currentIndex =
+            Math.min(
+                currentIndex,
+                maxIndex()
+            );
+
+        updateSlider();
+
+    }
+);
+
+updateSlider();
+
+/* =========================================================
+   COLLECTION DRAG / SWIPE
+========================================================= */
+
+let dragStart=0;
+let dragging=false;
+
+windowBox.addEventListener(
+    "pointerdown",
+    e=>{
+
+        dragging=true;
+        dragStart=e.clientX;
+
+        windowBox.setPointerCapture(e.pointerId);
+
+    }
+);
+
+windowBox.addEventListener(
+    "pointerup",
+    e=>{
+
+        if(!dragging)
+            return;
+
+        const diff =
+            e.clientX-dragStart;
+
+        dragging=false;
+
+        if(Math.abs(diff)>60){
+
+            if(diff<0)
+                nextSlide();
+            else
+                previousSlide();
+
+        }
+
+    }
+);
+
+windowBox.addEventListener(
+    "pointercancel",
+    ()=>{
+        dragging=false;
+    }
+);
+
+/* =========================================================
+   COLLECTION AUTO SLIDE
+========================================================= */
+
+let autoSlider;
+
+function startAuto(){
+
+    clearInterval(autoSlider);
+
+    autoSlider =
+        setInterval(
+            nextSlide,
+            5200
+        );
+
+}
+
+startAuto();
+
+windowBox.addEventListener(
+    "mouseenter",
+    ()=>{
+        clearInterval(autoSlider);
+    }
+);
+
+windowBox.addEventListener(
+    "mouseleave",
+    ()=>{
+        startAuto();
+    }
+);
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+document
+    .querySelectorAll(".faq-question")
+    .forEach(question=>{
+
+        question.addEventListener(
+            "click",
+            ()=>{
+
+                const item =
+                    question.parentElement;
+
+                const answer =
+                    item.querySelector(
+                        ".faq-answer"
+                    );
+
+                document
+                    .querySelectorAll(".faq-item")
+                    .forEach(other=>{
+
+                        if(other!==item){
+
+                            other.classList.remove(
+                                "open"
+                            );
+
+                            other
+                                .querySelector(
+                                    ".faq-answer"
+                                )
+                                .style.maxHeight=null;
+
+                        }
+
+                    });
+
+                item.classList.toggle("open");
+
+                if(item.classList.contains("open")){
+
+                    answer.style.maxHeight =
+                        answer.scrollHeight+"px";
+
+                }else{
+
+                    answer.style.maxHeight=null;
+
+                }
+
+            }
+        );
+
+    });
+
+/* =========================================================
+   SMOOTH ANCHOR SCROLL
+========================================================= */
+
+document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(anchor=>{
+
+        anchor.addEventListener(
+            "click",
+            e=>{
+
+                const target =
+                    document.querySelector(
+                        anchor.getAttribute("href")
+                    );
+
+                if(!target)
+                    return;
+
+                e.preventDefault();
+
+                const offset =
+                    navbar.offsetHeight;
+
+                const top =
+                    target.getBoundingClientRect().top +
+                    window.scrollY -
+                    offset;
+
+                window.scrollTo({
+
+                    top:top,
+
+                    behavior:"smooth"
+
+                });
+
+            }
+        );
+
+    });
+
+/* =========================================================
+   ENQUIRY → WHATSAPP
+========================================================= */
+
+const enquiryForm =
+    document.getElementById(
+        "enquiryForm"
+    );
+
+enquiryForm.addEventListener(
+    "submit",
+    e=>{
+
+        e.preventDefault();
+
+        const name =
+            document
+                .getElementById("name")
+                .value
+                .trim();
+
+        const phone =
+            document
+                .getElementById("phone")
+                .value
+                .trim();
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+        const requirement =
+            document
+                .getElementById("requirement")
+                .value;
+
+        const message =
+            document
+                .getElementById("message")
+                .value
+                .trim();
+
+        const whatsappMessage =
+`Hello M.R. Moorti Art,
+
+I would like to make an enquiry.
+
+Name: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+Requirement: ${requirement || "Not specified"}
+
+Message:
+${message || "I would like to know more about your collection."}`;
+
+        const whatsappURL =
+            "https://wa.me/918741917946?text="+
+            encodeURIComponent(
+                whatsappMessage
+            );
+
+        window.open(
+            whatsappURL,
+            "_blank"
+        );
+
+    }
+);
+
+/* =========================================================
+   IMAGE PARALLAX SECTIONS
+========================================================= */
+
+const parallaxSections =
+    document.querySelectorAll(
+        ".about-image,.about-detail,.worldwide"
+    );
+
+window.addEventListener("scroll",()=>{
+
+    if(window.innerWidth < 900)
+        return;
+
+    parallaxSections.forEach(el=>{
+
+        const rect =
+            el.getBoundingClientRect();
+
+        const center =
+            rect.top +
+            rect.height/2;
+
+        const viewport =
+            window.innerHeight/2;
+
+        const distance =
+            (center-viewport)*.035;
+
+        if(el.classList.contains("about-image") ||
+           el.classList.contains("about-detail")){
+
+            el.style.transform =
+                `translateY(${distance}px)`;
+
+        }
+
+    });
+
+});
+
+</script>
+
+
+<!-- =========================================================
+     ADMIN PANEL — same-file Supabase CMS
+========================================================= -->
+<div id="adminPanel" aria-hidden="true">
+  <div class="admin-shell">
+    <aside class="admin-side">
+      <div class="admin-logo">M.R. Moorti Art</div>
+      <div class="admin-sub">Website Control Panel</div>
+      <div class="admin-nav">
+        <button class="active" data-tab="content">Content</button>
+        <button data-tab="collections">Photos & Collection</button>
+        <button data-tab="contact">Contact / SEO</button>
+        <button data-tab="account">Account</button>
+      </div>
+    </aside>
+    <main class="admin-main">
+      <div class="admin-top">
+        <div>
+          <h2>Admin Panel</h2>
+          <div class="admin-status" id="adminStatus">Checking connection…</div>
+        </div>
+        <div class="admin-actions">
+          <span class="admin-user" id="adminUser"></span>
+          <button class="admin-btn" id="viewSiteBtn">View Website</button>
+          <button class="admin-btn primary" id="saveSiteBtn">Save Changes</button>
+          <button class="admin-btn" id="logoutBtn">Logout</button>
+        </div>
+      </div>
+
+      <section class="admin-tab active" id="adminTab-content">
+        <div class="admin-grid">
+          <div class="admin-card">
+            <h3>Hero</h3>
+            <div class="admin-fields">
+              <div class="admin-field"><label>Eyebrow</label><input data-path="hero.eyebrow"></div>
+              <div class="admin-inline">
+                <div class="admin-field"><label>Title line 1</label><input data-path="hero.title1"></div>
+                <div class="admin-field"><label>Title line 2</label><input data-path="hero.title2"></div>
+              </div>
+              <div class="admin-field"><label>Description</label><textarea data-path="hero.description"></textarea></div>
+              <div class="admin-field"><label>Hero Video</label><input class="admin-file" type="file" id="heroVideoFile" accept="video/*"></div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3>About</h3>
+            <div class="admin-fields">
+              <div class="admin-field"><label>Kicker</label><input data-path="about.kicker"></div>
+              <div class="admin-inline">
+                <div class="admin-field"><label>Title line 1</label><input data-path="about.title1"></div>
+                <div class="admin-field"><label>Title line 2</label><input data-path="about.title2"></div>
+              </div>
+              <div class="admin-field"><label>Paragraph 1</label><textarea data-path="about.copy1"></textarea></div>
+              <div class="admin-field"><label>Paragraph 2</label><textarea data-path="about.copy2"></textarea></div>
+              <div class="admin-field"><label>Quote</label><textarea data-path="about.quote"></textarea></div>
+            </div>
+          </div>
+
+          <div class="admin-card full">
+            <h3>About Photos</h3>
+            <div class="admin-inline">
+              <div class="admin-field"><label>About main image</label><input type="file" id="aboutImageFile" accept="image/*"></div>
+              <div class="admin-field"><label>About detail image</label><input type="file" id="aboutDetailFile" accept="image/*"></div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3>Craft Section</h3>
+            <div class="admin-fields">
+              <div class="admin-field"><label>Kicker</label><input data-path="craft.kicker"></div>
+              <div class="admin-field"><label>Title line 1</label><input data-path="craft.title1"></div>
+              <div class="admin-field"><label>Title line 2</label><input data-path="craft.title2"></div>
+              <div class="admin-field"><label>Description</label><textarea data-path="craft.copy"></textarea></div><div class="admin-field"><label>Craft Background Photo</label><input type="file" id="craftImageFile" accept="image/*"></div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3>Services Heading</h3>
+            <div class="admin-fields">
+              <div class="admin-field"><label>Kicker</label><input data-path="services.kicker"></div>
+              <div class="admin-field"><label>Title line 1</label><input data-path="services.title1"></div>
+              <div class="admin-field"><label>Title line 2</label><input data-path="services.title2"></div>
+            </div>
+          </div>
+
+          <div class="admin-card full">
+            <h3>Services</h3>
+            <div class="admin-fields" id="servicesEditor"></div>
+          </div>
+
+          <div class="admin-card full">
+            <h3>Process</h3>
+            <div class="admin-fields" id="processEditor"></div>
+          </div>
+
+          <div class="admin-card">
+            <h3>Worldwide Section</h3>
+            <div class="admin-fields">
+              <div class="admin-field"><label>Kicker</label><input data-path="worldwide.kicker"></div>
+              <div class="admin-field"><label>Title line 1</label><input data-path="worldwide.title1"></div>
+              <div class="admin-field"><label>Title line 2</label><input data-path="worldwide.title2"></div>
+              <div class="admin-field"><label>Description</label><textarea data-path="worldwide.copy"></textarea></div><div class="admin-field"><label>Worldwide Background Photo</label><input type="file" id="worldwideImageFile" accept="image/*"></div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3>Testimonials Heading</h3>
+            <div class="admin-fields">
+              <div class="admin-field"><label>Kicker</label><input data-path="testimonials.kicker"></div>
+              <div class="admin-field"><label>Title line 1</label><input data-path="testimonials.title1"></div>
+              <div class="admin-field"><label>Title line 2</label><input data-path="testimonials.title2"></div>
+              <div class="admin-field"><label>Note</label><textarea data-path="testimonials.note"></textarea></div>
+            </div>
+          </div>
+
+          <div class="admin-card full">
+            <h3>Testimonials</h3>
+            <div class="admin-fields" id="reviewsEditor"></div>
+          </div>
+
+          <div class="admin-card full">
+            <h3>FAQ</h3>
+            <div class="admin-fields" id="faqEditor"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-tab" id="adminTab-collections">
+        <div class="admin-card">
+          <h3>Collection Photos & Details</h3>
+          <div class="admin-note">Replace any photo, change its name/caption, or add a new collection item. Uploaded files are stored in Supabase Storage, so the change works for every visitor—not just your browser.</div>
+          <div class="admin-actions" style="margin:18px 0">
+            <button class="admin-btn primary" id="addCollectionBtn">+ Add New Photo</button>
+          </div>
+          <div class="admin-collections" id="collectionEditor"></div>
+        </div>
+      </section>
+
+      <section class="admin-tab" id="adminTab-contact">
+        <div class="admin-grid">
+          <div class="admin-card">
+            <h3>Business Contact</h3>
+            <div class="admin-fields">
+              <div class="admin-field"><label>Brand Name</label><input data-path="general.brand"></div>
+              <div class="admin-field"><label>Tagline</label><input data-path="general.tagline"></div>
+              <div class="admin-field"><label>Phone</label><input data-path="general.phone"></div>
+              <div class="admin-field"><label>WhatsApp</label><input data-path="general.whatsapp"></div>
+              <div class="admin-field"><label>Email</label><input data-path="general.email"></div>
+              <div class="admin-field"><label>Address</label><textarea data-path="general.address"></textarea></div>
+              <div class="admin-field"><label>Logo</label><input type="file" id="logoFile" accept="image/*"></div>
+            </div>
+          </div>
+          <div class="admin-card">
+            <h3>SEO</h3>
+            <div class="admin-fields">
+              <div class="admin-field"><label>Page Title</label><input data-path="seo.title"></div>
+              <div class="admin-field"><label>Meta Description</label><textarea data-path="seo.description"></textarea></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="admin-tab" id="adminTab-account">
+        <div class="admin-card" style="max-width:700px">
+          <h3>Admin Account</h3>
+          <div class="admin-note">This panel uses Supabase Auth email/password. The publishable key is safe to place in the browser; your Supabase service-role key must never be placed here.</div>
+          <div class="admin-fields" style="margin-top:15px">
+            <div class="admin-field"><label>Logged in email</label><input id="accountEmail" disabled></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div class="admin-login" id="adminLogin" style="display:none">
+  <div class="admin-login-card">
+    <h2>Admin Login</h2>
+    <p>Private website control panel. Sign in with the Supabase email/password account you already created.</p>
+    <div class="admin-fields">
+      <div class="admin-field"><label>Email</label><input type="email" id="adminEmail" autocomplete="username"></div>
+      <div class="admin-field"><label>Password</label><input type="password" id="adminPassword" autocomplete="current-password"></div>
+    </div>
+    <button class="admin-btn primary" id="loginBtn" style="width:100%;margin-top:3px">Login</button>
+    <div class="admin-status" id="loginStatus"></div>
+    <button class="admin-btn" id="closeLoginBtn" style="width:100%;display:none">Back to Website</button>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =========================================================
+   M.R. MOORTI ART — SUPABASE CMS
+========================================================= */
+(() => {
+  "use strict";
+
+  const SUPABASE_URL = "https://kyxjrqqkuavbelfixnyl.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_tvIXgDw3YLYhg1OZ4dwKPA__HSKWUiR";
+  const CONTENT_TABLE = "site_content";
+  const STORAGE_BUCKET = "site-assets";
+  const CONTENT_ID = "main";
+
+  const sb = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY,
+    { auth: { persistSession:true, autoRefreshToken:true, detectSessionInUrl:true } }
+  );
+
+  const defaults = {
+    general:{
+      brand:"M.R. Moorti Art",
+      tagline:"Marble • Art • Heritage",
+      phone:"+91 87419 17946",
+      whatsapp:"918741917946",
+      email:"",
+      address:"Rajasthan, India",
+      logo:"logo.png"
+    },
+    seo:{
+      title:"M.R. Moorti Art | Luxury Marble Art & Craftsmanship",
+      description:"M.R. Moorti Art — timeless marble craftsmanship, divine marble murtis, handcrafted art, marble mandirs and bespoke creations from Rajasthan."
+    },
+    hero:{
+      eyebrow:"Rajasthan · Since 1992",
+      title1:"Stone",
+      title2:"with a soul.",
+      description:"Timeless marble craftsmanship shaped with devotion, precision and artistic excellence. Discover divine murtis, handcrafted art, marble mandirs and bespoke creations inspired by the heritage of Rajasthan.",
+      video:"hero.mp4"
+    },
+    about:{
+      kicker:"Our Story",
+      title1:"Where marble",
+      title2:"becomes art.",
+      copy1:"M.R. Moorti Art is rooted in the timeless tradition of marble craftsmanship. Every creation reflects patience, precision and the character of the artisan who shaped it.",
+      copy2:"From divine marble murtis and temple artistry to handcrafted pieces and bespoke marble creations, our work is designed to bring beauty, devotion and heritage into meaningful spaces.",
+      quote:"Every piece is more than marble. It is a story carved by hand.",
+      image:"o1.png",
+      detailImage:"o2.png"
+    },
+    trust:[
+      {number:"1992",label:"Heritage & Experience"},
+      {number:"15+",label:"Signature Pieces"},
+      {number:"∞",label:"Custom Possibilities"},
+      {number:"01",label:"Rajasthan Craftsmanship"}
+    ],
+    collection:{
+      kicker:"Signature Collection",
+      title1:"Crafted pieces.",
+      title2:"Timeless presence.",
+      copy:"Explore selected creations representing the artistic character and craftsmanship of M.R. Moorti Art.",
+      meta:"15 Selected Works",
+      items:[
+        {image:"c1.jpeg",name:"Divine Form",caption:"Marble craftsmanship"},
+        {image:"c2.jpeg",name:"Sacred Detail",caption:"Handcrafted artistry"},
+        {image:"c3.jpeg",name:"Pure Craft",caption:"Timeless marble work"},
+        {image:"c4.jpeg",name:"Heritage Form",caption:"Rajasthan artistry"},
+        {image:"c5.jpeg",name:"Stone Poetry",caption:"Refined craftsmanship"},
+        {image:"c6.jpeg",name:"Divine Grace",caption:"Hand-finished marble"},
+        {image:"c7.jpeg",name:"Sculpted Legacy",caption:"Artisan craftsmanship"},
+        {image:"c8.jpeg",name:"Marble Soul",caption:"Art with character"},
+        {image:"c9.jpeg",name:"Sacred Lines",caption:"Detailed marble art"},
+        {image:"c10.jpeg",name:"Quiet Grandeur",caption:"Luxury stonework"},
+        {image:"c11.jpeg",name:"Artisan Spirit",caption:"Made by hand"},
+        {image:"c12.jpeg",name:"Eternal Beauty",caption:"Natural marble"},
+        {image:"c13.jpeg",name:"Sacred Art",caption:"Traditional influence"},
+        {image:"c14.jpeg",name:"Timeless Stone",caption:"Refined details"},
+        {image:"c15.jpeg",name:"The Masterpiece",caption:"Signature craftsmanship"}
+      ]
+    },
+    craft:{
+      kicker:"The Art Of Craft",
+      title1:"Not just marble.",
+      title2:"A legacy in stone.",
+      copy:"Every curve, expression, ornament and detail is patiently refined. Natural stone is transformed into artwork through a balance of traditional craftsmanship and artistic vision.",
+      image:"https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=2400&q=90"
+    },
+    services:{
+      kicker:"What We Create",
+      title1:"From sacred spaces",
+      title2:"to statement pieces.",
+      items:[
+        {name:"Marble Murti",copy:"Traditional and custom marble murtis crafted with exceptional detailing and devotional precision."},
+        {name:"Marble Mandir",copy:"Elegant marble temple designs created for homes, institutions and spiritual spaces."},
+        {name:"Handicrafts",copy:"Unique handcrafted marble pieces bringing Rajasthan's artistic heritage into modern spaces."},
+        {name:"Custom Art",copy:"Bespoke marble creations developed around your preferred design, size and artistic vision."},
+        {name:"Paintings",copy:"Artistic works selected and created to complement interiors, spiritual spaces and collections."}
+      ]
+    },
+    process:{
+      kicker:"Our Approach",
+      title1:"From vision",
+      title2:"to creation.",
+      copy:"Every custom requirement follows a thoughtful process designed around detail, craftsmanship and the final space.",
+      items:[
+        {name:"Understand",copy:"We begin by understanding your requirement, design preference, dimensions and intended space."},
+        {name:"Create",copy:"The concept is translated into carefully crafted marble artwork through skilled hands and detailed finishing."},
+        {name:"Deliver",copy:"The completed creation is prepared with attention to presentation and delivery requirements."}
+      ]
+    },
+    worldwide:{
+      kicker:"Rajasthan · To The World",
+      title1:"Rajasthan's art.",
+      title2:"Beyond borders.",
+      copy:"Bringing the beauty of Indian marble craftsmanship from Rajasthan to meaningful spaces across India and beyond.",
+      image:"https://images.unsplash.com/photo-1590077428593-a55bb07c4665?auto=format&fit=crop&w=2200&q=90"
+    },
+    testimonials:{
+      kicker:"Client Experience",
+      title1:"Words from",
+      title2:"our clients.",
+      note:"Genuine client feedback can be added here as your verified reviews are collected.",
+      items:[
+        {text:"“Beautiful craftsmanship and attention to detail. The final piece felt truly special.”",author:"Client Review · Jaipur"},
+        {text:"“The detailing and finish were exactly what we were looking for.”",author:"Client Review · Rajasthan"},
+        {text:"“A beautiful combination of traditional artistry and refined workmanship.”",author:"Client Review · India"}
+      ]
+    },
+    faq:{
+      kicker:"Frequently Asked",
+      title1:"Questions,",
+      title2:"answered.",
+      copy:"Have a specific requirement? Send us your details and our team can discuss the possibilities with you directly.",
+      items:[
+        {q:"Do you create custom marble art?",a:"Yes. Custom marble creations can be discussed according to design, dimensions, artistic requirements and intended space."},
+        {q:"Do you create marble mandirs?",a:"Yes. Marble mandir requirements for homes, institutions and spiritual spaces can be discussed with the team."},
+        {q:"Can I enquire about a particular piece?",a:"Absolutely. Mention the piece or collection image you are interested in and send your requirement through WhatsApp."},
+        {q:"Do you provide delivery outside Rajasthan?",a:"Delivery requirements can be discussed depending on the destination and nature of the creation."},
+        {q:"How can I request a quotation?",a:"Use the enquiry form below or contact us directly on WhatsApp with your name, requirement and preferred details."}
+      ]
+    },
+    contact:{
+      kicker:"Start A Conversation",
+      title1:"Have a vision?",
+      title2:"Let's create it.",
+      copy:"Tell us what you're looking for. Whether it is a marble murti, mandir, handcrafted piece or custom artwork, send us your requirement."
+    }
+  };
+
+  let siteData = JSON.parse(JSON.stringify(defaults));
+  const $ = (s,r=document) => r.querySelector(s);
+  const $$ = (s,r=document) => [...r.querySelectorAll(s)];
+
+  function getPath(obj,path){
+    return path.split(".").reduce((a,k)=>a?.[k],obj);
+  }
+  function setPath(obj,path,value){
+    const keys=path.split(".");
+    let cur=obj;
+    keys.slice(0,-1).forEach(k=>{ if(!cur[k] || typeof cur[k]!=="object") cur[k]={}; cur=cur[k]; });
+    cur[keys[keys.length-1]]=value;
+  }
+  function mergeDeep(base,incoming){
+    if(!incoming || typeof incoming!=="object") return base;
+    Object.keys(incoming).forEach(k=>{
+      if(incoming[k] && typeof incoming[k]==="object" && !Array.isArray(incoming[k]) &&
+         base[k] && typeof base[k]==="object" && !Array.isArray(base[k])) mergeDeep(base[k],incoming[k]);
+      else base[k]=incoming[k];
+    });
+    return base;
+  }
+  function escapeHTML(v){
+    return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  }
+  function setStatus(msg,type=""){
+    const el=$("#adminStatus"); if(!el) return;
+    el.textContent=msg; el.className="admin-status "+type;
+  }
+
+  function applySiteData(){
+    const d=siteData;
+    document.title=d.seo.title;
+    const meta=$('meta[name="description"]'); if(meta) meta.content=d.seo.description;
+
+    const brand=$(".brand-name"); if(brand) brand.textContent=d.general.brand;
+    const brandSub=$(".brand-sub"); if(brandSub) brandSub.textContent=d.general.tagline;
+    const loader=$(".loader-brand"); if(loader) loader.textContent=d.general.brand;
+    $$(".brand-mark img").forEach(img=>img.src=d.general.logo||"logo.png");
+    const footerBrand=$(".footer-brand"); if(footerBrand && footerBrand.childNodes[0]) footerBrand.childNodes[0].nodeValue="\n                "+d.general.brand+"\n                ";
+    const footerTag=$(".footer-tagline"); if(footerTag) footerTag.textContent=d.general.tagline;
+    const hero=$(".hero");
+    if(hero){
+      $(".hero-eyebrow",hero).textContent=d.hero.eyebrow;
+      const h=$("h1",hero); if(h) h.innerHTML=escapeHTML(d.hero.title1)+"<br><em>"+escapeHTML(d.hero.title2)+"</em>";
+      $(".hero-description",hero).textContent=d.hero.description;
+      if(d.hero.video){ const v=$(".hero-video",hero); if(v && v.querySelector("source")?.src !== d.hero.video){ v.innerHTML=`<source src="${escapeHTML(d.hero.video)}" type="video/mp4">`; v.load(); v.play().catch(()=>{}); } }
+    }
+
+    const about=$("#about");
+    if(about){
+      $(".kicker",about).textContent=d.about.kicker;
+      const h=$(".section-title",about); if(h) h.innerHTML=escapeHTML(d.about.title1)+"<br><em>"+escapeHTML(d.about.title2)+"</em>";
+      const copies=$$(".section-copy",about); if(copies[0]) copies[0].textContent=d.about.copy1; if(copies[1]) copies[1].textContent=d.about.copy2;
+      $(".about-quote",about).textContent=d.about.quote;
+      $(".about-image",about).style.backgroundImage=`url("${d.about.image}")`;
+      $(".about-detail",about).style.backgroundImage=`url("${d.about.detailImage}")`;
+    }
+
+    $$(".trust-item").forEach((el,i)=>{
+      const x=d.trust[i]; if(!x) return;
+      $(".trust-number",el).textContent=x.number; $(".trust-label",el).textContent=x.label;
+    });
+
+    const col=$("#collection");
+    if(col){
+      $(".kicker",col).textContent=d.collection.kicker;
+      const h=$(".section-title",col); if(h) h.innerHTML=escapeHTML(d.collection.title1)+"<br><em>"+escapeHTML(d.collection.title2)+"</em>";
+      $(".section-copy",col).textContent=d.collection.copy;
+      $(".collection-meta",col).textContent=d.collection.items.length+" Selected Works";
+      renderCollection();
+    }
+
+    const craft=$("#craft");
+    if(craft){
+      $(".kicker",craft).textContent=d.craft.kicker;
+      $(".craft-title",craft).innerHTML=escapeHTML(d.craft.title1)+"<br><em>"+escapeHTML(d.craft.title2)+"</em>";
+      $(".craft-copy",craft).textContent=d.craft.copy;
+      if(d.craft.image) craft.style.backgroundImage=`linear-gradient(90deg,rgba(12,12,11,.94),rgba(12,12,11,.60),rgba(12,12,11,.75)),url("${d.craft.image}")`;
+    }
+
+    const services=$("#services");
+    if(services){
+      $(".kicker",services).textContent=d.services.kicker;
+      const h=$(".section-title",services); if(h) h.innerHTML=escapeHTML(d.services.title1)+"<br><em>"+escapeHTML(d.services.title2)+"</em>";
+      $$(".service",services).forEach((el,i)=>{
+        const x=d.services.items[i]; if(!x) return;
+        $(".service-no",el).textContent=String(i+1).padStart(2,"0");
+        $(".service h3",el).textContent=x.name; $(".service p",el).textContent=x.copy;
+      });
+    }
+
+    const process=$(".process");
+    if(process){
+      const ks=$$(".kicker",process); if(ks[0]) ks[0].textContent=d.process.kicker;
+      const h=$(".section-title",process); if(h) h.innerHTML=escapeHTML(d.process.title1)+"<br><em>"+escapeHTML(d.process.title2)+"</em>";
+      $(".section-copy",process).textContent=d.process.copy;
+      $$(".process-card",process).forEach((el,i)=>{
+        const x=d.process.items[i]; if(!x) return;
+        $(".process-number",el).textContent=String(i+1).padStart(2,"0");
+        $(".process-card h3",el).textContent=x.name; $(".process-card p",el).textContent=x.copy;
+      });
+    }
+
+    const ww=$(".worldwide");
+    if(ww){
+      $(".kicker",ww).textContent=d.worldwide.kicker;
+      const h=$(".worldwide-title",ww); if(h) h.innerHTML=escapeHTML(d.worldwide.title1)+"<br><em>"+escapeHTML(d.worldwide.title2)+"</em>";
+      $(".section-copy",ww).textContent=d.worldwide.copy;
+      if(d.worldwide.image) ww.style.backgroundImage=`linear-gradient(90deg,rgba(238,238,235,.95),rgba(238,238,235,.75),rgba(238,238,235,.15)),url("${d.worldwide.image}")`;
+    }
+
+    const reviews=$(".testimonials");
+    if(reviews){
+      $(".kicker",reviews).textContent=d.testimonials.kicker;
+      const h=$(".section-title",reviews); if(h) h.innerHTML=escapeHTML(d.testimonials.title1)+"<br><em>"+escapeHTML(d.testimonials.title2)+"</em>";
+      $(".review-note",reviews).textContent=d.testimonials.note;
+      $$(".review",reviews).forEach((el,i)=>{
+        const x=d.testimonials.items[i]; if(!x) return;
+        $(".review-text",el).textContent=x.text; $(".review-author",el).textContent=x.author;
+      });
+    }
+
+    const faq=$("#faq");
+    if(faq){
+      const ks=$$(".kicker",faq); if(ks[0]) ks[0].textContent=d.faq.kicker;
+      const h=$(".section-title",faq); if(h) h.innerHTML=escapeHTML(d.faq.title1)+"<br><em>"+escapeHTML(d.faq.title2)+"</em>";
+      $(".section-copy",faq).textContent=d.faq.copy;
+      $$(".faq-item",faq).forEach((el,i)=>{
+        const x=d.faq.items[i]; if(!x) return;
+        $(".faq-question span:first-child",el).textContent=x.q;
+        $(".faq-answer p",el).textContent=x.a;
+      });
+    }
+
+    const contact=$("#contact");
+    if(contact){
+      $(".kicker",contact).textContent=d.contact.kicker;
+      const h=$(".contact-title",contact); if(h) h.innerHTML=escapeHTML(d.contact.title1)+"<br><em>"+escapeHTML(d.contact.title2)+"</em>";
+      $(".contact-copy",contact).textContent=d.contact.copy;
+    }
+
+    const footerItems=$$(".footer-contact-item");
+    if(footerItems[0]){footerItems[0].href="tel:"+(d.general.phone||"").replace(/\D/g,""); const sp=footerItems[0].querySelectorAll("span"); if(sp[1]) sp[1].textContent=d.general.phone||"";}
+    if(footerItems[1]){footerItems[1].href="https://wa.me/"+(d.general.whatsapp||"").replace(/\D/g,""); const sp=footerItems[1].querySelectorAll("span"); if(sp[1]) sp[1].textContent="WhatsApp · "+(d.general.whatsapp||d.general.phone||"");}
+    if(footerItems[2]){footerItems[2].href=d.general.email?"mailto:"+d.general.email:"#"; const sp=footerItems[2].querySelectorAll("span"); if(sp[1]) sp[1].textContent=d.general.email||"Email";}
+    const addr=$(".footer-address"); if(addr) addr.textContent=d.general.address||"";
+    const phoneDigits=(d.general.phone||"").replace(/\D/g,"");
+    const waDigits=(d.general.whatsapp||phoneDigits).replace(/\D/g,"");
+    $$(".whatsapp").forEach(a=>a.href="https://wa.me/"+waDigits);
+    $$(".call").forEach(a=>a.href="tel:"+phoneDigits);
+    $$(".footer-contact-item").forEach(el=>{
+      const txt=el.textContent.toLowerCase();
+      if(txt.includes("call") || txt.includes("phone")) { const a=el.closest("a"); if(a) a.href="tel:"+phoneDigits; }
+      if(txt.includes("whatsapp")) { const a=el.closest("a"); if(a) a.href="https://wa.me/"+waDigits; }
+    });
+  }
+
+  function renderCollection(){
+    const track=$("#collectionTrack"); if(!track) return;
+    track.innerHTML="";
+    siteData.collection.items.forEach((x,i)=>{
+      const card=document.createElement("article");
+      card.className="collection-card";
+      card.innerHTML=`<img src="${escapeHTML(x.image)}" alt="${escapeHTML(x.name)}">
+        <div class="collection-overlay">
+          <div class="collection-index">${String(i+1).padStart(2,"0")} / ${siteData.collection.items.length}</div>
+          <div class="collection-name">${escapeHTML(x.name)}</div>
+          <div class="collection-caption">${escapeHTML(x.caption)}</div>
+        </div>`;
+      track.appendChild(card);
+    });
+    window.dispatchEvent(new Event("resize"));
+  }
+
+  function renderEditors(){
+    $$("[data-path]").forEach(input=>{
+      const val=getPath(siteData,input.dataset.path);
+      input.value=val??"";
+      input.oninput=()=>setPath(siteData,input.dataset.path,input.value);
+    });
+
+    const se=$("#servicesEditor");
+    se.innerHTML=siteData.services.items.map((x,i)=>`
+      <div class="admin-card" style="padding:15px">
+        <div class="admin-inline">
+          <div class="admin-field"><label>Service ${i+1} name</label><input data-svc-name="${i}" value="${escapeHTML(x.name)}"></div>
+          <div class="admin-field"><label>Description</label><input data-svc-copy="${i}" value="${escapeHTML(x.copy)}"></div>
+        </div>
+      </div>`).join("");
+    $$("[data-svc-name]").forEach(el=>el.oninput=()=>siteData.services.items[+el.dataset.svcName].name=el.value);
+    $$("[data-svc-copy]").forEach(el=>el.oninput=()=>siteData.services.items[+el.dataset.svcCopy].copy=el.value);
+
+    const pe=$("#processEditor");
+    pe.innerHTML=siteData.process.items.map((x,i)=>`
+      <div class="admin-card" style="padding:15px">
+        <div class="admin-inline">
+          <div class="admin-field"><label>Step ${i+1}</label><input data-proc-name="${i}" value="${escapeHTML(x.name)}"></div>
+          <div class="admin-field"><label>Description</label><input data-proc-copy="${i}" value="${escapeHTML(x.copy)}"></div>
+        </div>
+      </div>`).join("");
+    $$("[data-proc-name]").forEach(el=>el.oninput=()=>siteData.process.items[+el.dataset.procName].name=el.value);
+    $$("[data-proc-copy]").forEach(el=>el.oninput=()=>siteData.process.items[+el.dataset.procCopy].copy=el.value);
+
+    const re=$("#reviewsEditor");
+    re.innerHTML=siteData.testimonials.items.map((x,i)=>`
+      <div class="admin-card" style="padding:15px">
+        <div class="admin-inline">
+          <div class="admin-field"><label>Review ${i+1}</label><textarea data-review-text="${i}">${escapeHTML(x.text)}</textarea></div>
+          <div class="admin-field"><label>Author</label><input data-review-author="${i}" value="${escapeHTML(x.author)}"></div>
+        </div>
+      </div>`).join("");
+    $$("[data-review-text]").forEach(el=>el.oninput=()=>siteData.testimonials.items[+el.dataset.reviewText].text=el.value);
+    $$("[data-review-author]").forEach(el=>el.oninput=()=>siteData.testimonials.items[+el.dataset.reviewAuthor].author=el.value);
+
+    const fe=$("#faqEditor");
+    fe.innerHTML=siteData.faq.items.map((x,i)=>`
+      <div class="admin-card" style="padding:15px">
+        <div class="admin-fields">
+          <div class="admin-field"><label>Question ${i+1}</label><input data-faq-q="${i}" value="${escapeHTML(x.q)}"></div>
+          <div class="admin-field"><label>Answer</label><textarea data-faq-a="${i}">${escapeHTML(x.a)}</textarea></div>
+        </div>
+      </div>`).join("");
+    $$("[data-faq-q]").forEach(el=>el.oninput=()=>siteData.faq.items[+el.dataset.faqQ].q=el.value);
+    $$("[data-faq-a]").forEach(el=>el.oninput=()=>siteData.faq.items[+el.dataset.faqA].a=el.value);
+
+    renderCollectionEditor();
+    $("#accountEmail").value=sb.auth.getUser ? "" : "";
+  }
+
+  function renderCollectionEditor(){
+    const wrap=$("#collectionEditor"); if(!wrap) return;
+    wrap.innerHTML=siteData.collection.items.map((x,i)=>`
+      <div class="admin-collection">
+        <img class="admin-thumb" src="${escapeHTML(x.image)}" alt="">
+        <div class="admin-collection-fields">
+          <input data-col-name="${i}" value="${escapeHTML(x.name)}" placeholder="Collection name">
+          <input data-col-caption="${i}" value="${escapeHTML(x.caption)}" placeholder="Caption">
+          <input class="admin-file" type="file" accept="image/*" data-col-file="${i}">
+        </div>
+        <button class="admin-btn danger" data-col-delete="${i}" ${siteData.collection.items.length<=1?"disabled":""}>Delete</button>
+      </div>`).join("");
+
+    $$("[data-col-name]").forEach(el=>el.oninput=()=>siteData.collection.items[+el.dataset.colName].name=el.value);
+    $$("[data-col-caption]").forEach(el=>el.oninput=()=>siteData.collection.items[+el.dataset.colCaption].caption=el.value);
+    $$("[data-col-file]").forEach(el=>el.onchange=async()=>{
+      const i=+el.dataset.colFile, file=el.files?.[0]; if(!file) return;
+      await uploadAndSet(file, url=>siteData.collection.items[i].image=url, "collection-"+(i+1));
+    });
+    $$("[data-col-delete]").forEach(el=>el.onclick=()=>{
+      const i=+el.dataset.colDelete;
+      if(confirm("Delete this collection item?")){ siteData.collection.items.splice(i,1); renderCollectionEditor(); renderCollection(); }
+    });
+  }
+
+  async function uploadFile(file, prefix){
+    if(!file) return null;
+    const safe=file.name.toLowerCase().replace(/[^a-z0-9._-]+/g,"-");
+    const path=`${prefix}/${Date.now()}-${safe}`;
+    const {error}=await sb.storage.from(STORAGE_BUCKET).upload(path,file,{upsert:false,cacheControl:"31536000"});
+    if(error) throw error;
+    const {data}=sb.storage.from(STORAGE_BUCKET).getPublicUrl(path);
+    return data.publicUrl;
+  }
+
+  async function uploadAndSet(file,setter,prefix){
+    try{
+      setStatus("Uploading "+file.name+"…");
+      const url=await uploadFile(file,prefix);
+      setter(url);
+      setStatus("Upload complete. Save Changes to publish it.","ok");
+      renderCollectionEditor();
+    }catch(err){ console.error(err); setStatus("Upload failed: "+(err.message||err),"err"); }
+  }
+
+  async function loadSite(){
+    const {data,error}=await sb.from(CONTENT_TABLE).select("content").eq("id",CONTENT_ID).maybeSingle();
+    if(error){
+      setStatus("Supabase connected, but content table is not ready: "+error.message,"err");
+      return;
+    }
+    if(data?.content){
+      siteData=mergeDeep(JSON.parse(JSON.stringify(defaults)),data.content);
+      applySiteData();
+      renderEditors();
+      setStatus("Connected • latest saved content loaded","ok");
+    }else{
+      applySiteData(); renderEditors();
+      setStatus("Connected • no saved content yet; defaults are active","ok");
+    }
+  }
+
+  async function saveSite(){
+    try{
+      setStatus("Saving changes…");
+      const {error}=await sb.from(CONTENT_TABLE).upsert({
+        id:CONTENT_ID,
+        content:siteData,
+        updated_at:new Date().toISOString()
+      },{onConflict:"id"});
+      if(error) throw error;
+      applySiteData();
+      setStatus("All changes saved successfully.","ok");
+    }catch(err){
+      console.error(err);
+      setStatus("Save failed: "+(err.message||err),"err");
+      alert("Save failed.\n\nIf Supabase says relation/table or policy is missing, create the site_content table and RLS policies for the logged-in admin.");
+    }
+  }
+
+  async function openAdmin(){
+    const panel=$("#adminPanel"), login=$("#adminLogin");
+    panel.classList.add("open"); panel.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+    const {data:{session}}=await sb.auth.getSession();
+    if(session){
+      login.style.display="none";
+      $("#adminUser").textContent=session.user.email||"";
+      $("#accountEmail").value=session.user.email||"";
+      await loadSite();
+    }else{
+      login.style.display="flex";
+      $("#adminStatus").textContent="";
+      $("#adminEmail").focus();
+    }
+  }
+  function closeAdmin(){
+    $("#adminPanel").classList.remove("open"); $("#adminPanel").setAttribute("aria-hidden","true");
+    $("#adminLogin").style.display="none"; document.body.style.overflow="";
+    if(location.hash==="#admin") history.replaceState(null,"",location.pathname+location.search);
+  }
+
+  // Login
+  $("#loginBtn").onclick=async()=>{
+    const email=$("#adminEmail").value.trim(), password=$("#adminPassword").value;
+    if(!email || !password){$("#loginStatus").textContent="Enter email and password.";return;}
+    $("#loginStatus").textContent="Signing in…";
+    const {error}=await sb.auth.signInWithPassword({email,password});
+    if(error){$("#loginStatus").textContent=error.message;return;}
+    $("#loginStatus").textContent="";
+    $("#adminLogin").style.display="none";
+    const {data:{session}}=await sb.auth.getSession();
+    $("#adminUser").textContent=session?.user?.email||"";
+    $("#accountEmail").value=session?.user?.email||"";
+    await loadSite();
+  };
+  $("#adminPassword").addEventListener("keydown",e=>{if(e.key==="Enter")$("#loginBtn").click();});
+  $("#closeLoginBtn").onclick=closeAdmin;
+
+  // Save
+  $("#saveSiteBtn").onclick=saveSite;
+
+  // View website
+  $("#viewSiteBtn").onclick=()=>closeAdmin();
+
+  // Logout
+  $("#logoutBtn").onclick=async()=>{await sb.auth.signOut();closeAdmin();};
+
+  // Tabs
+  $$(".admin-nav button").forEach(btn=>{
+    btn.onclick=()=>{
+      $$(".admin-nav button").forEach(x=>x.classList.remove("active"));
+      $$(".admin-tab").forEach(x=>x.classList.remove("active"));
+      btn.classList.add("active");
+      $("#adminTab-"+btn.dataset.tab).classList.add("active");
+    };
+  });
+
+  // Add new collection
+  $("#addCollectionBtn").onclick=()=>{
+    siteData.collection.items.push({image:"",name:"New Collection",caption:"Add a caption"});
+    renderCollectionEditor();
+    document.querySelector("#collectionEditor .admin-collection:last-child")?.scrollIntoView({behavior:"smooth",block:"center"});
+  };
+
+  // Asset uploads
+  $("#logoFile").onchange=async e=>{
+    const f=e.target.files?.[0]; if(!f)return;
+    await uploadAndSet(f,url=>{
+      $$(".brand-mark img").forEach(img=>img.src=url);
+      siteData.general.logo=url;
+    },"logo");
+  };
+  $("#aboutImageFile").onchange=async e=>{
+    const f=e.target.files?.[0]; if(!f)return;
+    await uploadAndSet(f,url=>siteData.about.image=url,"about-main");
+  };
+  $("#aboutDetailFile").onchange=async e=>{
+    const f=e.target.files?.[0]; if(!f)return;
+    await uploadAndSet(f,url=>siteData.about.detailImage=url,"about-detail");
+  };
+  $("#craftImageFile").onchange=async e=>{ const f=e.target.files?.[0]; if(!f)return; await uploadAndSet(f,url=>siteData.craft.image=url,"craft-bg"); };
+  $("#worldwideImageFile").onchange=async e=>{ const f=e.target.files?.[0]; if(!f)return; await uploadAndSet(f,url=>siteData.worldwide.image=url,"worldwide-bg"); };
+  $("#heroVideoFile").onchange=async e=>{
+    const f=e.target.files?.[0]; if(!f)return;
+    await uploadAndSet(f,url=>{
+      const video=$(".hero-video");
+      if(video){
+        video.innerHTML=`<source src="${url}" type="${escapeHTML(f.type||"video/mp4")}">`;
+        video.load(); video.play().catch(()=>{});
+      }
+      siteData.hero.video=url;
+    },"hero-video");
+  };
+
+  // Admin access: ?admin, #admin, or Ctrl+Shift+A
+  const adminRequested=new URLSearchParams(location.search).has("admin") || location.hash==="#admin";
+  if(adminRequested) openAdmin();
+  document.addEventListener("keydown",e=>{
+    if(e.ctrlKey && e.shiftKey && e.key.toLowerCase()==="a"){e.preventDefault();openAdmin();}
+    if(e.key==="Escape" && $("#adminPanel").classList.contains("open")) closeAdmin();
+  });
+
+  // Preloader safety: never let a slow video/network request keep it forever.
+  const hidePreloader=()=>{
+    const p=$("#preloader");
+    if(p) p.classList.add("hide");
+  };
+  if(document.readyState!=="loading") setTimeout(hidePreloader,900);
+  else document.addEventListener("DOMContentLoaded",()=>setTimeout(hidePreloader,900));
+  window.addEventListener("load",()=>setTimeout(hidePreloader,250));
+  setTimeout(hidePreloader,3500);
+
+  // Load saved public content without blocking the preloader.
+  sb.from(CONTENT_TABLE).select("content").eq("id",CONTENT_ID).maybeSingle()
+    .then(({data})=>{
+      if(data?.content){
+        siteData=mergeDeep(JSON.parse(JSON.stringify(defaults)),data.content);
+        applySiteData();
+      }
+    }).catch(()=>{});
+
+})();
 </script>
 
 </body>

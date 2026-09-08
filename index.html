@@ -14,9 +14,6 @@ content="M.R. Moorti Art — timeless marble craftsmanship, divine marble murtis
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
-<!-- Supabase JS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 
 /* =========================================================
@@ -158,6 +155,13 @@ body.cursor-hover .cursor-ring{
     transition:
         opacity 1s var(--ease),
         visibility 1s;
+    /* Public site must never depend on the CMS/CDN. */
+    animation:mrPreloaderFailsafe 1.6s ease forwards;
+}
+
+@keyframes mrPreloaderFailsafe{
+    0%,65%{opacity:1;visibility:visible;pointer-events:auto;}
+    100%{opacity:0;visibility:hidden;pointer-events:none;}
 }
 
 .preloader.hide{
@@ -1766,41 +1770,6 @@ footer::before{
 }
 
 /* =========================================================
-   ADMIN PANEL STYLES
-========================================================= */
-.editable-active {
-    outline: 2px dashed #b79b68 !important;
-    outline-offset: 4px;
-    position: relative;
-}
-#admin-toolbar {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 99999;
-    background: #171716;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 50px;
-    display: none;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-#admin-toolbar button {
-    background: #b79b68;
-    border: none;
-    color: white;
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -2086,16 +2055,31 @@ footer::before{
 }
 
 </style>
+
+
+<style id="mr-admin-css">
+/* =========================================================
+   M.R. MOORTI ART — VISUAL ADMIN EDITOR
+========================================================= */
+#mrAdminPanel{display:none;position:fixed;inset:0;z-index:2147483647;background:rgba(12,12,11,.72);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:24px;font-family:Manrope,Arial,sans-serif}
+#mrAdminPanel.open{display:flex}
+#mrAdminPanel *{box-sizing:border-box}
+.mr-login-card{width:min(430px,100%);background:#f7f6f2;color:#171716;border-radius:18px;padding:30px;box-shadow:0 30px 100px #0008;border:1px solid #d8d1c3}
+.mr-login-card h1{margin:0 0 6px;font:500 30px 'Playfair Display',serif}.mr-login-card p{margin:0 0 22px;color:#777}.mr-login-card label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin:14px 0 6px;color:#666}.mr-login-card input{width:100%;padding:13px;border:1px solid #d1c9ba;border-radius:9px;background:#fff;font:14px Manrope,Arial}.mr-admin-btn{border:1px solid #b79b68;background:#b79b68;color:#111;padding:11px 17px;border-radius:9px;cursor:pointer;font-weight:800}.mr-admin-btn.secondary{background:#171716;color:#fff;border-color:#171716}.mr-admin-error{color:#a52e2e;margin-top:12px;font-size:13px}.mr-admin-success{color:#2b7047;margin-top:12px;font-size:13px}
+#mrAdminToolbar{display:none;position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:2147483646;background:#111;color:#fff;border:1px solid #3c3c38;border-radius:999px;padding:9px 11px;box-shadow:0 18px 55px #0007;align-items:center;gap:9px;font:600 13px Manrope,Arial,sans-serif}
+#mrAdminToolbar.show{display:flex}
+#mrAdminToolbar .mr-toolbar-title{padding:0 8px;white-space:nowrap}.mr-toolbar-status{opacity:.7;font-weight:500}
+#mrAdminToolbar button{border:0;border-radius:999px;padding:10px 15px;cursor:pointer;font:700 13px Manrope,Arial}.mr-toolbar-edit{background:#b79b68;color:#111}.mr-toolbar-save{background:#fff;color:#111}.mr-toolbar-exit{background:#292927;color:#fff}
+body.mr-admin-editing [data-mr-editable="true"]{outline:1px dashed #b79b68!important;outline-offset:4px;cursor:pointer!important}
+body.mr-admin-editing img[data-mr-editable="true"]{outline:2px solid #b79b68!important;outline-offset:4px}
+body.mr-admin-editing [data-mr-editable="true"]:hover{background:rgba(183,155,104,.10)}
+#mrEditModal{display:none;position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:20px;font-family:Manrope,Arial,sans-serif}
+#mrEditModal.open{display:flex}.mr-edit-box{width:min(620px,100%);background:#f7f6f2;color:#171716;border-radius:16px;padding:24px;box-shadow:0 30px 100px #0008}.mr-edit-box h3{margin:0 0 6px;font:500 25px 'Playfair Display',serif}.mr-edit-box p{margin:0 0 16px;color:#777;font-size:13px}.mr-edit-box textarea{width:100%;min-height:180px;padding:13px;border:1px solid #d1c9ba;border-radius:10px;background:#fff;font:15px Manrope,Arial;resize:vertical}.mr-edit-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;flex-wrap:wrap}
+@media(max-width:700px){#mrAdminToolbar{left:10px;right:10px;bottom:10px;transform:none;justify-content:center;flex-wrap:wrap;border-radius:18px}.mr-toolbar-title,.mr-toolbar-status{display:none}}
+</style>
 </head>
 
 <body>
-
-<!-- Admin Toolbar -->
-<div id="admin-toolbar">
-    <span>Admin Mode Active</span>
-    <button id="saveChangesBtn">Save Changes</button>
-    <button id="logoutBtn" style="background:#444;">Logout</button>
-</div>
 
 <!-- ======================================================
      PRELOADER
@@ -2107,6 +2091,13 @@ footer::before{
         <div class="loader-line"></div>
     </div>
 </div>
+<script>
+(function(){
+  function releasePreloader(){var el=document.getElementById("preloader");if(el)el.classList.add("hide");}
+  setTimeout(releasePreloader,1400);
+  document.addEventListener("DOMContentLoaded",releasePreloader,{once:true});
+})();
+</script>
 
 <div class="noise"></div>
 
@@ -2126,8 +2117,8 @@ footer::before{
         </div>
 
         <div class="brand-text">
-            <div class="brand-name" data-key="brand-name">M.R. Moorti Art</div>
-            <div class="brand-sub" data-key="brand-sub">Marble • Art • Heritage</div>
+            <div class="brand-name">M.R. Moorti Art</div>
+            <div class="brand-sub">Marble • Art • Heritage</div>
         </div>
 
     </a>
@@ -2165,16 +2156,16 @@ footer::before{
 
     <div class="hero-content">
 
-        <div class="hero-eyebrow" data-key="hero-eyebrow">
+        <div class="hero-eyebrow">
             Rajasthan · Since 1992
         </div>
 
-        <h1 data-key="hero-title">
+        <h1>
             Stone<br>
             <em>with a soul.</em>
         </h1>
 
-        <p class="hero-description" data-key="hero-desc">
+        <p class="hero-description">
             Timeless marble craftsmanship shaped with devotion,
             precision and artistic excellence. Discover divine
             murtis, handcrafted art, marble mandirs and bespoke
@@ -2232,26 +2223,26 @@ footer::before{
                 Our Story
             </div>
 
-            <h2 class="section-title" data-key="about-title">
+            <h2 class="section-title">
                 Where marble<br>
                 becomes <em>art.</em>
             </h2>
 
-            <p class="section-copy" data-key="about-copy-1">
+            <p class="section-copy">
                 M.R. Moorti Art is rooted in the timeless tradition
                 of marble craftsmanship. Every creation reflects
                 patience, precision and the character of the artisan
                 who shaped it.
             </p>
 
-            <p class="section-copy" data-key="about-copy-2">
+            <p class="section-copy">
                 From divine marble murtis and temple artistry to
                 handcrafted pieces and bespoke marble creations,
                 our work is designed to bring beauty, devotion and
                 heritage into meaningful spaces.
             </p>
 
-            <div class="about-quote" data-key="about-quote">
+            <div class="about-quote">
                 Every piece is more than marble.
                 It is a story carved by hand.
             </div>
@@ -3476,78 +3467,6 @@ footer::before{
 ====================================================== -->
 
 <script>
-/* =========================================================
-   SUPABASE CONNECTION & ADMIN PANEL LOGIC
-========================================================= */
-const SUPABASE_URL = "https://kyxjrqqkuavbelfixnyl.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_tvIXgDw3YLYhg1OZ4dwKPA__HSKWUiR";
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-let isAdminMode = false;
-
-async function checkAdminRoute() {
-    if (window.location.hash === "#admin") {
-        const username = prompt("Enter Admin Username:");
-        const password = prompt("Enter Admin Password:");
-
-        // Supabase table 'admin_users' se verify karna (or custom check)
-        const { data, error } = await supabaseClient
-            .from('admin_users')
-            .select('*')
-            .eq('username', username)
-            .eq('password', password);
-
-        if (data && data.length > 0) {
-            isAdminMode = true;
-            document.getElementById("admin-toolbar").style.display = "flex";
-            enableEditing();
-            alert("Admin Login Successful!");
-        } else {
-            alert("Invalid Credentials!");
-            window.location.hash = "";
-        }
-    }
-}
-
-function enableEditing() {
-    document.querySelectorAll("[data-key]").forEach(el => {
-        el.setAttribute("contenteditable", "true");
-        el.classList.add("editable-active");
-    });
-}
-
-async function loadWebsiteContent() {
-    const { data, error } = await supabaseClient.from('site_content').select('*');
-    if (data && data.length > 0) {
-        data.forEach(item => {
-            const el = document.querySelector(`[data-key="${item.key}"]`);
-            if (el) el.innerHTML = item.value;
-        });
-    }
-}
-
-document.getElementById("saveChangesBtn").addEventListener("click", async () => {
-    const elements = document.querySelectorAll("[data-key]");
-    for (let el of elements) {
-        const key = el.getAttribute("data-key");
-        const value = el.innerHTML;
-
-        await supabaseClient
-            .from('site_content')
-            .upsert({ key: key, value: value }, { onConflict: 'key' });
-    }
-    alert("Changes saved successfully to Supabase!");
-});
-
-document.getElementById("logoutBtn").addEventListener("click", () => {
-    window.location.hash = "";
-    location.reload();
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-    loadWebsiteContent();
-    checkAdminRoute();
-});
 
 /* =========================================================
    PRELOADER
@@ -3653,6 +3572,13 @@ const observer =
 
         {
             threshold:.08,
+
+            /*
+              Deliberately slow sensitivity:
+              elements reveal only after they
+              properly enter the viewport.
+            */
+
             rootMargin:"0px 0px -90px 0px"
         }
 
@@ -4217,7 +4143,7 @@ window.addEventListener("scroll",()=>{
     parallaxSections.forEach(el=>{
 
         const rect =
-            el.getcwdBoundingClientRect ? el.getBoundingClientRect() : el.getBoundingClientRect();
+            el.getBoundingClientRect();
 
         const center =
             rect.top +
@@ -4243,5 +4169,202 @@ window.addEventListener("scroll",()=>{
 
 </script>
 
+
+<div id="mrAdminPanel" aria-hidden="true">
+  <div id="mrAdminLogin" class="mr-login-card">
+    <h1>M.R. Moorti Art</h1>
+    <p>Secure Website Admin</p>
+    <label>Email</label>
+    <input id="mrAdminEmail" type="email" autocomplete="username" placeholder="Admin email">
+    <label>Password</label>
+    <input id="mrAdminPassword" type="password" autocomplete="current-password" placeholder="Password">
+    <button id="mrAdminLoginBtn" class="mr-admin-btn" style="margin-top:18px;width:100%">Login & Open Website</button>
+    <div id="mrAdminLoginMsg"></div>
+  </div>
+</div>
+
+<div id="mrAdminToolbar" aria-hidden="true">
+  <span class="mr-toolbar-title">M.R. Moorti Art</span>
+  <span class="mr-toolbar-status" id="mrToolbarStatus">Admin mode</span>
+  <button class="mr-toolbar-edit" id="mrStartEdit">Edit Website</button>
+  <button class="mr-toolbar-save" id="mrAdminSave" style="display:none">Save Changes</button>
+  <button class="mr-toolbar-exit" id="mrAdminExit">Exit Admin</button>
+</div>
+
+<div id="mrEditModal" aria-hidden="true">
+  <div class="mr-edit-box">
+    <h3 id="mrEditTitle">Edit Content</h3>
+    <p id="mrEditHint">Make your change and save it.</p>
+    <textarea id="mrEditTextarea"></textarea>
+    <div class="mr-edit-actions">
+      <button class="mr-admin-btn secondary" id="mrEditCancel">Cancel</button>
+      <button class="mr-admin-btn" id="mrEditApply">Apply Change</button>
+    </div>
+  </div>
+</div>
+
+<script id="mr-admin-js">
+(function(){
+'use strict';
+const SUPABASE_URL='https://kyxjrqqkuavbelfixnyl.supabase.co';
+const SUPABASE_KEY='sb_publishable_tvIXgDw3YLYhg1OZ4dwKPA__HSKWUiR';
+let sb=null, editMode=false, editingElement=null, loggedIn=false;
+const $=id=>document.getElementById(id);
+const panel=()=>$('mrAdminPanel');
+const toolbar=()=>$('mrAdminToolbar');
+
+function ensureSupabase(){
+  if(window.supabase)return Promise.resolve(window.supabase);
+  return new Promise((resolve,reject)=>{
+    let script=document.getElementById('mr-supabase-cdn');
+    if(!script){
+      script=document.createElement('script');script.id='mr-supabase-cdn';
+      script.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      script.onload=()=>window.supabase?resolve(window.supabase):reject(new Error('Supabase unavailable'));
+      script.onerror=()=>reject(new Error('Supabase CDN unavailable'));
+      document.head.appendChild(script);
+    }else{
+      script.addEventListener('load',()=>window.supabase?resolve(window.supabase):reject(new Error('Supabase unavailable')),{once:true});
+      script.addEventListener('error',()=>reject(new Error('Supabase CDN unavailable')),{once:true});
+    }
+  });
+}
+async function getClient(){
+  await ensureSupabase();
+  if(!sb)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  return sb;
+}
+function openLogin(){
+  panel().classList.add('open');panel().setAttribute('aria-hidden','false');
+}
+function closeLogin(){panel().classList.remove('open');panel().setAttribute('aria-hidden','true');}
+function showToolbar(){toolbar().classList.add('show');toolbar().setAttribute('aria-hidden','false');}
+function hideToolbar(){toolbar().classList.remove('show');toolbar().setAttribute('aria-hidden','true');}
+function initEditable(){
+  const selectors='h1,h2,h3,h4,h5,p,span,a,button,li,label,blockquote,small,strong,em';
+  let index=0;
+  document.querySelectorAll(selectors).forEach(el=>{
+    if(el.closest('#mrAdminPanel,#mrAdminToolbar,#mrEditModal'))return;
+    if(!el.textContent.trim() || el.children.length>0)return;
+    el.dataset.mrEditable='true';
+    if(!el.dataset.mrKey)el.dataset.mrKey='text_'+(index++);
+  });
+  document.querySelectorAll('img').forEach((el,i)=>{
+    if(el.closest('#mrAdminPanel,#mrAdminToolbar,#mrEditModal'))return;
+    el.dataset.mrEditable='true';
+    if(!el.dataset.mrKey)el.dataset.mrKey='image_'+i;
+  });
+}
+function getPayload(){
+  const text={},images={};
+  document.querySelectorAll('[data-mr-editable="true"]').forEach(el=>{
+    const k=el.dataset.mrKey;if(!k)return;
+    if(el.tagName==='IMG')images[k]=el.getAttribute('src')||'';
+    else text[k]=el.innerHTML;
+  });
+  const d=document.querySelector('meta[name="description"]');
+  return {text,images,meta:{title:document.title,description:d?d.content:''},saved_at:new Date().toISOString()};
+}
+async function loadContent(){
+  const client=await getClient();
+  const {data,error}=await client.from('site_content').select('content_value').eq('content_key','website_cms').maybeSingle();
+  if(error)throw error;
+  if(!data?.content_value)return;
+  let obj;try{obj=JSON.parse(data.content_value)}catch(e){return;}
+  if(obj.text){Object.entries(obj.text).forEach(([key,val])=>{const el=document.querySelector('[data-mr-key="'+CSS.escape(key)+'"]');if(el&&typeof val==='string')el.innerHTML=val;});}
+  if(obj.images){Object.entries(obj.images).forEach(([key,val])=>{const el=document.querySelector('[data-mr-key="'+CSS.escape(key)+'"]');if(el&&el.tagName==='IMG'&&val)el.src=val;});}
+  if(obj.meta){if(obj.meta.title)document.title=obj.meta.title;const d=document.querySelector('meta[name="description"]');if(d&&obj.meta.description)d.content=obj.meta.description;}
+}
+async function saveContent(){
+  const client=await getClient();
+  const payload=getPayload();
+  const {error}=await client.from('site_content').upsert({content_key:'website_cms',content_value:JSON.stringify(payload),updated_at:new Date().toISOString()},{onConflict:'content_key'});
+  if(error)throw error;
+}
+async function uploadImage(file){
+  const client=await getClient();
+  const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  const path='website/'+Date.now()+'_'+safe;
+  const {error}=await client.storage.from('site-media').upload(path,file,{upsert:false,contentType:file.type||undefined});
+  if(error)throw error;
+  const {data}=client.storage.from('site-media').getPublicUrl(path);
+  return data.publicUrl;
+}
+function enterEditMode(){
+  initEditable();editMode=true;document.body.classList.add('mr-admin-editing');
+  $('mrStartEdit').style.display='none';$('mrAdminSave').style.display='inline-block';
+  $('mrToolbarStatus').textContent='Click any text or photo to edit';
+}
+function exitEditMode(){
+  editMode=false;document.body.classList.remove('mr-admin-editing');
+  $('mrStartEdit').style.display='inline-block';$('mrAdminSave').style.display='none';
+  $('mrToolbarStatus').textContent='Admin mode';
+}
+function openTextEditor(el){
+  editingElement=el;$('mrEditTitle').textContent='Edit Text';$('mrEditHint').textContent='Change the text below. HTML is allowed for links/formatting.';$('mrEditTextarea').value=el.innerText;
+  $('mrEditModal').classList.add('open');$('mrEditModal').setAttribute('aria-hidden','false');$('mrEditTextarea').focus();
+}
+function closeModal(){editingElement=null;$('mrEditModal').classList.remove('open');$('mrEditModal').setAttribute('aria-hidden','true');}
+async function handleImage(el){
+  const input=document.createElement('input');input.type='file';input.accept='image/*';
+  input.onchange=async()=>{const file=input.files&&input.files[0];if(!file)return;try{$('mrToolbarStatus').textContent='Uploading photo…';const url=await uploadImage(file);el.src=url;$('mrToolbarStatus').textContent='Photo updated — click Save Changes';}catch(e){alert('Photo upload failed: '+(e.message||e));$('mrToolbarStatus').textContent='Click any text or photo to edit';}};
+  input.click();
+}
+function exitAdmin(){
+  exitEditMode();hideToolbar();loggedIn=false;
+  if(sb)sb.auth.signOut().catch(()=>{});
+  if(location.hash.toLowerCase()==='#admin')history.replaceState(null,'',location.pathname+location.search);
+}
+async function openAdmin(){
+  openLogin();
+  try{
+    const client=await getClient();
+    const {data:{session}}=await client.auth.getSession();
+    if(session){await enterAdmin(session);}
+  }catch(e){$('mrAdminLoginMsg').innerHTML='<div class="mr-admin-error">Supabase connection unavailable. Check your internet connection.</div>';}
+}
+async function enterAdmin(){
+  loggedIn=true;closeLogin();showToolbar();
+  try{initEditable();await loadContent();}catch(e){console.warn('CMS content load skipped:',e);}
+}
+
+window.addEventListener('hashchange',()=>{
+  if(location.hash.toLowerCase()==='#admin'){if(!loggedIn)openAdmin();}
+  else if(loggedIn)exitAdmin();
+});
+
+document.addEventListener('DOMContentLoaded',async()=>{
+  if(location.hash.toLowerCase()==='#admin')await openAdmin();
+  $('mrAdminLoginBtn').addEventListener('click',async()=>{
+    const email=$('mrAdminEmail').value.trim(),password=$('mrAdminPassword').value,msg=$('mrAdminLoginMsg');
+    if(!email||!password){msg.innerHTML='<div class="mr-admin-error">Email and password required.</div>';return;}
+    try{
+      const client=await getClient();
+      const {data,error}=await client.auth.signInWithPassword({email,password});
+      if(error)throw error;
+      msg.innerHTML='<div class="mr-admin-success">Login successful. Opening website…</div>';
+      await enterAdmin(data.session);
+    }catch(e){msg.innerHTML='<div class="mr-admin-error">'+(e.message||'Login failed')+'</div>';}
+  });
+  $('mrStartEdit').addEventListener('click',enterEditMode);
+  $('mrAdminSave').addEventListener('click',async()=>{
+    try{$('mrToolbarStatus').textContent='Saving…';await saveContent();$('mrToolbarStatus').textContent='Saved successfully ✓';setTimeout(()=>{if(editMode)$('mrToolbarStatus').textContent='Click any text or photo to edit';},1800);}
+    catch(e){alert('Save failed: '+(e.message||e));$('mrToolbarStatus').textContent='Save failed';}
+  });
+  $('mrAdminExit').addEventListener('click',exitAdmin);
+  $('mrEditCancel').addEventListener('click',closeModal);
+  $('mrEditApply').addEventListener('click',()=>{if(editingElement){editingElement.innerText=$('mrEditTextarea').value;$('mrToolbarStatus').textContent='Text updated — click Save Changes';}closeModal();});
+  $('mrEditModal').addEventListener('click',e=>{if(e.target===$('mrEditModal'))closeModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();}});
+  document.addEventListener('click',e=>{
+    if(!editMode)return;
+    const el=e.target.closest('[data-mr-editable="true"]');
+    if(!el||el.closest('#mrAdminPanel,#mrAdminToolbar,#mrEditModal'))return;
+    e.preventDefault();e.stopPropagation();
+    if(el.tagName==='IMG')handleImage(el);else openTextEditor(el);
+  },true);
+});
+})();
+</script>
 </body>
 </html>

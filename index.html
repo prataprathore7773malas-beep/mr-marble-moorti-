@@ -2354,6 +2354,16 @@ body.cms-editing .cms-edit-hint{display:block}
     </div>
 </div>
 
+<!-- FAIL-SAFE LOADER -->
+<script>
+(function(){
+function hideWebsiteLoader(){var l=document.getElementById("preloader");if(!l)return;l.classList.add("hide");l.style.opacity="0";l.style.visibility="hidden";l.style.pointerEvents="none";}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",hideWebsiteLoader,{once:true});else hideWebsiteLoader();
+window.addEventListener("load",hideWebsiteLoader,{once:true});
+setTimeout(hideWebsiteLoader,2500);
+})();
+</script>
+
 <div class="noise"></div>
 
 <div class="cursor" id="cursor"></div>
